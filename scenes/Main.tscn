@@ -1,0 +1,60 @@
+[gd_scene load_steps=10 format=3 uid="uid://b71gis6vgkvkg"]
+
+[ext_resource type="PackedScene" uid="uid://bob88w6sefucj" path="res://scenes/Environment.tscn" id="1_halep"]
+[ext_resource type="PackedScene" uid="uid://blhmkefans43h" path="res://scenes/Player.tscn" id="1_wh5s5"]
+[ext_resource type="Texture2D" uid="uid://3qb8kfbkhsw5" path="res://art/environment/door.png" id="2_kfafl"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_6cw46"]
+atlas = ExtResource("2_kfafl")
+region = Rect2(0, 0, 32, 96)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_amp5s"]
+atlas = ExtResource("2_kfafl")
+region = Rect2(32, 0, 32, 96)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_cuy4o"]
+atlas = ExtResource("2_kfafl")
+region = Rect2(64, 0, 32, 96)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_pxd8l"]
+atlas = ExtResource("2_kfafl")
+region = Rect2(96, 0, 32, 96)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_6e4rv"]
+atlas = ExtResource("2_kfafl")
+region = Rect2(128, 0, 32, 96)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_32rnp"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_6cw46")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_amp5s")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_cuy4o")
+}, {
+"duration": 1.5,
+"texture": SubResource("AtlasTexture_pxd8l")
+}, {
+"duration": 2.0,
+"texture": SubResource("AtlasTexture_6e4rv")
+}],
+"loop": false,
+"name": &"default",
+"speed": 10.0
+}]
+
+[node name="Main" type="Node2D"]
+
+[node name="Environment" parent="." instance=ExtResource("1_halep")]
+
+[node name="Player" parent="." instance=ExtResource("1_wh5s5")]
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
+position = Vector2(297, -68)
+sprite_frames = SubResource("SpriteFrames_32rnp")
+frame = 4
+frame_progress = 1.0
