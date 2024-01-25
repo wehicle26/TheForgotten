@@ -1,8 +1,9 @@
-[gd_scene load_steps=10 format=3 uid="uid://b71gis6vgkvkg"]
+[gd_scene load_steps=15 format=3 uid="uid://b71gis6vgkvkg"]
 
 [ext_resource type="PackedScene" uid="uid://bob88w6sefucj" path="res://scenes/Environment.tscn" id="1_halep"]
 [ext_resource type="PackedScene" uid="uid://blhmkefans43h" path="res://scenes/Player.tscn" id="1_wh5s5"]
 [ext_resource type="Texture2D" uid="uid://3qb8kfbkhsw5" path="res://art/environment/door.png" id="2_kfafl"]
+[ext_resource type="Shader" path="res://shaders/static.gdshader" id="4_551p1"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_6cw46"]
 atlas = ExtResource("2_kfafl")
@@ -47,14 +48,49 @@ animations = [{
 "speed": 10.0
 }]
 
+[sub_resource type="Gradient" id="Gradient_4tdo4"]
+offsets = PackedFloat32Array(0, 0.520134)
+colors = PackedColorArray(0.921569, 0.929412, 0.913725, 1, 0.0352941, 0.0392157, 0.0784314, 1)
+
+[sub_resource type="FastNoiseLite" id="FastNoiseLite_7frh4"]
+noise_type = 5
+frequency = 1.0
+domain_warp_type = 1
+
+[sub_resource type="NoiseTexture2D" id="NoiseTexture2D_rea4r"]
+seamless_blend_skirt = 0.042
+color_ramp = SubResource("Gradient_4tdo4")
+noise = SubResource("FastNoiseLite_7frh4")
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_ypjim"]
+shader = ExtResource("4_551p1")
+shader_parameter/Transparency = 2.0
+shader_parameter/Slow = 25.0
+shader_parameter/Noise = SubResource("NoiseTexture2D_rea4r")
+
 [node name="Main" type="Node2D"]
-
-[node name="Environment" parent="." instance=ExtResource("1_halep")]
-
-[node name="Player" parent="." instance=ExtResource("1_wh5s5")]
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
 position = Vector2(297, -68)
 sprite_frames = SubResource("SpriteFrames_32rnp")
 frame = 4
 frame_progress = 1.0
+
+[node name="Entities" type="Node2D" parent="."]
+
+[node name="Player" parent="Entities" instance=ExtResource("1_wh5s5")]
+position = Vector2(-44, -15)
+
+[node name="Environment" parent="Entities" instance=ExtResource("1_halep")]
+
+[node name="CanvasModulate" type="CanvasModulate" parent="."]
+color = Color(0.00392157, 0.00392157, 0.00392157, 1)
+
+[node name="ColorRect" type="ColorRect" parent="."]
+material = SubResource("ShaderMaterial_ypjim")
+offset_left = -750.0
+offset_top = -458.0
+offset_right = -662.0
+offset_bottom = -367.0
+scale = Vector2(15.0444, 9.17675)
+color = Color(0, 0, 0, 0.631373)
