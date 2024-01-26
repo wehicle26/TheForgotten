@@ -9,4 +9,5 @@ Get the latest version (4.2.1).
 
 ## Godot Git Plugin
 
-Follow the Installation Instructions to use the plugin: [Git Plugin](https://github.com/godotengine/godot-git-plugin)
+Follow the Installation Instructions to use the plugin.  
+[Git Plugin](https://github.com/godotengine/godot-git-plugin)
