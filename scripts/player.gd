@@ -1,7 +1,7 @@
 extends CharacterBody2D
 
 
-@export var speed = 300.0
+@export var speed = 300
 @onready var animation_player = $AnimationPlayer
 @onready var bullet_spawn = $BulletSpawn
 @onready var gun = $Gun

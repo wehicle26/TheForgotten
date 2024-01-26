@@ -1,0 +1,51 @@
+[gd_scene load_steps=7 format=3 uid="uid://duwl5sldekn2r"]
+
+[ext_resource type="Script" path="res://scenes/enemy.gd" id="1_0u0m4"]
+[ext_resource type="Texture2D" uid="uid://dbbcvib2y67ve" path="res://art/enemy/spood.png" id="2_ll3eg"]
+[ext_resource type="PackedScene" uid="uid://7gpl1jyx7wsl" path="res://scenes/HurtBox.tscn" id="3_y1unv"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_yk7c2"]
+atlas = ExtResource("2_ll3eg")
+region = Rect2(96, 0, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_41ir5"]
+atlas = ExtResource("2_ll3eg")
+region = Rect2(128, 0, 32, 32)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_ski8j"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_yk7c2")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_41ir5")
+}],
+"loop": true,
+"name": &"walk",
+"speed": 5.0
+}]
+
+[node name="Enemy" type="CharacterBody2D"]
+collision_layer = 2
+collision_mask = 3
+motion_mode = 1
+wall_min_slide_angle = 0.0
+script = ExtResource("1_0u0m4")
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
+sprite_frames = SubResource("SpriteFrames_ski8j")
+animation = &"walk"
+frame = 1
+frame_progress = 0.674733
+
+[node name="HurtBox" parent="." instance=ExtResource("3_y1unv")]
+
+[node name="NavigationAgent2D" type="NavigationAgent2D" parent="."]
+debug_enabled = true
+
+[node name="NavigationTimer" type="Timer" parent="."]
+wait_time = 0.5
+autostart = true
+
+[connection signal="timeout" from="NavigationTimer" to="." method="_on_navigation_timer_timeout"]
