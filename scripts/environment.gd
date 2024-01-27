@@ -1,4 +1,4 @@
-#extends Node2D
+extends Node2D
 #
 #var navigation_mesh: NavigationPolygon
 #var source_geometry : NavigationMeshSourceGeometryData2D

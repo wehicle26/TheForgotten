@@ -1,0 +1,173 @@
+[gd_scene load_steps=23 format=3 uid="uid://uxy816amcxf0"]
+
+[ext_resource type="Texture2D" uid="uid://b50yos60kjpva" path="res://art/player/blaster.png" id="1_137mn"]
+[ext_resource type="Script" path="res://scripts/gun.gd" id="1_a1byo"]
+[ext_resource type="Texture2D" uid="uid://d3hrvheu1l4w0" path="res://art/bullet/muzzleFlash.png" id="2_uk50p"]
+[ext_resource type="Texture2D" uid="uid://yc2tiuoqwfcw" path="res://art/bullet/muzzleFlash2.png" id="3_3fmh3"]
+[ext_resource type="AudioStream" uid="uid://b5stjw3uso0oa" path="res://sounds/151022__bubaproducer__laser-shot-silenced.wav" id="5_grnp1"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_j0qu6"]
+atlas = ExtResource("2_uk50p")
+region = Rect2(0, 0, 64, 64)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_8chta"]
+atlas = ExtResource("2_uk50p")
+region = Rect2(64, 0, 64, 64)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_0o04w"]
+atlas = ExtResource("2_uk50p")
+region = Rect2(128, 0, 64, 64)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_ko0n8"]
+atlas = ExtResource("2_uk50p")
+region = Rect2(192, 0, 64, 64)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_v0hfo"]
+atlas = ExtResource("2_uk50p")
+region = Rect2(256, 0, 64, 64)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_8ymby"]
+animations = [{
+"frames": [],
+"loop": true,
+"name": &"default",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 2.0,
+"texture": SubResource("AtlasTexture_j0qu6")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_8chta")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_0o04w")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_ko0n8")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_v0hfo")
+}],
+"loop": false,
+"name": &"shoot",
+"speed": 24.0
+}]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_qogjl"]
+atlas = ExtResource("3_3fmh3")
+region = Rect2(0, 0, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_fdobr"]
+atlas = ExtResource("3_3fmh3")
+region = Rect2(32, 0, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_33ts8"]
+atlas = ExtResource("3_3fmh3")
+region = Rect2(64, 0, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_06bv4"]
+atlas = ExtResource("3_3fmh3")
+region = Rect2(96, 0, 32, 32)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_0yc58"]
+animations = [{
+"frames": [{
+"duration": 2.0,
+"texture": SubResource("AtlasTexture_qogjl")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_fdobr")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_33ts8")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_06bv4")
+}],
+"loop": false,
+"name": &"shoot",
+"speed": 24.0
+}]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_ix7rh"]
+atlas = ExtResource("1_137mn")
+region = Rect2(96, 0, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_phfj6"]
+atlas = ExtResource("1_137mn")
+region = Rect2(64, 0, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_djx0i"]
+atlas = ExtResource("1_137mn")
+region = Rect2(32, 0, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_38ke8"]
+atlas = ExtResource("1_137mn")
+region = Rect2(0, 0, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_0rxaj"]
+atlas = ExtResource("1_137mn")
+region = Rect2(128, 0, 32, 32)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_uo2ek"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_ix7rh")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_phfj6")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_djx0i")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_38ke8")
+}],
+"loop": false,
+"name": &"fire",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_0rxaj")
+}],
+"loop": true,
+"name": &"holster",
+"speed": 5.0
+}]
+
+[node name="Gun" type="Node2D"]
+script = ExtResource("1_a1byo")
+
+[node name="BulletSpawn" type="Marker2D" parent="."]
+position = Vector2(0, -10)
+
+[node name="MuzzleFlash1" type="AnimatedSprite2D" parent="BulletSpawn"]
+visible = false
+scale = Vector2(0.5, 0.5)
+sprite_frames = SubResource("SpriteFrames_8ymby")
+animation = &"shoot"
+
+[node name="MuzzleFlash2" type="AnimatedSprite2D" parent="BulletSpawn"]
+visible = false
+sprite_frames = SubResource("SpriteFrames_0yc58")
+animation = &"shoot"
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
+sprite_frames = SubResource("SpriteFrames_uo2ek")
+animation = &"holster"
+
+[node name="ReloadTimer" type="Timer" parent="."]
+wait_time = 2.0
+one_shot = true
+
+[node name="AudioStreamPlayer2D" type="AudioStreamPlayer2D" parent="."]
+stream = ExtResource("5_grnp1")
+
+[node name="AttackTimer" type="Timer" parent="."]
+wait_time = 0.5
+one_shot = true
+
+[connection signal="out_of_ammo" from="." to="." method="_on_out_of_ammo"]

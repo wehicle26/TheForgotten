@@ -1,13 +1,11 @@
-[gd_scene load_steps=11 format=3 uid="uid://ckbaj464j5huq"]
+[gd_scene load_steps=13 format=3 uid="uid://ckbaj464j5huq"]
 
 [ext_resource type="Script" path="res://scripts/bullet.gd" id="1_arhrb"]
 [ext_resource type="Texture2D" uid="uid://bif8mpc8de0q" path="res://art/bullet/circle_05.png" id="2_2nt64"]
 [ext_resource type="Texture2D" uid="uid://dxyttraq6xp6" path="res://art/bullet/bullet.png" id="3_33o73"]
 [ext_resource type="Texture2D" uid="uid://dgccom3njtb52" path="res://art/bullet/trace_06_rotated.png" id="4_npmsh"]
 [ext_resource type="Script" path="res://scripts/trail.gd" id="5_e1coj"]
-
-[sub_resource type="CircleShape2D" id="CircleShape2D_71jdm"]
-radius = 2.0
+[ext_resource type="PackedScene" uid="uid://cjwohg5ed45jj" path="res://scenes/Hitbox.tscn" id="6_al14d"]
 
 [sub_resource type="Gradient" id="Gradient_orsmv"]
 colors = PackedColorArray(1, 1, 1, 1, 1, 1, 1, 0)
@@ -26,12 +24,16 @@ color_ramp = SubResource("GradientTexture1D_r5jyx")
 [sub_resource type="Gradient" id="Gradient_3iu6o"]
 colors = PackedColorArray(1, 0.164706, 0.121569, 1, 1, 1, 1, 0)
 
+[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_iiw4w"]
+radius = 4.0
+height = 12.0
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_u72d2"]
+radius = 4.0
+
 [node name="Bullet" type="RigidBody2D"]
 rotation = -1.5708
-collision_layer = 0
-collision_mask = 0
 gravity_scale = 0.0
-linear_velocity = Vector2(-2.18557e-05, -500)
 script = ExtResource("1_arhrb")
 
 [node name="Glow" type="Sprite2D" parent="."]
@@ -45,9 +47,6 @@ texture = ExtResource("2_2nt64")
 rotation = 1.5708
 scale = Vector2(0.5, 0.5)
 texture = ExtResource("3_33o73")
-
-[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
-shape = SubResource("CircleShape2D_71jdm")
 
 [node name="VisibleOnScreenNotifier2D" type="VisibleOnScreenNotifier2D" parent="."]
 
@@ -64,4 +63,19 @@ texture = ExtResource("4_npmsh")
 texture_mode = 2
 script = ExtResource("5_e1coj")
 
+[node name="Hitbox" parent="." instance=ExtResource("6_al14d")]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Hitbox"]
+rotation = -1.57079
+shape = SubResource("CapsuleShape2D_iiw4w")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+shape = SubResource("CircleShape2D_u72d2")
+
+[node name="RayCast2D" type="RayCast2D" parent="."]
+target_position = Vector2(9, 3.25799e-05)
+
+[connection signal="body_entered" from="." to="." method="_on_body_entered"]
+[connection signal="body_shape_entered" from="." to="." method="_on_body_shape_entered"]
 [connection signal="screen_exited" from="VisibleOnScreenNotifier2D" to="." method="_on_visible_on_screen_notifier_2d_screen_exited"]
+[connection signal="area_entered" from="Hitbox" to="." method="_on_hitbox_area_entered"]

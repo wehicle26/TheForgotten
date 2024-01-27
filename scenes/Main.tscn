@@ -84,6 +84,11 @@ position = Vector2(-44, -15)
 
 [node name="Environment" parent="Entities" instance=ExtResource("1_halep")]
 
+[node name="Enemy" parent="Entities" node_paths=PackedStringArray("player") instance=ExtResource("5_yl7gn")]
+position = Vector2(-169, 103)
+speed = 100
+player = NodePath("../Player")
+
 [node name="CanvasModulate" type="CanvasModulate" parent="."]
 visible = false
 color = Color(0.00392157, 0.00392157, 0.00392157, 1)
@@ -97,8 +102,3 @@ offset_right = -662.0
 offset_bottom = -367.0
 scale = Vector2(15.0444, 9.17675)
 color = Color(0, 0, 0, 0.631373)
-
-[node name="Enemy" parent="." node_paths=PackedStringArray("player") instance=ExtResource("5_yl7gn")]
-position = Vector2(-263, -163)
-speed = 100
-player = NodePath("../Entities/Player")

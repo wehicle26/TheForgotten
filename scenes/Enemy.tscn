@@ -1,8 +1,9 @@
-[gd_scene load_steps=7 format=3 uid="uid://duwl5sldekn2r"]
+[gd_scene load_steps=10 format=3 uid="uid://duwl5sldekn2r"]
 
-[ext_resource type="Script" path="res://scenes/enemy.gd" id="1_0u0m4"]
+[ext_resource type="Script" path="res://scripts/enemy.gd" id="1_0u0m4"]
 [ext_resource type="Texture2D" uid="uid://dbbcvib2y67ve" path="res://art/enemy/spood.png" id="2_ll3eg"]
-[ext_resource type="PackedScene" uid="uid://7gpl1jyx7wsl" path="res://scenes/HurtBox.tscn" id="3_y1unv"]
+[ext_resource type="PackedScene" uid="uid://7gpl1jyx7wsl" path="res://scenes/Health.tscn" id="3_y1unv"]
+[ext_resource type="PackedScene" uid="uid://cjwohg5ed45jj" path="res://scenes/Hitbox.tscn" id="4_1n8rf"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_yk7c2"]
 atlas = ExtResource("2_ll3eg")
@@ -26,6 +27,12 @@ animations = [{
 "speed": 5.0
 }]
 
+[sub_resource type="CircleShape2D" id="CircleShape2D_kalxv"]
+radius = 7.0
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_ofe1f"]
+radius = 5.0
+
 [node name="Enemy" type="CharacterBody2D"]
 collision_layer = 2
 collision_mask = 3
@@ -39,13 +46,23 @@ animation = &"walk"
 frame = 1
 frame_progress = 0.674733
 
-[node name="HurtBox" parent="." instance=ExtResource("3_y1unv")]
-
 [node name="NavigationAgent2D" type="NavigationAgent2D" parent="."]
 debug_enabled = true
 
 [node name="NavigationTimer" type="Timer" parent="."]
 wait_time = 0.5
 autostart = true
+
+[node name="Hitbox" parent="." node_paths=PackedStringArray("health") instance=ExtResource("4_1n8rf")]
+health = NodePath("../Health")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Hitbox"]
+visible = false
+shape = SubResource("CircleShape2D_kalxv")
+
+[node name="Health" parent="." instance=ExtResource("3_y1unv")]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+shape = SubResource("CircleShape2D_ofe1f")
 
 [connection signal="timeout" from="NavigationTimer" to="." method="_on_navigation_timer_timeout"]
