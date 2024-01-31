@@ -11,8 +11,13 @@ func _ready():
 	health = max_health
 
 func damage(attack: Attack):
+	var body = get_parent()
+	if body.has_method("damage"):
+		body.damage()
 	health -= attack.attack_damage
-	
+	var enemy = get_parent()
+	if enemy is Enemy:
+		enemy.velocity = (global_position - attack.attack_position).normalized()*attack.knockback_force
 	if health <= 0:
 		var parent = get_parent()
 		if parent is Player:

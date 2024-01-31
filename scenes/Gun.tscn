@@ -142,7 +142,7 @@ animations = [{
 script = ExtResource("1_a1byo")
 
 [node name="BulletSpawn" type="Marker2D" parent="."]
-position = Vector2(0, -10)
+position = Vector2(0, -6)
 
 [node name="MuzzleFlash1" type="AnimatedSprite2D" parent="BulletSpawn"]
 visible = false
@@ -157,10 +157,10 @@ animation = &"shoot"
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
 sprite_frames = SubResource("SpriteFrames_uo2ek")
-animation = &"holster"
+animation = &"fire"
 
 [node name="ReloadTimer" type="Timer" parent="."]
-wait_time = 2.0
+wait_time = 1.5
 one_shot = true
 
 [node name="AudioStreamPlayer2D" type="AudioStreamPlayer2D" parent="."]
@@ -168,6 +168,10 @@ stream = ExtResource("5_grnp1")
 
 [node name="AttackTimer" type="Timer" parent="."]
 wait_time = 0.5
+one_shot = true
+
+[node name="ArmTimer" type="Timer" parent="."]
+wait_time = 2.0
 one_shot = true
 
 [connection signal="out_of_ammo" from="." to="." method="_on_out_of_ammo"]

@@ -2,7 +2,7 @@
 
 [ext_resource type="Script" path="res://scripts/bullet.gd" id="1_arhrb"]
 [ext_resource type="Texture2D" uid="uid://bif8mpc8de0q" path="res://art/bullet/circle_05.png" id="2_2nt64"]
-[ext_resource type="Texture2D" uid="uid://dxyttraq6xp6" path="res://art/bullet/bullet.png" id="3_33o73"]
+[ext_resource type="Texture2D" uid="uid://bwr02gsgnge2j" path="res://art/bullet/bullet_small.png" id="3_claxp"]
 [ext_resource type="Texture2D" uid="uid://dgccom3njtb52" path="res://art/bullet/trace_06_rotated.png" id="4_npmsh"]
 [ext_resource type="Script" path="res://scripts/trail.gd" id="5_e1coj"]
 [ext_resource type="PackedScene" uid="uid://cjwohg5ed45jj" path="res://scenes/Hitbox.tscn" id="6_al14d"]
@@ -25,11 +25,11 @@ color_ramp = SubResource("GradientTexture1D_r5jyx")
 colors = PackedColorArray(1, 0.164706, 0.121569, 1, 1, 1, 1, 0)
 
 [sub_resource type="CapsuleShape2D" id="CapsuleShape2D_iiw4w"]
-radius = 4.0
-height = 12.0
+radius = 2.0
+height = 4.00002
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_u72d2"]
-radius = 4.0
+radius = 2.0
 
 [node name="Bullet" type="RigidBody2D"]
 rotation = -1.5708
@@ -46,7 +46,7 @@ texture = ExtResource("2_2nt64")
 [node name="Bullet" type="Sprite2D" parent="."]
 rotation = 1.5708
 scale = Vector2(0.5, 0.5)
-texture = ExtResource("3_33o73")
+texture = ExtResource("3_claxp")
 
 [node name="VisibleOnScreenNotifier2D" type="VisibleOnScreenNotifier2D" parent="."]
 
@@ -73,7 +73,8 @@ shape = SubResource("CapsuleShape2D_iiw4w")
 shape = SubResource("CircleShape2D_u72d2")
 
 [node name="RayCast2D" type="RayCast2D" parent="."]
-target_position = Vector2(9, 3.25799e-05)
+target_position = Vector2(3, 1.086e-05)
+collision_mask = 16
 
 [connection signal="body_entered" from="." to="." method="_on_body_entered"]
 [connection signal="body_shape_entered" from="." to="." method="_on_body_shape_entered"]

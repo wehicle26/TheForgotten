@@ -6,4 +6,5 @@ class_name Hitbox
 
 func damage(attack: Attack):
 	if health:
+		print("damaged")
 		health.damage(attack)
