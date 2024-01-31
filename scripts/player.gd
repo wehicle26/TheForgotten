@@ -5,13 +5,22 @@ class_name Player
 @export var speed = 300
 @onready var animation_player = $AnimationPlayer
 @onready var gun = $Gun
+@onready var flashlight = $Flashlight
+@onready var sprite_2d = $Sprite2D
 
-@onready var ray_cast_2d = $RayCast2D
-@onready var ray_cast_2d_2 = $RayCast2D2
+var knockback = Vector2.ZERO
 
 
 func _ready():
-	pass
+	gun.get_node("ArmTimer").timeout.connect(_lower_arm)
+	sprite_2d.material.set_shader_parameter("active", false) 
+
+func damage():
+	print("tint")
+	sprite_2d.material.set_shader_parameter("active", true)
+	var timer = get_tree().create_timer(.5)
+	await timer.timeout
+	sprite_2d.material.set_shader_parameter("active", false)
 	
 func _input(event):
 	if event.is_action_pressed("1"):
@@ -24,18 +33,21 @@ func _input(event):
 		gun.num_bullets = 4
 	if event.is_action_pressed("5"):
 		gun.num_bullets = 5
-		
-	if event.is_action_pressed("shoot"):
-		gun.fire_gun()
+	
+	if event.is_action_pressed("flashlight_toggle"):
+		flashlight.toggle()
 		
 func get_input():
 	var input_dir = Input.get_vector("move_left", "move_right", "move_up", "move_down")
-	velocity = input_dir * speed
+	velocity = input_dir * speed + knockback
+	
+	if Input.is_action_pressed("shoot"):
+		gun.fire_gun()
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _physics_process(delta):
 	get_input()
-	move_and_collide(velocity * delta)
+	move_and_slide()
 	look_at(get_global_mouse_position())
 	global_rotation += PI/2
 #	var vector = global_position - get_global_mouse_position()
@@ -43,13 +55,17 @@ func _physics_process(delta):
 #	var rotaion = global_rotation
 #	global_rotation= lerp(rotaion, angle, 0.2)
 	
-	if animation_player.is_playing():
-		pass
-	else:
-		animation_player.play("RESET")
 	if velocity != Vector2(0, 0):
 		#animation_player.play("shoot")
 		pass
 	else:
 		pass
 		#animation_player.stop()
+
+func _lower_arm():
+	animation_player.play("RESET")
+
+
+func _on_hitbox_body_entered(body):
+	if body is Enemy:
+		print(body)

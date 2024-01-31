@@ -1,7 +1,6 @@
-[gd_scene load_steps=19 format=3 uid="uid://duwl5sldekn2r"]
+[gd_scene load_steps=16 format=3 uid="uid://duwl5sldekn2r"]
 
 [ext_resource type="Script" path="res://scripts/enemy.gd" id="1_0u0m4"]
-[ext_resource type="Shader" path="res://shaders/damage_tint.gdshader" id="1_pl7k7"]
 [ext_resource type="Texture2D" uid="uid://bfqnlwh3hf87w" path="res://art/enemy/Blob.png" id="2_j8s2h"]
 [ext_resource type="PackedScene" uid="uid://7gpl1jyx7wsl" path="res://scenes/Health.tscn" id="3_y1unv"]
 [ext_resource type="PackedScene" uid="uid://cjwohg5ed45jj" path="res://scenes/Hitbox.tscn" id="4_1n8rf"]
@@ -9,12 +8,6 @@
 [ext_resource type="Script" path="res://scripts/State/enemyIdle.gd" id="6_yghre"]
 [ext_resource type="Script" path="res://scripts/State/enemyFollow.gd" id="7_2vsql"]
 [ext_resource type="Script" path="res://scripts/State/enemyAttack.gd" id="8_no63c"]
-[ext_resource type="Script" path="res://scripts/lineOfSight.gd" id="9_idnvk"]
-
-[sub_resource type="ShaderMaterial" id="ShaderMaterial_q4u76"]
-shader = ExtResource("1_pl7k7")
-shader_parameter/active = false
-shader_parameter/tint = Color(0.647059, 0.188235, 0.188235, 1)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_305en"]
 atlas = ExtResource("2_j8s2h")
@@ -35,16 +28,16 @@ region = Rect2(96, 0, 32, 32)
 [sub_resource type="SpriteFrames" id="SpriteFrames_ski8j"]
 animations = [{
 "frames": [{
-"duration": 2.0,
+"duration": 1.0,
 "texture": SubResource("AtlasTexture_305en")
 }, {
-"duration": 2.0,
+"duration": 1.0,
 "texture": SubResource("AtlasTexture_yunbx")
 }, {
-"duration": 2.0,
+"duration": 1.0,
 "texture": SubResource("AtlasTexture_an2qe")
 }, {
-"duration": 2.0,
+"duration": 1.0,
 "texture": SubResource("AtlasTexture_mad2o")
 }],
 "loop": true,
@@ -53,18 +46,19 @@ animations = [{
 }]
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_kalxv"]
-radius = 11.0454
+radius = 7.0
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_ofe1f"]
 radius = 5.0
 
 [node name="Enemy" type="CharacterBody2D"]
+collision_layer = 2
+collision_mask = 3
 motion_mode = 1
 wall_min_slide_angle = 0.0
 script = ExtResource("1_0u0m4")
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
-material = SubResource("ShaderMaterial_q4u76")
 sprite_frames = SubResource("SpriteFrames_ski8j")
 animation = &"walk"
 autoplay = "walk"
@@ -92,7 +86,7 @@ shape = SubResource("CircleShape2D_ofe1f")
 
 [node name="StateMachine" type="Node" parent="." node_paths=PackedStringArray("initial_state")]
 script = ExtResource("5_2c3kk")
-initial_state = NodePath("Idle")
+initial_state = NodePath("Follow")
 
 [node name="Idle" type="Node" parent="StateMachine" node_paths=PackedStringArray("enemy")]
 script = ExtResource("6_yghre")
@@ -102,18 +96,7 @@ enemy = NodePath("../..")
 script = ExtResource("7_2vsql")
 enemy = NodePath("../..")
 
-[node name="Attack" type="Node" parent="StateMachine" node_paths=PackedStringArray("enemy")]
+[node name="Attack" type="Node" parent="StateMachine"]
 script = ExtResource("8_no63c")
-enemy = NodePath("../..")
-
-[node name="LineOfSight" type="Node2D" parent="."]
-script = ExtResource("9_idnvk")
-
-[node name="AggroTimer" type="Timer" parent="."]
-wait_time = 20.0
-one_shot = true
 
 [connection signal="timeout" from="NavigationTimer" to="." method="_on_navigation_timer_timeout"]
-[connection signal="area_entered" from="Hitbox" to="." method="_on_hitbox_area_entered"]
-[connection signal="body_entered" from="Hitbox" to="." method="_on_hitbox_body_entered"]
-[connection signal="timeout" from="AggroTimer" to="." method="_on_aggro_timer_timeout"]

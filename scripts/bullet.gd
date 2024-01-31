@@ -2,7 +2,9 @@ extends RigidBody2D
 
 class_name Bullet
 
-@export var bullet_speed = 500
+@export var bullet_speed = 700
+@export var knockback_force = 700
+@export var stun_time = 5
 @onready var gpu_particles_2d = $GPUParticles2D
 @onready var ray_cast_2d = $RayCast2D
 
@@ -25,9 +27,12 @@ func _on_visible_on_screen_notifier_2d_screen_exited():
 
 
 func _on_hitbox_area_entered(area):
-	if area.has_method("damage"):
+	if area is Hitbox:
 		var attack = Attack.new()
 		attack.attack_damage = attack_damage
+		attack.knockback_force = knockback_force
+		attack.attack_position = global_position
+		attack.stun_time = stun_time
 		area.damage(attack)
 	
 	queue_free()
