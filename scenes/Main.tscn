@@ -1,12 +1,11 @@
 [gd_scene load_steps=15 format=3 uid="uid://b71gis6vgkvkg"]
 
+[ext_resource type="Script" path="res://scripts/level.gd" id="1_6u7sh"]
 [ext_resource type="PackedScene" uid="uid://bob88w6sefucj" path="res://scenes/Environment.tscn" id="1_halep"]
 [ext_resource type="Shader" path="res://shaders/colorblind.gdshader" id="1_r7men"]
 [ext_resource type="PackedScene" uid="uid://blhmkefans43h" path="res://scenes/Player.tscn" id="1_wh5s5"]
 [ext_resource type="Texture2D" uid="uid://3qb8kfbkhsw5" path="res://art/environment/door.png" id="2_kfafl"]
 [ext_resource type="PackedScene" uid="uid://duwl5sldekn2r" path="res://scenes/Enemy.tscn" id="5_yl7gn"]
-[ext_resource type="Texture2D" uid="uid://c0wfi1jxvdyl8" path="res://art/environment/bdgd.png" id="6_gvraf"]
-[ext_resource type="PackedScene" uid="uid://ch0016cku2p02" path="res://scenes/Flashlight.tscn" id="7_8wyrg"]
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_wgyfe"]
 shader = ExtResource("1_r7men")
@@ -55,9 +54,14 @@ animations = [{
 "speed": 10.0
 }]
 
+[sub_resource type="CompressedTexture2D" id="CompressedTexture2D_ihsyq"]
+load_path = "res://.godot/imported/bdgd.png-ceacbecd4c9b813386432095d3f959ca.ctex"
+
 [node name="Main" type="Node2D"]
+script = ExtResource("1_6u7sh")
 
 [node name="ColorRect" type="ColorRect" parent="."]
+visible = false
 material = SubResource("ShaderMaterial_wgyfe")
 offset_left = -2708.0
 offset_top = -1263.0
@@ -92,7 +96,7 @@ visible = false
 z_index = -9
 position = Vector2(3.99997, 0.999996)
 scale = Vector2(1.99208, 1.99208)
-texture = ExtResource("6_gvraf")
+texture = SubResource("CompressedTexture2D_ihsyq")
 
 [node name="Control" type="Control" parent="."]
 layout_mode = 3
@@ -105,18 +109,5 @@ layout_mode = 0
 offset_right = 40.0
 offset_bottom = 40.0
 
-[node name="Flashlight" parent="." instance=ExtResource("7_8wyrg")]
-position = Vector2(-727, -116)
-rotation = 0.0
-
-[node name="Flashlight2" parent="." instance=ExtResource("7_8wyrg")]
-position = Vector2(-592, -168)
-rotation = -3.14159
-
-[node name="Flashlight3" parent="." instance=ExtResource("7_8wyrg")]
-position = Vector2(-592, -215)
-rotation = 3.14159
-
-[node name="Flashlight4" parent="." instance=ExtResource("7_8wyrg")]
-position = Vector2(-727, -32)
-rotation = 0.0
+[node name="PlayerSpawnLocation" type="Marker2D" parent="."]
+position = Vector2(-657, -143)

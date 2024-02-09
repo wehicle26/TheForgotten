@@ -29,8 +29,9 @@ DSP/dsp_buffer_count=4
 [application]
 
 config/name="The Forgotten"
-run/main_scene="res://scenes/Main.tscn"
+run/main_scene="res://scenes/Ui.tscn"
 config/features=PackedStringArray("4.2", "Forward Plus")
+boot_splash/bg_color=Color(0.141176, 0.141176, 0.141176, 1)
 config/icon="res://icon.svg"
 
 [autoload]
@@ -46,7 +47,6 @@ window/size/initial_position=Vector2i(230, 0)
 window/size/window_width_override=1280
 window/size/window_height_override=640
 window/stretch/mode="canvas_items"
-mouse_cursor/custom_image="res://art/player/crosshair041.png"
 
 [editor]
 
