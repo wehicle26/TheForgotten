@@ -118,6 +118,7 @@ script = ExtResource("5_tm3ug")
 occluder = SubResource("OccluderPolygon2D_dgh7m")
 
 [node name="Flashlight" parent="." instance=ExtResource("5_mcm12")]
+position = Vector2(0, 5)
 
 [node name="Hitbox" parent="." node_paths=PackedStringArray("health") instance=ExtResource("10_40kik")]
 health = NodePath("../Health")

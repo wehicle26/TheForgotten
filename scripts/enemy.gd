@@ -37,7 +37,7 @@ func make_path():
 func path_to_player():
 	var next_path_position = navigation_agent_2d.get_next_path_position()
 	var directon = to_local(next_path_position).normalized()
-	#animated_sprite_2d.look_at(directon)
+	animated_sprite_2d.look_at(directon)
 	velocity = directon * speed	
 
 func _player_spotted():

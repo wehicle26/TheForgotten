@@ -1,0 +1,56 @@
+[gd_scene load_steps=5 format=3 uid="uid://dx367olnv4jly"]
+
+[ext_resource type="FontFile" uid="uid://bw8jydqtglvtj" path="res://ui/MILLENNIA.TTF" id="1_8cm4m"]
+[ext_resource type="Script" path="res://scripts/ui.gd" id="1_mk2rm"]
+[ext_resource type="Texture2D" uid="uid://cdvesl8mi6bv5" path="res://art/environment/space Helm.png" id="2_wa7mn"]
+
+[sub_resource type="Theme" id="Theme_cxsb4"]
+default_font = ExtResource("1_8cm4m")
+default_font_size = 10
+
+[node name="UI" type="Control"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme = SubResource("Theme_cxsb4")
+script = ExtResource("1_mk2rm")
+
+[node name="TextureRect" type="TextureRect" parent="."]
+layout_mode = 0
+offset_right = 320.0
+offset_bottom = 160.0
+texture = ExtResource("2_wa7mn")
+expand_mode = 1
+
+[node name="VBoxContainer" type="VBoxContainer" parent="."]
+layout_mode = 1
+anchors_preset = -1
+anchor_left = 0.05
+anchor_top = 0.412
+anchor_right = 0.3
+anchor_bottom = 0.9
+offset_top = 0.0799942
+alignment = 1
+metadata/_edit_use_anchors_ = true
+
+[node name="Button" type="Button" parent="VBoxContainer"]
+layout_mode = 2
+theme_override_colors/font_hover_color = Color(0, 1, 0, 1)
+theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
+text = "START GAME"
+
+[node name="Button2" type="Button" parent="VBoxContainer"]
+layout_mode = 2
+text = "OPTIONS
+"
+
+[node name="Button3" type="Button" parent="VBoxContainer"]
+layout_mode = 2
+theme_override_colors/font_hover_color = Color(1, 0, 0, 1)
+text = "QUIT"
+
+[node name="Timer" type="Timer" parent="."]
+wait_time = 10.0

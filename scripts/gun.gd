@@ -22,7 +22,7 @@ const BLASTER_CLICK = preload("res://sounds/blaster_click.wav")
 @export var num_bullets = 1
 
 var bullets_in_clip
-@export var clip_size = 3
+@export var clip_size = 6
 
 func _ready():
 	bullets_in_clip = clip_size
