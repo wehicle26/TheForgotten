@@ -28,7 +28,7 @@ func _ready():
 	animated_sprite_2d.material.set_shader_parameter("active", false)
 	line_of_sight.player_spotted.connect(_player_spotted)
 
-func _physics_process(delta):
+func _physics_process(_delta):
 	move_and_slide()
 			
 func make_path():

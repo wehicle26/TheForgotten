@@ -57,6 +57,10 @@ version_control/autoload_on_startup=true
 
 enabled=PackedStringArray("res://addons/fmod/plugin.cfg", "res://addons/script-ide/plugin.cfg", "res://addons/tile_maps_chef/plugin.cfg")
 
+[filesystem]
+
+import/blender/enabled=false
+
 [input]
 
 move_left={

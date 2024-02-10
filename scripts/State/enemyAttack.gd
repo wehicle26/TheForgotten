@@ -13,7 +13,7 @@ func enter():
 	print("attack")
 	#var direction = player.global_position - enemy.global_position
 	
-func physics_update(delta):
+func physics_update(_delta):
 	var direction = player.global_position - enemy.global_position
 	#enemy.velocity = lunge_speed * -direction
 	if direction.length() > attack_range:

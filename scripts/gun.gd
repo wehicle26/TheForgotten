@@ -27,7 +27,7 @@ var bullets_in_clip
 func _ready():
 	bullets_in_clip = clip_size
 
-func _process(delta):
+func _process(_delta):
 	if bullets_in_clip == -1:
 		out_of_ammo.emit()
 	if arm_timer.is_stopped():
@@ -96,7 +96,7 @@ func fire_gun():
 	
 func spawn_bullet(pos, rot):
 	var bullet : Bullet = bullet_scene.instantiate()
-	var direction_to_mouse = (get_global_mouse_position() - bullet_spawn.global_position).normalized()
+	var _direction_to_mouse = (get_global_mouse_position() - bullet_spawn.global_position).normalized()
 	bullet.set_global_position(pos)
 	bullet.set_global_rotation(rot)
 	get_parent().get_parent().add_child(bullet)

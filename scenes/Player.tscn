@@ -112,6 +112,7 @@ libraries = {
 }
 
 [node name="PlayerCamera" type="Camera2D" parent="."]
+position_smoothing_enabled = true
 script = ExtResource("5_tm3ug")
 
 [node name="LightOccluder2D" type="LightOccluder2D" parent="."]

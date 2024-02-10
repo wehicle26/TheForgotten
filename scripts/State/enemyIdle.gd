@@ -25,10 +25,10 @@ func update(delta):
 	else:
 		randomize_wander()
 		
-func physics_update(delta):
+func physics_update(_delta):
 	if enemy:
 		enemy.velocity = move_direction * move_speed
 	
-	var direction = player.global_position - enemy.global_position
+	var _direction = player.global_position - enemy.global_position
 	if enemy.is_player_spotted:
 		transitioned.emit(self, "follow")

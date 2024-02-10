@@ -45,7 +45,7 @@ func get_input():
 		gun.fire_gun()
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
-func _physics_process(delta):
+func _physics_process(_delta):
 	get_input()
 	move_and_slide()
 	look_at(get_global_mouse_position())

@@ -1,10 +1,10 @@
 extends Camera2D
 
 @export var dead_zone = 160
-@export var lerp_speed = 1.0
+@export var lerp_speed = 0.8
 @onready var player = $".."
 
-func _input(event):
+func _input(_event):
 	pass
 #	if event is InputEventMouseMotion:
 #		var target = event.position - get_viewport().size * 0.5
@@ -15,4 +15,5 @@ func _input(event):
 func _process(delta):
 	var camera_position = player.global_position + (get_global_mouse_position() - player.global_position)*0.25
 	global_position = camera_position
+	#global_position = lerp(camera_position, global_position, lerp_speed)
 	

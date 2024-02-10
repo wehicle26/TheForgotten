@@ -12,7 +12,7 @@ func enter():
 	enemy.speed = move_speed
 	player = get_tree().get_first_node_in_group("Player")
 	
-func physics_update(delta):
+func physics_update(_delta):
 	#var directon = to_local(navigation_agent_2d.get_next_path_position()).normalized()
 	#animated_sprite_2d.look_at(directon)
 	#velocity = directon * speed

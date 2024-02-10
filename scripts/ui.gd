@@ -35,8 +35,7 @@ func initialize_fmod():
 	FmodServer.load_bank("res://sounds/banks/Desktop/MainLoop.bank", 
 	FmodServer.FMOD_STUDIO_LOAD_BANK_NORMAL)
 
-	var event = FmodServer.create_event_instance("event:/the_forgotten2.rpp")
+	event = FmodServer.create_event_instance("event:/the_forgotten2.rpp")
 	event.set_volume(1)
 	event.start()
-	event.set_parameter_by_name("mainLoopLevel", MAIN_LOOP_CURIOUS)
 	FmodServer.set_global_parameter_by_name("mainLoopLevel", MAIN_LOOP_CURIOUS)

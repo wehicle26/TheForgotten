@@ -1,12 +1,12 @@
 extends Node
 
-@export var max_charge = 30
+@export var max_charge = 30.0
 
 @onready var flashlight : FlashLight = $".."
 
 signal no_power
 var on
-var current_charge
+var current_charge = 0.0
 
 func _ready():
 	current_charge = max_charge
@@ -16,7 +16,7 @@ func _process(delta):
 	if on and current_charge > 0:
 		current_charge -= 1 * delta
 		#flashlight.flicker(false)
-	elif current_charge <= max_charge / 3:
+	elif current_charge <= max_charge / 3.0:
 		#flashlight.flicker(true)
 		pass
 	elif current_charge <= 0:
