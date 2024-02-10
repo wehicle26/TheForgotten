@@ -1,4 +1,4 @@
-[gd_scene load_steps=8 format=3 uid="uid://b71gis6vgkvkg"]
+[gd_scene load_steps=9 format=3 uid="uid://b71gis6vgkvkg"]
 
 [ext_resource type="Script" path="res://scripts/level.gd" id="1_6u7sh"]
 [ext_resource type="PackedScene" uid="uid://bob88w6sefucj" path="res://scenes/Environment.tscn" id="1_halep"]
@@ -6,6 +6,7 @@
 [ext_resource type="PackedScene" uid="uid://ch0016cku2p02" path="res://scenes/Light.tscn" id="4_7cj7q"]
 [ext_resource type="Texture2D" uid="uid://beuoex8va8e8p" path="res://art/environment/lights/wall light1.png" id="5_t0sxk"]
 [ext_resource type="Texture2D" uid="uid://dwtag4xtkqkbc" path="res://art/environment/light.png" id="6_m56ua"]
+[ext_resource type="Texture2D" uid="uid://c1n1chkpvoqhi" path="res://art/item/RifleItem.png" id="7_dy02q"]
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_wgyfe"]
 shader = ExtResource("1_r7men")
@@ -26,78 +27,111 @@ color = Color(0, 0, 0, 0.631373)
 
 [node name="Entities" type="Node2D" parent="."]
 
-[node name="Light" parent="Entities" node_paths=PackedStringArray("sprite_light", "shadow_light") instance=ExtResource("4_7cj7q")]
-position = Vector2(-727, -31)
+[node name="Environment" parent="." instance=ExtResource("1_halep")]
+
+[node name="RifleItem" type="Sprite2D" parent="Environment"]
+z_index = 3
+position = Vector2(-465, -198)
+rotation = 1.0472
+texture = ExtResource("7_dy02q")
+
+[node name="Light" parent="Environment" node_paths=PackedStringArray("sprite_light", "shadow_light") instance=ExtResource("4_7cj7q")]
+position = Vector2(-727, 1)
 rotation = 0.0
 texture = ExtResource("5_t0sxk")
 sprite_light = NodePath("SpriteLight")
 shadow_light = NodePath("ShadowLight")
 
-[node name="SpriteLight" type="PointLight2D" parent="Entities/Light"]
+[node name="SpriteLight" type="PointLight2D" parent="Environment/Light"]
+scale = Vector2(0.75, 0.75)
 texture = ExtResource("6_m56ua")
 height = 25.0
 
-[node name="ShadowLight" type="PointLight2D" parent="Entities/Light"]
+[node name="ShadowLight" type="PointLight2D" parent="Environment/Light"]
+scale = Vector2(0.75, 0.75)
 range_item_cull_mask = 2
 shadow_enabled = true
 texture = ExtResource("6_m56ua")
 height = 25.0
 
-[node name="Light2" parent="Entities" node_paths=PackedStringArray("sprite_light", "shadow_light") instance=ExtResource("4_7cj7q")]
-position = Vector2(-586, -31)
+[node name="Light2" parent="Environment" node_paths=PackedStringArray("sprite_light", "shadow_light") instance=ExtResource("4_7cj7q")]
+position = Vector2(-586, 1)
 rotation = 3.14159
 texture = ExtResource("5_t0sxk")
 sprite_light = NodePath("../Light/SpriteLight")
 shadow_light = NodePath("../Light/ShadowLight")
 
-[node name="SpriteLight" type="PointLight2D" parent="Entities/Light2"]
+[node name="SpriteLight" type="PointLight2D" parent="Environment/Light2"]
+scale = Vector2(0.75, 0.75)
 texture = ExtResource("6_m56ua")
 height = 25.0
 
-[node name="ShadowLight" type="PointLight2D" parent="Entities/Light2"]
+[node name="ShadowLight" type="PointLight2D" parent="Environment/Light2"]
+scale = Vector2(0.75, 0.75)
 range_item_cull_mask = 2
 shadow_enabled = true
 texture = ExtResource("6_m56ua")
 height = 25.0
 
-[node name="Light3" parent="Entities" node_paths=PackedStringArray("sprite_light", "shadow_light") instance=ExtResource("4_7cj7q")]
-position = Vector2(-680, -238)
+[node name="Light3" parent="Environment" node_paths=PackedStringArray("sprite_light", "shadow_light") instance=ExtResource("4_7cj7q")]
+position = Vector2(-680, -206)
 rotation = 0.785397
 texture = ExtResource("5_t0sxk")
 sprite_light = NodePath("../Light/SpriteLight")
 shadow_light = NodePath("../Light/ShadowLight")
 
-[node name="SpriteLight" type="PointLight2D" parent="Entities/Light3"]
+[node name="SpriteLight" type="PointLight2D" parent="Environment/Light3"]
+scale = Vector2(0.75, 0.75)
 texture = ExtResource("6_m56ua")
 height = 25.0
 
-[node name="ShadowLight" type="PointLight2D" parent="Entities/Light3"]
+[node name="ShadowLight" type="PointLight2D" parent="Environment/Light3"]
+scale = Vector2(0.75, 0.75)
 range_item_cull_mask = 2
 shadow_enabled = true
 texture = ExtResource("6_m56ua")
 height = 25.0
 
-[node name="Light4" parent="Entities" node_paths=PackedStringArray("sprite_light", "shadow_light") instance=ExtResource("4_7cj7q")]
-position = Vector2(-586, -192)
+[node name="Light4" parent="Environment" node_paths=PackedStringArray("sprite_light", "shadow_light") instance=ExtResource("4_7cj7q")]
+position = Vector2(-586, -128)
 rotation = 3.14159
 texture = ExtResource("5_t0sxk")
 sprite_light = NodePath("../Light/SpriteLight")
 shadow_light = NodePath("../Light/ShadowLight")
 
-[node name="SpriteLight" type="PointLight2D" parent="Entities/Light4"]
+[node name="SpriteLight" type="PointLight2D" parent="Environment/Light4"]
+scale = Vector2(0.75, 0.75)
 texture = ExtResource("6_m56ua")
 height = 25.0
 
-[node name="ShadowLight" type="PointLight2D" parent="Entities/Light4"]
+[node name="ShadowLight" type="PointLight2D" parent="Environment/Light4"]
+scale = Vector2(0.75, 0.75)
 range_item_cull_mask = 2
 shadow_enabled = true
 texture = ExtResource("6_m56ua")
 height = 25.0
 
-[node name="Environment" parent="Entities" instance=ExtResource("1_halep")]
+[node name="Light5" parent="Environment" node_paths=PackedStringArray("sprite_light", "shadow_light") instance=ExtResource("4_7cj7q")]
+position = Vector2(-727, -127)
+rotation = 0.0
+texture = ExtResource("5_t0sxk")
+sprite_light = NodePath("../Light/SpriteLight")
+shadow_light = NodePath("../Light/ShadowLight")
+
+[node name="SpriteLight" type="PointLight2D" parent="Environment/Light5"]
+scale = Vector2(0.75, 0.75)
+texture = ExtResource("6_m56ua")
+height = 25.0
+
+[node name="ShadowLight" type="PointLight2D" parent="Environment/Light5"]
+scale = Vector2(0.75, 0.75)
+range_item_cull_mask = 2
+shadow_enabled = true
+texture = ExtResource("6_m56ua")
+height = 25.0
 
 [node name="DarknessLevel" type="CanvasModulate" parent="."]
-color = Color(0.0313726, 0.0313726, 0.0313726, 1)
+color = Color(0, 0, 0, 1)
 
 [node name="HUD" type="Control" parent="."]
 layout_mode = 3
