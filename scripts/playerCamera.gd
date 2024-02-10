@@ -12,7 +12,7 @@ func _input(_event):
 #			position = Vector2(0, 0)
 #		else:
 #			position = target.normalized() * (target.length() - DEAD_ZONE) * 0.5
-func _process(delta):
+func _process(_delta):
 	var camera_position = player.global_position + (get_global_mouse_position() - player.global_position)*0.25
 	global_position = camera_position
 	#global_position = lerp(camera_position, global_position, lerp_speed)

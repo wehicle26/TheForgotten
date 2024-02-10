@@ -1,17 +1,19 @@
 extends Sprite2D
 
-class_name FlashLight
+class_name Light
 const FLASHLIGHT_SWITCH_ON = preload("res://sounds/FlashlightSwitchOn_SFXB.929.wav")
 const FLASHLIGHT_SWITCH_OFF = preload("res://sounds/FlashlightSwitchOff_SFXB._1.wav")
 @onready var audio_stream_player_2d = $AudioStreamPlayer2D
 @onready var flicker_timer = $FlickerTimer
-@onready var sprite_light = $SpriteLight
-@onready var shadow_light = $ShadowLight
+
+@export var sprite_light : PointLight2D
+@export var shadow_light : PointLight2D
+@export var battery : Battery
 
 signal flashlight_toggle
 
 func _ready():
-	visible = false
+	pass
 
 func toggle():
 	if visible:

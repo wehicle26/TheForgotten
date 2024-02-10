@@ -32,7 +32,8 @@ func _physics_process(_delta):
 	move_and_slide()
 			
 func make_path():
-	navigation_agent_2d.target_position = player.global_position
+	if is_instance_valid(player):
+		navigation_agent_2d.target_position = player.global_position
 
 func path_to_player():
 	var next_path_position = navigation_agent_2d.get_next_path_position()

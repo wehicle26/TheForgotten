@@ -1,8 +1,8 @@
 extends Node
 
-@export var max_charge = 30.0
+class_name Battery
 
-@onready var flashlight : FlashLight = $".."
+@export var max_charge = 30.0
 
 signal no_power
 var on

@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://coywo1aakp1w1"
-path="res://.godot/imported/blake-rex-spaceship-texture-by-svenniemannie.jpg-1ec5d1b031e55836551520c28b902247.ctex"
+uid="uid://beuoex8va8e8p"
+path="res://.godot/imported/wall light1.png-b4f41ff84e615a44580eeca86a78e752.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://art/environment/blake-rex-spaceship-texture-by-svenniemannie.jpg"
-dest_files=["res://.godot/imported/blake-rex-spaceship-texture-by-svenniemannie.jpg-1ec5d1b031e55836551520c28b902247.ctex"]
+source_file="res://art/environment/lights/wall light1.png"
+dest_files=["res://.godot/imported/wall light1.png-b4f41ff84e615a44580eeca86a78e752.ctex"]
 
 [params]
 

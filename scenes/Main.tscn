@@ -1,65 +1,20 @@
-[gd_scene load_steps=15 format=3 uid="uid://b71gis6vgkvkg"]
+[gd_scene load_steps=8 format=3 uid="uid://b71gis6vgkvkg"]
 
 [ext_resource type="Script" path="res://scripts/level.gd" id="1_6u7sh"]
 [ext_resource type="PackedScene" uid="uid://bob88w6sefucj" path="res://scenes/Environment.tscn" id="1_halep"]
 [ext_resource type="Shader" path="res://shaders/colorblind.gdshader" id="1_r7men"]
-[ext_resource type="PackedScene" uid="uid://blhmkefans43h" path="res://scenes/Player.tscn" id="1_wh5s5"]
-[ext_resource type="Texture2D" uid="uid://3qb8kfbkhsw5" path="res://art/environment/door.png" id="2_kfafl"]
-[ext_resource type="PackedScene" uid="uid://duwl5sldekn2r" path="res://scenes/Enemy.tscn" id="5_yl7gn"]
+[ext_resource type="PackedScene" uid="uid://ch0016cku2p02" path="res://scenes/Light.tscn" id="4_7cj7q"]
+[ext_resource type="Texture2D" uid="uid://beuoex8va8e8p" path="res://art/environment/lights/wall light1.png" id="5_t0sxk"]
+[ext_resource type="Texture2D" uid="uid://dwtag4xtkqkbc" path="res://art/environment/light.png" id="6_m56ua"]
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_wgyfe"]
 shader = ExtResource("1_r7men")
 shader_parameter/mode = 1
 
-[sub_resource type="AtlasTexture" id="AtlasTexture_6cw46"]
-atlas = ExtResource("2_kfafl")
-region = Rect2(0, 0, 32, 96)
-
-[sub_resource type="AtlasTexture" id="AtlasTexture_amp5s"]
-atlas = ExtResource("2_kfafl")
-region = Rect2(32, 0, 32, 96)
-
-[sub_resource type="AtlasTexture" id="AtlasTexture_cuy4o"]
-atlas = ExtResource("2_kfafl")
-region = Rect2(64, 0, 32, 96)
-
-[sub_resource type="AtlasTexture" id="AtlasTexture_pxd8l"]
-atlas = ExtResource("2_kfafl")
-region = Rect2(96, 0, 32, 96)
-
-[sub_resource type="AtlasTexture" id="AtlasTexture_6e4rv"]
-atlas = ExtResource("2_kfafl")
-region = Rect2(128, 0, 32, 96)
-
-[sub_resource type="SpriteFrames" id="SpriteFrames_32rnp"]
-animations = [{
-"frames": [{
-"duration": 1.0,
-"texture": SubResource("AtlasTexture_6cw46")
-}, {
-"duration": 1.0,
-"texture": SubResource("AtlasTexture_amp5s")
-}, {
-"duration": 1.0,
-"texture": SubResource("AtlasTexture_cuy4o")
-}, {
-"duration": 1.5,
-"texture": SubResource("AtlasTexture_pxd8l")
-}, {
-"duration": 2.0,
-"texture": SubResource("AtlasTexture_6e4rv")
-}],
-"loop": false,
-"name": &"default",
-"speed": 10.0
-}]
-
-[sub_resource type="CompressedTexture2D" id="CompressedTexture2D_ihsyq"]
-
 [node name="Main" type="Node2D"]
 script = ExtResource("1_6u7sh")
 
-[node name="ColorRect" type="ColorRect" parent="."]
+[node name="ColorblindShader" type="ColorRect" parent="."]
 visible = false
 material = SubResource("ShaderMaterial_wgyfe")
 offset_left = -2708.0
@@ -69,41 +24,88 @@ offset_bottom = -940.0
 scale = Vector2(15.0444, 9.17675)
 color = Color(0, 0, 0, 0.631373)
 
-[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
-position = Vector2(297, -68)
-sprite_frames = SubResource("SpriteFrames_32rnp")
-frame = 4
-frame_progress = 1.0
-
 [node name="Entities" type="Node2D" parent="."]
 
-[node name="Player" parent="Entities" instance=ExtResource("1_wh5s5")]
-position = Vector2(-505, 11)
+[node name="Light" parent="Entities" node_paths=PackedStringArray("sprite_light", "shadow_light") instance=ExtResource("4_7cj7q")]
+position = Vector2(-727, -31)
+rotation = 0.0
+texture = ExtResource("5_t0sxk")
+sprite_light = NodePath("SpriteLight")
+shadow_light = NodePath("ShadowLight")
+
+[node name="SpriteLight" type="PointLight2D" parent="Entities/Light"]
+texture = ExtResource("6_m56ua")
+height = 25.0
+
+[node name="ShadowLight" type="PointLight2D" parent="Entities/Light"]
+range_item_cull_mask = 2
+shadow_enabled = true
+texture = ExtResource("6_m56ua")
+height = 25.0
+
+[node name="Light2" parent="Entities" node_paths=PackedStringArray("sprite_light", "shadow_light") instance=ExtResource("4_7cj7q")]
+position = Vector2(-586, -31)
+rotation = 3.14159
+texture = ExtResource("5_t0sxk")
+sprite_light = NodePath("../Light/SpriteLight")
+shadow_light = NodePath("../Light/ShadowLight")
+
+[node name="SpriteLight" type="PointLight2D" parent="Entities/Light2"]
+texture = ExtResource("6_m56ua")
+height = 25.0
+
+[node name="ShadowLight" type="PointLight2D" parent="Entities/Light2"]
+range_item_cull_mask = 2
+shadow_enabled = true
+texture = ExtResource("6_m56ua")
+height = 25.0
+
+[node name="Light3" parent="Entities" node_paths=PackedStringArray("sprite_light", "shadow_light") instance=ExtResource("4_7cj7q")]
+position = Vector2(-680, -238)
+rotation = 0.785397
+texture = ExtResource("5_t0sxk")
+sprite_light = NodePath("../Light/SpriteLight")
+shadow_light = NodePath("../Light/ShadowLight")
+
+[node name="SpriteLight" type="PointLight2D" parent="Entities/Light3"]
+texture = ExtResource("6_m56ua")
+height = 25.0
+
+[node name="ShadowLight" type="PointLight2D" parent="Entities/Light3"]
+range_item_cull_mask = 2
+shadow_enabled = true
+texture = ExtResource("6_m56ua")
+height = 25.0
+
+[node name="Light4" parent="Entities" node_paths=PackedStringArray("sprite_light", "shadow_light") instance=ExtResource("4_7cj7q")]
+position = Vector2(-586, -192)
+rotation = 3.14159
+texture = ExtResource("5_t0sxk")
+sprite_light = NodePath("../Light/SpriteLight")
+shadow_light = NodePath("../Light/ShadowLight")
+
+[node name="SpriteLight" type="PointLight2D" parent="Entities/Light4"]
+texture = ExtResource("6_m56ua")
+height = 25.0
+
+[node name="ShadowLight" type="PointLight2D" parent="Entities/Light4"]
+range_item_cull_mask = 2
+shadow_enabled = true
+texture = ExtResource("6_m56ua")
+height = 25.0
 
 [node name="Environment" parent="Entities" instance=ExtResource("1_halep")]
 
-[node name="Enemy" parent="Entities" node_paths=PackedStringArray("player") instance=ExtResource("5_yl7gn")]
-position = Vector2(-444, 380)
-player = NodePath("../Player")
-
-[node name="CanvasModulate" type="CanvasModulate" parent="."]
-visible = false
+[node name="DarknessLevel" type="CanvasModulate" parent="."]
 color = Color(0.0313726, 0.0313726, 0.0313726, 1)
 
-[node name="Sprite2D" type="Sprite2D" parent="."]
-visible = false
-z_index = -9
-position = Vector2(3.99997, 0.999996)
-scale = Vector2(1.99208, 1.99208)
-texture = SubResource("CompressedTexture2D_ihsyq")
-
-[node name="Control" type="Control" parent="."]
+[node name="HUD" type="Control" parent="."]
 layout_mode = 3
 anchors_preset = 0
 offset_right = 40.0
 offset_bottom = 40.0
 
-[node name="TextureProgressBar" type="TextureProgressBar" parent="Control"]
+[node name="TextureProgressBar" type="TextureProgressBar" parent="HUD"]
 layout_mode = 0
 offset_right = 40.0
 offset_bottom = 40.0

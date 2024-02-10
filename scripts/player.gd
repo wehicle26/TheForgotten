@@ -6,7 +6,7 @@ class_name Player
 @onready var animation_player = $AnimationPlayer
 @onready var gun = $Gun
 @onready var flashlight = $Flashlight
-@onready var sprite_2d = $Sprite2D
+@onready var sprite_2d = $PlayerSprite
 
 var knockback = Vector2.ZERO
 

@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://c4igcrk3i7agl"
-path="res://.godot/imported/pngimg.com - light_PNG14412.png-03b75be051e047c473415ee5564b7d2e.ctex"
+uid="uid://cp2ay5o5a8tbb"
+path="res://.godot/imported/LightCone_resized.png-ce1ce9b1ae8a682333cc9c722ed9e3e5.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://art/environment/pngimg.com - light_PNG14412.png"
-dest_files=["res://.godot/imported/pngimg.com - light_PNG14412.png-03b75be051e047c473415ee5564b7d2e.ctex"]
+source_file="res://art/environment/lights/LightCone_resized.png"
+dest_files=["res://.godot/imported/LightCone_resized.png-ce1ce9b1ae8a682333cc9c722ed9e3e5.ctex"]
 
 [params]
 

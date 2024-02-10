@@ -28,7 +28,7 @@ func update(delta):
 func physics_update(_delta):
 	if enemy:
 		enemy.velocity = move_direction * move_speed
-	
-	var _direction = player.global_position - enemy.global_position
+	if is_instance_valid(player):
+		var _direction = player.global_position - enemy.global_position
 	if enemy.is_player_spotted:
 		transitioned.emit(self, "follow")
