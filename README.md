@@ -83,11 +83,11 @@ This will push your branch to Github.
 
 Finally, you can make a pull request to sync your changes into the main repository.
 
-Go to the URL for the fork you created, making sure to check if the branch and changes you made have sucessfully made it to Github. Go to the "Pull Requests" tab at the top left and click on the green button to create a new PR:
+Now click on "Preview Pull Request":
 
 ![PR](screenshots/github_pull_request.png)
 
-Make sure the right side is your repository name and the branch you just created is selected:
+Make sure the right side is your repository name and the branch you just created is selected and hit create:
 
 ![PR2](screenshots/github_pull_request2.png)
 
