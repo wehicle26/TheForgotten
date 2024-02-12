@@ -5,15 +5,21 @@ const FLASHLIGHT_SWITCH_ON = preload("res://sounds/FlashlightSwitchOn_SFXB.929.w
 const FLASHLIGHT_SWITCH_OFF = preload("res://sounds/FlashlightSwitchOff_SFXB._1.wav")
 @onready var audio_stream_player_2d = $AudioStreamPlayer2D
 @onready var flicker_timer = $FlickerTimer
+@onready var sprite_light = $SpriteLight
+@onready var shadow_light = $ShadowLight
 
-@export var sprite_light : PointLight2D
-@export var shadow_light : PointLight2D
+@export var light_texture : Texture2D
 @export var battery : Battery
 
 signal flashlight_toggle
 
 func _ready():
-	pass
+	sprite_light.texture = light_texture
+	shadow_light.texture = light_texture
+	flicker_timer.start()
+	if get_parent() is Player:
+		sprite_light.offset.x = 140
+		shadow_light.offset.x = 140
 
 func toggle():
 	if visible:

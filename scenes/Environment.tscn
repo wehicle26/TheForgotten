@@ -3731,9 +3731,6 @@ script = ExtResource("1_8e6hg")
 
 [node name="TileMap" type="TileMap" parent="." groups=["navigation"]]
 light_mask = 2
-position = Vector2(-1, 0)
-rotation = -0.000961421
-scale = Vector2(0.999102, 0.999489)
 tile_set = SubResource("TileSet_cgr4s")
 format = 2
 layer_0/name = "flooor3"

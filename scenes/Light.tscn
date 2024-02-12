@@ -1,12 +1,12 @@
-[gd_scene load_steps=3 format=3 uid="uid://ch0016cku2p02"]
+[gd_scene load_steps=4 format=3 uid="uid://ch0016cku2p02"]
 
 [ext_resource type="Script" path="res://scripts/light.gd" id="1_b7ajr"]
+[ext_resource type="Texture2D" uid="uid://dwtag4xtkqkbc" path="res://art/environment/light.png" id="2_k8u6y"]
 [ext_resource type="AudioStream" uid="uid://b1mfv1sxpq7ue" path="res://sounds/FlashlightSwitchOn_SFXB.929.wav" id="3_itpbj"]
 
 [node name="Light" type="Sprite2D"]
-position = Vector2(0, -2)
-rotation = -1.5708
 script = ExtResource("1_b7ajr")
+light_texture = ExtResource("2_k8u6y")
 
 [node name="ColorRect" type="ColorRect" parent="."]
 visible = false
@@ -21,5 +21,17 @@ color = Color(0.160784, 0.223529, 0.219608, 1)
 stream = ExtResource("3_itpbj")
 
 [node name="FlickerTimer" type="Timer" parent="."]
+
+[node name="SpriteLight" type="PointLight2D" parent="."]
+scale = Vector2(0.75, 0.75)
+color = Color(0.921569, 0.929412, 0.913725, 1)
+height = 25.0
+
+[node name="ShadowLight" type="PointLight2D" parent="."]
+scale = Vector2(0.75, 0.75)
+range_item_cull_mask = 2
+shadow_enabled = true
+shadow_color = Color(0.0352941, 0.0392157, 0.0784314, 0)
+height = 25.0
 
 [connection signal="timeout" from="FlickerTimer" to="." method="_on_flicker_timer_timeout"]

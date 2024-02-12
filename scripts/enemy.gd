@@ -19,13 +19,13 @@ var is_player_spotted = false
 
 func damage():
 	print("tint")
-	animated_sprite_2d.material.set_shader_parameter("active", true)
+	#animated_sprite_2d.material.set_shader_parameter("active", true)
 	var timer = get_tree().create_timer(0.5)
 	await timer.timeout
-	animated_sprite_2d.material.set_shader_parameter("active", false)
+	#animated_sprite_2d.material.set_shader_parameter("active", false)
 	
 func _ready():
-	animated_sprite_2d.material.set_shader_parameter("active", false)
+	#animated_sprite_2d.material.set_shader_parameter("active", false)
 	line_of_sight.player_spotted.connect(_player_spotted)
 
 func _physics_process(_delta):

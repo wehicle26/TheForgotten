@@ -6,21 +6,23 @@ class_name Player
 @onready var animation_player = $AnimationPlayer
 @onready var gun = $Gun
 @onready var flashlight = $Flashlight
-@onready var sprite_2d = $PlayerSprite
+@onready var player_sprite = $PlayerSprite
+
+const CROSSHAIR_004 = preload("res://art/player/crosshair004.png")
 
 var knockback = Vector2.ZERO
 
 
-func _ready():
+func _ready():		
 	gun.get_node("ArmTimer").timeout.connect(_lower_arm)
-	sprite_2d.material.set_shader_parameter("active", false) 
+	player_sprite.material.set_shader_parameter("active", false)
 
 func damage():
 	print("tint")
-	sprite_2d.material.set_shader_parameter("active", true)
+	player_sprite.material.set_shader_parameter("active", true)
 	var timer = get_tree().create_timer(.5)
 	await timer.timeout
-	sprite_2d.material.set_shader_parameter("active", false)
+	player_sprite.material.set_shader_parameter("active", false)
 	
 func _input(event):
 	if event.is_action_pressed("1"):
@@ -36,6 +38,11 @@ func _input(event):
 	
 	if event.is_action_pressed("flashlight_toggle"):
 		flashlight.toggle()
+	if Input.is_action_pressed("aim"):
+		Input.set_custom_mouse_cursor(CROSSHAIR_004)
+	if Input.is_action_just_released("aim"):
+		Input.set_custom_mouse_cursor(null)
+		
 		
 func get_input():
 	var input_dir = Input.get_vector("move_left", "move_right", "move_up", "move_down")
@@ -43,6 +50,7 @@ func get_input():
 	
 	if Input.is_action_pressed("shoot"):
 		gun.fire_gun()
+	
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _physics_process(_delta):
