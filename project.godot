@@ -35,6 +35,10 @@ boot_splash/bg_color=Color(0.141176, 0.141176, 0.141176, 1)
 boot_splash/use_filter=false
 config/icon="res://icon.svg"
 
+[aseprite]
+
+animation/layers/only_include_visible_layers_by_default=true
+
 [autoload]
 
 FmodManager="*res://addons/fmod/FmodManager.gd"
@@ -50,7 +54,7 @@ window/stretch/scale_mode="integer"
 
 [editor_plugins]
 
-enabled=PackedStringArray("res://addons/fmod/plugin.cfg", "res://addons/script-ide/plugin.cfg", "res://addons/tile_maps_chef/plugin.cfg")
+enabled=PackedStringArray("res://addons/AsepriteWizard/plugin.cfg", "res://addons/fmod/plugin.cfg", "res://addons/script-ide/plugin.cfg", "res://addons/tile_maps_chef/plugin.cfg")
 
 [filesystem]
 
