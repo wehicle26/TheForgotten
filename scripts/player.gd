@@ -2,14 +2,20 @@ extends CharacterBody2D
 
 class_name Player
 
+signal healthChanged 
+
 @export var speed = 85
 @onready var animation_player = $AnimationPlayer
 @onready var gun = $Gun
 @onready var flashlight = $Flashlight
+@onready var sprite_2d = $Sprite2D
+@onready var health = $Health
 @onready var player_sprite = $PlayerSprite
 @onready var feet = $Feet
 @onready var player_feet = $PlayerFeet
 
+@onready var currentHealth: int = health.max_health
+@onready var max_Health: int = health.max_health
 const CROSSHAIR_004 = preload("res://art/player/crosshair004.png")
 
 var knockback = Vector2.ZERO
@@ -17,6 +23,7 @@ var footstep_sound : FmodEvent
 var isPlaying = true
 var emitter : FmodEventEmitter2D
 var input_dir : Vector2
+
 
 func _ready():
 	gun.get_node("ArmTimer").timeout.connect(_lower_arm)
@@ -50,11 +57,6 @@ func _input(event):
 	
 	if event.is_action_pressed("flashlight_toggle"):
 		flashlight.toggle()
-	if Input.is_action_pressed("aim"):
-		Input.set_custom_mouse_cursor(CROSSHAIR_004)
-	if Input.is_action_just_released("aim"):
-		Input.set_custom_mouse_cursor(null)
-		
 		
 func get_input():
 	input_dir = Input.get_vector("move_left", "move_right", "move_up", "move_down")
@@ -67,7 +69,7 @@ func _process(_delta):
 	pass
 			
 # Called every frame. 'delta' is the elapsed time since the previous frame.
-func _physics_process(_delta):
+func _physics_process(delta):
 	get_input()
 	move_and_slide()
 	look_at(get_global_mouse_position())
