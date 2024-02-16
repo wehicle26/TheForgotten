@@ -47,7 +47,7 @@ func reload():
 func fire_gun():
 	position = Vector2(9, -16)
 	z_index = 1
-	get_parent().animation_player.play("shoot")
+	get_parent().animation_player.play("Walk_Shoot")
 	animated_sprite_2d.set_animation("fire")
 	show()
 	arm_timer.start()

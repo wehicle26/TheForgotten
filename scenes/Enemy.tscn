@@ -1,7 +1,6 @@
-[gd_scene load_steps=18 format=3 uid="uid://duwl5sldekn2r"]
+[gd_scene load_steps=12 format=3 uid="uid://duwl5sldekn2r"]
 
 [ext_resource type="Script" path="res://scripts/enemy.gd" id="1_0u0m4"]
-[ext_resource type="Texture2D" uid="uid://bfqnlwh3hf87w" path="res://art/enemy/Blob.png" id="2_j8s2h"]
 [ext_resource type="PackedScene" uid="uid://7gpl1jyx7wsl" path="res://scenes/Health.tscn" id="3_y1unv"]
 [ext_resource type="PackedScene" uid="uid://cjwohg5ed45jj" path="res://scenes/Hitbox.tscn" id="4_1n8rf"]
 [ext_resource type="Script" path="res://scripts/State/stateMachine.gd" id="5_2c3kk"]
@@ -12,42 +11,6 @@
 
 [sub_resource type="CanvasItemMaterial" id="CanvasItemMaterial_gharv"]
 light_mode = 2
-
-[sub_resource type="AtlasTexture" id="AtlasTexture_305en"]
-atlas = ExtResource("2_j8s2h")
-region = Rect2(0, 0, 32, 32)
-
-[sub_resource type="AtlasTexture" id="AtlasTexture_yunbx"]
-atlas = ExtResource("2_j8s2h")
-region = Rect2(32, 0, 32, 32)
-
-[sub_resource type="AtlasTexture" id="AtlasTexture_an2qe"]
-atlas = ExtResource("2_j8s2h")
-region = Rect2(64, 0, 32, 32)
-
-[sub_resource type="AtlasTexture" id="AtlasTexture_mad2o"]
-atlas = ExtResource("2_j8s2h")
-region = Rect2(96, 0, 32, 32)
-
-[sub_resource type="SpriteFrames" id="SpriteFrames_ski8j"]
-animations = [{
-"frames": [{
-"duration": 2.0,
-"texture": SubResource("AtlasTexture_305en")
-}, {
-"duration": 2.0,
-"texture": SubResource("AtlasTexture_yunbx")
-}, {
-"duration": 2.0,
-"texture": SubResource("AtlasTexture_an2qe")
-}, {
-"duration": 2.0,
-"texture": SubResource("AtlasTexture_mad2o")
-}],
-"loop": true,
-"name": &"walk",
-"speed": 5.0
-}]
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_kalxv"]
 radius = 11.0454
@@ -60,15 +23,6 @@ material = SubResource("CanvasItemMaterial_gharv")
 motion_mode = 1
 wall_min_slide_angle = 0.0
 script = ExtResource("1_0u0m4")
-
-[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
-light_mask = 2
-use_parent_material = true
-sprite_frames = SubResource("SpriteFrames_ski8j")
-animation = &"walk"
-autoplay = "walk"
-frame = 1
-frame_progress = 0.674733
 
 [node name="NavigationAgent2D" type="NavigationAgent2D" parent="."]
 debug_enabled = true

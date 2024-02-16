@@ -3,20 +3,23 @@ extends CharacterBody2D
 class_name Enemy
 
 @export var speed = 100
+@export var max_speed = 130
+@export var skitter_speed = 100
 @export var player: Node2D
 @export var rotation_speed = .5
 @export var attack_damage = 1
 @export var knockback_force = 50
 @export var stun_time = .25
+@export var animated_sprite_2d : AnimatedSprite2D
 
 @onready var navigation_agent_2d = $NavigationAgent2D
-@onready var animated_sprite_2d = $AnimatedSprite2D
 @onready var line_of_sight = $LineOfSight
 @onready var aggro_timer = $AggroTimer
 
 var current_stun_time
 var is_player_spotted = false
-
+var direction
+var next_path_position
 func damage():
 	print("tint")
 	#animated_sprite_2d.material.set_shader_parameter("active", true)
@@ -32,14 +35,19 @@ func _physics_process(_delta):
 	move_and_slide()
 			
 func make_path():
+	player = get_tree().get_first_node_in_group("Player")
 	if is_instance_valid(player):
 		navigation_agent_2d.target_position = player.global_position
 
+	
 func path_to_player():
-	var next_path_position = navigation_agent_2d.get_next_path_position()
-	var directon = to_local(next_path_position).normalized()
-	animated_sprite_2d.look_at(directon)
-	velocity = directon * speed	
+	if speed < max_speed and self.is_in_group("Roach"):
+		speed += skitter_speed
+	next_path_position = navigation_agent_2d.get_next_path_position()
+	direction = to_local(next_path_position).normalized()
+	animated_sprite_2d.look_at(next_path_position)
+	#look_at(direction)
+	velocity = direction * speed
 
 func _player_spotted():
 	is_player_spotted = true

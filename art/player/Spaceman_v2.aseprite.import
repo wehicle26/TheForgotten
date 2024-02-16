@@ -1,0 +1,14 @@
+[remap]
+
+importer="aseprite_wizard.plugin.noop"
+type="PackedDataContainer"
+uid="uid://b05d2krun01p2"
+path="res://.godot/imported/Spaceman_v2.aseprite-a930ab1050e8bccf4965c63377bb7a09.res"
+
+[deps]
+
+source_file="res://art/player/Spaceman_v2.aseprite"
+dest_files=["res://.godot/imported/Spaceman_v2.aseprite-a930ab1050e8bccf4965c63377bb7a09.res"]
+
+[params]
+

@@ -9,6 +9,7 @@ const FLASHLIGHT_SWITCH_OFF = preload("res://sounds/FlashlightSwitchOff_SFXB._1.
 @onready var shadow_light = $ShadowLight
 
 @export var light_texture : Texture2D
+@export var flicker_factor = 1.0
 @export var battery : Battery
 
 signal flashlight_toggle
@@ -16,6 +17,7 @@ signal flashlight_toggle
 func _ready():
 	sprite_light.texture = light_texture
 	shadow_light.texture = light_texture
+	flicker_timer.wait_time = 1 + flicker_factor
 	flicker_timer.start()
 	if get_parent() is Player:
 		sprite_light.offset.x = 140
@@ -57,4 +59,4 @@ func _on_flicker_timer_timeout():
 		sprite_light.energy = 0.75
 		shadow_light.energy = 0.75
 	
-	flicker_timer.start(rand_light/randf_range(1, 20))
+	flicker_timer.start(flicker_factor + (rand_light/randf_range(1, 20)))
