@@ -1,23 +1,39 @@
-[gd_scene load_steps=20 format=3 uid="uid://blhmkefans43h"]
+[gd_scene load_steps=22 format=3 uid="uid://blhmkefans43h"]
 
 [ext_resource type="Script" path="res://scripts/player.gd" id="1_ucx17"]
+[ext_resource type="Script" path="res://scenes/healthbar.gd" id="2_2lfhk"]
 [ext_resource type="Texture2D" uid="uid://bvrqydcwjh4ma" path="res://art/player/Spaceman_old.png" id="2_5f2j7"]
 [ext_resource type="Shader" path="res://shaders/damage_tint.gdshader" id="2_eb1nu"]
 [ext_resource type="Texture2D" uid="uid://dwyd5hjqgn0c1" path="res://art/player/Spaceman_old_n.png" id="3_bmv8b"]
 [ext_resource type="PackedScene" uid="uid://uxy816amcxf0" path="res://scenes/Gun.tscn" id="4_p0ajy"]
+[ext_resource type="PackedScene" uid="uid://ch0016cku2p02" path="res://scenes/Flashlight.tscn" id="5_mcm12"]
 [ext_resource type="Script" path="res://scripts/playerCamera.gd" id="5_tm3ug"]
-[ext_resource type="PackedScene" uid="uid://ch0016cku2p02" path="res://scenes/Light.tscn" id="9_mx5ss"]
 [ext_resource type="PackedScene" uid="uid://7gpl1jyx7wsl" path="res://scenes/Health.tscn" id="9_tlcqm"]
 [ext_resource type="PackedScene" uid="uid://cjwohg5ed45jj" path="res://scenes/Hitbox.tscn" id="10_40kik"]
-[ext_resource type="Texture2D" uid="uid://cp2ay5o5a8tbb" path="res://art/environment/lights/LightCone_resized.png" id="10_m3ubn"]
-[ext_resource type="Script" path="res://scripts/battery.gd" id="11_8hfxj"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_jvhh7"]
+
+[sub_resource type="CanvasTexture" id="CanvasTexture_0s8r6"]
+
+[sub_resource type="StyleBoxTexture" id="StyleBoxTexture_4bwxv"]
+texture = SubResource("CanvasTexture_0s8r6")
+modulate_color = Color(0.133333, 0.0705882, 0.101961, 1)
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_kd3j2"]
+shader = ExtResource("2_eb1nu")
+shader_parameter/active = false
+shader_parameter/tint = Color(0.647059, 0.188235, 0.188235, 1)
+
+[sub_resource type="CanvasTexture" id="CanvasTexture_teybc"]
+diffuse_texture = ExtResource("2_5f2j7")
+normal_texture = ExtResource("3_bmv8b")
 
 [sub_resource type="Animation" id="Animation_tvekj"]
 length = 0.001
 tracks/0/type = "value"
 tracks/0/imported = false
 tracks/0/enabled = true
-tracks/0/path = NodePath("PlayerSprite:frame")
+tracks/0/path = NodePath("Sprite2D:frame")
 tracks/0/interp = 1
 tracks/0/loop_wrap = true
 tracks/0/keys = {
@@ -32,7 +48,7 @@ resource_name = "shoot"
 tracks/0/type = "value"
 tracks/0/imported = false
 tracks/0/enabled = true
-tracks/0/path = NodePath("PlayerSprite:frame")
+tracks/0/path = NodePath("Sprite2D:frame")
 tracks/0/interp = 1
 tracks/0/loop_wrap = true
 tracks/0/keys = {
@@ -49,7 +65,7 @@ step = 0.25
 tracks/0/type = "value"
 tracks/0/imported = false
 tracks/0/enabled = true
-tracks/0/path = NodePath("PlayerSprite:frame")
+tracks/0/path = NodePath("Sprite2D:frame")
 tracks/0/interp = 1
 tracks/0/loop_wrap = true
 tracks/0/keys = {
@@ -74,31 +90,43 @@ polygon = PackedVector2Array(2, 4, 4, 3, 5, 1, 9, 2, 12, 1, 12, 2, 11, 2, 11, 3,
 radius = 4.0
 height = 20.0
 
-[sub_resource type="ShaderMaterial" id="ShaderMaterial_kd3j2"]
-shader = ExtResource("2_eb1nu")
-shader_parameter/active = false
-shader_parameter/tint = Color(0.647059, 0.188235, 0.188235, 1)
-
-[sub_resource type="CanvasTexture" id="CanvasTexture_teybc"]
-diffuse_texture = ExtResource("2_5f2j7")
-normal_texture = ExtResource("3_bmv8b")
-
 [node name="Player" type="CharacterBody2D" groups=["Player"]]
 y_sort_enabled = true
+position = Vector2(1, -5)
 collision_layer = 10
 collision_mask = 3
 motion_mode = 1
 wall_min_slide_angle = 0.0
 script = ExtResource("1_ucx17")
 
+[node name="CanvasLayer" type="CanvasLayer" parent="."]
+layer = 11
+
+[node name="ProgressBar" type="ProgressBar" parent="CanvasLayer"]
+offset_left = 10.0
+offset_top = 8.0
+offset_right = 60.0
+offset_bottom = 13.0
+theme_override_styles/background = SubResource("StyleBoxEmpty_jvhh7")
+theme_override_styles/fill = SubResource("StyleBoxTexture_4bwxv")
+max_value = 10.0
+value = 10.0
+show_percentage = false
+script = ExtResource("2_2lfhk")
+
 [node name="ColorRect" type="ColorRect" parent="."]
 visible = false
-offset_left = -177.0
-offset_top = -114.0
-offset_right = -137.0
-offset_bottom = -74.0
+offset_left = -183.0
+offset_top = -205.0
+offset_right = -143.0
+offset_bottom = -165.0
 scale = Vector2(8.76, 5.52)
 color = Color(0.160784, 0.223529, 0.219608, 1)
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+material = SubResource("ShaderMaterial_kd3j2")
+texture = SubResource("CanvasTexture_teybc")
+hframes = 4
 
 [node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="."]
 polygon = PackedVector2Array(7, -21, 11, -21, 11, 3, -8, 3, -8, -3, 7, -3)
@@ -114,6 +142,9 @@ script = ExtResource("5_tm3ug")
 [node name="LightOccluder2D" type="LightOccluder2D" parent="."]
 occluder = SubResource("OccluderPolygon2D_dgh7m")
 
+[node name="Flashlight" parent="." instance=ExtResource("5_mcm12")]
+position = Vector2(0, 5)
+
 [node name="Hitbox" parent="." node_paths=PackedStringArray("health") instance=ExtResource("10_40kik")]
 health = NodePath("../Health")
 
@@ -126,18 +157,5 @@ y_sort_enabled = true
 position = Vector2(9, -6)
 
 [node name="Health" parent="." instance=ExtResource("9_tlcqm")]
-
-[node name="Flashlight" parent="." node_paths=PackedStringArray("battery") instance=ExtResource("9_mx5ss")]
-rotation = -1.5708
-light_texture = ExtResource("10_m3ubn")
-battery = NodePath("Battery")
-
-[node name="Battery" type="Node" parent="Flashlight"]
-script = ExtResource("11_8hfxj")
-
-[node name="PlayerSprite" type="Sprite2D" parent="."]
-material = SubResource("ShaderMaterial_kd3j2")
-texture = SubResource("CanvasTexture_teybc")
-hframes = 4
 
 [connection signal="body_entered" from="Hitbox" to="." method="_on_hitbox_body_entered"]

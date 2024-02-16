@@ -2,27 +2,31 @@ extends CharacterBody2D
 
 class_name Player
 
+signal healthChanged 
+
 @export var speed = 85
 @onready var animation_player = $AnimationPlayer
 @onready var gun = $Gun
 @onready var flashlight = $Flashlight
-@onready var player_sprite = $PlayerSprite
+@onready var sprite_2d = $Sprite2D
+@onready var health = $Health
 
-const CROSSHAIR_004 = preload("res://art/player/crosshair004.png")
-
+@onready var currentHealth: int = health.max_health
+@onready var max_Health: int = health.max_health
 var knockback = Vector2.ZERO
 
 
-func _ready():		
+
+func _ready():
 	gun.get_node("ArmTimer").timeout.connect(_lower_arm)
-	player_sprite.material.set_shader_parameter("active", false)
+	sprite_2d.material.set_shader_parameter("active", false) 
 
 func damage():
 	print("tint")
-	player_sprite.material.set_shader_parameter("active", true)
+	sprite_2d.material.set_shader_parameter("active", true)
 	var timer = get_tree().create_timer(.5)
 	await timer.timeout
-	player_sprite.material.set_shader_parameter("active", false)
+	sprite_2d.material.set_shader_parameter("active", false)
 	
 func _input(event):
 	if event.is_action_pressed("1"):
@@ -38,11 +42,6 @@ func _input(event):
 	
 	if event.is_action_pressed("flashlight_toggle"):
 		flashlight.toggle()
-	if Input.is_action_pressed("aim"):
-		Input.set_custom_mouse_cursor(CROSSHAIR_004)
-	if Input.is_action_just_released("aim"):
-		Input.set_custom_mouse_cursor(null)
-		
 		
 func get_input():
 	var input_dir = Input.get_vector("move_left", "move_right", "move_up", "move_down")
@@ -50,10 +49,9 @@ func get_input():
 	
 	if Input.is_action_pressed("shoot"):
 		gun.fire_gun()
-	
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
-func _physics_process(_delta):
+func _physics_process(delta):
 	get_input()
 	move_and_slide()
 	look_at(get_global_mouse_position())
