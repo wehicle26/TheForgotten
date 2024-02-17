@@ -5,6 +5,7 @@ class_name Player
 signal healthChanged 
 
 @export var speed = 85
+@export var inventory : Inventory
 @onready var animation_player = $AnimationPlayer
 @onready var gun = $Gun
 @onready var flashlight = $Flashlight
@@ -80,12 +81,14 @@ func _physics_process(delta):
 #	global_rotation= lerp(rotaion, angle, 0.2)
 	
 	if velocity != Vector2(0, 0):
-		feet.play("walk")
-		#player_feet.global_rotation = global_position.angle_to(input_dir) - PI/2
-		#player_feet.global_rotation = global_rotation
+		#animation_player.play("Walk")
+		if not gun.get_node("ArmTimer").is_stopped():
+			animation_player.play("Walk_Shoot")
+		else:
+			animation_player.play("Walk")
+		
 	else:
-		pass
-		#animation_player.stop()
+		animation_player.stop()
 
 func _lower_arm():
 	animation_player.play("Walk")

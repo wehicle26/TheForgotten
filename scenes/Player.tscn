@@ -1,8 +1,9 @@
-[gd_scene load_steps=33 format=3 uid="uid://blhmkefans43h"]
+[gd_scene load_steps=35 format=3 uid="uid://blhmkefans43h"]
 
 [ext_resource type="Script" path="res://scripts/player.gd" id="1_ucx17"]
 [ext_resource type="Texture2D" uid="uid://bvrqydcwjh4ma" path="res://art/player/Spaceman_old.png" id="2_5f2j7"]
 [ext_resource type="Shader" path="res://shaders/damage_tint.gdshader" id="2_eb1nu"]
+[ext_resource type="Resource" uid="uid://3i4xk73rle30" path="res://art/player/playerInventory.tres" id="2_xm8oc"]
 [ext_resource type="Texture2D" uid="uid://dwyd5hjqgn0c1" path="res://art/player/Spaceman_old_n.png" id="3_bmv8b"]
 [ext_resource type="PackedScene" uid="uid://uxy816amcxf0" path="res://scenes/Gun.tscn" id="4_p0ajy"]
 [ext_resource type="Script" path="res://scripts/playerCamera.gd" id="5_tm3ug"]
@@ -13,8 +14,8 @@
 [ext_resource type="Texture2D" uid="uid://busbkrvsvk5qn" path="res://art/player/Spaceman_v2_feet_n.png" id="10_d28cc"]
 [ext_resource type="Texture2D" uid="uid://cp2ay5o5a8tbb" path="res://art/environment/lights/LightCone_resized.png" id="10_m3ubn"]
 [ext_resource type="Script" path="res://scripts/battery.gd" id="11_8hfxj"]
-[ext_resource type="Texture2D" uid="uid://deuxnpcpd62ft" path="res://output/spaceman.png" id="14_dg0jk"]
-[ext_resource type="Texture2D" uid="uid://0nuv276x4v7h" path="res://output/spaceman_n.png" id="15_a2d6c"]
+[ext_resource type="Texture2D" uid="uid://b0w7kd2sgeyxq" path="res://output/spacemanFlattened.png" id="14_y8prj"]
+[ext_resource type="Texture2D" uid="uid://04yg0ihwqr2g" path="res://output/spaceman_nFlattened_NormalGenerated.png" id="15_5rrit"]
 
 [sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_c2fxj"]
 
@@ -262,17 +263,46 @@ tracks/2/keys = {
 "values": [22, 23, 24, 25, 26, 25, 24, 23, 22, 27, 28, 29, 30, 29, 31, 27]
 }
 
+[sub_resource type="Animation" id="Animation_yvj8y"]
+length = 1.55
+loop_mode = 1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Sprite2D:visible")
+tracks/0/interp = 1
+tracks/0/loop_wrap = false
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [true]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("Sprite2D:frame")
+tracks/1/interp = 1
+tracks/1/loop_wrap = false
+tracks/1/keys = {
+"times": PackedFloat32Array(0, 0.2, 0.3, 0.4, 0.5, 0.9, 0.95, 1.05, 1.15, 1.25, 1.35),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1),
+"update": 1,
+"values": [11, 32, 33, 34, 35, 36, 37, 38, 39, 40, 11]
+}
+
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_d2w7h"]
 _data = {
+"Crowbar_Swing": SubResource("Animation_yvj8y"),
 "Run": SubResource("Animation_sdj05"),
 "Shoot": SubResource("Animation_yh804"),
 "Walk": SubResource("Animation_s2jxc"),
 "Walk_Shoot": SubResource("Animation_04nk4")
 }
 
-[sub_resource type="CanvasTexture" id="CanvasTexture_m8kww"]
-diffuse_texture = ExtResource("14_dg0jk")
-normal_texture = ExtResource("15_a2d6c")
+[sub_resource type="CanvasTexture" id="CanvasTexture_ed5dk"]
+diffuse_texture = ExtResource("14_y8prj")
+normal_texture = ExtResource("15_5rrit")
 
 [node name="Player" type="CharacterBody2D" groups=["Player"]]
 y_sort_enabled = true
@@ -281,6 +311,7 @@ collision_mask = 3
 motion_mode = 1
 wall_min_slide_angle = 0.0
 script = ExtResource("1_ucx17")
+inventory = ExtResource("2_xm8oc")
 
 [node name="CanvasLayer" type="CanvasLayer" parent="."]
 
@@ -355,23 +386,22 @@ hframes = 4
 libraries = {
 "": SubResource("AnimationLibrary_d2w7h")
 }
-autoplay = "Walk"
 
 [node name="Sprite2D" type="Sprite2D" parent="."]
 texture_filter = 1
-texture = SubResource("CanvasTexture_m8kww")
-hframes = 6
-vframes = 6
-frame = 22
+texture = SubResource("CanvasTexture_ed5dk")
+hframes = 7
+vframes = 7
+frame = 11
 metadata/_aseprite_wizard_config_ = {
-"i_mode": -1,
+"i_mode": 0,
 "keep_anim_length": true,
-"layer": "",
+"layer": "Flattened",
 "o_ex_p": "",
 "o_folder": "res://output",
-"o_name": "spaceman_n",
+"o_name": "spaceman",
 "only_visible": true,
-"op_exp": false,
+"op_exp": true,
 "player": "AnimationPlayer",
 "source": "res://art/player/Spaceman_v2.aseprite"
 }
