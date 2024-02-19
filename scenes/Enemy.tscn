@@ -43,16 +43,20 @@ shape = SubResource("CircleShape2D_kalxv")
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 shape = SubResource("CircleShape2D_ofe1f")
 
-[node name="StateMachine" parent="." instance=ExtResource("4_flp2n")]
+[node name="StateMachine" parent="." node_paths=PackedStringArray("initial_state") instance=ExtResource("4_flp2n")]
+initial_state = NodePath("Idle")
 
-[node name="Idle" type="Node" parent="StateMachine"]
+[node name="Idle" type="Node" parent="StateMachine" node_paths=PackedStringArray("enemy")]
 script = ExtResource("6_yghre")
+enemy = NodePath("../..")
 
-[node name="Follow" type="Node" parent="StateMachine"]
+[node name="Follow" type="Node" parent="StateMachine" node_paths=PackedStringArray("enemy")]
 script = ExtResource("7_2vsql")
+enemy = NodePath("../..")
 
-[node name="Attack" type="Node" parent="StateMachine"]
+[node name="Attack" type="Node" parent="StateMachine" node_paths=PackedStringArray("enemy")]
 script = ExtResource("8_no63c")
+enemy = NodePath("../..")
 
 [node name="LineOfSight" type="Node2D" parent="."]
 script = ExtResource("9_idnvk")

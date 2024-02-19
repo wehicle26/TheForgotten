@@ -43,13 +43,14 @@ animation/layers/only_include_visible_layers_by_default=true
 
 FmodManager="*res://addons/fmod/FmodManager.gd"
 InteractionManager="*res://scenes/InteractionManager.tscn"
+SoundManager="*res://scripts/soundManager.gd"
 
 [display]
 
 window/size/viewport_width=320
 window/size/viewport_height=180
 window/size/window_width_override=1280
-window/size/window_height_override=640
+window/size/window_height_override=720
 window/stretch/mode="canvas_items"
 window/stretch/scale_mode="integer"
 
@@ -142,6 +143,7 @@ run={
 
 2d_render/layer_1="other"
 2d_render/layer_2="floor_shadow"
+2d_navigation/layer_1="Cargo"
 2d_physics/layer_4="LoS"
 2d_physics/layer_5="bullet"
 2d_physics/layer_8="Items"
@@ -149,3 +151,4 @@ run={
 [rendering]
 
 textures/canvas_textures/default_texture_filter=0
+renderer/rendering_method="gl_compatibility"

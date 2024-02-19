@@ -6,33 +6,34 @@ signal healthChanged
 
 @export var speed = 85
 @export var inventory : Inventory
+@export var swinging : bool = false
+
 @onready var animation_player = $AnimationPlayer
 @onready var flashlight = $Flashlight
 @onready var sprite_2d = $Sprite2D
 @onready var health = $Health
 @onready var feet = $Feet
-@onready var crowbar_hitbox = $CrowbarHitbox
-
 @onready var currentHealth: int = health.max_health
 @onready var max_Health: int = health.max_health
+
 const CROSSHAIR_004 = preload("res://art/player/crosshair004.png")
 
 var knockback = Vector2.ZERO
-var footstep_sound : FmodEvent
 var isPlaying = true
-var emitter : FmodEventEmitter2D
 var input_dir : Vector2
 var has_gun : bool = false
 var current_weapon = "crowbar"
-@export var swinging : bool = false
+
+var attack_damage = 1
+var knockback_force = 100
+var attack_position = 0
+var stun_time = .25
 
 
 func _ready():
 	#gun.get_node("ArmTimer").timeout.connect(_lower_arm)
 	#player_sprite.material.set_shader_parameter("active", false)
-	footstep_sound = FmodServer.create_event_instance("event:/footsteps")
-	footstep_sound.set_2d_attributes(self.global_transform)
-	footstep_sound.set_volume( 1 )
+	SoundManager.initialize_player_sounds(self)
 
 
 func damage():
@@ -43,7 +44,11 @@ func damage():
 	#player_sprite.material.set_shader_parameter("active", false)
 
 func play_footstep():
-	footstep_sound.start()
+	SoundManager.play_footstep()
+
+
+func play_crowbar_swing():
+	SoundManager.play_crowbar_swing()
 
 
 func _input(event):
@@ -83,3 +88,13 @@ func _lower_arm():
 func _on_hitbox_body_entered(body):
 	if body is Enemy:
 		print(body)
+
+
+func _on_area_2d_area_entered(area):
+	if area is Hitbox:
+		var attack = Attack.new()
+		attack.attack_damage = attack_damage
+		attack.knockback_force = knockback_force
+		attack.attack_position = global_position
+		attack.stun_time = stun_time
+		area.damage(attack)
