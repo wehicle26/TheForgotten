@@ -2,7 +2,7 @@ extends State
 
 class_name EnemyIdle
 
-@export var enemy: CharacterBody2D
+@export var enemy: Enemy
 @export var move_speed = 10
 @export var aggro_range = 200
 

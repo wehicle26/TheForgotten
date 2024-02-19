@@ -4,4 +4,3 @@
 
 [resource]
 script = ExtResource("1_67afb")
-items = Array[Resource("res://scripts/inventoryItem.gd")]([])

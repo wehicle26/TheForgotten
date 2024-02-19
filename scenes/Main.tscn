@@ -1,7 +1,8 @@
-[gd_scene load_steps=25 format=3 uid="uid://b71gis6vgkvkg"]
+[gd_scene load_steps=26 format=3 uid="uid://b71gis6vgkvkg"]
 
 [ext_resource type="Script" path="res://scripts/level.gd" id="1_6u7sh"]
 [ext_resource type="PackedScene" uid="uid://bob88w6sefucj" path="res://scenes/Environment.tscn" id="1_halep"]
+[ext_resource type="PackedScene" uid="uid://cyj8triea8w13" path="res://scenes/Crowbar.tscn" id="3_ax4cu"]
 [ext_resource type="PackedScene" uid="uid://duwl5sldekn2r" path="res://scenes/Enemy.tscn" id="3_ex2xc"]
 [ext_resource type="PackedScene" uid="uid://ch0016cku2p02" path="res://scenes/Light.tscn" id="4_7cj7q"]
 [ext_resource type="Texture2D" uid="uid://beuoex8va8e8p" path="res://art/environment/lights/wall light1.png" id="5_t0sxk"]
@@ -147,6 +148,9 @@ position = Vector2(-657, -143)
 
 [node name="RifleItem" type="Sprite2D" parent="Environment"]
 z_index = 3
+
+[node name="Crowbar" parent="Environment" instance=ExtResource("3_ax4cu")]
+position = Vector2(-624, -208)
 
 [node name="DarknessLevel" type="CanvasModulate" parent="."]
 visible = false

@@ -9,7 +9,7 @@ func _ready():
 
 
 func initialize_fmod():
-	FmodServer.add_listener(0, self)
+	#FmodServer.add_listener(0, self)
 	FmodServer.load_bank("res://sounds/banks/Desktop/Master.strings.bank", 
 	FmodServer.FMOD_STUDIO_LOAD_BANK_NORMAL)
 	FmodServer.load_bank("res://sounds/banks/Desktop/Master.bank", 
