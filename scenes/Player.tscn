@@ -1,11 +1,10 @@
-[gd_scene load_steps=35 format=3 uid="uid://blhmkefans43h"]
+[gd_scene load_steps=40 format=3 uid="uid://blhmkefans43h"]
 
 [ext_resource type="Script" path="res://scripts/player.gd" id="1_ucx17"]
 [ext_resource type="Texture2D" uid="uid://bvrqydcwjh4ma" path="res://art/player/Spaceman_old.png" id="2_5f2j7"]
 [ext_resource type="Shader" path="res://shaders/damage_tint.gdshader" id="2_eb1nu"]
 [ext_resource type="Resource" uid="uid://3i4xk73rle30" path="res://art/player/playerInventory.tres" id="2_xm8oc"]
 [ext_resource type="Texture2D" uid="uid://dwyd5hjqgn0c1" path="res://art/player/Spaceman_old_n.png" id="3_bmv8b"]
-[ext_resource type="PackedScene" uid="uid://uxy816amcxf0" path="res://scenes/Gun.tscn" id="4_p0ajy"]
 [ext_resource type="Script" path="res://scripts/playerCamera.gd" id="5_tm3ug"]
 [ext_resource type="Texture2D" uid="uid://rwveppyb3ifm" path="res://art/player/Spaceman_v2_feet.png" id="9_cbwmm"]
 [ext_resource type="PackedScene" uid="uid://ch0016cku2p02" path="res://scenes/Light.tscn" id="9_mx5ss"]
@@ -16,89 +15,53 @@
 [ext_resource type="Script" path="res://scripts/battery.gd" id="11_8hfxj"]
 [ext_resource type="Texture2D" uid="uid://b0w7kd2sgeyxq" path="res://output/spacemanFlattened.png" id="14_y8prj"]
 [ext_resource type="Texture2D" uid="uid://04yg0ihwqr2g" path="res://output/spaceman_nFlattened_NormalGenerated.png" id="15_5rrit"]
+[ext_resource type="PackedScene" uid="uid://bvxg5kctr4jyl" path="res://scenes/StateMachine.tscn" id="16_2nuhd"]
+[ext_resource type="Script" path="res://scripts/State/playerIdle.gd" id="17_uyqxx"]
+[ext_resource type="Script" path="res://scripts/State/playerWalk.gd" id="18_muy3d"]
+[ext_resource type="Script" path="res://scripts/State/playerRun.gd" id="19_yhe6l"]
+[ext_resource type="Script" path="res://scripts/State/playerAttack.gd" id="20_ij0pt"]
 
-[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_c2fxj"]
-
-[sub_resource type="PlaceholderTexture2D" id="PlaceholderTexture2D_q5i5u"]
-
-[sub_resource type="StyleBoxTexture" id="StyleBoxTexture_fmanf"]
-texture = SubResource("PlaceholderTexture2D_q5i5u")
-modulate_color = Color(0.647059, 0.188235, 0.188235, 1)
-
-[sub_resource type="OccluderPolygon2D" id="OccluderPolygon2D_dgh7m"]
-cull_mode = 2
-polygon = PackedVector2Array(2, 4, 4, 3, 5, 1, 9, 2, 12, 1, 12, 2, 11, 2, 11, 3, 10, 3, 10, 4, 5, 4, 5, 5, 4, 5, 4, 6, 2, 6, 2, 7, -2, 7, -2, 6, -4, 6, -4, 5, -5, 5, -5, 4, -10, 4, -10, 3, -11, 3, -11, 2, -12, 2, -12, 1, -9, 2, -6, 1, -4, 3, -2, 4, 0, 5)
-
-[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_x5s37"]
-radius = 4.0
-height = 20.0
-
-[sub_resource type="Animation" id="Animation_q3tnl"]
-length = 0.001
+[sub_resource type="Animation" id="Animation_yvj8y"]
+length = 1.55
 tracks/0/type = "value"
 tracks/0/imported = false
 tracks/0/enabled = true
-tracks/0/path = NodePath("PlayerShouldersLegs:frame")
+tracks/0/path = NodePath("Sprite2D:visible")
 tracks/0/interp = 1
-tracks/0/loop_wrap = true
+tracks/0/loop_wrap = false
 tracks/0/keys = {
 "times": PackedFloat32Array(0),
 "transitions": PackedFloat32Array(1),
 "update": 1,
-"values": [0]
-}
-
-[sub_resource type="Animation" id="Animation_rpeqo"]
-resource_name = "walk"
-length = 1.1
-tracks/0/type = "method"
-tracks/0/imported = false
-tracks/0/enabled = false
-tracks/0/path = NodePath(".")
-tracks/0/interp = 1
-tracks/0/loop_wrap = true
-tracks/0/keys = {
-"times": PackedFloat32Array(0, 0.5),
-"transitions": PackedFloat32Array(1, 1),
-"values": [{
-"args": [],
-"method": &"play_footstep"
-}, {
-"args": [],
-"method": &"play_footstep"
-}]
+"values": [true]
 }
 tracks/1/type = "value"
 tracks/1/imported = false
-tracks/1/enabled = false
-tracks/1/path = NodePath("PlayerShouldersLegs:frame")
+tracks/1/enabled = true
+tracks/1/path = NodePath("Sprite2D:frame")
 tracks/1/interp = 1
-tracks/1/loop_wrap = true
+tracks/1/loop_wrap = false
 tracks/1/keys = {
-"times": PackedFloat32Array(0, 0.1, 0.2, 0.3, 0.4, 0.5, 0.6, 0.7, 0.8, 0.9, 1),
+"times": PackedFloat32Array(0, 0.2, 0.3, 0.4, 0.5, 0.9, 0.95, 1.05, 1.15, 1.25, 1.35),
 "transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1),
 "update": 1,
-"values": [0, 0, 1, 2, 3, 4, 5, 6, 7, 8, 9]
+"values": [11, 32, 33, 34, 35, 36, 37, 38, 39, 40, 11]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath(".:swinging")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0, 1.5),
+"transitions": PackedFloat32Array(1, 1),
+"update": 1,
+"values": [true, false]
 }
 
-[sub_resource type="AnimationLibrary" id="AnimationLibrary_m12t3"]
-_data = {
-"RESET": SubResource("Animation_q3tnl"),
-"walk": SubResource("Animation_rpeqo")
-}
-
-[sub_resource type="CanvasTexture" id="CanvasTexture_utn2m"]
-diffuse_texture = ExtResource("9_cbwmm")
-normal_texture = ExtResource("10_d28cc")
-
-[sub_resource type="ShaderMaterial" id="ShaderMaterial_kd3j2"]
-shader = ExtResource("2_eb1nu")
-shader_parameter/active = false
-shader_parameter/tint = Color(0.647059, 0.188235, 0.188235, 1)
-
-[sub_resource type="CanvasTexture" id="CanvasTexture_teybc"]
-diffuse_texture = ExtResource("2_5f2j7")
-normal_texture = ExtResource("3_bmv8b")
+[sub_resource type="Animation" id="Animation_gyhls"]
+length = 0.001
 
 [sub_resource type="Animation" id="Animation_sdj05"]
 length = 1.2
@@ -263,42 +226,97 @@ tracks/2/keys = {
 "values": [22, 23, 24, 25, 26, 25, 24, 23, 22, 27, 28, 29, 30, 29, 31, 27]
 }
 
-[sub_resource type="Animation" id="Animation_yvj8y"]
-length = 1.55
-loop_mode = 1
-tracks/0/type = "value"
-tracks/0/imported = false
-tracks/0/enabled = true
-tracks/0/path = NodePath("Sprite2D:visible")
-tracks/0/interp = 1
-tracks/0/loop_wrap = false
-tracks/0/keys = {
-"times": PackedFloat32Array(0),
-"transitions": PackedFloat32Array(1),
-"update": 1,
-"values": [true]
-}
-tracks/1/type = "value"
-tracks/1/imported = false
-tracks/1/enabled = true
-tracks/1/path = NodePath("Sprite2D:frame")
-tracks/1/interp = 1
-tracks/1/loop_wrap = false
-tracks/1/keys = {
-"times": PackedFloat32Array(0, 0.2, 0.3, 0.4, 0.5, 0.9, 0.95, 1.05, 1.15, 1.25, 1.35),
-"transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1),
-"update": 1,
-"values": [11, 32, 33, 34, 35, 36, 37, 38, 39, 40, 11]
-}
-
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_d2w7h"]
 _data = {
 "Crowbar_Swing": SubResource("Animation_yvj8y"),
+"RESET": SubResource("Animation_gyhls"),
 "Run": SubResource("Animation_sdj05"),
 "Shoot": SubResource("Animation_yh804"),
 "Walk": SubResource("Animation_s2jxc"),
 "Walk_Shoot": SubResource("Animation_04nk4")
 }
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_c2fxj"]
+
+[sub_resource type="PlaceholderTexture2D" id="PlaceholderTexture2D_q5i5u"]
+
+[sub_resource type="StyleBoxTexture" id="StyleBoxTexture_fmanf"]
+texture = SubResource("PlaceholderTexture2D_q5i5u")
+modulate_color = Color(0.647059, 0.188235, 0.188235, 1)
+
+[sub_resource type="OccluderPolygon2D" id="OccluderPolygon2D_1so1u"]
+polygon = PackedVector2Array(-7, 0, -7, 2, -6, 2, -6, 4, -5, 4, -5, 5, -4, 5, -4, 6, -2, 6, -2, 7, 2, 7, 2, 6, 4, 6, 4, 5, 5, 5, 5, 4, 6, 4, 6, 2, 7, 2, 7, 0)
+
+[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_x5s37"]
+radius = 4.0
+height = 20.0
+
+[sub_resource type="Animation" id="Animation_q3tnl"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("PlayerShouldersLegs:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [0]
+}
+
+[sub_resource type="Animation" id="Animation_rpeqo"]
+resource_name = "walk"
+length = 1.1
+tracks/0/type = "method"
+tracks/0/imported = false
+tracks/0/enabled = false
+tracks/0/path = NodePath(".")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.5),
+"transitions": PackedFloat32Array(1, 1),
+"values": [{
+"args": [],
+"method": &"play_footstep"
+}, {
+"args": [],
+"method": &"play_footstep"
+}]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = false
+tracks/1/path = NodePath("PlayerShouldersLegs:frame")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0, 0.1, 0.2, 0.3, 0.4, 0.5, 0.6, 0.7, 0.8, 0.9, 1),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1),
+"update": 1,
+"values": [0, 0, 1, 2, 3, 4, 5, 6, 7, 8, 9]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_m12t3"]
+_data = {
+"RESET": SubResource("Animation_q3tnl"),
+"walk": SubResource("Animation_rpeqo")
+}
+
+[sub_resource type="CanvasTexture" id="CanvasTexture_utn2m"]
+diffuse_texture = ExtResource("9_cbwmm")
+normal_texture = ExtResource("10_d28cc")
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_kd3j2"]
+shader = ExtResource("2_eb1nu")
+shader_parameter/active = false
+shader_parameter/tint = Color(0.647059, 0.188235, 0.188235, 1)
+
+[sub_resource type="CanvasTexture" id="CanvasTexture_teybc"]
+diffuse_texture = ExtResource("2_5f2j7")
+normal_texture = ExtResource("3_bmv8b")
 
 [sub_resource type="CanvasTexture" id="CanvasTexture_ed5dk"]
 diffuse_texture = ExtResource("14_y8prj")
@@ -311,7 +329,14 @@ collision_mask = 3
 motion_mode = 1
 wall_min_slide_angle = 0.0
 script = ExtResource("1_ucx17")
+speed = 65
 inventory = ExtResource("2_xm8oc")
+swinging = true
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+libraries = {
+"": SubResource("AnimationLibrary_d2w7h")
+}
 
 [node name="CanvasLayer" type="CanvasLayer" parent="."]
 
@@ -342,7 +367,7 @@ polygon = PackedVector2Array(7, -21, 11, -21, 11, 3, -8, 3, -8, -3, 7, -3)
 script = ExtResource("5_tm3ug")
 
 [node name="LightOccluder2D" type="LightOccluder2D" parent="."]
-occluder = SubResource("OccluderPolygon2D_dgh7m")
+occluder = SubResource("OccluderPolygon2D_1so1u")
 
 [node name="Hitbox" parent="." node_paths=PackedStringArray("health") instance=ExtResource("10_40kik")]
 health = NodePath("../Health")
@@ -351,13 +376,10 @@ health = NodePath("../Health")
 rotation = -1.57079
 shape = SubResource("CapsuleShape2D_x5s37")
 
-[node name="Gun" parent="." instance=ExtResource("4_p0ajy")]
-y_sort_enabled = true
-position = Vector2(9, -6)
-
 [node name="Health" parent="." instance=ExtResource("9_tlcqm")]
 
 [node name="Flashlight" parent="." node_paths=PackedStringArray("battery") instance=ExtResource("9_mx5ss")]
+visible = false
 rotation = -1.5708
 light_texture = ExtResource("10_m3ubn")
 flicker_factor = 0.0
@@ -382,11 +404,6 @@ material = SubResource("ShaderMaterial_kd3j2")
 texture = SubResource("CanvasTexture_teybc")
 hframes = 4
 
-[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
-libraries = {
-"": SubResource("AnimationLibrary_d2w7h")
-}
-
 [node name="Sprite2D" type="Sprite2D" parent="."]
 texture_filter = 1
 texture = SubResource("CanvasTexture_ed5dk")
@@ -405,5 +422,28 @@ metadata/_aseprite_wizard_config_ = {
 "player": "AnimationPlayer",
 "source": "res://art/player/Spaceman_v2.aseprite"
 }
+
+[node name="CrowbarHitbox" type="CollisionPolygon2D" parent="."]
+polygon = PackedVector2Array(-26, 21, -26, 28, -14, 38, 3, 40, 23, 31, 33, 18, 37, -2, 36, -21, 26, -33, 9, -39, -9, -38, -23, -30, -33, -13, -26, -9, -19, -7, -9, -26, 21, -27, 32, -13, 26, 15, 0, 30, -7, 24, -17, 14)
+disabled = true
+
+[node name="StateMachine" parent="." node_paths=PackedStringArray("initial_state") instance=ExtResource("16_2nuhd")]
+initial_state = NodePath("PlayerIdle")
+
+[node name="PlayerIdle" type="Node" parent="StateMachine" node_paths=PackedStringArray("player")]
+script = ExtResource("17_uyqxx")
+player = NodePath("../..")
+
+[node name="PlayerWalk" type="Node" parent="StateMachine" node_paths=PackedStringArray("player")]
+script = ExtResource("18_muy3d")
+player = NodePath("../..")
+
+[node name="PlayerRun" type="Node" parent="StateMachine" node_paths=PackedStringArray("player")]
+script = ExtResource("19_yhe6l")
+player = NodePath("../..")
+
+[node name="PlayerAttack" type="Node" parent="StateMachine" node_paths=PackedStringArray("player")]
+script = ExtResource("20_ij0pt")
+player = NodePath("../..")
 
 [connection signal="body_entered" from="Hitbox" to="." method="_on_hitbox_body_entered"]
