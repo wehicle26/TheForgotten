@@ -1,4 +1,4 @@
-[gd_scene load_steps=40 format=3 uid="uid://blhmkefans43h"]
+[gd_scene load_steps=41 format=3 uid="uid://blhmkefans43h"]
 
 [ext_resource type="Script" path="res://scripts/player.gd" id="1_ucx17"]
 [ext_resource type="Texture2D" uid="uid://bvrqydcwjh4ma" path="res://art/player/Spaceman_old.png" id="2_5f2j7"]
@@ -59,9 +59,59 @@ tracks/2/keys = {
 "update": 1,
 "values": [true, false]
 }
+tracks/3/type = "method"
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/path = NodePath(".")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/keys = {
+"times": PackedFloat32Array(0.8),
+"transitions": PackedFloat32Array(1),
+"values": [{
+"args": [],
+"method": &"play_crowbar_swing"
+}]
+}
+tracks/4/type = "value"
+tracks/4/imported = false
+tracks/4/enabled = true
+tracks/4/path = NodePath("CollisionPolygon2D:disabled")
+tracks/4/interp = 1
+tracks/4/loop_wrap = true
+tracks/4/keys = {
+"times": PackedFloat32Array(0, 0.8, 1),
+"transitions": PackedFloat32Array(1, 1, 1),
+"update": 1,
+"values": [true, false, true]
+}
 
 [sub_resource type="Animation" id="Animation_gyhls"]
 length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("CollisionPolygon2D:disabled")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [true]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("Sprite2D:frame")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [0]
+}
 
 [sub_resource type="Animation" id="Animation_sdj05"]
 length = 1.2
@@ -322,6 +372,10 @@ normal_texture = ExtResource("3_bmv8b")
 diffuse_texture = ExtResource("14_y8prj")
 normal_texture = ExtResource("15_5rrit")
 
+[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_4c1uc"]
+radius = 6.0
+height = 12.0
+
 [node name="Player" type="CharacterBody2D" groups=["Player"]]
 y_sort_enabled = true
 collision_layer = 10
@@ -360,10 +414,14 @@ offset_bottom = -74.0
 scale = Vector2(8.76, 5.52)
 color = Color(0.160784, 0.223529, 0.219608, 1)
 
-[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="."]
-polygon = PackedVector2Array(7, -21, 11, -21, 11, 3, -8, 3, -8, -3, 7, -3)
-
 [node name="PlayerCamera" type="Camera2D" parent="."]
+drag_horizontal_enabled = true
+drag_vertical_enabled = true
+drag_left_margin = 0.1
+drag_top_margin = 0.1
+drag_right_margin = 0.1
+drag_bottom_margin = 0.1
+editor_draw_drag_margin = true
 script = ExtResource("5_tm3ug")
 
 [node name="LightOccluder2D" type="LightOccluder2D" parent="."]
@@ -409,7 +467,6 @@ texture_filter = 1
 texture = SubResource("CanvasTexture_ed5dk")
 hframes = 7
 vframes = 7
-frame = 11
 metadata/_aseprite_wizard_config_ = {
 "i_mode": 0,
 "keep_anim_length": true,
@@ -423,7 +480,7 @@ metadata/_aseprite_wizard_config_ = {
 "source": "res://art/player/Spaceman_v2.aseprite"
 }
 
-[node name="CrowbarHitbox" type="CollisionPolygon2D" parent="."]
+[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="."]
 polygon = PackedVector2Array(-26, 21, -26, 28, -14, 38, 3, 40, 23, 31, 33, 18, 37, -2, 36, -21, 26, -33, 9, -39, -9, -38, -23, -30, -33, -13, -26, -9, -19, -7, -9, -26, 21, -27, 32, -13, 26, 15, 0, 30, -7, 24, -17, 14)
 disabled = true
 
@@ -445,5 +502,8 @@ player = NodePath("../..")
 [node name="PlayerAttack" type="Node" parent="StateMachine" node_paths=PackedStringArray("player")]
 script = ExtResource("20_ij0pt")
 player = NodePath("../..")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+shape = SubResource("CapsuleShape2D_4c1uc")
 
 [connection signal="body_entered" from="Hitbox" to="." method="_on_hitbox_body_entered"]

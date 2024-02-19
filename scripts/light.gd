@@ -22,6 +22,10 @@ func _ready():
 	if get_parent() is Player:
 		sprite_light.offset.x = 140
 		shadow_light.offset.x = 140
+	else:
+		pass
+		#flip_h = true
+
 
 func toggle():
 	if visible:
