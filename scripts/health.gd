@@ -10,7 +10,8 @@ signal healthChanged
 
 func _ready():
 	health = max_health
-	
+
+
 func damage(attack: Attack):
 	var body = get_parent()
 	if body.has_method("damage"):

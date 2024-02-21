@@ -1,0 +1,80 @@
+[gd_scene load_steps=10 format=3 uid="uid://c7u77qm7btd2s"]
+
+[ext_resource type="PackedScene" uid="uid://drc50lwybh48x" path="res://scenes/Item.tscn" id="1_nptfi"]
+[ext_resource type="Script" path="res://scripts/cryoBed.gd" id="2_1460b"]
+[ext_resource type="Texture2D" uid="uid://c6dj2anoojwnx" path="res://art/environment/cryo_bed.png" id="3_o1o7a"]
+[ext_resource type="Texture2D" uid="uid://dnhuo5lpb7mk7" path="res://art/environment/cryo_bed_n.png" id="4_qf0d0"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_7jmsp"]
+resource_local_to_scene = true
+
+[sub_resource type="CanvasTexture" id="CanvasTexture_7xppf"]
+diffuse_texture = ExtResource("3_o1o7a")
+normal_texture = ExtResource("4_qf0d0")
+
+[sub_resource type="Animation" id="Animation_qje5l"]
+resource_name = "Open"
+length = 9.0
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Sprite2D:frame")
+tracks/0/interp = 0
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 8.4),
+"transitions": PackedFloat32Array(1, 1),
+"update": 1,
+"values": [0, 1]
+}
+tracks/1/type = "method"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath(".")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"values": [{
+"args": [],
+"method": &"play_bed_sound"
+}]
+}
+
+[sub_resource type="Animation" id="Animation_5etqb"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Sprite2D:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [0]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_vkmmr"]
+_data = {
+"Open": SubResource("Animation_qje5l"),
+"RESET": SubResource("Animation_5etqb")
+}
+
+[node name="CryoBed" instance=ExtResource("1_nptfi")]
+script = ExtResource("2_1460b")
+
+[node name="CollisionShape2D" parent="." index="0"]
+shape = SubResource("RectangleShape2D_7jmsp")
+
+[node name="Sprite2D" parent="." index="1"]
+material = null
+texture = SubResource("CanvasTexture_7xppf")
+hframes = 2
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="." index="2"]
+libraries = {
+"": SubResource("AnimationLibrary_vkmmr")
+}

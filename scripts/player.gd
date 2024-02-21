@@ -2,7 +2,7 @@ extends CharacterBody2D
 
 class_name Player
 
-signal healthChanged 
+signal healthChanged
 
 @export var speed = 85
 @export var inventory : Inventory
@@ -23,7 +23,6 @@ var isPlaying = true
 var input_dir : Vector2
 var has_gun : bool = false
 var current_weapon = "crowbar"
-
 var attack_damage = 1
 var knockback_force = 100
 var attack_position = 0
@@ -42,6 +41,7 @@ func damage():
 	var timer = get_tree().create_timer(.5)
 	await timer.timeout
 	#player_sprite.material.set_shader_parameter("active", false)
+
 
 func play_footstep():
 	SoundManager.play_footstep()
@@ -64,7 +64,8 @@ func _input(event):
 		#gun.num_bullets = 5
 	if event.is_action_pressed("flashlight_toggle") and inventory.flashlight:
 		flashlight.toggle()
-		
+
+
 func get_input():
 	#if not swinging:
 	input_dir = Input.get_vector("move_left", "move_right", "move_up", "move_down")
@@ -73,13 +74,16 @@ func get_input():
 		pass
 		#gun.fire_gun()
 	return input_dir
-	
+
+
 func _process(_delta):
 	pass
-			
+
+
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _physics_process(delta):
 	move_and_slide()
+
 
 func _lower_arm():
 	animation_player.play("Walk")

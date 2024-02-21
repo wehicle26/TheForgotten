@@ -1,9 +1,10 @@
-[gd_scene load_steps=27 format=3 uid="uid://b71gis6vgkvkg"]
+[gd_scene load_steps=31 format=3 uid="uid://b71gis6vgkvkg"]
 
 [ext_resource type="Script" path="res://scripts/level.gd" id="1_6u7sh"]
 [ext_resource type="PackedScene" uid="uid://bob88w6sefucj" path="res://scenes/Environment.tscn" id="1_halep"]
 [ext_resource type="PackedScene" uid="uid://cyj8triea8w13" path="res://scenes/Crowbar.tscn" id="3_ax4cu"]
 [ext_resource type="PackedScene" uid="uid://duwl5sldekn2r" path="res://scenes/Enemy.tscn" id="3_ex2xc"]
+[ext_resource type="PackedScene" uid="uid://c7u77qm7btd2s" path="res://scenes/CryoBed.tscn" id="4_0fems"]
 [ext_resource type="PackedScene" uid="uid://ch0016cku2p02" path="res://scenes/Light.tscn" id="4_7cj7q"]
 [ext_resource type="Texture2D" uid="uid://beuoex8va8e8p" path="res://art/environment/lights/wall light1.png" id="5_t0sxk"]
 [ext_resource type="Texture2D" uid="uid://bs1j2sjkfkrod" path="res://art/environment/lights/wall light2.png" id="5_wy17f"]
@@ -120,6 +121,67 @@ animations = [{
 "speed": 5.0
 }]
 
+[sub_resource type="Animation" id="Animation_2qwia"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("AnimationPlayer/CanvasLayer/ColorRect:self_modulate")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Color(1, 1, 1, 1)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("AnimationPlayer/CanvasLayer/ColorRect:visible")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [true]
+}
+
+[sub_resource type="Animation" id="Animation_u5hk3"]
+resource_name = "fade_in"
+length = 3.0
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("AnimationPlayer/CanvasLayer/ColorRect:self_modulate")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 3),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Color(1, 1, 1, 1), Color(1, 1, 1, 0)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("AnimationPlayer/CanvasLayer/ColorRect:visible")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0, 3),
+"transitions": PackedFloat32Array(1, 1),
+"update": 1,
+"values": [true, false]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_pgkf5"]
+_data = {
+"RESET": SubResource("Animation_2qwia"),
+"fade_in": SubResource("Animation_u5hk3")
+}
+
 [node name="Main" type="Node2D"]
 script = ExtResource("1_6u7sh")
 
@@ -135,7 +197,7 @@ offset_right = 40.0
 offset_bottom = 40.0
 
 [node name="PlayerSpawnLocation" type="Marker2D" parent="."]
-position = Vector2(-649, -32)
+position = Vector2(-657, -27)
 
 [node name="Environment" parent="." instance=ExtResource("1_halep")]
 
@@ -145,10 +207,11 @@ z_index = 3
 [node name="Crowbar" parent="Environment" instance=ExtResource("3_ax4cu")]
 position = Vector2(-601, -231)
 
-[node name="Sprite2D" type="Sprite2D" parent="Environment"]
-position = Vector2(-664, -215)
+[node name="CryoBed" parent="Environment" instance=ExtResource("4_0fems")]
+position = Vector2(-702, 0)
 
 [node name="DarknessLevel" type="CanvasModulate" parent="."]
+visible = false
 color = Color(0.0352941, 0.0392157, 0.0784314, 1)
 
 [node name="Lights" type="Node2D" parent="."]
@@ -378,7 +441,6 @@ light_texture = ExtResource("6_g4f4m")
 [node name="Light31" parent="Lights/WallLights" instance=ExtResource("4_7cj7q")]
 position = Vector2(-6, -54)
 rotation = 0.785425
-scale = Vector2(1, 1)
 texture = ExtResource("5_t0sxk")
 light_texture = ExtResource("6_g4f4m")
 
@@ -413,3 +475,15 @@ position = Vector2(-1216, -32)
 sprite_frames = SubResource("SpriteFrames_tjdlj")
 autoplay = "default"
 frame_progress = 0.321637
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+libraries = {
+"": SubResource("AnimationLibrary_pgkf5")
+}
+
+[node name="CanvasLayer" type="CanvasLayer" parent="AnimationPlayer"]
+
+[node name="ColorRect" type="ColorRect" parent="AnimationPlayer/CanvasLayer"]
+offset_right = 320.0
+offset_bottom = 180.0
+color = Color(0, 0, 0, 1)
