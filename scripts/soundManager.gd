@@ -2,9 +2,13 @@ extends Node
 
 enum {MAIN_LOOP_INTRO, MAIN_LOOP_CURIOUS, MAIN_LOOP_EERIE, MAIN_LOOP_DRONE, MAIN_LOOP_GARBLED}
 var event: FmodEvent = null
+var intro_sound: FmodEvent
 var footstep_sound : FmodEvent
 var crowbar_swing_sound : FmodEvent
 var roach_move_sound : FmodEvent
+var bed_sound : FmodEvent
+var let_me_out_sound : FmodEvent
+var shatter_glass_sound : FmodEvent
 
 func _ready():
 	initialize_fmod()
@@ -21,10 +25,6 @@ func initialize_fmod():
 	FmodServer.load_bank("res://sounds/banks/Desktop/Sounds.bank", 
 	FmodServer.FMOD_STUDIO_LOAD_BANK_NORMAL)
 
-	event = FmodServer.create_event_instance("event:/the_forgotten2.rpp")
-	event.set_volume(.5)
-	event.start()
-	set_main_loop_parameter(MAIN_LOOP_INTRO)
 
 func set_main_loop_parameter(loopLevel):
 	FmodServer.set_global_parameter_by_name("mainLoopLevel", loopLevel)
@@ -49,8 +49,51 @@ func initialize_enemy_sounds(enemy : Enemy):
 		pass
 
 
+func inittialize_bed_sound(bed):
+	bed_sound = FmodServer.create_event_instance("event:/cryo_bed")
+	bed_sound.set_2d_attributes(bed.global_transform)
+	bed_sound.set_volume( .6 )
+
+
 func initialize_sounds():
-	pass
+	intro_sound = FmodServer.create_event_instance("event:/intro_scene")
+	#bed_sound.set_2d_attributes(bed.global_transform)
+	intro_sound.set_volume( .6 )
+	
+	let_me_out_sound = FmodServer.create_event_instance("event:/let_me_out")
+	let_me_out_sound.set_volume( .7 )
+	
+	shatter_glass_sound = FmodServer.create_event_instance("event:/glass_shatter")
+	shatter_glass_sound.set_volume(.4)
+
+
+func play_main_loop():
+	event = FmodServer.create_event_instance("event:/the_forgotten2.rpp")
+	event.set_volume(.3)
+	event.start()
+	set_main_loop_parameter(MAIN_LOOP_INTRO)
+
+func stop_main_loop():
+	event.stop(1)
+
+func play_let_me_out():
+	let_me_out_sound.start()
+
+
+func get_let_me_out_state():
+	return let_me_out_sound.get_playback_state()
+
+
+func play_shatter_glass():
+	shatter_glass_sound.start()
+
+
+func play_intro_sound():
+	intro_sound.start()
+
+
+func play_bed_sound():
+	bed_sound.start()
 
 
 func play_footstep():

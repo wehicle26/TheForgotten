@@ -1,0 +1,155 @@
+[gd_scene load_steps=13 format=3 uid="uid://ch2qgcgexbqxx"]
+
+[ext_resource type="Script" path="res://scripts/intro.gd" id="1_cd5hq"]
+[ext_resource type="Texture2D" uid="uid://qkmswvnub1tp" path="res://art/environment/cryo_interior.png" id="1_jcsbc"]
+[ext_resource type="Shader" path="res://shaders/blur.gdshader" id="2_ldi8d"]
+[ext_resource type="Shader" path="res://shaders/shatter.gdshader" id="3_ppdhc"]
+[ext_resource type="Texture2D" uid="uid://bj85q6c8fx5uj" path="res://art/environment/cracked_glass.png" id="4_c7yy3"]
+[ext_resource type="Texture2D" uid="uid://bdo81umubna0d" path="res://art/environment/cryo_interior_smashed.png" id="5_cgdj8"]
+[ext_resource type="PackedScene" uid="uid://drcff36cbtlfm" path="res://scenes/ShardEmitter.tscn" id="6_3og6b"]
+
+[sub_resource type="Animation" id="Animation_p5um5"]
+resource_name = "Intro"
+length = 26.0
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("TextureRect:self_modulate")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 2.2, 4.2, 6.2, 8.2, 10.2, 25.6, 25.8),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1, 7.72747, 1),
+"update": 0,
+"values": [Color(0.137255, 0.137255, 0.137255, 1), Color(0, 0, 0, 1), Color(0.137255, 0.137255, 0.137255, 1), Color(0, 0, 0, 1), Color(0.137255, 0.137255, 0.137255, 1), Color(0, 0, 0, 1), Color(0, 0, 0, 1), Color(0.415686, 0.415686, 0.415686, 1)]
+}
+tracks/1/type = "method"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath(".")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"values": [{
+"args": [],
+"method": &"play_intro_sound"
+}]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("CanvasLayer/ColorRect:material:shader_parameter/lod")
+tracks/2/interp = 1
+tracks/2/loop_wrap = false
+tracks/2/keys = {
+"times": PackedFloat32Array(0, 2.1, 4, 6, 8, 10, 25.5, 26),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1, 1, 1),
+"update": 0,
+"values": [3.0, 0.0, 3.0, 0.0, 3.0, 0.0, 3.0, 0.0]
+}
+
+[sub_resource type="Animation" id="Animation_f326r"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("TextureRect:self_modulate")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Color(0, 0, 0, 1)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("CanvasLayer/ColorRect:material:shader_parameter/lod")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [1.0]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_8p1ep"]
+_data = {
+"Intro": SubResource("Animation_p5um5"),
+"RESET": SubResource("Animation_f326r")
+}
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_t2kqf"]
+shader = ExtResource("3_ppdhc")
+shader_parameter/refractionOffset = Vector2(25, 25)
+shader_parameter/reflectionOffset = Vector2(1, 1)
+shader_parameter/reflectionColor = Color(1, 1, 1, 0.8)
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_53g26"]
+shader = ExtResource("2_ldi8d")
+shader_parameter/lod = 1.0
+
+[node name="Intro" type="Node2D"]
+script = ExtResource("1_cd5hq")
+
+[node name="ColorRect" type="ColorRect" parent="."]
+offset_left = -199.0
+offset_top = -117.0
+offset_right = 210.0
+offset_bottom = 118.0
+color = Color(0, 0, 0, 1)
+
+[node name="CutscenePlayer" type="AnimationPlayer" parent="."]
+libraries = {
+"": SubResource("AnimationLibrary_8p1ep")
+}
+
+[node name="TextureRect" type="TextureRect" parent="."]
+self_modulate = Color(0, 0, 0, 1)
+offset_left = -160.0
+offset_top = -90.0
+offset_right = 160.0
+offset_bottom = 90.0
+texture = ExtResource("1_jcsbc")
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+visible = false
+material = SubResource("ShaderMaterial_t2kqf")
+texture = ExtResource("4_c7yy3")
+hframes = 6
+
+[node name="CPUParticles2D" type="CPUParticles2D" parent="."]
+visible = false
+amount = 1
+texture = ExtResource("5_cgdj8")
+gravity = Vector2(0, 0)
+initial_velocity_min = 67.56
+initial_velocity_max = 209.45
+
+[node name="Sprite2D2" type="Sprite2D" parent="."]
+visible = false
+texture = ExtResource("5_cgdj8")
+
+[node name="ShardEmitter" parent="Sprite2D2" instance=ExtResource("6_3og6b")]
+nbr_of_shards = 100
+min_impulse = 500.0
+max_impulse = 1000.0
+
+[node name="Camera2D" type="Camera2D" parent="."]
+
+[node name="CanvasLayer2" type="CanvasLayer" parent="."]
+visible = false
+
+[node name="CanvasLayer" type="CanvasLayer" parent="."]
+
+[node name="ColorRect" type="ColorRect" parent="CanvasLayer"]
+material = SubResource("ShaderMaterial_53g26")
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
