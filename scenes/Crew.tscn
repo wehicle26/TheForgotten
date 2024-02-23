@@ -1,0 +1,17 @@
+[gd_scene load_steps=4 format=3 uid="uid://cepudlrv6r5kn"]
+
+[ext_resource type="PackedScene" uid="uid://drc50lwybh48x" path="res://scenes/Item.tscn" id="1_iwlt4"]
+[ext_resource type="Script" path="res://scripts/crew.gd" id="2_2eoa8"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_iylet"]
+resource_local_to_scene = true
+
+[node name="Crew" instance=ExtResource("1_iwlt4")]
+script = ExtResource("2_2eoa8")
+action_name = null
+
+[node name="CollisionShape2D" parent="." index="0"]
+shape = SubResource("RectangleShape2D_iylet")
+
+[node name="Sprite2D" parent="." index="1"]
+material = null

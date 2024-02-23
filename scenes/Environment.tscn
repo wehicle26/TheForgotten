@@ -1,9 +1,9 @@
 [gd_scene load_steps=183 format=3 uid="uid://bob88w6sefucj"]
 
+
 [ext_resource type="Script" path="res://scripts/environment.gd" id="1_8e6hg"]
 [ext_resource type="Texture2D" uid="uid://cwkn530rs0hqi" path="res://art/environment/Space_Tiles_13.png" id="1_wc5e0"]
 [ext_resource type="Texture2D" uid="uid://dm45unm5d2w6w" path="res://art/environment/Space_Tiles_13_n.png" id="2_r0311"]
-[ext_resource type="Texture2D" uid="uid://dnpv80q2kt3ai" path="res://art/item/Gun_Item.png" id="4_t3ms6"]
 [ext_resource type="Texture2D" uid="uid://c3tcqa75o8vu8" path="res://art/player/Spaceman_v3.png" id="5_s7i1y"]
 
 [sub_resource type="OccluderPolygon2D" id="OccluderPolygon2D_ufvou"]
@@ -4924,9 +4924,6 @@ script = ExtResource("1_8e6hg")
 
 [node name="TileMap" type="TileMap" parent="." groups=["navigation"]]
 light_mask = 2
-position = Vector2(-1, 0)
-rotation = -0.000961421
-scale = Vector2(0.999102, 0.999489)
 tile_set = SubResource("TileSet_cgr4s")
 format = 2
 layer_0/name = "flooor3"
@@ -4963,12 +4960,6 @@ layer_8/tile_data = PackedInt32Array(-393220, 1835008, 18, -393218, 1835008, 18,
 visible = false
 navigation_polygon = SubResource("NavigationPolygon_vfffu")
 
-[node name="RifleItem(3)2" type="Sprite2D" parent="."]
-visible = false
-z_index = 6
-position = Vector2(-464, -198)
-rotation = 1.309
-texture = ExtResource("4_t3ms6")
 
 [node name="SpacemanV3" type="AnimatedSprite2D" parent="."]
 visible = false

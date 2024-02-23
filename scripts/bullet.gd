@@ -10,7 +10,7 @@ class_name Bullet
 
 var attack_damage = 1
 
-func _process(delta):
+func _process(_delta):
 	if(ray_cast_2d.is_colliding()):
 		queue_free()
 	

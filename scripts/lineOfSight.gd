@@ -9,7 +9,7 @@ signal player_spotted
 func _ready():
 	line_of_sight()
 	
-func _physics_process(delta):
+func _physics_process(_delta):
 	for ray in get_children():
 		if ray.is_colliding() and ray.get_collider() is Player:
 			player_spotted.emit()

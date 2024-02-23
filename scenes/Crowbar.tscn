@@ -1,0 +1,20 @@
+[gd_scene load_steps=6 format=3 uid="uid://cyj8triea8w13"]
+
+[ext_resource type="PackedScene" uid="uid://drc50lwybh48x" path="res://scenes/Item.tscn" id="1_lv1ju"]
+[ext_resource type="Texture2D" uid="uid://cgbpnygvtaqv4" path="res://art/item/crowbar.png" id="2_taavo"]
+[ext_resource type="Resource" uid="uid://o6jcpo4ol4yu" path="res://art/item/crowbar.tres" id="2_tieya"]
+[ext_resource type="Script" path="res://scripts/crowbar.gd" id="2_ts241"]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_8dd3s"]
+radius = 16.0312
+
+[node name="Crowbar" instance=ExtResource("1_lv1ju")]
+script = ExtResource("2_ts241")
+itemRes = ExtResource("2_tieya")
+action_name = "pick_up"
+
+[node name="CollisionShape2D" parent="." index="0"]
+shape = SubResource("CircleShape2D_8dd3s")
+
+[node name="Sprite2D" parent="." index="1"]
+texture = ExtResource("2_taavo")

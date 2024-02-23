@@ -1,56 +1,16 @@
-[gd_scene load_steps=19 format=3 uid="uid://duwl5sldekn2r"]
+[gd_scene load_steps=12 format=3 uid="uid://duwl5sldekn2r"]
 
 [ext_resource type="Script" path="res://scripts/enemy.gd" id="1_0u0m4"]
-[ext_resource type="Shader" path="res://shaders/damage_tint.gdshader" id="1_pl7k7"]
-[ext_resource type="Texture2D" uid="uid://bfqnlwh3hf87w" path="res://art/enemy/Blob.png" id="2_j8s2h"]
 [ext_resource type="PackedScene" uid="uid://7gpl1jyx7wsl" path="res://scenes/Health.tscn" id="3_y1unv"]
 [ext_resource type="PackedScene" uid="uid://cjwohg5ed45jj" path="res://scenes/Hitbox.tscn" id="4_1n8rf"]
-[ext_resource type="Script" path="res://scripts/State/stateMachine.gd" id="5_2c3kk"]
+[ext_resource type="PackedScene" uid="uid://bvxg5kctr4jyl" path="res://scenes/StateMachine.tscn" id="4_flp2n"]
 [ext_resource type="Script" path="res://scripts/State/enemyIdle.gd" id="6_yghre"]
 [ext_resource type="Script" path="res://scripts/State/enemyFollow.gd" id="7_2vsql"]
 [ext_resource type="Script" path="res://scripts/State/enemyAttack.gd" id="8_no63c"]
 [ext_resource type="Script" path="res://scripts/lineOfSight.gd" id="9_idnvk"]
 
-[sub_resource type="ShaderMaterial" id="ShaderMaterial_q4u76"]
-shader = ExtResource("1_pl7k7")
-shader_parameter/active = false
-shader_parameter/tint = Color(0.647059, 0.188235, 0.188235, 1)
-
-[sub_resource type="AtlasTexture" id="AtlasTexture_305en"]
-atlas = ExtResource("2_j8s2h")
-region = Rect2(0, 0, 32, 32)
-
-[sub_resource type="AtlasTexture" id="AtlasTexture_yunbx"]
-atlas = ExtResource("2_j8s2h")
-region = Rect2(32, 0, 32, 32)
-
-[sub_resource type="AtlasTexture" id="AtlasTexture_an2qe"]
-atlas = ExtResource("2_j8s2h")
-region = Rect2(64, 0, 32, 32)
-
-[sub_resource type="AtlasTexture" id="AtlasTexture_mad2o"]
-atlas = ExtResource("2_j8s2h")
-region = Rect2(96, 0, 32, 32)
-
-[sub_resource type="SpriteFrames" id="SpriteFrames_ski8j"]
-animations = [{
-"frames": [{
-"duration": 2.0,
-"texture": SubResource("AtlasTexture_305en")
-}, {
-"duration": 2.0,
-"texture": SubResource("AtlasTexture_yunbx")
-}, {
-"duration": 2.0,
-"texture": SubResource("AtlasTexture_an2qe")
-}, {
-"duration": 2.0,
-"texture": SubResource("AtlasTexture_mad2o")
-}],
-"loop": true,
-"name": &"walk",
-"speed": 5.0
-}]
+[sub_resource type="CanvasItemMaterial" id="CanvasItemMaterial_gharv"]
+light_mode = 2
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_kalxv"]
 radius = 11.0454
@@ -59,17 +19,10 @@ radius = 11.0454
 radius = 5.0
 
 [node name="Enemy" type="CharacterBody2D"]
+material = SubResource("CanvasItemMaterial_gharv")
 motion_mode = 1
 wall_min_slide_angle = 0.0
 script = ExtResource("1_0u0m4")
-
-[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
-material = SubResource("ShaderMaterial_q4u76")
-sprite_frames = SubResource("SpriteFrames_ski8j")
-animation = &"walk"
-autoplay = "walk"
-frame = 1
-frame_progress = 0.674733
 
 [node name="NavigationAgent2D" type="NavigationAgent2D" parent="."]
 debug_enabled = true
@@ -90,8 +43,7 @@ shape = SubResource("CircleShape2D_kalxv")
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 shape = SubResource("CircleShape2D_ofe1f")
 
-[node name="StateMachine" type="Node" parent="." node_paths=PackedStringArray("initial_state")]
-script = ExtResource("5_2c3kk")
+[node name="StateMachine" parent="." node_paths=PackedStringArray("initial_state") instance=ExtResource("4_flp2n")]
 initial_state = NodePath("Idle")
 
 [node name="Idle" type="Node" parent="StateMachine" node_paths=PackedStringArray("enemy")]
