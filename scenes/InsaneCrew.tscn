@@ -1,0 +1,64 @@
+[gd_scene load_steps=7 format=3 uid="uid://d2eli84d2uqkm"]
+
+[ext_resource type="PackedScene" uid="uid://cepudlrv6r5kn" path="res://scenes/Crew.tscn" id="1_l4m8c"]
+[ext_resource type="Texture2D" uid="uid://ddxeph63veqth" path="res://art/environment/InsaneCrewLayer 1.png" id="2_hd73g"]
+[ext_resource type="Script" path="res://scripts/InsaneCrew.gd" id="2_t1g51"]
+
+[sub_resource type="Animation" id="Animation_f0gkb"]
+length = 2.6
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Sprite2D:visible")
+tracks/0/interp = 1
+tracks/0/loop_wrap = false
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [true]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("Sprite2D:frame")
+tracks/1/interp = 1
+tracks/1/loop_wrap = false
+tracks/1/keys = {
+"times": PackedFloat32Array(0, 2.5),
+"transitions": PackedFloat32Array(1, 1),
+"update": 1,
+"values": [0, 1]
+}
+
+[sub_resource type="Animation" id="Animation_1bjcb"]
+length = 0.001
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_lq5tf"]
+_data = {
+"Deadge": SubResource("Animation_f0gkb"),
+"RESET": SubResource("Animation_1bjcb")
+}
+
+[node name="InsaneCrew" instance=ExtResource("1_l4m8c")]
+script = ExtResource("2_t1g51")
+
+[node name="Sprite2D" parent="." index="1"]
+texture = ExtResource("2_hd73g")
+metadata/_aseprite_wizard_config_ = {
+"i_mode": -1,
+"keep_anim_length": false,
+"layer": "Layer 1",
+"o_ex_p": "",
+"o_folder": "res://art/environment",
+"o_name": "InsaneCrew",
+"only_visible": true,
+"op_exp": true,
+"player": "AnimationPlayer",
+"source": "res://art/environment/InsaneCrew.aseprite"
+}
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="." index="2"]
+libraries = {
+"": SubResource("AnimationLibrary_lq5tf")
+}

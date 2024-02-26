@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://cdvesl8mi6bv5"
-path="res://.godot/imported/space Helm.png-5c9152da128cc2f45841b3467adb7019.ctex"
+uid="uid://cwn23onickl1b"
+path="res://.godot/imported/cryo_machine.png-13bf305bd6e0c28792daefa8fc3fb61a.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://art/environment/space Helm.png"
-dest_files=["res://.godot/imported/space Helm.png-5c9152da128cc2f45841b3467adb7019.ctex"]
+source_file="res://art/environment/cryo_machine.png"
+dest_files=["res://.godot/imported/cryo_machine.png-13bf305bd6e0c28792daefa8fc3fb61a.ctex"]
 
 [params]
 

@@ -1,9 +1,8 @@
 extends Control
 
-
-var current_level : Level
-var level_2 : PackedScene = preload("res://scenes/Main.tscn")
-var intro : PackedScene = preload("res://scenes/Intro.tscn")
+var current_level: Level
+var level_2: PackedScene = preload("res://scenes/Main.tscn")
+var intro: PackedScene = preload("res://scenes/Intro.tscn")
 @onready var background = $Background
 @onready var button_container = $ButtonContainer
 @onready var animation_player = $AnimationPlayer
@@ -26,9 +25,8 @@ func _on_start_game_button_pressed():
 
 
 func _on_options_button_pressed():
-	pass # Replace with function body.
+	pass  # Replace with function body.
 
 
 func _on_quit_button_pressed():
 	get_tree().quit()
-

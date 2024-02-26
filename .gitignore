@@ -2,3 +2,7 @@
 .godot/
 bin/
 *.tmp
+.aseprite_wizard_history
+.vscode/launch.json
+.vscode/settings.json
+.vscode/tasks.json

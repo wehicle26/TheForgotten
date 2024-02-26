@@ -1,4 +1,4 @@
-[gd_scene load_steps=31 format=3 uid="uid://b71gis6vgkvkg"]
+[gd_scene load_steps=36 format=3 uid="uid://b71gis6vgkvkg"]
 
 [ext_resource type="Script" path="res://scripts/level.gd" id="1_6u7sh"]
 [ext_resource type="PackedScene" uid="uid://bob88w6sefucj" path="res://scenes/Environment.tscn" id="1_halep"]
@@ -14,6 +14,10 @@
 [ext_resource type="Texture2D" uid="uid://bbimwc3c5qhsh" path="res://art/enemy/SpaceRoach_n.png" id="8_3wd5g"]
 [ext_resource type="PackedScene" uid="uid://clo08muxcwc4o" path="res://scenes/Blob.tscn" id="8_ckvvi"]
 [ext_resource type="Texture2D" uid="uid://vr4ybpyhhe04" path="res://art/environment/power core.png" id="11_krgf7"]
+[ext_resource type="PackedScene" uid="uid://d2eli84d2uqkm" path="res://scenes/InsaneCrew.tscn" id="16_ee52r"]
+[ext_resource type="PackedScene" uid="uid://d8noqp0xbebg" path="res://scenes/CryoMachine.tscn" id="16_idydh"]
+[ext_resource type="PackedScene" uid="uid://bo3acd3y8ucuy" path="res://scenes/Eus.tscn" id="17_7u0ol"]
+[ext_resource type="Shader" path="res://shaders/space.gdshader" id="18_ghgnd"]
 
 [sub_resource type="CanvasTexture" id="CanvasTexture_1tpc1"]
 diffuse_texture = ExtResource("7_rpvx3")
@@ -104,7 +108,7 @@ animations = [{
 "duration": 2.0,
 "texture": SubResource("AtlasTexture_vl7la")
 }, {
-"duration": 2.0,
+"duration": 4.0,
 "texture": SubResource("AtlasTexture_y8twb")
 }, {
 "duration": 2.0,
@@ -182,6 +186,23 @@ _data = {
 "fade_in": SubResource("Animation_u5hk3")
 }
 
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_ilnn4"]
+shader = ExtResource("18_ghgnd")
+shader_parameter/iterations = 17
+shader_parameter/formuparam = 0.53
+shader_parameter/volsteps = 10
+shader_parameter/stepsize = 0.1
+shader_parameter/zoom = 0.8
+shader_parameter/tile = 0.85
+shader_parameter/speed = 0.001
+shader_parameter/brightness = 0.0015
+shader_parameter/darkmatter = 0.3
+shader_parameter/distfading = 0.73
+shader_parameter/saturation = 0.85
+shader_parameter/rotation = null
+shader_parameter/colorampMix = 0.5
+shader_parameter/isColoramp = null
+
 [node name="Main" type="Node2D"]
 script = ExtResource("1_6u7sh")
 
@@ -208,10 +229,26 @@ z_index = 3
 position = Vector2(-601, -231)
 
 [node name="CryoBed" parent="Environment" instance=ExtResource("4_0fems")]
-position = Vector2(-702, 0)
+position = Vector2(-706, -48)
+rotation = -1.57079
 
-[node name="DarknessLevel" type="CanvasModulate" parent="."]
-visible = false
+[node name="CryoBed2" parent="Environment" instance=ExtResource("4_0fems")]
+position = Vector2(-706, 16)
+rotation = -1.57079
+
+[node name="CryoBed3" parent="Environment" instance=ExtResource("4_0fems")]
+position = Vector2(-605, 16)
+rotation = -4.71238
+
+[node name="CryoBed4" parent="Environment" instance=ExtResource("4_0fems")]
+position = Vector2(-606, -16)
+rotation = -4.71238
+
+[node name="CryoBed5" parent="Environment" instance=ExtResource("4_0fems")]
+position = Vector2(-607, -48)
+rotation = -4.71238
+
+[node name="DarknessLevel" type="CanvasModulate" parent="." groups=["Darkness"]]
 color = Color(0.0352941, 0.0392157, 0.0784314, 1)
 
 [node name="Lights" type="Node2D" parent="."]
@@ -476,6 +513,13 @@ sprite_frames = SubResource("SpriteFrames_tjdlj")
 autoplay = "default"
 frame_progress = 0.321637
 
+[node name="Eus" parent="Entities" instance=ExtResource("17_7u0ol")]
+position = Vector2(-534, -279)
+rotation = 3.14159
+
+[node name="InsaneCrew" parent="Entities" instance=ExtResource("16_ee52r")]
+position = Vector2(-653, -252)
+
 [node name="AnimationPlayer" type="AnimationPlayer" parent="."]
 libraries = {
 "": SubResource("AnimationLibrary_pgkf5")
@@ -486,4 +530,19 @@ libraries = {
 [node name="ColorRect" type="ColorRect" parent="AnimationPlayer/CanvasLayer"]
 offset_right = 320.0
 offset_bottom = 180.0
+color = Color(0, 0, 0, 1)
+
+[node name="CryoMachine" parent="." instance=ExtResource("16_idydh")]
+position = Vector2(-709, -132)
+
+[node name="CanvasLayer" type="CanvasLayer" parent="."]
+layer = -8
+
+[node name="ColorRect" type="ColorRect" parent="CanvasLayer"]
+material = SubResource("ShaderMaterial_ilnn4")
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
 color = Color(0, 0, 0, 1)
