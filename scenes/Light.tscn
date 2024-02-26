@@ -1,16 +1,38 @@
-[gd_scene load_steps=3 format=3 uid="uid://ch0016cku2p02"]
+[gd_scene load_steps=6 format=3 uid="uid://ch0016cku2p02"]
 
 [ext_resource type="Script" path="res://scripts/light.gd" id="1_b7ajr"]
+[ext_resource type="Texture2D" uid="uid://del2om5wttw3a" path="res://art/environment/lights/wall_light3.png" id="1_njchp"]
+[ext_resource type="Texture2D" uid="uid://cugrvpv4kw027" path="res://art/environment/lights/wall_light3_n.png" id="2_vy16v"]
 [ext_resource type="AudioStream" uid="uid://b1mfv1sxpq7ue" path="res://sounds/FlashlightSwitchOn_SFXB.929.wav" id="3_itpbj"]
 
+[sub_resource type="CanvasTexture" id="CanvasTexture_1cd5k"]
+diffuse_texture = ExtResource("1_njchp")
+normal_texture = ExtResource("2_vy16v")
+
 [node name="Light" type="Sprite2D" groups=["Light"]]
+z_index = 4
+texture_filter = 1
+texture = SubResource("CanvasTexture_1cd5k")
 script = ExtResource("1_b7ajr")
 flicker_factor = 3.0
+metadata/_aseprite_wizard_config_ = {
+"i_mode": 1,
+"keep_anim_length": false,
+"layer": "",
+"o_ex_p": "",
+"o_folder": "res://art/environment/lights",
+"o_name": "wall_light3_n",
+"only_visible": true,
+"op_exp": false,
+"player": "",
+"source": "res://art/environment/lights/wall_light3.aseprite"
+}
 
 [node name="ColorRect" type="ColorRect" parent="."]
 visible = false
+offset_left = -168.0
 offset_top = -112.0
-offset_right = 40.0
+offset_right = -128.0
 offset_bottom = -72.0004
 scale = Vector2(8.76, 5.52)
 color = Color(0.196078, 0.196078, 0.196078, 1)
@@ -23,7 +45,6 @@ stream = ExtResource("3_itpbj")
 [node name="SpriteLight" type="PointLight2D" parent="."]
 scale = Vector2(0.75, 0.75)
 color = Color(0.921569, 0.929412, 0.913725, 1)
-offset = Vector2(300, 0)
 height = 25.0
 
 [node name="ShadowLight" type="PointLight2D" parent="."]
@@ -32,7 +53,6 @@ color = Color(0.921569, 0.929412, 0.913725, 1)
 range_item_cull_mask = 2
 shadow_enabled = true
 shadow_color = Color(0.0352941, 0.0392157, 0.0784314, 0)
-offset = Vector2(300, 0)
 height = 25.0
 
 [connection signal="timeout" from="FlickerTimer" to="." method="_on_flicker_timer_timeout"]

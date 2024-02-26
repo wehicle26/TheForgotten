@@ -1,9 +1,14 @@
 extends State
 
-class_name PlayerIdle
-
 @export var player: Player
 @export var move_speed = 0
+
+func _ready():
+	player.freeze.connect(_freeze_player)
+
+ 
+func _freeze_player():
+	transitioned.emit(self, "playerFreeze")
 
 
 func _input(_event):

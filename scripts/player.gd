@@ -3,6 +3,8 @@ extends CharacterBody2D
 class_name Player
 
 signal healthChanged
+signal freeze
+signal unfreeze
 
 @export var speed = 85
 @export var inventory: Inventory
@@ -33,6 +35,14 @@ func _ready():
 	#gun.get_node("ArmTimer").timeout.connect(_lower_arm)
 	#player_sprite.material.set_shader_parameter("active", false)
 	SoundManager.initialize_player_sounds(self)
+
+
+func freeze_player():
+	freeze.emit()
+
+
+func unfreeze_player():
+	unfreeze.emit()
 
 
 func damage():

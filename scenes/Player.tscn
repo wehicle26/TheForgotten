@@ -3,7 +3,6 @@
 [ext_resource type="Script" path="res://scripts/player.gd" id="1_ucx17"]
 [ext_resource type="Texture2D" uid="uid://bvrqydcwjh4ma" path="res://art/player/Spaceman_old.png" id="2_5f2j7"]
 [ext_resource type="Shader" path="res://shaders/damage_tint.gdshader" id="2_eb1nu"]
-[ext_resource type="Resource" uid="uid://3i4xk73rle30" path="res://art/player/playerInventory.tres" id="2_xm8oc"]
 [ext_resource type="Texture2D" uid="uid://dwyd5hjqgn0c1" path="res://art/player/Spaceman_old_n.png" id="3_bmv8b"]
 [ext_resource type="Script" path="res://scripts/playerCamera.gd" id="5_tm3ug"]
 [ext_resource type="Texture2D" uid="uid://rwveppyb3ifm" path="res://art/player/Spaceman_v2_feet.png" id="9_cbwmm"]
@@ -12,6 +11,7 @@
 [ext_resource type="Texture2D" uid="uid://busbkrvsvk5qn" path="res://art/player/Spaceman_v2_feet_n.png" id="10_d28cc"]
 [ext_resource type="PackedScene" uid="uid://bvxg5kctr4jyl" path="res://scenes/StateMachine.tscn" id="16_2nuhd"]
 [ext_resource type="Script" path="res://scripts/State/playerIdle.gd" id="17_uyqxx"]
+[ext_resource type="Script" path="res://scripts/State/playerFreeze.gd" id="18_8jj5h"]
 [ext_resource type="Script" path="res://scripts/State/playerWalk.gd" id="18_muy3d"]
 [ext_resource type="Script" path="res://scripts/State/playerRun.gd" id="19_yhe6l"]
 [ext_resource type="Script" path="res://scripts/State/playerAttack.gd" id="20_ij0pt"]
@@ -486,9 +486,6 @@ collision_mask = 3
 motion_mode = 1
 wall_min_slide_angle = 0.0
 script = ExtResource("1_ucx17")
-speed = 65
-inventory = ExtResource("2_xm8oc")
-swinging = true
 
 [node name="CanvasLayer" type="CanvasLayer" parent="."]
 
@@ -588,6 +585,10 @@ player = NodePath("../..")
 
 [node name="PlayerAttack" type="Node" parent="StateMachine" node_paths=PackedStringArray("player")]
 script = ExtResource("20_ij0pt")
+player = NodePath("../..")
+
+[node name="PlayerFreeze" type="Node" parent="StateMachine" node_paths=PackedStringArray("player")]
+script = ExtResource("18_8jj5h")
 player = NodePath("../..")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]

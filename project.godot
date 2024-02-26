@@ -46,6 +46,7 @@ InteractionManager="*res://scenes/InteractionManager.tscn"
 SoundManager="*res://scripts/singletons/soundManager.gd"
 DialogueManager="*res://scripts/singletons/dialogueManager.gd"
 HitStopManager="*res://scripts/singletons/hitStopManager.gd"
+GlobalState="*res://scripts/singletons/globalState.gd"
 
 [dialogue_manager]
 

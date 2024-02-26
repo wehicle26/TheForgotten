@@ -1,0 +1,14 @@
+[remap]
+
+importer="aseprite_wizard.plugin.noop"
+type="PackedDataContainer"
+uid="uid://d3lb1uql6qgj1"
+path="res://.godot/imported/wall_light3.aseprite-b3e6c70aed820e11c038bc353d0e56ef.res"
+
+[deps]
+
+source_file="res://art/environment/lights/wall_light3.aseprite"
+dest_files=["res://.godot/imported/wall_light3.aseprite-b3e6c70aed820e11c038bc353d0e56ef.res"]
+
+[params]
+

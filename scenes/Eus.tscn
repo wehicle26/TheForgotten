@@ -1,4 +1,4 @@
-[gd_scene load_steps=13 format=3 uid="uid://bo3acd3y8ucuy"]
+[gd_scene load_steps=17 format=3 uid="uid://bo3acd3y8ucuy"]
 
 [ext_resource type="PackedScene" uid="uid://cepudlrv6r5kn" path="res://scenes/Crew.tscn" id="1_68x2v"]
 [ext_resource type="Script" path="res://scripts/eus.gd" id="2_p37qv"]
@@ -6,7 +6,10 @@
 [ext_resource type="Texture2D" uid="uid://dl8f4pv3c3ba2" path="res://art/environment/lights/LightCone_resized_narrow_red.png" id="4_10li6"]
 [ext_resource type="Texture2D" uid="uid://cpivewnoe1mdo" path="res://art/environment/Spaceman_V3NoArms.png" id="4_10yxw"]
 [ext_resource type="PackedScene" uid="uid://ch0016cku2p02" path="res://scenes/Light.tscn" id="5_h85ak"]
+[ext_resource type="Texture2D" uid="uid://7qohbc4bkfh5" path="res://art/environment/lights/LightCone_resized_narrow_green.png" id="5_ll7fi"]
 [ext_resource type="Texture2D" uid="uid://ds85orhhb6nym" path="res://art/environment/Spaceman_V3NoArms_n.png" id="6_upxxu"]
+[ext_resource type="Shader" path="res://shaders/shine.gdshader" id="8_ih11h"]
+[ext_resource type="Texture2D" uid="uid://c1n1chkpvoqhi" path="res://art/item/RifleItem.png" id="8_s5cxf"]
 
 [sub_resource type="CanvasTexture" id="CanvasTexture_bl1vw"]
 diffuse_texture = ExtResource("4_10yxw")
@@ -119,31 +122,41 @@ _data = {
 "eus": SubResource("Animation_jcy4b")
 }
 
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_wpgrl"]
+shader = ExtResource("8_ih11h")
+shader_parameter/shine_color = Vector4(1, 1, 1, 1)
+shader_parameter/shine_speed = 1.0
+shader_parameter/shine_size = 0.01
+
 [node name="Eus" instance=ExtResource("1_68x2v")]
 script = ExtResource("2_p37qv")
-action_name = null
+action_name = "interact"
 
 [node name="Light" parent="." index="0" instance=ExtResource("5_h85ak")]
 visible = false
 rotation = -1.5708
 scale = Vector2(0.5, 0.5)
+texture = null
 light_texture = ExtResource("4_10li6")
 flicker_factor = 0.25
 energy_factor = 7.0
 light_offset = 300
 
-[node name="CollisionShape2D" parent="." index="1"]
+[node name="TrickLight" parent="." index="1" groups=["Trick_Light"] instance=ExtResource("5_h85ak")]
+rotation = -1.5708
+scale = Vector2(0.5, 0.5)
+texture = null
+light_texture = ExtResource("5_ll7fi")
+energy_factor = 7.0
+light_offset = 300
+
+[node name="CollisionShape2D" parent="." index="2"]
 visible = false
 
-[node name="Sprite2D" parent="." index="2"]
+[node name="Sprite2D" parent="." index="3"]
 visible = false
 texture = SubResource("CanvasTexture_bl1vw")
 hframes = 1
-
-[node name="RayCast2D" type="RayCast2D" parent="." index="3"]
-rotation = 3.26551
-target_position = Vector2(0, 250)
-collision_mask = 2
 
 [node name="CanvasLayer" type="CanvasLayer" parent="." index="4"]
 visible = false
@@ -160,3 +173,30 @@ grow_vertical = 2
 libraries = {
 "": SubResource("AnimationLibrary_4rfhu")
 }
+
+[node name="Rays" type="Node2D" parent="." index="6"]
+
+[node name="FirstRay" type="RayCast2D" parent="Rays" index="0"]
+rotation = -3.05776
+target_position = Vector2(0, 75)
+collision_mask = 2
+
+[node name="FirstRay2" type="RayCast2D" parent="Rays" index="1"]
+rotation = -2.90755
+target_position = Vector2(0, 75)
+collision_mask = 2
+
+[node name="FirstRay3" type="RayCast2D" parent="Rays" index="2"]
+rotation = 3.06893
+target_position = Vector2(0, 75)
+collision_mask = 2
+
+[node name="FirstRay4" type="RayCast2D" parent="Rays" index="3"]
+rotation = 2.90358
+target_position = Vector2(0, 75)
+collision_mask = 2
+
+[node name="TrickItem" type="Sprite2D" parent="." index="7"]
+material = SubResource("ShaderMaterial_wpgrl")
+rotation = 2.51152
+texture = ExtResource("8_s5cxf")

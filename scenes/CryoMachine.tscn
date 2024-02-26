@@ -1,11 +1,16 @@
-[gd_scene load_steps=5 format=3 uid="uid://d8noqp0xbebg"]
+[gd_scene load_steps=7 format=3 uid="uid://d8noqp0xbebg"]
 
 [ext_resource type="PackedScene" uid="uid://drc50lwybh48x" path="res://scenes/Item.tscn" id="1_jw473"]
 [ext_resource type="Script" path="res://scripts/cryoMachine.gd" id="2_33tf2"]
 [ext_resource type="Texture2D" uid="uid://cwn23onickl1b" path="res://art/environment/cryo_machine.png" id="2_egvs8"]
+[ext_resource type="Texture2D" uid="uid://3i6fk8y37ydv" path="res://art/environment/cryo_machine_n.png" id="4_taa7u"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_3tnyo"]
 resource_local_to_scene = true
+
+[sub_resource type="CanvasTexture" id="CanvasTexture_d026o"]
+diffuse_texture = ExtResource("2_egvs8")
+normal_texture = ExtResource("4_taa7u")
 
 [node name="Item" instance=ExtResource("1_jw473")]
 script = ExtResource("2_33tf2")
@@ -14,5 +19,6 @@ script = ExtResource("2_33tf2")
 shape = SubResource("RectangleShape2D_3tnyo")
 
 [node name="Sprite2D" parent="." index="1"]
+z_index = 9
 material = null
-texture = ExtResource("2_egvs8")
+texture = SubResource("CanvasTexture_d026o")

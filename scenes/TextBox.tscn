@@ -1,10 +1,13 @@
-[gd_scene load_steps=13 format=3 uid="uid://bx2ab51bychng"]
+[gd_scene load_steps=14 format=3 uid="uid://bx2ab51bychng"]
 
 [ext_resource type="Script" path="res://scripts/textBox.gd" id="1_p0uq2"]
 [ext_resource type="Texture2D" uid="uid://cpfwf80v78ypw" path="res://ui/bubble.png" id="2_sf68p"]
 [ext_resource type="FontFile" uid="uid://cj8rhodwww8xo" path="res://ui/Millennia-Regular(1).otf" id="3_he467"]
 [ext_resource type="Texture2D" uid="uid://4pmj1dkvslws" path="res://ui/tail.png" id="3_q0iww"]
 [ext_resource type="Texture2D" uid="uid://cp7x265qm68g1" path="res://ui/SpinArrow.png" id="4_yby1x"]
+
+[sub_resource type="CanvasItemMaterial" id="CanvasItemMaterial_rcusm"]
+light_mode = 1
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_bym5k"]
 atlas = ExtResource("4_yby1x")
@@ -71,11 +74,13 @@ animations = [{
 [node name="TextBox" type="MarginContainer"]
 top_level = true
 z_index = 15
+material = SubResource("CanvasItemMaterial_rcusm")
 offset_right = 32.0
 offset_bottom = 32.0
 script = ExtResource("1_p0uq2")
 
 [node name="NinePatchRect" type="NinePatchRect" parent="."]
+use_parent_material = true
 layout_mode = 2
 texture = ExtResource("2_sf68p")
 region_rect = Rect2(0, 0, 48, 48)
@@ -85,6 +90,7 @@ patch_margin_right = 16
 patch_margin_bottom = 16
 
 [node name="Control" type="Control" parent="NinePatchRect"]
+use_parent_material = true
 layout_mode = 1
 anchors_preset = 7
 anchor_left = 0.5
@@ -97,10 +103,12 @@ grow_horizontal = 2
 grow_vertical = 0
 
 [node name="Sprite2D" type="Sprite2D" parent="NinePatchRect/Control"]
+use_parent_material = true
 position = Vector2(-20, 5)
 texture = ExtResource("3_q0iww")
 
 [node name="Control2" type="Control" parent="NinePatchRect"]
+use_parent_material = true
 layout_mode = 1
 anchors_preset = 3
 anchor_left = 1.0
@@ -113,6 +121,7 @@ grow_vertical = 0
 [node name="NextIndicator" type="AnimatedSprite2D" parent="NinePatchRect/Control2"]
 visible = false
 texture_filter = 1
+use_parent_material = true
 position = Vector2(-5, -8)
 sprite_frames = SubResource("SpriteFrames_wsi16")
 animation = &"Spin"
@@ -130,6 +139,7 @@ metadata/_aseprite_wizard_config_ = {
 }
 
 [node name="MarginContainer" type="MarginContainer" parent="."]
+use_parent_material = true
 layout_mode = 2
 theme_override_constants/margin_left = 8
 theme_override_constants/margin_top = 8
@@ -137,6 +147,7 @@ theme_override_constants/margin_right = 8
 theme_override_constants/margin_bottom = 8
 
 [node name="Label" type="Label" parent="MarginContainer"]
+use_parent_material = true
 layout_mode = 2
 theme_override_colors/font_color = Color(0, 0, 0, 1)
 theme_override_fonts/font = ExtResource("3_he467")

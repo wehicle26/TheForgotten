@@ -2,10 +2,10 @@
 
 [ext_resource type="PackedScene" uid="uid://cepudlrv6r5kn" path="res://scenes/Crew.tscn" id="1_l4m8c"]
 [ext_resource type="Texture2D" uid="uid://ddxeph63veqth" path="res://art/environment/InsaneCrewLayer 1.png" id="2_hd73g"]
-[ext_resource type="Script" path="res://scripts/InsaneCrew.gd" id="2_t1g51"]
+[ext_resource type="Script" path="res://scripts/insaneCrew.gd" id="2_t1g51"]
 
 [sub_resource type="Animation" id="Animation_f0gkb"]
-length = 2.6
+length = 3.5
 tracks/0/type = "value"
 tracks/0/imported = false
 tracks/0/enabled = true
@@ -29,6 +29,23 @@ tracks/1/keys = {
 "transitions": PackedFloat32Array(1, 1),
 "update": 1,
 "values": [0, 1]
+}
+tracks/2/type = "method"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath(".")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(2, 3.3),
+"transitions": PackedFloat32Array(1, 1),
+"values": [{
+"args": [],
+"method": &"pitch_black"
+}, {
+"args": [],
+"method": &"restore_light"
+}]
 }
 
 [sub_resource type="Animation" id="Animation_1bjcb"]
