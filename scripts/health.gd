@@ -4,9 +4,10 @@ class_name Health
 
 @export var max_health = 10
 
-var health : float
+var health: float
 signal game_over
 signal healthChanged
+
 
 func _ready():
 	health = max_health
@@ -19,7 +20,9 @@ func damage(attack: Attack):
 	health -= attack.attack_damage
 	var enemy = get_parent()
 	if enemy is Enemy:
-		enemy.velocity = (global_position - attack.attack_position).normalized()*attack.knockback_force
+		enemy.velocity = (
+			(global_position - attack.attack_position).normalized() * attack.knockback_force
+		)
 	if health <= 0:
 		var parent = get_parent()
 		if parent is Player:

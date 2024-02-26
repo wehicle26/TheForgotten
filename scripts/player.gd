@@ -5,11 +5,11 @@ class_name Player
 signal healthChanged
 
 @export var speed = 85
-@export var inventory : Inventory
-@export var swinging : bool = false
+@export var inventory: Inventory
+@export var swinging: bool = false
 
 @onready var animation_player = $AnimationPlayer
-@onready var flashlight = $Flashlight
+#@onready var flashlight = $Flashlight
 @onready var sprite_2d = $Sprite2D
 @onready var health = $Health
 @onready var feet = $Feet
@@ -20,8 +20,8 @@ const CROSSHAIR_004 = preload("res://art/player/crosshair004.png")
 
 var knockback = Vector2.ZERO
 var isPlaying = true
-var input_dir : Vector2
-var has_gun : bool = false
+var input_dir: Vector2
+var has_gun: bool = false
 var current_weapon = "crowbar"
 var attack_damage = 1
 var knockback_force = 100
@@ -51,19 +51,24 @@ func play_crowbar_swing():
 	SoundManager.play_crowbar_swing()
 
 
+func play_crowbar_swing_fast():
+	SoundManager.play_crowbar_swing_fast()
+
+
 func _input(event):
 	#if event.is_action_pressed("1"):
-		#gun.num_bullets = 1
+	#gun.num_bullets = 1
 	#if event.is_action_pressed("2"):
-		#gun.num_bullets = 2
+	#gun.num_bullets = 2
 	#if event.is_action_pressed("3"):
-		#gun.num_bullets = 3
+	#gun.num_bullets = 3
 	#if event.is_action_pressed("4"):
-		#gun.num_bullets = 4
+	#gun.num_bullets = 4
 	#if event.is_action_pressed("5"):
-		#gun.num_bullets = 5
+	#gun.num_bullets = 5
 	if event.is_action_pressed("flashlight_toggle") and inventory.flashlight:
-		flashlight.toggle()
+		pass
+		#flashlight.toggle()
 
 
 func get_input():
@@ -81,7 +86,7 @@ func _process(_delta):
 
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
-func _physics_process(delta):
+func _physics_process(_delta):
 	move_and_slide()
 
 

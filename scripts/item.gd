@@ -16,14 +16,14 @@ func collect(inventory: Inventory):
 	queue_free()
 
 
-func _on_input_event(viewport, event, shape_idx):
+func _on_input_event(_viewport, event, _shape_idx):
 	if event.is_action_pressed("interact"):
 		pass
 
 
-func _on_body_entered(body):
+func _on_body_entered(_body):
 	InteractionManager.register_area(self)
 
 
-func _on_body_exited(body):
+func _on_body_exited(_body):
 	InteractionManager.unregister_area(self)

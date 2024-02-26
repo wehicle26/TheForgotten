@@ -1,0 +1,162 @@
+[gd_scene load_steps=13 format=3 uid="uid://bo3acd3y8ucuy"]
+
+[ext_resource type="PackedScene" uid="uid://cepudlrv6r5kn" path="res://scenes/Crew.tscn" id="1_68x2v"]
+[ext_resource type="Script" path="res://scripts/eus.gd" id="2_p37qv"]
+[ext_resource type="Shader" path="res://shaders/glitch.gdshader" id="3_q5uxm"]
+[ext_resource type="Texture2D" uid="uid://dl8f4pv3c3ba2" path="res://art/environment/lights/LightCone_resized_narrow_red.png" id="4_10li6"]
+[ext_resource type="Texture2D" uid="uid://cpivewnoe1mdo" path="res://art/environment/Spaceman_V3NoArms.png" id="4_10yxw"]
+[ext_resource type="PackedScene" uid="uid://ch0016cku2p02" path="res://scenes/Light.tscn" id="5_h85ak"]
+[ext_resource type="Texture2D" uid="uid://ds85orhhb6nym" path="res://art/environment/Spaceman_V3NoArms_n.png" id="6_upxxu"]
+
+[sub_resource type="CanvasTexture" id="CanvasTexture_bl1vw"]
+diffuse_texture = ExtResource("4_10yxw")
+normal_texture = ExtResource("6_upxxu")
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_of1oi"]
+shader = ExtResource("3_q5uxm")
+shader_parameter/shake_power = 0.03
+shader_parameter/shake_rate = 0.2
+shader_parameter/shake_speed = 5.0
+shader_parameter/shake_block_size = 30.5
+shader_parameter/shake_color_rate = 0.01
+
+[sub_resource type="Animation" id="Animation_eo3qo"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Light:visible")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [false]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("Sprite2D:visible")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [false]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("CanvasLayer:visible")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [false]
+}
+
+[sub_resource type="Animation" id="Animation_jcy4b"]
+resource_name = "eus"
+length = 10.0
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Sprite2D:visible")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 6.3, 9),
+"transitions": PackedFloat32Array(1, 1, 1),
+"update": 1,
+"values": [false, true, false]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("Light:visible")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(1, 9),
+"transitions": PackedFloat32Array(1, 1),
+"update": 1,
+"values": [true, false]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("CanvasLayer:visible")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0, 1, 9),
+"transitions": PackedFloat32Array(1, 1, 1),
+"update": 1,
+"values": [false, true, false]
+}
+tracks/3/type = "method"
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/path = NodePath(".")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"values": [{
+"args": [],
+"method": &"play_eus_sound"
+}]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_4rfhu"]
+_data = {
+"RESET": SubResource("Animation_eo3qo"),
+"eus": SubResource("Animation_jcy4b")
+}
+
+[node name="Eus" instance=ExtResource("1_68x2v")]
+script = ExtResource("2_p37qv")
+action_name = null
+
+[node name="Light" parent="." index="0" instance=ExtResource("5_h85ak")]
+visible = false
+rotation = -1.5708
+scale = Vector2(0.5, 0.5)
+light_texture = ExtResource("4_10li6")
+flicker_factor = 0.25
+energy_factor = 7.0
+light_offset = 300
+
+[node name="CollisionShape2D" parent="." index="1"]
+visible = false
+
+[node name="Sprite2D" parent="." index="2"]
+visible = false
+texture = SubResource("CanvasTexture_bl1vw")
+hframes = 1
+
+[node name="RayCast2D" type="RayCast2D" parent="." index="3"]
+rotation = 3.26551
+target_position = Vector2(0, 250)
+collision_mask = 2
+
+[node name="CanvasLayer" type="CanvasLayer" parent="." index="4"]
+visible = false
+
+[node name="ColorRect" type="ColorRect" parent="CanvasLayer" index="0"]
+material = SubResource("ShaderMaterial_of1oi")
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="." index="5"]
+libraries = {
+"": SubResource("AnimationLibrary_4rfhu")
+}

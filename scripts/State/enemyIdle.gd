@@ -6,9 +6,10 @@ class_name EnemyIdle
 @export var move_speed = 10
 @export var aggro_range = 200
 
-var player : CharacterBody2D
-var move_direction : Vector2
-var wander_time : float
+var player: CharacterBody2D
+var move_direction: Vector2
+var wander_time: float
+
 
 func randomize_wander():
 	move_direction = Vector2(randf_range(-1, 1), randf_range(-1, 1)).normalized()

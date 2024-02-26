@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://04yg0ihwqr2g"
-path="res://.godot/imported/spaceman_nFlattened_NormalGenerated.png-2952665cfa3658c253194eded8b7d578.ctex"
+uid="uid://qovihpnwo6nb"
+path="res://.godot/imported/spacemanFlattened_NormalGenerated.png-c963f8c8ad8e3ebe637c3561e4667166.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://output/spaceman_nFlattened_NormalGenerated.png"
-dest_files=["res://.godot/imported/spaceman_nFlattened_NormalGenerated.png-2952665cfa3658c253194eded8b7d578.ctex"]
+source_file="res://art/player/spacemanFlattened_NormalGenerated.png"
+dest_files=["res://.godot/imported/spacemanFlattened_NormalGenerated.png-c963f8c8ad8e3ebe637c3561e4667166.ctex"]
 
 [params]
 

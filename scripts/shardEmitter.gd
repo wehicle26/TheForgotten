@@ -4,10 +4,10 @@ class_name ShardEmitter extends Node2D
 @export_range(0, 200) var nbr_of_shards: int = 5
 
 ## Prevents slim triangles being created at the sprite edges.
-@export var threshold: float = 10.0 
+@export var threshold: float = 10.0
 
 ## Minimum impulse of the shards upon breaking.
-@export var min_impulse: float = 50.0 
+@export var min_impulse: float = 50.0
 
 ## Maximum impulse of the shards upon breaking.
 @export var max_impulse: float = 200.0
@@ -16,16 +16,17 @@ class_name ShardEmitter extends Node2D
 @export var lifetime: float = 5.0
 
 ## Whether to display the triangles, for debug purposes.
-@export var display_triangles: bool = false 
+@export var display_triangles: bool = false
 
 const SHARD = preload("res://scenes/Shard.tscn")
 
 var triangles = []
 var shards = []
 
+
 func _ready() -> void:
 	$DeleteTimer.timeout.connect(_on_DeleteTimer_timeout)
-	
+
 	if get_parent() is Sprite2D:
 		var _rect = get_parent().get_rect()
 		var points = []
@@ -37,7 +38,9 @@ func _ready() -> void:
 
 		#add random break points
 		for i in nbr_of_shards:
-			var p = _rect.position + Vector2(randi_range(0, _rect.size.x), randi_range(0, _rect.size.y))
+			var p = (
+				_rect.position + Vector2(randi_range(0, _rect.size.x), randi_range(0, _rect.size.y))
+			)
 			#move outer points onto rectangle edges
 			if p.x < _rect.position.x + threshold:
 				p.x = _rect.position.x
@@ -52,12 +55,14 @@ func _ready() -> void:
 		#calculate triangles
 		var delaunay = Geometry2D.triangulate_delaunay(points)
 		for i in range(0, delaunay.size(), 3):
-			triangles.append([points[delaunay[i + 2]], points[delaunay[i + 1]], points[delaunay[i]]])
+			triangles.append(
+				[points[delaunay[i + 2]], points[delaunay[i + 1]], points[delaunay[i]]]
+			)
 
 		#create RigidBody2D shards
 		var texture = get_parent().texture
 		for t in triangles:
-			var center = Vector2((t[0].x + t[1].x + t[2].x)/3.0,(t[0].y + t[1].y + t[2].y)/3.0)
+			var center = Vector2((t[0].x + t[1].x + t[2].x) / 3.0, (t[0].y + t[1].y + t[2].y) / 3.0)
 
 			var shard = SHARD.instantiate()
 			shard.position = center
@@ -90,7 +95,7 @@ func shatter() -> void:
 	randomize()
 	get_parent().self_modulate.a = 0
 	for s in shards:
-		var direction = Vector2.UP.rotated(randf_range(0, 2*PI))
+		var direction = Vector2.UP.rotated(randf_range(0, 2 * PI))
 		var impulse = randf_range(min_impulse, max_impulse)
 		s.apply_central_impulse(direction * impulse)
 		s.get_node("CollisionPolygon2D").disabled = false

@@ -10,10 +10,12 @@ class_name Bullet
 
 var attack_damage = 1
 
+
 func _process(_delta):
-	if(ray_cast_2d.is_colliding()):
+	if ray_cast_2d.is_colliding():
 		queue_free()
-	
+
+
 # Called when the node enters the scene tree for the first time.
 func _ready():
 	var velocity = Vector2(bullet_speed, 0.0)
@@ -34,6 +36,5 @@ func _on_hitbox_area_entered(area):
 		attack.attack_position = global_position
 		attack.stun_time = stun_time
 		area.damage(attack)
-	
-	queue_free()
 
+	queue_free()

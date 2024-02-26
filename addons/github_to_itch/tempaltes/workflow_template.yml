@@ -28,7 +28,7 @@ jobs:
   needs: CleanArtifacts # wait for artifacts to clean before making a new one
   runs-on: ubuntu-latest
   steps:
-  - uses: actions/checkout@v2
+  - uses: actions/checkout@v4
   
   - name: Download + Authorize Godot
 	run: |
@@ -47,9 +47,17 @@ jobs:
 	run: |
 	 mkdir -p ~/.local/share/godot/export_templates/{GODOT_VERSION}.{GODOT_STATUS}
 	 mv ./templates/* ~/.local/share/godot/export_templates/{GODOT_VERSION}.{GODOT_STATUS}
-  
+
+  - name: release-downloader
+	uses: robinraju/release-downloader@v1.9
+	with:
+		repository: "utopia-rise/fmod-gdextension"
+		tag: "4.1.0-4.2.0"
+		fileName: "addons.zip"
+		extract: true
+
 {EXPORTS_FROM_GODOT}
-  - uses: actions/upload-artifact@v2
+  - uses: actions/upload-artifact@v4
 	with:
 	 name: exports
 	 path: exports
@@ -59,7 +67,7 @@ jobs:
   if: ${{ contains(github.ref, 'main') }}
   runs-on: ubuntu-latest
   steps:
-	- uses: actions/checkout@v2
+	- uses: actions/checkout@v4
    
 	- name: Version
 	  id: tag_version
@@ -72,7 +80,7 @@ jobs:
 	  run: exit 1
 	
 	- name: Download Exports
-	  uses: actions/download-artifact@v2
+	  uses: actions/download-artifact@v4
 	  with:
 	   name: exports
 	   path: exports
@@ -82,7 +90,7 @@ jobs:
 	
 	- name: Create Github Release
 	  id: create_release
-	  uses: actions/create-release@v1
+	  uses: actions/create-release@v4
 	  env:
 	   GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
 	  with:
@@ -91,7 +99,7 @@ jobs:
 	   body: ${{ steps.tag_version.outputs.changelog }}
 	
 	- name: Upload Release Artifact
-	  uses: actions/upload-release-asset@v1
+	  uses: actions/upload-release-asset@v4
 	  env:
 	   GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
 	  with:
@@ -106,7 +114,7 @@ jobs:
 	   content: ${{ steps.tag_version.outputs.new_version }}
 	   mode: 0655
 	
-	- uses: actions/upload-artifact@v2
+	- uses: actions/upload-artifact@v4
 	  with:
 	   name: VERSION
 	   path: ./VERSION.txt
@@ -116,7 +124,7 @@ jobs:
   if: ${{ contains(github.ref, 'main') }}
   runs-on: ubuntu-latest
   steps:
-	- uses: actions/download-artifact@v2
+	- uses: actions/download-artifact@v4
 	
 	- name: Download + Authorize Butler
 	  run: |

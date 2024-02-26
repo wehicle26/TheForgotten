@@ -1,6 +1,5 @@
 extends Node2D
 
-
 const HAND = preload("res://art/environment/hand.png")
 const CRYO_INTERIOR_SMASHED = preload("res://art/environment/cryo_interior_smashed.png")
 const MAIN = preload("res://scenes/Main.tscn")
@@ -12,10 +11,10 @@ const MAIN = preload("res://scenes/Main.tscn")
 @onready var sprite_2d_2 = $Sprite2D2
 @onready var shard_emitter = $Sprite2D2/ShardEmitter
 
-@export var random_strength : float = 30.0
-@export var shake_fade : float = 5.0
+@export var random_strength: float = 30.0
+@export var shake_fade: float = 5.0
 
-var shake_strength : float = 0.0
+var shake_strength: float = 0.0
 var allow_input = false
 var rand = RandomNumberGenerator.new()
 var hit_count = 0
@@ -26,14 +25,19 @@ func apply_shake():
 
 
 func randomOffset():
-	return Vector2(rand.randf_range(-shake_strength, shake_strength), 
-	rand.randf_range(-shake_strength, shake_strength))
+	return Vector2(
+		rand.randf_range(-shake_strength, shake_strength),
+		rand.randf_range(-shake_strength, shake_strength)
+	)
 
 
 func _input(event):
-	if allow_input and event.is_action_pressed("shoot") and \
-	SoundManager.get_let_me_out_state() != 0 and \
-	hit_count <= 5:
+	if (
+		allow_input
+		and event.is_action_pressed("shoot")
+		and SoundManager.get_let_me_out_state() != 0
+		and hit_count <= 5
+	):
 		print(hit_count)
 		play_let_me_out()
 		apply_shake()

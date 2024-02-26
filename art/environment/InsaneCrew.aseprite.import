@@ -1,0 +1,14 @@
+[remap]
+
+importer="aseprite_wizard.plugin.noop"
+type="PackedDataContainer"
+uid="uid://cxigl4jfblm4q"
+path="res://.godot/imported/InsaneCrew.aseprite-f8c68115d5eb1c3f4bc03a423c2e0371.res"
+
+[deps]
+
+source_file="res://art/environment/InsaneCrew.aseprite"
+dest_files=["res://.godot/imported/InsaneCrew.aseprite-f8c68115d5eb1c3f4bc03a423c2e0371.res"]
+
+[params]
+

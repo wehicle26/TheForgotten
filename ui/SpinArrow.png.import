@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://bw5p1hqslec5f"
-path="res://.godot/imported/spaceman_armArms.png-f0d06a663411f853e3caad3a909ba14e.ctex"
+uid="uid://cp7x265qm68g1"
+path="res://.godot/imported/SpinArrow.png-3e0c6de420397dc0ca904c922e4698ed.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://output/spaceman_armArms.png"
-dest_files=["res://.godot/imported/spaceman_armArms.png-f0d06a663411f853e3caad3a909ba14e.ctex"]
+source_file="res://ui/SpinArrow.png"
+dest_files=["res://.godot/imported/SpinArrow.png-3e0c6de420397dc0ca904c922e4698ed.ctex"]
 
 [params]
 

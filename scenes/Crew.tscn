@@ -3,15 +3,29 @@
 [ext_resource type="PackedScene" uid="uid://drc50lwybh48x" path="res://scenes/Item.tscn" id="1_iwlt4"]
 [ext_resource type="Script" path="res://scripts/crew.gd" id="2_2eoa8"]
 
-[sub_resource type="RectangleShape2D" id="RectangleShape2D_iylet"]
-resource_local_to_scene = true
+[sub_resource type="CircleShape2D" id="CircleShape2D_2nhps"]
+radius = 25.0
 
 [node name="Crew" instance=ExtResource("1_iwlt4")]
 script = ExtResource("2_2eoa8")
-action_name = null
+action_name = "talk"
 
 [node name="CollisionShape2D" parent="." index="0"]
-shape = SubResource("RectangleShape2D_iylet")
+shape = SubResource("CircleShape2D_2nhps")
 
 [node name="Sprite2D" parent="." index="1"]
+texture_filter = 1
 material = null
+hframes = 2
+metadata/_aseprite_wizard_config_ = {
+"i_mode": -1,
+"keep_anim_length": false,
+"layer": "Layer 1",
+"o_ex_p": "",
+"o_folder": "res://art/environment",
+"o_name": "InsaneCrew",
+"only_visible": true,
+"op_exp": false,
+"player": "AnimationPlayer",
+"source": "res://art/environment/InsaneCrew.aseprite"
+}

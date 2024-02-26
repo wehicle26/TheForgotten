@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://0nuv276x4v7h"
-path="res://.godot/imported/spaceman_n.png-fdc42ce9349a3b6baedfd134fa3bc8e1.ctex"
+uid="uid://coskoi4lcewfg"
+path="res://.godot/imported/Spaceman_v2.aseprite.png-e277f6dd980340f8dfd3615ed2796c2b.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://output/spaceman_n.png"
-dest_files=["res://.godot/imported/spaceman_n.png-fdc42ce9349a3b6baedfd134fa3bc8e1.ctex"]
+source_file="res://art/player/Spaceman_v2.aseprite.png"
+dest_files=["res://.godot/imported/Spaceman_v2.aseprite.png-e277f6dd980340f8dfd3615ed2796c2b.ctex"]
 
 [params]
 

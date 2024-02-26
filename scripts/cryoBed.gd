@@ -1,6 +1,5 @@
 extends Item
 
-
 @onready var animation_player = $AnimationPlayer
 
 
@@ -11,6 +10,7 @@ func _ready():
 
 func _on_interact():
 	animation_player.play("Open")
+
 
 func play_bed_sound():
 	SoundManager.play_bed_sound()

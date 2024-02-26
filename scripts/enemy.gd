@@ -21,6 +21,7 @@ var is_player_spotted = false
 var direction
 var next_path_position
 
+
 func damage():
 	print("tint")
 	#animated_sprite_2d.material.set_shader_parameter("active", true)
@@ -38,6 +39,7 @@ func _ready():
 func _physics_process(_delta):
 	move_and_slide()
 
+
 func play_enemy_move_sound():
 	SoundManager.play_enemy_move_sound(self)
 
@@ -46,7 +48,6 @@ func make_path():
 	player = get_tree().get_first_node_in_group("Player")
 	if is_instance_valid(player):
 		navigation_agent_2d.target_position = player.global_position
-
 
 
 func path_to_player():
