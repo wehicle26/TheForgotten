@@ -48,13 +48,6 @@ jobs:
      mkdir -p ~/.local/share/godot/export_templates/4.2.1.stable
      mv ./templates/* ~/.local/share/godot/export_templates/4.2.1.stable
 
-  - name: release-downloader
-    uses: robinraju/release-downloader@v1.9
-    with:
-        repository: "utopia-rise/fmod-gdextension"
-        tag: "4.1.0-4.2.0"
-        fileName: "addons.zip"
-        extract: true
 
   - name: Export Windows Desktop
     run: |
