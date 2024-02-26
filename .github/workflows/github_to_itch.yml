@@ -50,11 +50,21 @@ jobs:
   
   - name: Export Web
     run: |
-     mkdir -p ./
-     ./godot --headless --path ./ --export-release "Web" ./
+     mkdir -p ./bin
+     ./godot --headless --path ./ --export-release "Windows Desktop" ./bin/The Forgotten.exe
+    
+  - name: Export macOS
+    run: |
+     mkdir -p ./bin
+     ./godot --headless --path ./ --export-release "macOS" ./bin/The Forgotten.zip
+    
+  - name: Export Linux/X11
+    run: |
+     mkdir -p ./bin
+     ./godot --headless --path ./ --export-release "Linux/X11" ./bin/The Forgotten.x86_64
     
 
-  - uses: actions/upload-artifact@v2
+  - uses: actions/upload-artifact@v4
     with:
      name: exports
      path: exports
