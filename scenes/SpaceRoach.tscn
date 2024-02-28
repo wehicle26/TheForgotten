@@ -1,0 +1,112 @@
+[gd_scene load_steps=15 format=3 uid="uid://byo7nlby2q2i0"]
+
+[ext_resource type="PackedScene" uid="uid://duwl5sldekn2r" path="res://scenes/Enemy.tscn" id="1_a4mcf"]
+[ext_resource type="Texture2D" uid="uid://cy3m4d2q7gqxp" path="res://art/enemy/SpaceRoach.png" id="3_xqlrr"]
+[ext_resource type="Texture2D" uid="uid://bbimwc3c5qhsh" path="res://art/enemy/SpaceRoach_n.png" id="4_xan20"]
+[ext_resource type="PackedScene" uid="uid://bvxg5kctr4jyl" path="res://scenes/StateMachine.tscn" id="5_rw34c"]
+[ext_resource type="Script" path="res://scripts/State/enemyIdle.gd" id="6_yyomf"]
+[ext_resource type="Script" path="res://scripts/State/enemyFollow.gd" id="7_653x3"]
+[ext_resource type="Script" path="res://scripts/State/enemyAttack.gd" id="8_fjar5"]
+[ext_resource type="Script" path="res://scripts/State/enemyRetreat.gd" id="8_hqh0c"]
+
+[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_14swm"]
+radius = 7.0
+height = 22.0
+
+[sub_resource type="CanvasTexture" id="CanvasTexture_mhte7"]
+resource_local_to_scene = true
+diffuse_texture = ExtResource("3_xqlrr")
+normal_texture = ExtResource("4_xan20")
+
+[sub_resource type="Animation" id="Animation_qomen"]
+length = 0.4
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Sprite2D:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [0]
+}
+
+[sub_resource type="Animation" id="Animation_sgu5j"]
+resource_name = "dead"
+
+[sub_resource type="Animation" id="Animation_51k7a"]
+resource_name = "walk"
+length = 0.4
+loop_mode = 1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Sprite2D:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.1, 0.2, 0.3),
+"transitions": PackedFloat32Array(1, 1, 1, 1),
+"update": 1,
+"values": [0, 1, 2, 3]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_4vb37"]
+_data = {
+"RESET": SubResource("Animation_qomen"),
+"dead": SubResource("Animation_sgu5j"),
+"walk": SubResource("Animation_51k7a")
+}
+
+[node name="SpaceRoach" instance=ExtResource("1_a4mcf")]
+collision_layer = 1
+collision_mask = 3
+default_speed = 35
+max_speed = 45
+skitter_speed = 2
+lunge_speed = 300
+attack_range = 50
+knockback_force = 500
+
+[node name="Hitbox" parent="." index="2"]
+collision_layer = 3
+collision_mask = 3
+
+[node name="CollisionShape2D" parent="Hitbox" index="0"]
+visible = true
+rotation = -1.57079
+shape = SubResource("CapsuleShape2D_14swm")
+
+[node name="CollisionShape2D" parent="." index="4"]
+z_index = 1
+
+[node name="Sprite2D" parent="." index="8"]
+texture = SubResource("CanvasTexture_mhte7")
+hframes = 4
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="." index="9"]
+libraries = {
+"": SubResource("AnimationLibrary_4vb37")
+}
+autoplay = "walk"
+
+[node name="StateMachine" parent="." index="10" node_paths=PackedStringArray("initial_state") instance=ExtResource("5_rw34c")]
+initial_state = NodePath("Idle")
+
+[node name="Idle" type="Node" parent="StateMachine" index="0" node_paths=PackedStringArray("enemy")]
+script = ExtResource("6_yyomf")
+enemy = NodePath("../..")
+
+[node name="Follow" type="Node" parent="StateMachine" index="1" node_paths=PackedStringArray("enemy")]
+script = ExtResource("7_653x3")
+enemy = NodePath("../..")
+
+[node name="Attack" type="Node" parent="StateMachine" index="2" node_paths=PackedStringArray("enemy")]
+script = ExtResource("8_fjar5")
+enemy = NodePath("../..")
+
+[node name="Retreat" type="Node" parent="StateMachine" index="3" node_paths=PackedStringArray("enemy")]
+script = ExtResource("8_hqh0c")
+enemy = NodePath("../..")

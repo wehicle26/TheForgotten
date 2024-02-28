@@ -6,7 +6,7 @@ class_name EnemyIdle
 @export var move_speed = 10
 @export var aggro_range = 200
 
-var player: CharacterBody2D
+var player: Player
 var move_direction: Vector2
 var wander_time: float
 

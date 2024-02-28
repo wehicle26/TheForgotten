@@ -6,9 +6,11 @@ signal healthChanged
 signal freeze
 signal unfreeze
 
-@export var speed = 85
+@export var walk_speed = 65
+@export var run_speed = 85
 @export var inventory: Inventory
 @export var swinging: bool = false
+@onready var hitbox = $Hitbox
 
 @onready var animation_player = $AnimationPlayer
 #@onready var flashlight = $Flashlight
@@ -20,21 +22,24 @@ signal unfreeze
 
 const CROSSHAIR_004 = preload("res://art/player/crosshair004.png")
 
+var collision: bool = false
+var speed = 0
 var knockback = Vector2.ZERO
 var isPlaying = true
 var input_dir: Vector2
 var has_gun: bool = false
 var current_weapon = "crowbar"
 var attack_damage = 1
-var knockback_force = 100
+var knockback_force = 500
 var attack_position = 0
 var stun_time = .25
 
 
 func _ready():
 	#gun.get_node("ArmTimer").timeout.connect(_lower_arm)
-	#player_sprite.material.set_shader_parameter("active", false)
+	sprite_2d.material.set_shader_parameter("active", false)
 	SoundManager.initialize_player_sounds(self)
+	inventory = Inventory.new()
 
 
 func freeze_player():
@@ -46,11 +51,11 @@ func unfreeze_player():
 
 
 func damage():
-	print("tint")
-	#player_sprite.material.set_shader_parameter("active", true)
+	sprite_2d.material.set_shader_parameter("active", true)
+	SoundManager.play_custom_sound(self.global_transform, "event:/roach_bite", 0.7)
 	var timer = get_tree().create_timer(.5)
 	await timer.timeout
-	#player_sprite.material.set_shader_parameter("active", false)
+	sprite_2d.material.set_shader_parameter("active", false)
 
 
 func play_footstep():
@@ -104,12 +109,7 @@ func _lower_arm():
 	animation_player.play("Walk")
 
 
-func _on_hitbox_body_entered(body):
-	if body is Enemy:
-		print(body)
-
-
-func _on_area_2d_area_entered(area):
+func _on_crowbar_hitbox_area_entered(area):
 	if area is Hitbox:
 		var attack = Attack.new()
 		attack.attack_damage = attack_damage

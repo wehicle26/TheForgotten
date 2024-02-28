@@ -2,10 +2,14 @@ extends CharacterBody2D
 
 class_name Enemy
 
-@export var speed = 100
+
+@export var default_speed = 50
+@export var speed = default_speed
 @export var max_speed = 130
 @export var skitter_speed = 100
-@export var player: Node2D
+@export var player: Player
+@export var lunge_speed = 50
+@export var attack_range = 60
 @export var rotation_speed = .5
 @export var attack_damage = 1
 @export var knockback_force = 50
@@ -15,23 +19,30 @@ class_name Enemy
 @onready var navigation_agent_2d = $NavigationAgent2D
 @onready var line_of_sight = $LineOfSight
 @onready var aggro_timer = $AggroTimer
+@onready var move_sound_timer = $MoveSoundTimer
 
 var current_stun_time
 var is_player_spotted = false
 var direction
 var next_path_position
 
+func kill():
+	if is_in_group("Roach"):
+		SoundManager.play_custom_sound(global_transform, "event:/roach_splat", 0.8)
+	queue_free()
+
 
 func damage():
-	print("tint")
-	#animated_sprite_2d.material.set_shader_parameter("active", true)
+	if is_in_group("Roach"):
+		SoundManager.play_custom_sound(global_transform, "event:/roach_hit", 0.5)
+	sprite_2d.material.set_shader_parameter("active", true)
 	var timer = get_tree().create_timer(0.5)
 	await timer.timeout
-	#animated_sprite_2d.material.set_shader_parameter("active", false)
+	sprite_2d.material.set_shader_parameter("active", false)
 
 
 func _ready():
-	#animated_sprite_2d.material.set_shader_parameter("active", false)
+	sprite_2d.material.set_shader_parameter("active", false)
 	line_of_sight.player_spotted.connect(_player_spotted)
 	SoundManager.initialize_enemy_sounds(self)
 
@@ -51,13 +62,16 @@ func make_path():
 
 
 func path_to_player():
-	play_enemy_move_sound()
-	if speed < max_speed and self.is_in_group("Roach"):
-		speed += skitter_speed
 	next_path_position = navigation_agent_2d.get_next_path_position()
 	direction = to_local(next_path_position).normalized()
 	sprite_2d.look_at(next_path_position)
-	#look_at(direction)
+	velocity = direction * speed
+
+
+func retreat_from_player():
+	next_path_position = navigation_agent_2d.get_next_path_position() * -1
+	direction = to_local(next_path_position).normalized()
+	sprite_2d.look_at(next_path_position)
 	velocity = direction * speed
 
 
@@ -82,3 +96,8 @@ func _on_hitbox_area_entered(area):
 		attack.attack_position = global_position
 		attack.stun_time = stun_time
 		area.damage(attack)
+
+
+func _on_move_sound_timer_timeout():
+	play_enemy_move_sound()
+

@@ -2,7 +2,6 @@ extends State
 
 
 @export var player: Player
-@export var move_speed = 0
 
 
 func _ready():
@@ -14,7 +13,7 @@ func _unfreeze_player():
 
 
 func enter():
-	player.speed = move_speed
+	player.speed = 0
 	player.velocity = Vector2.ZERO
 	player.animation_player.play("RESET")
 

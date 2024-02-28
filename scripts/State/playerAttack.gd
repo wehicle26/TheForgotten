@@ -1,7 +1,6 @@
 extends State
 
 @export var player: Player
-@export var move_speed = 0
 
 var duration
 
@@ -19,7 +18,7 @@ func _input(_event):
 
 func enter():
 	duration = 0.0
-	player.speed = move_speed
+	player.speed = 0
 	player.velocity = Vector2.ZERO
 	player.animation_player.play("Crowbar_Swing_Fast")
 

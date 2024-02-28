@@ -39,3 +39,15 @@ func _on_enter_cryo_body_exited(body):
 	if body is Player:
 		get_tree().call_group("Cryo_Light", "turn_on")
 		get_tree().call_group("Hallway_Light", "turn_off")
+
+
+func _on_enter_cargo_body_exited(body):
+	if body is Player:
+		get_tree().call_group("Cargo_Light", "turn_on")
+		get_tree().call_group("Hallway_Light", "turn_off")
+
+
+func _on_exit_cargo_body_exited(body):
+	if body is Player:
+		get_tree().call_group("Cargo_Light", "turn_off")
+		get_tree().call_group("Hallway_Light", "turn_on")

@@ -1,4 +1,4 @@
-[gd_scene load_steps=39 format=3 uid="uid://blhmkefans43h"]
+[gd_scene load_steps=40 format=3 uid="uid://blhmkefans43h"]
 
 [ext_resource type="Script" path="res://scripts/player.gd" id="1_ucx17"]
 [ext_resource type="Texture2D" uid="uid://bvrqydcwjh4ma" path="res://art/player/Spaceman_old.png" id="2_5f2j7"]
@@ -28,10 +28,6 @@ modulate_color = Color(0.647059, 0.188235, 0.188235, 1)
 
 [sub_resource type="OccluderPolygon2D" id="OccluderPolygon2D_1so1u"]
 polygon = PackedVector2Array(-7, 0, -7, 2, -6, 2, -6, 4, -5, 4, -5, 5, -4, 5, -4, 6, -2, 6, -2, 7, 2, 7, 2, 6, 4, 6, 4, 5, 5, 5, 5, 4, 6, 4, 6, 2, 7, 2, 7, 0)
-
-[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_x5s37"]
-radius = 5.0
-height = 10.0
 
 [sub_resource type="Animation" id="Animation_q3tnl"]
 length = 0.001
@@ -100,6 +96,11 @@ shader_parameter/tint = Color(0.647059, 0.188235, 0.188235, 1)
 diffuse_texture = ExtResource("2_5f2j7")
 normal_texture = ExtResource("3_bmv8b")
 
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_f4o7c"]
+shader = ExtResource("2_eb1nu")
+shader_parameter/active = false
+shader_parameter/tint = Color(0.647059, 0.188235, 0.188235, 1)
+
 [sub_resource type="CanvasTexture" id="CanvasTexture_2a18q"]
 diffuse_texture = ExtResource("21_pqqym")
 normal_texture = ExtResource("22_2cr7p")
@@ -135,7 +136,7 @@ tracks/1/keys = {
 tracks/2/type = "value"
 tracks/2/imported = false
 tracks/2/enabled = true
-tracks/2/path = NodePath("PowerSwingBox:disabled")
+tracks/2/path = NodePath("CrowbarHitbox/PowerSwingBox:disabled")
 tracks/2/interp = 1
 tracks/2/loop_wrap = true
 tracks/2/keys = {
@@ -239,7 +240,7 @@ tracks/4/keys = {
 tracks/5/type = "value"
 tracks/5/imported = false
 tracks/5/enabled = true
-tracks/5/path = NodePath("FastSwingBox:disabled")
+tracks/5/path = NodePath("CrowbarHitbox/FastSwingBox:disabled")
 tracks/5/interp = 1
 tracks/5/loop_wrap = true
 tracks/5/keys = {
@@ -255,7 +256,7 @@ loop_mode = 1
 tracks/0/type = "value"
 tracks/0/imported = false
 tracks/0/enabled = true
-tracks/0/path = NodePath("PowerSwingBox:disabled")
+tracks/0/path = NodePath("CrowbarHitbox/PowerSwingBox:disabled")
 tracks/0/interp = 1
 tracks/0/loop_wrap = true
 tracks/0/keys = {
@@ -291,7 +292,7 @@ tracks/2/keys = {
 tracks/3/type = "value"
 tracks/3/imported = false
 tracks/3/enabled = true
-tracks/3/path = NodePath("FastSwingBox:disabled")
+tracks/3/path = NodePath("CrowbarHitbox/FastSwingBox:disabled")
 tracks/3/interp = 1
 tracks/3/loop_wrap = true
 tracks/3/keys = {
@@ -476,8 +477,12 @@ _data = {
 }
 
 [sub_resource type="CapsuleShape2D" id="CapsuleShape2D_4c1uc"]
-radius = 5.0
-height = 10.0
+radius = 4.0
+height = 8.0
+
+[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_ys3oe"]
+radius = 4.0
+height = 18.0
 
 [node name="Player" type="CharacterBody2D" groups=["Player"]]
 y_sort_enabled = true
@@ -486,6 +491,7 @@ collision_mask = 3
 motion_mode = 1
 wall_min_slide_angle = 0.0
 script = ExtResource("1_ucx17")
+swinging = true
 
 [node name="CanvasLayer" type="CanvasLayer" parent="."]
 
@@ -515,13 +521,6 @@ script = ExtResource("5_tm3ug")
 [node name="LightOccluder2D" type="LightOccluder2D" parent="."]
 occluder = SubResource("OccluderPolygon2D_1so1u")
 
-[node name="Hitbox" parent="." node_paths=PackedStringArray("health") instance=ExtResource("10_40kik")]
-health = NodePath("../Health")
-
-[node name="CollisionShape2D" type="CollisionShape2D" parent="Hitbox"]
-rotation = -1.57079
-shape = SubResource("CapsuleShape2D_x5s37")
-
 [node name="Health" parent="." instance=ExtResource("9_tlcqm")]
 
 [node name="Feet" type="AnimationPlayer" parent="."]
@@ -542,6 +541,7 @@ hframes = 4
 
 [node name="Sprite2D" type="Sprite2D" parent="."]
 texture_filter = 1
+material = SubResource("ShaderMaterial_f4o7c")
 texture = SubResource("CanvasTexture_2a18q")
 hframes = 7
 vframes = 7
@@ -562,11 +562,6 @@ metadata/_aseprite_wizard_config_ = {
 libraries = {
 "": SubResource("AnimationLibrary_d2w7h")
 }
-
-[node name="PowerSwingBox" type="CollisionPolygon2D" parent="."]
-visible = false
-polygon = PackedVector2Array(-26, 21, -26, 28, -14, 38, 3, 40, 23, 31, 33, 18, 37, -2, 36, -21, 26, -33, 9, -39, -9, -38, -23, -30, -33, -13, -26, -9, -19, -7, -9, -26, 21, -27, 32, -13, 26, 15, 0, 30, -7, 24, -17, 14)
-disabled = true
 
 [node name="StateMachine" parent="." node_paths=PackedStringArray("initial_state") instance=ExtResource("16_2nuhd")]
 initial_state = NodePath("PlayerIdle")
@@ -594,9 +589,25 @@ player = NodePath("../..")
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 shape = SubResource("CapsuleShape2D_4c1uc")
 
-[node name="FastSwingBox" type="CollisionPolygon2D" parent="."]
+[node name="Hitbox" parent="." node_paths=PackedStringArray("health") instance=ExtResource("10_40kik")]
+health = NodePath("../Health")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Hitbox"]
+rotation = -1.57079
+shape = SubResource("CapsuleShape2D_ys3oe")
+
+[node name="CrowbarHitbox" type="Area2D" parent="."]
+
+[node name="FastSwingBox" type="CollisionPolygon2D" parent="CrowbarHitbox"]
 visible = false
 polygon = PackedVector2Array(-18, 8, -25, -2, -25, -18, -10, -32, 5, -31, 25, -18, 31, -6, 18, 3, 12, -7, 3, -13, -9, -13)
 disabled = true
 
+[node name="PowerSwingBox" type="CollisionPolygon2D" parent="CrowbarHitbox"]
+visible = false
+polygon = PackedVector2Array(-26, 21, -26, 28, -14, 38, 3, 40, 23, 31, 33, 18, 37, -2, 36, -21, 26, -33, 9, -39, -9, -38, -23, -30, -33, -13, -26, -9, -19, -7, -9, -26, 21, -27, 32, -13, 26, 15, 0, 30, -7, 24, -17, 14)
+disabled = true
+
+[connection signal="area_entered" from="Hitbox" to="." method="_on_hitbox_area_entered"]
 [connection signal="body_entered" from="Hitbox" to="." method="_on_hitbox_body_entered"]
+[connection signal="area_entered" from="CrowbarHitbox" to="." method="_on_crowbar_hitbox_area_entered"]

@@ -1,7 +1,6 @@
 extends State
 
 @export var player: Player
-@export var move_speed = 85
 
 func _ready():
 	player.freeze.connect(_freeze_player)
@@ -17,7 +16,7 @@ func _input(_event):
 
 
 func enter():
-	player.speed = move_speed
+	player.speed = player.run_speed
 	player.animation_player.play("Run")
 
 

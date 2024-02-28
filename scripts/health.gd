@@ -18,10 +18,8 @@ func damage(attack: Attack):
 	if body.has_method("damage"):
 		body.damage()
 	health -= attack.attack_damage
-	var enemy = get_parent()
-	if enemy is Enemy:
-		enemy.velocity = (
-			(global_position - attack.attack_position).normalized() * attack.knockback_force
+	body.velocity = (
+		(global_position - attack.attack_position).normalized() * attack.knockback_force
 		)
 	if health <= 0:
 		var parent = get_parent()
@@ -29,4 +27,4 @@ func damage(attack: Attack):
 			game_over.emit()
 			healthChanged.emit()
 		else:
-			parent.queue_free()
+			parent.kill()
