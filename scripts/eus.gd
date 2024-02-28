@@ -17,7 +17,7 @@ func _ready():
 func _process(_delta):
 	for ray in rays.get_children():
 		if ray.is_colliding() and ray.get_collider() is Player and not played:
-			var player: Player = ray.get_collider()
+			player = ray.get_collider()
 			trick_item.visible = false
 			trick_light.visible = false
 			player.freeze_player()

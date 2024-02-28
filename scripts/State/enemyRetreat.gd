@@ -14,7 +14,7 @@ func enter():
 	transitioned.emit(self, "follow")
 
 func physics_update(_delta):
-	var direction = player.global_position - enemy.global_position
+	var _direction = player.global_position - enemy.global_position
 	#enemy.look_at(direction)
 	enemy.retreat_from_player()
 #

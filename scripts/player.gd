@@ -51,11 +51,13 @@ func unfreeze_player():
 
 
 func damage():
+	freeze_player()
 	sprite_2d.material.set_shader_parameter("active", true)
 	SoundManager.play_custom_sound(self.global_transform, "event:/roach_bite", 0.7)
 	var timer = get_tree().create_timer(.5)
 	await timer.timeout
 	sprite_2d.material.set_shader_parameter("active", false)
+	unfreeze_player()
 
 
 func play_footstep():

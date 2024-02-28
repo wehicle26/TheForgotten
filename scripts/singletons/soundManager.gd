@@ -109,8 +109,8 @@ func stop_main_loop():
 	event.stop(1)
 
 
-func play_custom_sound(transform, event, volume):
-	var new_event = FmodServer.create_event_instance(event)
+func play_custom_sound(transform, custom_event, volume):
+	var new_event = FmodServer.create_event_instance(custom_event)
 	new_event.set_2d_attributes(transform)
 	new_event.set_volume(volume)
 	new_event.start()

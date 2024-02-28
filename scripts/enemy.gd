@@ -2,6 +2,7 @@ extends CharacterBody2D
 
 class_name Enemy
 
+signal hit_player
 
 @export var default_speed = 50
 @export var speed = default_speed
@@ -20,20 +21,28 @@ class_name Enemy
 @onready var line_of_sight = $LineOfSight
 @onready var aggro_timer = $AggroTimer
 @onready var move_sound_timer = $MoveSoundTimer
+@onready var gpu_particles_2d = $GPUParticles2D
+@onready var animation_player = $AnimationPlayer
 
 var current_stun_time
 var is_player_spotted = false
 var direction
 var next_path_position
 
-func kill():
+func kill(direction):
 	if is_in_group("Roach"):
+		gpu_particles_2d.amount = 64
+		gpu_particles_2d.emitting = true
+		animation_player.play("Death")
 		SoundManager.play_custom_sound(global_transform, "event:/roach_splat", 0.8)
+		await animation_player.animation_finished
 	queue_free()
 
 
 func damage():
 	if is_in_group("Roach"):
+		gpu_particles_2d.emitting = true
+		gpu_particles_2d.process_material.direction = - Vector3(direction.x, direction.y, 0)
 		SoundManager.play_custom_sound(global_transform, "event:/roach_hit", 0.5)
 	sprite_2d.material.set_shader_parameter("active", true)
 	var timer = get_tree().create_timer(0.5)
@@ -90,6 +99,7 @@ func _on_aggro_timer_timeout():
 
 func _on_hitbox_area_entered(area):
 	if area is Hitbox:
+		hit_player.emit()
 		var attack = Attack.new()
 		attack.attack_damage = attack_damage
 		attack.knockback_force = knockback_force
