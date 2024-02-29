@@ -9,7 +9,7 @@ var intro: PackedScene = preload("res://scenes/Intro.tscn")
 
 
 func _ready():
-	SoundManager.play_main_loop()
+	SoundManager.play_main_loop(SoundManager.MAIN_LOOP_INTRO)
 
 
 func _on_start_game_button_pressed():

@@ -17,6 +17,7 @@ func randomize_wander():
 
 
 func enter():
+	enemy.animation_player.play("Walk")
 	player = get_tree().get_first_node_in_group("Player")
 	randomize_wander()
 
@@ -29,6 +30,7 @@ func update(delta):
 
 
 func physics_update(_delta):
+	enemy.sprite_2d.look_at(move_direction)
 	if enemy:
 		enemy.velocity = move_direction * move_speed
 	if is_instance_valid(player):

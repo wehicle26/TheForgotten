@@ -1,0 +1,14 @@
+[remap]
+
+importer="aseprite_wizard.plugin.noop"
+type="PackedDataContainer"
+uid="uid://ccpax1elhicxj"
+path="res://.godot/imported/forklift.aseprite-3fd77d58b43bd51c5eff3bd1e44b6f94.res"
+
+[deps]
+
+source_file="res://art/environment/forklift.aseprite"
+dest_files=["res://.godot/imported/forklift.aseprite-3fd77d58b43bd51c5eff3bd1e44b6f94.res"]
+
+[params]
+

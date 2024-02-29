@@ -5,7 +5,7 @@
 [ext_resource type="Script" path="res://scripts/insaneCrew.gd" id="2_t1g51"]
 
 [sub_resource type="Animation" id="Animation_f0gkb"]
-length = 3.5
+length = 10.0
 tracks/0/type = "value"
 tracks/0/imported = false
 tracks/0/enabled = true
@@ -60,7 +60,7 @@ _data = {
 [node name="InsaneCrew" instance=ExtResource("1_l4m8c")]
 script = ExtResource("2_t1g51")
 
-[node name="Sprite2D" parent="." index="1"]
+[node name="Sprite2D" parent="." index="0"]
 texture = ExtResource("2_hd73g")
 metadata/_aseprite_wizard_config_ = {
 "i_mode": -1,

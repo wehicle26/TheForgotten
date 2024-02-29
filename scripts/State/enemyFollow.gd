@@ -8,6 +8,7 @@ var player: Player
 
 
 func enter():
+	enemy.animation_player.play("Walk")
 	if enemy.is_in_group("Roach"):
 		enemy.move_sound_timer.start()
 	enemy.speed = enemy.default_speed
@@ -20,5 +21,5 @@ func physics_update(_delta):
 
 	if direction.length() > 250 and enemy.aggro_timer.is_stopped:
 		transitioned.emit(self, "idle")
-	if direction.length() < enemy.attack_range:
+	if (direction.length() < enemy.attack_range) and enemy.is_player_spotted:
 		transitioned.emit(self, "attack")

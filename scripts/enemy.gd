@@ -29,8 +29,9 @@ var is_player_spotted = false
 var direction
 var next_path_position
 
-func kill(direction):
+func kill(_splat_direction):
 	if is_in_group("Roach"):
+		sprite_2d.material.set_shader_parameter("active", false)
 		gpu_particles_2d.amount = 64
 		gpu_particles_2d.emitting = true
 		animation_player.play("Death")

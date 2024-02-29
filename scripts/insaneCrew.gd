@@ -26,8 +26,11 @@ func _on_interact():
 	interact = func():
 		pass
 	collision_shape_2d.disabled = true
+	SoundManager.stop_main_loop()
 	animation_player.play("Deadge")
 	SoundManager.play_custom_sound(self.global_transform, "event:/deadge", .6)
+	await animation_player.animation_finished
+	SoundManager.play_main_loop(SoundManager.MAIN_LOOP_CURIOUS)
 
 
 func pitch_black():

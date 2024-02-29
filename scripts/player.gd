@@ -11,6 +11,7 @@ signal unfreeze
 @export var inventory: Inventory
 @export var swinging: bool = false
 @onready var hitbox = $Hitbox
+@onready var idle_timer = $IdleTimer
 
 @onready var animation_player = $AnimationPlayer
 #@onready var flashlight = $Flashlight
@@ -40,6 +41,18 @@ func _ready():
 	sprite_2d.material.set_shader_parameter("active", false)
 	SoundManager.initialize_player_sounds(self)
 	inventory = Inventory.new()
+
+
+func play_sigh():
+	SoundManager.play_custom_sound(self.global_transform, "event:/sigh", 0.3)
+
+
+func play_breathe_in():
+	SoundManager.play_custom_sound(self.global_transform, "event:/breathe_in", 0.3)
+
+
+func play_neck_crack():
+	SoundManager.play_custom_sound(self.global_transform, "event:/neck_crack", 0.3)
 
 
 func freeze_player():

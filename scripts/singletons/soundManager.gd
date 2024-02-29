@@ -98,11 +98,11 @@ func initialize_sounds():
 	shatter_glass_sound.set_volume(.4)
 
 
-func play_main_loop():
+func play_main_loop(loop_level):
 	event = FmodServer.create_event_instance("event:/the_forgotten2.rpp")
 	event.set_volume(.3)
 	event.start()
-	set_main_loop_parameter(MAIN_LOOP_INTRO)
+	set_main_loop_parameter(loop_level)
 
 
 func stop_main_loop():

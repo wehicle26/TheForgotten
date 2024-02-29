@@ -1,4 +1,4 @@
-extends Item
+extends StaticBody2D
 
 
 func _ready():

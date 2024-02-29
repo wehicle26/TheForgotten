@@ -18,6 +18,7 @@ func _process(_delta):
 	for ray in rays.get_children():
 		if ray.is_colliding() and ray.get_collider() is Player and not played:
 			player = ray.get_collider()
+			SoundManager.stop_main_loop()
 			trick_item.visible = false
 			trick_light.visible = false
 			player.freeze_player()
@@ -28,6 +29,7 @@ func _process(_delta):
 			light.visible = false
 			player.unfreeze_player()
 			GlobalState.encounter1 = true
+			SoundManager.play_main_loop(SoundManager.MAIN_LOOP_EERIE)
 			queue_free()
 
 
