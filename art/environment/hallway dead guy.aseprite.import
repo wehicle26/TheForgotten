@@ -1,0 +1,14 @@
+[remap]
+
+importer="aseprite_wizard.plugin.noop"
+type="PackedDataContainer"
+uid="uid://bklme7mqurtpl"
+path="res://.godot/imported/hallway dead guy.aseprite-32f19ad4421f1cbf6fae4aed3e816dd3.res"
+
+[deps]
+
+source_file="res://art/environment/hallway dead guy.aseprite"
+dest_files=["res://.godot/imported/hallway dead guy.aseprite-32f19ad4421f1cbf6fae4aed3e816dd3.res"]
+
+[params]
+
