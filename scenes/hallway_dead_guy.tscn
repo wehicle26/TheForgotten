@@ -1,0 +1,76 @@
+[gd_scene load_steps=6 format=3 uid="uid://8bdjhnsaqthg"]
+
+[ext_resource type="Texture2D" uid="uid://c7joseobnrfwc" path="res://art/environment/hallway dead guy.png" id="1_67q7k"]
+
+[sub_resource type="OccluderPolygon2D" id="OccluderPolygon2D_ihdl4"]
+polygon = PackedVector2Array(-19, 3, -15, 3, -15, 4, -13, 4, -13, 5, -8, 5, -8, 0, -7, 0, -7, -1, 5, -1, 5, 0, 6, 0, 6, 5, 5, 5, 5, 6, 3, 6, 3, 7, 4, 7, 4, 8, 5, 8, 5, 9, 7, 9, 7, 4, 8, 4, 8, 3, 9, 3, 9, 4, 12, 4, 12, -1, 40, -1, 40, 27, 12, 27, 12, 23, 9, 23, 9, 24, 8, 24, 8, 23, 7, 23, 7, 18, 5, 18, 5, 19, 4, 19, 4, 20, 3, 20, 3, 21, 5, 21, 5, 22, 6, 22, 6, 26, 5, 26, 5, 27, -7, 27, -7, 26, -8, 26, -8, 22, -13, 22, -13, 23, -15, 23, -15, 24, -28, 24, -28, 23, -29, 23, -29, 21, -30, 21, -30, 19, -31, 19, -31, 8, -30, 8, -30, 6, -29, 6, -29, 4, -28, 4, -28, 3)
+
+[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_es66s"]
+height = 72.0
+
+[sub_resource type="Animation" id="Animation_51jxd"]
+length = 0.6
+loop_mode = 1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Sprite2D:visible")
+tracks/0/interp = 1
+tracks/0/loop_wrap = false
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [true]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("Sprite2D:frame")
+tracks/1/interp = 1
+tracks/1/loop_wrap = false
+tracks/1/keys = {
+"times": PackedFloat32Array(0, 0.2, 0.4),
+"transitions": PackedFloat32Array(1, 1, 1),
+"update": 1,
+"values": [0, 1, 2]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_h7mxe"]
+_data = {
+"default": SubResource("Animation_51jxd")
+}
+
+[node name="hallway dead guy" type="StaticBody2D"]
+
+[node name="LightOccluder2D" type="LightOccluder2D" parent="."]
+occluder = SubResource("OccluderPolygon2D_ihdl4")
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+texture_filter = 1
+texture = ExtResource("1_67q7k")
+hframes = 2
+vframes = 2
+metadata/_aseprite_wizard_config_ = {
+"i_mode": -1,
+"keep_anim_length": false,
+"layer": "",
+"o_ex_p": "",
+"o_folder": "res://art/environment",
+"o_name": "hallway dead guy",
+"only_visible": true,
+"op_exp": false,
+"player": "AnimationPlayer",
+"source": "res://art/environment/hallway dead guy.aseprite"
+}
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+visible = false
+position = Vector2(5, 13)
+rotation = 1.57079
+shape = SubResource("CapsuleShape2D_es66s")
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+libraries = {
+"": SubResource("AnimationLibrary_h7mxe")
+}

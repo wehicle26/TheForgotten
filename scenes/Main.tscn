@@ -1,4 +1,4 @@
-[gd_scene load_steps=34 format=3 uid="uid://b71gis6vgkvkg"]
+[gd_scene load_steps=35 format=3 uid="uid://b71gis6vgkvkg"]
 
 [ext_resource type="Script" path="res://scripts/level.gd" id="1_6u7sh"]
 [ext_resource type="PackedScene" uid="uid://bob88w6sefucj" path="res://scenes/Environment.tscn" id="1_halep"]
@@ -10,6 +10,7 @@
 [ext_resource type="Texture2D" uid="uid://c1n1chkpvoqhi" path="res://art/item/RifleItem.png" id="7_dy02q"]
 [ext_resource type="PackedScene" uid="uid://dgq8wmrdicq3d" path="res://scenes/Crate.tscn" id="8_74hus"]
 [ext_resource type="PackedScene" uid="uid://fcefbjw8babe" path="res://scenes/Forklift.tscn" id="9_rxupm"]
+[ext_resource type="PackedScene" uid="uid://8bdjhnsaqthg" path="res://scenes/hallway_dead_guy.tscn" id="10_p5tb0"]
 [ext_resource type="Texture2D" uid="uid://vr4ybpyhhe04" path="res://art/environment/power core.png" id="11_krgf7"]
 [ext_resource type="PackedScene" uid="uid://byo7nlby2q2i0" path="res://scenes/SpaceRoach.tscn" id="13_a1bri"]
 [ext_resource type="Shader" path="res://shaders/grain.gdshader" id="15_ui16x"]
@@ -250,9 +251,6 @@ rotation = -0.261799
 [node name="Crate3" parent="Environment/Objects" instance=ExtResource("8_74hus")]
 position = Vector2(-504, -260)
 
-[node name="Crate4" parent="Environment/Objects" instance=ExtResource("8_74hus")]
-position = Vector2(-441, 49)
-
 [node name="Crate5" parent="Environment/Objects" instance=ExtResource("8_74hus")]
 position = Vector2(-448, 9)
 rotation = -0.523598
@@ -358,9 +356,6 @@ position = Vector2(-849, 233)
 [node name="Crate38" parent="Environment/Objects" instance=ExtResource("8_74hus")]
 position = Vector2(-819, 235)
 
-[node name="Forklift" parent="Environment/Objects" instance=ExtResource("9_rxupm")]
-position = Vector2(-467, 50)
-
 [node name="Forklift2" parent="Environment/Objects" instance=ExtResource("9_rxupm")]
 position = Vector2(-843, 20)
 rotation = 1.57079
@@ -368,6 +363,9 @@ rotation = 1.57079
 [node name="Forklift3" parent="Environment/Objects" instance=ExtResource("9_rxupm")]
 position = Vector2(-981, -17)
 rotation = 3.14159
+
+[node name="hallway dead guy" parent="Environment/Objects" instance=ExtResource("10_p5tb0")]
+position = Vector2(-467, 35)
 
 [node name="DarknessLevel" type="CanvasModulate" parent="." groups=["Darkness"]]
 visible = false
