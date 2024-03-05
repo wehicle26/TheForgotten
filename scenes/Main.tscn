@@ -1,4 +1,4 @@
-[gd_scene load_steps=36 format=3 uid="uid://b71gis6vgkvkg"]
+[gd_scene load_steps=37 format=3 uid="uid://b71gis6vgkvkg"]
 
 [ext_resource type="Script" path="res://scripts/level.gd" id="1_6u7sh"]
 [ext_resource type="PackedScene" uid="uid://bob88w6sefucj" path="res://scenes/Environment.tscn" id="1_halep"]
@@ -11,10 +11,8 @@
 [ext_resource type="PackedScene" uid="uid://dgq8wmrdicq3d" path="res://scenes/Crate.tscn" id="8_74hus"]
 [ext_resource type="PackedScene" uid="uid://fcefbjw8babe" path="res://scenes/Forklift.tscn" id="9_rxupm"]
 [ext_resource type="PackedScene" uid="uid://cpu2pabqnow4x" path="res://scenes/BreakableDoor.tscn" id="10_3i61v"]
-[ext_resource type="PackedScene" uid="uid://cuee4phykn8mk" path="res://scenes/PowerCore.tscn" id="10_quu3m"]
 [ext_resource type="PackedScene" uid="uid://8bdjhnsaqthg" path="res://scenes/hallway_dead_guy.tscn" id="10_p5tb0"]
-[ext_resource type="Texture2D" uid="uid://vr4ybpyhhe04" path="res://art/environment/power core.png" id="11_krgf7"]
-[ext_resource type="PackedScene" uid="uid://byo7nlby2q2i0" path="res://scenes/SpaceRoach.tscn" id="13_a1bri"]
+[ext_resource type="PackedScene" uid="uid://cuee4phykn8mk" path="res://scenes/PowerCore.tscn" id="10_quu3m"]
 [ext_resource type="Shader" path="res://shaders/grain.gdshader" id="15_ui16x"]
 [ext_resource type="PackedScene" uid="uid://d2eli84d2uqkm" path="res://scenes/InsaneCrew.tscn" id="16_ee52r"]
 [ext_resource type="PackedScene" uid="uid://bv8yf3ytm2yc1" path="res://scenes/CryoMachine.tscn" id="16_idydh"]
@@ -211,11 +209,6 @@ rotation = -0.261799
 [node name="Crate3" parent="Environment/Inanimate" instance=ExtResource("8_74hus")]
 position = Vector2(-504, -260)
 
-[node name="Crate5" parent="Environment/Objects" instance=ExtResource("8_74hus")]
-
-position = Vector2(-448, 9)
-rotation = -0.523598
-
 [node name="Crate6" parent="Environment/Inanimate" instance=ExtResource("8_74hus")]
 position = Vector2(-411, 20)
 rotation = 0.523598
@@ -317,16 +310,23 @@ position = Vector2(-849, 233)
 [node name="Crate38" parent="Environment/Inanimate" instance=ExtResource("8_74hus")]
 position = Vector2(-819, 235)
 
-[node name="Forklift2" parent="Environment/Objects" instance=ExtResource("9_rxupm")]
-position = Vector2(-843, 20)
-rotation = 1.57079
-
 [node name="Forklift3" parent="Environment/Inanimate" instance=ExtResource("9_rxupm")]
 position = Vector2(-981, -17)
 rotation = 3.14159
 
 [node name="PowerCore" parent="Environment/Inanimate" instance=ExtResource("10_quu3m")]
 position = Vector2(-1216, 0)
+
+[node name="Forklift2" parent="Environment/Inanimate" instance=ExtResource("9_rxupm")]
+position = Vector2(-843, 52)
+rotation = 1.57079
+
+[node name="Crate5" parent="Environment/Inanimate" instance=ExtResource("8_74hus")]
+position = Vector2(-445, 6.99998)
+rotation = -0.523598
+
+[node name="hallway dead guy" parent="Environment/Inanimate" instance=ExtResource("10_p5tb0")]
+position = Vector2(-467, 35)
 
 [node name="Interactable" type="Node2D" parent="Environment"]
 
@@ -353,9 +353,6 @@ rotation = 1.57081
 [node name="CryoBed5" parent="Environment/Interactable" instance=ExtResource("4_0fems")]
 position = Vector2(-607, -48)
 rotation = 1.57081
-
-[node name="hallway dead guy" parent="Environment/Objects" instance=ExtResource("10_p5tb0")]
-position = Vector2(-467, 35)
 
 [node name="DarknessLevel" type="CanvasModulate" parent="." groups=["Darkness"]]
 visible = false
