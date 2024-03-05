@@ -21,6 +21,7 @@ shader_parameter/active = false
 shader_parameter/tint = Color(0.647059, 0.188235, 0.188235, 1)
 
 [sub_resource type="CanvasTexture" id="CanvasTexture_bahwe"]
+resource_local_to_scene = true
 
 [node name="Enemy" type="CharacterBody2D"]
 material = SubResource("CanvasItemMaterial_gharv")

@@ -14,4 +14,3 @@ func damage(attack: Attack):
 		if randHitstop > .75:
 			HitStopManager.hit_stop_short()
 		health.damage(attack)
-

@@ -33,6 +33,7 @@ func _on_exit_cryo_body_exited(body):
 		SoundManager.set_main_loop_parameter(SoundManager.MAIN_LOOP_EERIE)
 		get_tree().call_group("Cryo_Light", "turn_off")
 		get_tree().call_group("Trick_Light", "turn_on")
+		SoundManager.set_footstep_parameter("event:/footsteps_hallway")
 		if GlobalState.encounter1:
 			get_tree().call_group("Hallway_Light", "turn_on")
 
@@ -42,13 +43,19 @@ func _on_enter_cryo_body_exited(body):
 		SoundManager.set_main_loop_parameter(SoundManager.MAIN_LOOP_CURIOUS)
 		get_tree().call_group("Cryo_Light", "turn_on")
 		get_tree().call_group("Hallway_Light", "turn_off")
+		SoundManager.set_footstep_parameter("event:/footsteps")
 
 
 func _on_enter_cargo_body_exited(body):
 	if body is Player:
+		#if GlobalState.encounter2:
+			#SoundManager.set_main_loop_parameter(SoundManager.MAIN_LOOP_DRONE)
+		#else:
+			#SoundManager.stop_main_loop()
 		SoundManager.set_main_loop_parameter(SoundManager.MAIN_LOOP_DRONE)
 		get_tree().call_group("Cargo_Light", "turn_on")
 		get_tree().call_group("Hallway_Light", "turn_off")
+		SoundManager.set_footstep_parameter("event:/footsteps_cargo")
 
 
 func _on_exit_cargo_body_exited(body):
@@ -56,3 +63,30 @@ func _on_exit_cargo_body_exited(body):
 		SoundManager.set_main_loop_parameter(SoundManager.MAIN_LOOP_CURIOUS)
 		get_tree().call_group("Cargo_Light", "turn_off")
 		get_tree().call_group("Hallway_Light", "turn_on")
+		SoundManager.set_footstep_parameter("event:/footsteps_hallway")
+
+
+func _on_exit_shaft_body_exited(body):
+	if body is Player:
+		SoundManager.set_main_loop_parameter(SoundManager.MAIN_LOOP_CURIOUS)
+		get_tree().call_group("Cargo_Light", "turn_on")
+		SoundManager.set_footstep_parameter("event:/footsteps_cargo")
+
+
+func _on_enter_shaft_body_exited(body):
+	if body is Player:
+		SoundManager.set_main_loop_parameter(SoundManager.MAIN_LOOP_GARBLED)
+		get_tree().call_group("Cargo_Light", "turn_off")
+		SoundManager.set_footstep_parameter("event:/footsteps_metal")
+
+
+func _on_exit_medical_body_exited(body):
+	if body is Player:
+		SoundManager.set_main_loop_parameter(SoundManager.MAIN_LOOP_GARBLED)
+		SoundManager.set_footstep_parameter("event:/footsteps_metal")
+
+
+func _on_enter_medical_body_exited(body):
+	if body is Player:
+		SoundManager.set_main_loop_parameter(SoundManager.MAIN_LOOP_GARBLED)
+		SoundManager.set_footstep_parameter("event:/footsteps_medical")

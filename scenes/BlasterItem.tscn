@@ -1,0 +1,20 @@
+[gd_scene load_steps=6 format=3 uid="uid://bec2hndl7m2k3"]
+
+[ext_resource type="PackedScene" uid="uid://drc50lwybh48x" path="res://scenes/Item.tscn" id="1_efh1t"]
+[ext_resource type="Script" path="res://scripts/blasterItem.gd" id="2_h0xmh"]
+[ext_resource type="Texture2D" uid="uid://dnpv80q2kt3ai" path="res://art/item/Gun_Item.png" id="3_q24uk"]
+[ext_resource type="Resource" uid="uid://bup3er6te5xmf" path="res://art/item/blaster.tres" id="3_xkqfn"]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_0jqp6"]
+radius = 33.0151
+
+[node name="BlasterItem" instance=ExtResource("1_efh1t")]
+script = ExtResource("2_h0xmh")
+itemRes = ExtResource("3_xkqfn")
+action_name = "pick up"
+
+[node name="Sprite2D" parent="." index="0"]
+texture = ExtResource("3_q24uk")
+
+[node name="CollisionShape2D" parent="." index="1"]
+shape = SubResource("CircleShape2D_0jqp6")

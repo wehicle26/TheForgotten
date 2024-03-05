@@ -28,10 +28,13 @@ var current_stun_time
 var is_player_spotted = false
 var direction
 var next_path_position
+var red = Color(0.647, 0.188, 0.188)
+var white = Color(1, 1, 1)
 
 func kill(_splat_direction):
 	if is_in_group("Roach"):
-		sprite_2d.material.set_shader_parameter("active", false)
+		#sprite_2d.material.set_shader_parameter("active", false)
+		sprite_2d.modulate = white
 		gpu_particles_2d.amount = 64
 		gpu_particles_2d.emitting = true
 		animation_player.play("Death")
@@ -45,14 +48,16 @@ func damage():
 		gpu_particles_2d.emitting = true
 		gpu_particles_2d.process_material.direction = - Vector3(direction.x, direction.y, 0)
 		SoundManager.play_custom_sound(global_transform, "event:/roach_hit", 0.5)
-	sprite_2d.material.set_shader_parameter("active", true)
+	#sprite_2d.material.set_shader_parameter("active", true)
+	sprite_2d.modulate = red
 	var timer = get_tree().create_timer(0.5)
 	await timer.timeout
-	sprite_2d.material.set_shader_parameter("active", false)
-
+	#sprite_2d.material.set_shader_parameter("active", false)
+	sprite_2d.modulate = white
 
 func _ready():
-	sprite_2d.material.set_shader_parameter("active", false)
+	#sprite_2d.material.set_shader_parameter("active", false)
+	sprite_2d.modulate = white
 	line_of_sight.player_spotted.connect(_player_spotted)
 	SoundManager.initialize_enemy_sounds(self)
 

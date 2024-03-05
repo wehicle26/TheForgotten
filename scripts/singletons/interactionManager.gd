@@ -28,7 +28,7 @@ func _input(event):
 		if active_areas.size() > 0:
 			can_interact = false
 			label.hide()
-			if active_areas[0].action_name == "pick_up":
+			if active_areas[0].action_name == "pick up":
 				await active_areas[0].interact.call(player.inventory)
 			else:
 				await active_areas[0].interact.call()

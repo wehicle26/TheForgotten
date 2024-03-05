@@ -11,10 +11,10 @@ radius = 16.0312
 [node name="Crowbar" instance=ExtResource("1_lv1ju")]
 script = ExtResource("2_ts241")
 itemRes = ExtResource("2_tieya")
-action_name = "pick_up"
+action_name = "pick up"
 
-[node name="CollisionShape2D" parent="." index="0"]
-shape = SubResource("CircleShape2D_8dd3s")
-
-[node name="Sprite2D" parent="." index="1"]
+[node name="Sprite2D" parent="." index="0"]
 texture = ExtResource("2_taavo")
+
+[node name="CollisionShape2D" parent="." index="1"]
+shape = SubResource("CircleShape2D_8dd3s")

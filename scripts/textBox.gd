@@ -63,9 +63,9 @@ func _display_letter():
 		_:
 			letter_display_timer.start(letter_time)
 
-			var pitch = randf_range(1, 1.2)
+			var pitch = randf_range(.6, .8)
 			if text[letter_index] in ["a", "e", "i", "o", "u"]:
-				pitch += .1
+				pitch += .2
 
 			SoundManager.play_speech_sound(pitch)
 

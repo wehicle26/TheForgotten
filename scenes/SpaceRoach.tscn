@@ -143,6 +143,7 @@ z_index = 1
 
 [node name="Sprite2D" parent="." index="9"]
 texture_filter = 1
+use_parent_material = true
 texture = SubResource("CanvasTexture_x482n")
 hframes = 3
 vframes = 3

@@ -3,7 +3,6 @@ extends Sprite2D
 class_name Light
 const FLASHLIGHT_SWITCH_ON = preload("res://sounds/FlashlightSwitchOn_SFXB.929.wav")
 const FLASHLIGHT_SWITCH_OFF = preload("res://sounds/FlashlightSwitchOff_SFXB._1.wav")
-@onready var audio_stream_player_2d = $AudioStreamPlayer2D
 @onready var flicker_timer = $FlickerTimer
 @onready var sprite_light = $SpriteLight
 @onready var shadow_light = $ShadowLight
@@ -12,26 +11,27 @@ const FLASHLIGHT_SWITCH_OFF = preload("res://sounds/FlashlightSwitchOff_SFXB._1.
 @export var flicker_factor = 1.0
 @export var energy_factor = 1.0
 @export var height = 25
-@export var light_offset = 0
+@export var light_offset = 140
 @export var battery: Battery
 
 signal flashlight_toggle
 
 
 func _ready():
+	if get_parent() is Player:
+		light_offset = 140
+		rotation = -PI/2
+		height = 30
+		position.y = 30
+	
+	sprite_light.offset.x = light_offset
+	shadow_light.offset.x = light_offset
 	sprite_light.height = height
 	shadow_light.height = height
 	sprite_light.texture = light_texture
 	shadow_light.texture = light_texture
 	flicker_timer.wait_time = 1 + flicker_factor
 	flicker_timer.start()
-	if get_parent() is Player:
-		sprite_light.offset.x = 140
-		shadow_light.offset.x = 140
-	else:
-		sprite_light.offset.x = light_offset
-		shadow_light.offset.x = light_offset
-		#flip_h = true
 
 
 func turn_off():
@@ -44,14 +44,13 @@ func turn_on():
 
 func toggle():
 	if visible:
-		audio_stream_player_2d.set_stream(FLASHLIGHT_SWITCH_OFF)
+		SoundManager.play_custom_sound(global_transform, "event:/flashlight_off", 0.4)
 		flashlight_toggle.emit(false)
 	else:
-		audio_stream_player_2d.set_stream(FLASHLIGHT_SWITCH_ON)
+		SoundManager.play_custom_sound(global_transform, "event:/flashlight_on", 0.4)
 		flashlight_toggle.emit(true)
 		flicker_timer.start()
 
-	audio_stream_player_2d.play()
 	visible = not visible
 
 

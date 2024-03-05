@@ -1,13 +1,14 @@
-[gd_scene load_steps=9 format=3 uid="uid://clo08muxcwc4o"]
+[gd_scene load_steps=14 format=3 uid="uid://clo08muxcwc4o"]
 
 [ext_resource type="PackedScene" uid="uid://duwl5sldekn2r" path="res://scenes/Enemy.tscn" id="1_cgsu8"]
-[ext_resource type="Script" path="res://scripts/Blob.gd" id="2_s3aty"]
+[ext_resource type="Script" path="res://scripts/blob.gd" id="2_kx77r"]
 [ext_resource type="Texture2D" uid="uid://bfqnlwh3hf87w" path="res://art/enemy/Blob.png" id="3_m6pju"]
 [ext_resource type="Texture2D" uid="uid://c1p8venh7hp24" path="res://art/enemy/Blob_n.png" id="4_bh6qs"]
-
-[sub_resource type="CanvasTexture" id="CanvasTexture_7j6hq"]
-diffuse_texture = ExtResource("3_m6pju")
-normal_texture = ExtResource("4_bh6qs")
+[ext_resource type="PackedScene" uid="uid://bvxg5kctr4jyl" path="res://scenes/StateMachine.tscn" id="5_mmqxe"]
+[ext_resource type="Script" path="res://scripts/State/enemyIdle.gd" id="6_25acn"]
+[ext_resource type="Script" path="res://scripts/State/enemyFollow.gd" id="7_w0sou"]
+[ext_resource type="Script" path="res://scripts/State/enemyAttack.gd" id="8_q5wek"]
+[ext_resource type="Script" path="res://scripts/State/enemyRetreat.gd" id="9_fa6l7"]
 
 [sub_resource type="Animation" id="Animation_wa6lq"]
 length = 0.001
@@ -47,16 +48,38 @@ _data = {
 "walk": SubResource("Animation_ikq1x")
 }
 
+[sub_resource type="CanvasTexture" id="CanvasTexture_rdyou"]
+resource_local_to_scene = true
+diffuse_texture = ExtResource("3_m6pju")
+normal_texture = ExtResource("4_bh6qs")
+
 [node name="Blob" groups=["Blob"] instance=ExtResource("1_cgsu8")]
-script = ExtResource("2_s3aty")
+script = ExtResource("2_kx77r")
 
-[node name="Sprite2D" type="Sprite2D" parent="." index="8"]
-use_parent_material = true
-texture = SubResource("CanvasTexture_7j6hq")
-hframes = 4
-
-[node name="AnimationPlayer" type="AnimationPlayer" parent="." index="9"]
+[node name="AnimationPlayer" type="AnimationPlayer" parent="." index="8"]
 libraries = {
 "": SubResource("AnimationLibrary_2v6p4")
 }
 autoplay = "walk"
+
+[node name="Sprite2D" parent="." index="9"]
+texture = SubResource("CanvasTexture_rdyou")
+hframes = 4
+
+[node name="StateMachine" parent="." index="10" instance=ExtResource("5_mmqxe")]
+
+[node name="Idle" type="Node" parent="StateMachine" index="0" node_paths=PackedStringArray("enemy")]
+script = ExtResource("6_25acn")
+enemy = NodePath("../..")
+
+[node name="Follow" type="Node" parent="StateMachine" index="1" node_paths=PackedStringArray("enemy")]
+script = ExtResource("7_w0sou")
+enemy = NodePath("../..")
+
+[node name="Attack" type="Node" parent="StateMachine" index="2" node_paths=PackedStringArray("enemy")]
+script = ExtResource("8_q5wek")
+enemy = NodePath("../..")
+
+[node name="Retreat" type="Node" parent="StateMachine" index="3" node_paths=PackedStringArray("enemy")]
+script = ExtResource("9_fa6l7")
+enemy = NodePath("../..")

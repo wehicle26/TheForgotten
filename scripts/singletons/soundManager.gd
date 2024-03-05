@@ -40,6 +40,11 @@ func set_main_loop_parameter(loopLevel):
 	FmodServer.set_global_parameter_by_name("mainLoopLevel", loopLevel)
 
 
+func set_footstep_parameter(param):
+	footstep_sound = FmodServer.create_event_instance(param)
+	footstep_sound.set_volume(.4)
+
+
 func initialize_player_sounds(player: Player):
 	FmodServer.add_listener(0, player)
 	footstep_sound = FmodServer.create_event_instance("event:/footsteps")

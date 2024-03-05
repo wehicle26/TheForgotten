@@ -6,12 +6,14 @@ signal healthChanged
 signal freeze
 signal unfreeze
 
+@export var attack_damage = 1
 @export var walk_speed = 65
 @export var run_speed = 85
 @export var inventory: Inventory
 @export var swinging: bool = false
 @onready var hitbox = $Hitbox
 @onready var idle_timer = $IdleTimer
+@onready var player_camera = $PlayerCamera
 
 @onready var animation_player = $AnimationPlayer
 #@onready var flashlight = $Flashlight
@@ -22,6 +24,7 @@ signal unfreeze
 @onready var max_Health: int = health.max_health
 
 const CROSSHAIR_004 = preload("res://art/player/crosshair004.png")
+var FlashlightScene: PackedScene = preload("res://scenes/Flashlight.tscn")
 
 var collision: bool = false
 var speed = 0
@@ -30,11 +33,10 @@ var isPlaying = true
 var input_dir: Vector2
 var has_gun: bool = false
 var current_weapon = "crowbar"
-var attack_damage = 1
 var knockback_force = 500
 var attack_position = 0
 var stun_time = .25
-
+var flashlight: Light
 
 func _ready():
 	#gun.get_node("ArmTimer").timeout.connect(_lower_arm)
@@ -97,15 +99,17 @@ func _input(event):
 	#if event.is_action_pressed("5"):
 	#gun.num_bullets = 5
 	if event.is_action_pressed("flashlight_toggle") and inventory.flashlight:
-		pass
-		#flashlight.toggle()
+		if not is_instance_valid(flashlight):
+			flashlight = FlashlightScene.instantiate()
+			add_child(flashlight)
+		flashlight.toggle()
 
 
 func get_input():
 	#if not swinging:
 	input_dir = Input.get_vector("move_left", "move_right", "move_up", "move_down")
 	velocity = input_dir * speed + knockback
-	if Input.is_action_pressed("shoot") and has_gun:
+	if Input.is_action_pressed("shoot") and has_gun and current_weapon == "blaster":
 		pass
 		#gun.fire_gun()
 	return input_dir
@@ -132,3 +136,5 @@ func _on_crowbar_hitbox_area_entered(area):
 		attack.attack_position = global_position
 		attack.stun_time = stun_time
 		area.damage(attack)
+	if area is Hitbox and area.get_parent() is BreakableDoor:
+		area.get_parent().hit(attack_damage)

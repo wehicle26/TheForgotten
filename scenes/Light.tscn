@@ -1,9 +1,8 @@
-[gd_scene load_steps=6 format=3 uid="uid://ch0016cku2p02"]
+[gd_scene load_steps=5 format=3 uid="uid://ch0016cku2p02"]
 
 [ext_resource type="Script" path="res://scripts/light.gd" id="1_b7ajr"]
 [ext_resource type="Texture2D" uid="uid://del2om5wttw3a" path="res://art/environment/lights/wall_light3.png" id="1_njchp"]
 [ext_resource type="Texture2D" uid="uid://cugrvpv4kw027" path="res://art/environment/lights/wall_light3_n.png" id="2_vy16v"]
-[ext_resource type="AudioStream" uid="uid://b1mfv1sxpq7ue" path="res://sounds/FlashlightSwitchOn_SFXB.929.wav" id="3_itpbj"]
 
 [sub_resource type="CanvasTexture" id="CanvasTexture_1cd5k"]
 diffuse_texture = ExtResource("1_njchp")
@@ -15,7 +14,7 @@ texture_filter = 1
 texture = SubResource("CanvasTexture_1cd5k")
 script = ExtResource("1_b7ajr")
 flicker_factor = 3.0
-height = 75
+height = 50
 metadata/_aseprite_wizard_config_ = {
 "i_mode": 1,
 "keep_anim_length": false,
@@ -37,9 +36,6 @@ offset_right = -128.0
 offset_bottom = -72.0004
 scale = Vector2(8.76, 5.52)
 color = Color(0.196078, 0.196078, 0.196078, 1)
-
-[node name="AudioStreamPlayer2D" type="AudioStreamPlayer2D" parent="."]
-stream = ExtResource("3_itpbj")
 
 [node name="FlickerTimer" type="Timer" parent="."]
 

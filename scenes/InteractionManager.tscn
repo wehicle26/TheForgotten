@@ -1,13 +1,18 @@
-[gd_scene load_steps=3 format=3 uid="uid://63dt8eomyfuf"]
+[gd_scene load_steps=4 format=3 uid="uid://63dt8eomyfuf"]
 
 [ext_resource type="Script" path="res://scripts/singletons/interactionManager.gd" id="1_7lhk6"]
 [ext_resource type="FontFile" uid="uid://cj8rhodwww8xo" path="res://ui/Millennia-Regular(1).otf" id="2_5myjq"]
 
+[sub_resource type="CanvasItemMaterial" id="CanvasItemMaterial_7rhak"]
+light_mode = 1
+
 [node name="InteractionManager" type="Node2D"]
+material = SubResource("CanvasItemMaterial_7rhak")
 script = ExtResource("1_7lhk6")
 
 [node name="Label" type="Label" parent="."]
 z_index = 20
+use_parent_material = true
 anchors_preset = 5
 anchor_left = 0.5
 anchor_right = 0.5

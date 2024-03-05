@@ -4,6 +4,7 @@ class_name Inventory
 
 var crowbar = false
 var flashlight = false
+var blaster = false
 var itemArray: Array[bool]
 
 
@@ -13,3 +14,5 @@ func insert(item: InventoryItem):
 		print("crowbar added")
 	if item.name == "flashlight":
 		flashlight = true
+	if item.name == "blaster":
+		blaster = true

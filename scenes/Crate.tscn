@@ -3,9 +3,6 @@
 [ext_resource type="Texture2D" uid="uid://cbk03a7tvn101" path="res://art/environment/crate.png" id="1_01s4h"]
 [ext_resource type="Texture2D" uid="uid://bo8axagyr3elc" path="res://art/environment/crate_n.png" id="2_mgnir"]
 
-[sub_resource type="OccluderPolygon2D" id="OccluderPolygon2D_usheh"]
-polygon = PackedVector2Array(-14, 14, -14, -14, 14, -14, 14, 14)
-
 [sub_resource type="CanvasTexture" id="CanvasTexture_4yete"]
 diffuse_texture = ExtResource("1_01s4h")
 normal_texture = ExtResource("2_mgnir")
@@ -13,11 +10,11 @@ normal_texture = ExtResource("2_mgnir")
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_r8d6l"]
 size = Vector2(28, 28)
 
+[sub_resource type="OccluderPolygon2D" id="OccluderPolygon2D_usheh"]
+polygon = PackedVector2Array(-14, 14, -14, -14, 14, -14, 14, 14)
+
 [node name="Crate" type="StaticBody2D"]
 z_index = 5
-
-[node name="LightOccluder2D" type="LightOccluder2D" parent="."]
-occluder = SubResource("OccluderPolygon2D_usheh")
 
 [node name="Sprite2D" type="Sprite2D" parent="."]
 texture_filter = 1
@@ -30,10 +27,13 @@ metadata/_aseprite_wizard_config_ = {
 "o_folder": "res://art/environment",
 "o_name": "crate_n",
 "only_visible": true,
-"op_exp": false,
+"op_exp": true,
 "player": "",
 "source": "res://art/environment/crate.aseprite"
 }
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 shape = SubResource("RectangleShape2D_r8d6l")
+
+[node name="LightOccluder2D" type="LightOccluder2D" parent="."]
+occluder = SubResource("OccluderPolygon2D_usheh")

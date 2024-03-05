@@ -1,0 +1,38 @@
+[gd_scene load_steps=8 format=3 uid="uid://ds2pj4x60dosv"]
+
+[ext_resource type="PackedScene" uid="uid://drc50lwybh48x" path="res://scenes/Item.tscn" id="1_c4bdt"]
+[ext_resource type="Script" path="res://scripts/flashlightItem.gd" id="2_2skfo"]
+[ext_resource type="Resource" uid="uid://1lrd3lhwdsqs" path="res://art/item/flashlight.tres" id="3_jkfn8"]
+[ext_resource type="Texture2D" uid="uid://drimqaneif6x" path="res://art/item/flashlight.png" id="4_o3aiy"]
+[ext_resource type="Texture2D" uid="uid://dky6veha46isv" path="res://art/item/flashlight_n.png" id="5_8cols"]
+
+[sub_resource type="CanvasTexture" id="CanvasTexture_rhc4o"]
+diffuse_texture = ExtResource("4_o3aiy")
+normal_texture = ExtResource("5_8cols")
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_8giab"]
+radius = 21.0238
+
+[node name="FlashlightItem" instance=ExtResource("1_c4bdt")]
+script = ExtResource("2_2skfo")
+itemRes = ExtResource("3_jkfn8")
+action_name = "pick up"
+
+[node name="Sprite2D" parent="." index="0"]
+texture_filter = 1
+texture = SubResource("CanvasTexture_rhc4o")
+metadata/_aseprite_wizard_config_ = {
+"i_mode": 1,
+"keep_anim_length": false,
+"layer": "",
+"o_ex_p": "",
+"o_folder": "res://art/item",
+"o_name": "flashlight_n",
+"only_visible": true,
+"op_exp": false,
+"player": "",
+"source": "res://art/item/Flashlight.aseprite"
+}
+
+[node name="CollisionShape2D" parent="." index="1"]
+shape = SubResource("CircleShape2D_8giab")

@@ -1,4 +1,4 @@
-[gd_scene load_steps=47 format=3 uid="uid://blhmkefans43h"]
+[gd_scene load_steps=49 format=3 uid="uid://blhmkefans43h"]
 
 [ext_resource type="Script" path="res://scripts/player.gd" id="1_ucx17"]
 [ext_resource type="Texture2D" uid="uid://bvrqydcwjh4ma" path="res://art/player/Spaceman_old.png" id="2_5f2j7"]
@@ -25,7 +25,7 @@ polygon = PackedVector2Array(-7, 0, -7, 2, -6, 2, -6, 4, -5, 4, -5, 5, -4, 5, -4
 _data = [Vector2(0, 1), 0.0, 0.0, 0, 0, Vector2(1, 0), 0.0, 0.0, 0, 0]
 point_count = 2
 
-[sub_resource type="CurveTexture" id="CurveTexture_5tuao"]
+[sub_resource type="CurveTexture" id="CurveTexture_7qh22"]
 curve = SubResource("Curve_tkpw3")
 
 [sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_1rmc4"]
@@ -41,7 +41,14 @@ gravity = Vector3(0, 0, 0)
 damping_min = 25.0
 damping_max = 50.0
 color = Color(0.505882, 0.592157, 0.588235, 1)
-alpha_curve = SubResource("CurveTexture_5tuao")
+alpha_curve = SubResource("CurveTexture_7qh22")
+
+[sub_resource type="Curve" id="Curve_nfdls"]
+_data = [Vector2(0, 1), 0.0, 0.0, 0, 0, Vector2(1, 0), 0.0, 0.0, 0, 0]
+point_count = 2
+
+[sub_resource type="CurveTexture" id="CurveTexture_5tuao"]
+curve = SubResource("Curve_nfdls")
 
 [sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_0cq5t"]
 resource_local_to_scene = true
@@ -144,7 +151,6 @@ normal_texture = ExtResource("10_skw3n")
 
 [sub_resource type="Animation" id="Animation_yvj8y"]
 length = 1.45
-loop_mode = 1
 tracks/0/type = "value"
 tracks/0/imported = false
 tracks/0/enabled = true
@@ -219,10 +225,21 @@ tracks/5/keys = {
 "update": 1,
 "values": [Vector2(0, 0), Vector2(0, 1), Vector2(-1, 1), Vector2(-7, 5), Vector2(-6, -6), Vector2(-5, -5), Vector2(-3, -2), Vector2(0, 0)]
 }
+tracks/6/type = "value"
+tracks/6/imported = false
+tracks/6/enabled = true
+tracks/6/path = NodePath(".:attack_damage")
+tracks/6/interp = 1
+tracks/6/loop_wrap = true
+tracks/6/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [2]
+}
 
 [sub_resource type="Animation" id="Animation_5gvdh"]
 length = 0.6
-loop_mode = 1
 step = 0.05
 tracks/0/type = "value"
 tracks/0/imported = false
@@ -231,7 +248,7 @@ tracks/0/path = NodePath(".:swinging")
 tracks/0/interp = 1
 tracks/0/loop_wrap = true
 tracks/0/keys = {
-"times": PackedFloat32Array(0, 0.55),
+"times": PackedFloat32Array(0, 0.45),
 "transitions": PackedFloat32Array(1, 1),
 "update": 1,
 "values": [true, false]
@@ -311,6 +328,18 @@ tracks/6/keys = {
 "transitions": PackedFloat32Array(1, 1, 1),
 "update": 1,
 "values": [Vector2(0, 0), Vector2(0, -1), Vector2(0, 0)]
+}
+tracks/7/type = "value"
+tracks/7/imported = false
+tracks/7/enabled = true
+tracks/7/path = NodePath(".:attack_damage")
+tracks/7/interp = 1
+tracks/7/loop_wrap = true
+tracks/7/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [1]
 }
 
 [sub_resource type="Animation" id="Animation_5jxr0"]
@@ -474,7 +503,6 @@ tracks/3/keys = {
 
 [sub_resource type="Animation" id="Animation_gyhls"]
 length = 0.1
-loop_mode = 1
 tracks/0/type = "value"
 tracks/0/imported = false
 tracks/0/enabled = true
@@ -559,6 +587,18 @@ tracks/6/keys = {
 "update": 1,
 "values": [Vector2(0, 0)]
 }
+tracks/7/type = "value"
+tracks/7/imported = false
+tracks/7/enabled = true
+tracks/7/path = NodePath(".:swinging")
+tracks/7/interp = 1
+tracks/7/loop_wrap = true
+tracks/7/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [false]
+}
 
 [sub_resource type="Animation" id="Animation_sdj05"]
 length = 1.2
@@ -637,7 +677,7 @@ tracks/5/loop_wrap = true
 tracks/5/keys = {
 "times": PackedFloat32Array(0, 0.1, 0.2, 0.3, 0.4, 0.5, 0.6, 0.7, 0.8, 0.9, 1, 1.1, 1.2),
 "transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1),
-"update": 0,
+"update": 1,
 "values": [Vector2(0, 0), Vector2(1, -1), Vector2(0, -1), Vector2(0, 0), Vector2(0, -1), Vector2(-1, 0), Vector2(0, 0), Vector2(-1, -1), Vector2(0, -1), Vector2(0, 0), Vector2(0, -1), Vector2(1, 0), Vector2(1, 0)]
 }
 
@@ -677,7 +717,7 @@ tracks/2/loop_wrap = true
 tracks/2/keys = {
 "times": PackedFloat32Array(0),
 "transitions": PackedFloat32Array(1),
-"update": 0,
+"update": 1,
 "values": [Vector2(1, 0)]
 }
 
@@ -848,9 +888,11 @@ collision_mask = 3
 motion_mode = 1
 wall_min_slide_angle = 0.0
 script = ExtResource("1_ucx17")
+attack_damage = 2
 
 [node name="LightOccluder2D" type="LightOccluder2D" parent="."]
 occluder = SubResource("OccluderPolygon2D_1so1u")
+occluder_light_mask = 16
 
 [node name="RightFoot" type="GPUParticles2D" parent="."]
 emitting = false
@@ -888,7 +930,7 @@ offset_top = -114.0
 offset_right = -137.0
 offset_bottom = -74.0
 scale = Vector2(8.76, 5.52)
-color = Color(0.160784, 0.223529, 0.219608, 1)
+color = Color(0.027451, 0.0470588, 0.0470588, 1)
 
 [node name="PlayerCamera" type="Camera2D" parent="."]
 script = ExtResource("5_tm3ug")
