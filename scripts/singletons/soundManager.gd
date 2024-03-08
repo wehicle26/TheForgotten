@@ -85,6 +85,7 @@ func inittialize_speech_sound(speaker):
 	speech_sound.set_2d_attributes(speaker.global_transform)
 	speech_sound.set_volume(.2)
 
+
 func initialize_cryo_machine_sound(machine):
 	cryo_machine_sound = FmodServer.create_event_instance("event:/cryo_machine")
 	cryo_machine_sound.set_2d_attributes(machine.global_transform)
@@ -114,10 +115,11 @@ func stop_main_loop():
 	event.stop(1)
 
 
-func play_custom_sound(transform, custom_event, volume):
+func play_custom_sound(transform, custom_event, volume, pitch: float = 1):
 	var new_event = FmodServer.create_event_instance(custom_event)
 	new_event.set_2d_attributes(transform)
 	new_event.set_volume(volume)
+	new_event.set_pitch(pitch)
 	new_event.start()
 
 

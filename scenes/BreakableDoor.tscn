@@ -76,6 +76,7 @@ metadata/_aseprite_wizard_config_ = {
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 position = Vector2(-2, 0)
 shape = SubResource("RectangleShape2D_ymuu6")
+disabled = true
 
 [node name="Hitbox" parent="." instance=ExtResource("3_dtg6w")]
 

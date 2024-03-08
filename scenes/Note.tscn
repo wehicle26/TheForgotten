@@ -1,0 +1,46 @@
+[gd_scene load_steps=5 format=3 uid="uid://c1ks08dpslaga"]
+
+[ext_resource type="PackedScene" uid="uid://drc50lwybh48x" path="res://scenes/Item.tscn" id="1_ixv0v"]
+[ext_resource type="Script" path="res://scripts/note.gd" id="2_pd84y"]
+[ext_resource type="Texture2D" uid="uid://bcxi4kbiyqpm0" path="res://art/item/Crumpled_Note.png" id="3_40st0"]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_l2014"]
+radius = 16.0
+
+[node name="Note" instance=ExtResource("1_ixv0v")]
+script = ExtResource("2_pd84y")
+action_name = "read"
+
+[node name="Sprite2D" parent="." index="0"]
+metadata/_aseprite_wizard_config_ = {
+"i_mode": -1,
+"keep_anim_length": false,
+"layer": "",
+"o_ex_p": "",
+"o_folder": "",
+"o_name": "",
+"only_visible": true,
+"op_exp": true,
+"player": "",
+"source": ""
+}
+
+[node name="CollisionShape2D" parent="." index="1"]
+shape = SubResource("CircleShape2D_l2014")
+
+[node name="CanvasLayer" type="CanvasLayer" parent="." index="2"]
+
+[node name="CenterContainer" type="CenterContainer" parent="CanvasLayer" index="0"]
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="Control" type="Control" parent="CanvasLayer/CenterContainer" index="0"]
+layout_mode = 2
+
+[node name="Sprite2D" type="Sprite2D" parent="CanvasLayer/CenterContainer/Control" index="0"]
+visible = false
+scale = Vector2(0.073741, 0.073741)
+texture = ExtResource("3_40st0")

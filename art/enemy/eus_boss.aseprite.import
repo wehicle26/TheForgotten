@@ -1,0 +1,14 @@
+[remap]
+
+importer="aseprite_wizard.plugin.noop"
+type="PackedDataContainer"
+uid="uid://b355bvuxjg7co"
+path="res://.godot/imported/eus_boss.aseprite-10703098c333ce885085bbf995663928.res"
+
+[deps]
+
+source_file="res://art/enemy/eus_boss.aseprite"
+dest_files=["res://.godot/imported/eus_boss.aseprite-10703098c333ce885085bbf995663928.res"]
+
+[params]
+

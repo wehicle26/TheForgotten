@@ -150,13 +150,13 @@ light_texture = ExtResource("5_ll7fi")
 energy_factor = 7.0
 light_offset = 300
 
-[node name="CollisionShape2D" parent="." index="2"]
-visible = false
-
-[node name="Sprite2D" parent="." index="3"]
+[node name="Sprite2D" parent="." index="2"]
 visible = false
 texture = SubResource("CanvasTexture_bl1vw")
 hframes = 1
+
+[node name="CollisionShape2D" parent="." index="3"]
+visible = false
 
 [node name="CanvasLayer" type="CanvasLayer" parent="." index="4"]
 visible = false

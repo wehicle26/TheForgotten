@@ -5,6 +5,7 @@ extends MarginContainer
 #@onready var label = $MarginContainer/RichTextLabel
 @onready var next_indicator = $NinePatchRect/Control2/NextIndicator
 
+
 const MAX_WIDTH = 256
 
 var shake_text = "[shake rate=20.0 level=5 connected=1]%s[/shake]"
@@ -66,7 +67,7 @@ func _display_letter():
 			var pitch = randf_range(.6, .8)
 			if text[letter_index] in ["a", "e", "i", "o", "u"]:
 				pitch += .2
-
+			
 			SoundManager.play_speech_sound(pitch)
 
 

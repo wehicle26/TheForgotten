@@ -1,4 +1,4 @@
-[gd_scene load_steps=37 format=3 uid="uid://b71gis6vgkvkg"]
+[gd_scene load_steps=43 format=3 uid="uid://b71gis6vgkvkg"]
 
 [ext_resource type="Script" path="res://scripts/level.gd" id="1_6u7sh"]
 [ext_resource type="PackedScene" uid="uid://bob88w6sefucj" path="res://scenes/Environment.tscn" id="1_halep"]
@@ -6,6 +6,7 @@
 [ext_resource type="PackedScene" uid="uid://c7u77qm7btd2s" path="res://scenes/CryoBed.tscn" id="4_0fems"]
 [ext_resource type="PackedScene" uid="uid://ch0016cku2p02" path="res://scenes/Light.tscn" id="4_7cj7q"]
 [ext_resource type="PackedScene" uid="uid://ds2pj4x60dosv" path="res://art/item/FlashlightItem.tscn" id="5_6ojie"]
+[ext_resource type="PackedScene" uid="uid://bec2hndl7m2k3" path="res://scenes/BlasterItem.tscn" id="5_bmbqo"]
 [ext_resource type="Texture2D" uid="uid://bs1j2sjkfkrod" path="res://art/environment/lights/wall light2.png" id="5_wy17f"]
 [ext_resource type="Texture2D" uid="uid://cp2ay5o5a8tbb" path="res://art/environment/lights/LightCone_resized.png" id="6_g4f4m"]
 [ext_resource type="PackedScene" uid="uid://dgq8wmrdicq3d" path="res://scenes/Crate.tscn" id="8_74hus"]
@@ -13,12 +14,15 @@
 [ext_resource type="PackedScene" uid="uid://cpu2pabqnow4x" path="res://scenes/BreakableDoor.tscn" id="10_3i61v"]
 [ext_resource type="PackedScene" uid="uid://8bdjhnsaqthg" path="res://scenes/hallway_dead_guy.tscn" id="10_p5tb0"]
 [ext_resource type="PackedScene" uid="uid://cuee4phykn8mk" path="res://scenes/PowerCore.tscn" id="10_quu3m"]
+[ext_resource type="PackedScene" uid="uid://c1ks08dpslaga" path="res://scenes/Note.tscn" id="12_ylmx7"]
 [ext_resource type="Shader" path="res://shaders/grain.gdshader" id="15_ui16x"]
 [ext_resource type="PackedScene" uid="uid://d2eli84d2uqkm" path="res://scenes/InsaneCrew.tscn" id="16_ee52r"]
 [ext_resource type="PackedScene" uid="uid://bv8yf3ytm2yc1" path="res://scenes/CryoMachine.tscn" id="16_idydh"]
 [ext_resource type="PackedScene" uid="uid://bo3acd3y8ucuy" path="res://scenes/Eus.tscn" id="17_7u0ol"]
 [ext_resource type="Shader" path="res://shaders/space.gdshader" id="18_ghgnd"]
 [ext_resource type="PackedScene" uid="uid://clo08muxcwc4o" path="res://scenes/Blob.tscn" id="19_igytc"]
+[ext_resource type="PackedScene" uid="uid://bb6pi7b5qrh6t" path="res://scenes/EusBoss.tscn" id="19_sumik"]
+[ext_resource type="Shader" path="res://shaders/glitch.gdshader" id="22_dqfq6"]
 
 [sub_resource type="SegmentShape2D" id="SegmentShape2D_xjm62"]
 resource_local_to_scene = true
@@ -29,6 +33,59 @@ b = Vector2(50, 0)
 
 [sub_resource type="SegmentShape2D" id="SegmentShape2D_2sq0y"]
 b = Vector2(50, 0)
+
+[sub_resource type="NavigationPolygon" id="NavigationPolygon_x2io3"]
+vertices = PackedVector2Array(462, 156, 462, 302, 388, 302, 274, 188, 274, 50, 388, 50, 526, 92, 434, 4, 526, -92, 494, -124, 434, -262, 494, -262)
+polygons = Array[PackedInt32Array]([PackedInt32Array(0, 1, 2, 3, 4, 5), PackedInt32Array(6, 0, 5, 7), PackedInt32Array(8, 6, 7, 9), PackedInt32Array(7, 10, 11, 9)])
+outlines = Array[PackedVector2Array]([PackedVector2Array(264, 40, 264, 192, 384, 312, 472, 312, 472, 160, 536, 96, 536, -96, 504, -128, 504, -272, 424, -272, 424, 0, 384, 40)])
+source_geometry_group_name = &"navigation_polygon_source_group"
+
+[sub_resource type="NavigationPolygon" id="NavigationPolygon_h07k4"]
+resource_local_to_scene = true
+vertices = PackedVector2Array(74, -134, 139, -51, 131, -43, 52, -49, 50, -59, 174, 22, 164, 22, 167, 19, -60, -142, -42, -160, -42, -134, -70, -74, -22, 43, -22, -5, 24, 25, 24, 73, 129, -34, 89, -31, 50, -39, 220, 206, 197, 206, 197, 168, 199, 168, 238, 188, 238, -174, 199, 90, 173, 90, 173, 70, 174, 70, 169, 10, 169, -34, 167, -43, 74, -174, 159, -51, 149, -53, 42, -67, 33, -69, 9, -69, 9, -73, -22, -73, -22, -74, -78, -142, -78, -124, -92, 110, -92, -110, -70, -26, -39, -26, -39, -25, -70, -5, 9, -25, 9, -29, 33, -29, 129, -31, 89, -5, 59, -5, 42, -31, 59, 25, -70, 25, -73, 25, 24, 85, -25, 73, -25, 43, 26, 85, 26, 73, 24, 133, 56, 133, 56, 136, 59, 136, 59, 148, 57, 148, 57, 196, 59, 196, 59, 206, -22, 206, -22, 188, -110, 110, -110, -110, -73, 73)
+polygons = Array[PackedInt32Array]([PackedInt32Array(0, 1, 2, 3, 4), PackedInt32Array(5, 6, 7), PackedInt32Array(8, 9, 10, 11), PackedInt32Array(12, 13, 14, 15), PackedInt32Array(3, 2, 16, 17, 18), PackedInt32Array(19, 20, 21, 22, 23), PackedInt32Array(24, 23, 22, 25), PackedInt32Array(25, 26, 27, 28), PackedInt32Array(24, 25, 28, 5), PackedInt32Array(24, 5, 7, 29), PackedInt32Array(24, 29, 30), PackedInt32Array(24, 30, 31), PackedInt32Array(32, 24, 31, 33), PackedInt32Array(0, 32, 33, 34), PackedInt32Array(0, 34, 1), PackedInt32Array(0, 4, 35), PackedInt32Array(10, 0, 35, 36), PackedInt32Array(36, 37, 38), PackedInt32Array(10, 36, 38), PackedInt32Array(38, 39, 40), PackedInt32Array(10, 38, 40), PackedInt32Array(10, 40, 11), PackedInt32Array(41, 8, 11, 42), PackedInt32Array(43, 44, 42, 11, 45), PackedInt32Array(45, 46, 47, 48), PackedInt32Array(49, 50, 51), PackedInt32Array(16, 52, 17), PackedInt32Array(18, 17, 53, 54, 55), PackedInt32Array(51, 55, 54, 56, 14, 13), PackedInt32Array(48, 57, 58), PackedInt32Array(59, 60, 61, 12, 15, 62), PackedInt32Array(15, 63, 62), PackedInt32Array(64, 65, 66), PackedInt32Array(66, 67, 68, 69), PackedInt32Array(70, 71, 72, 73), PackedInt32Array(69, 70, 73, 74, 64, 66), PackedInt32Array(43, 75, 76, 44), PackedInt32Array(49, 51, 13), PackedInt32Array(47, 49, 13, 48), PackedInt32Array(43, 45, 48, 58), PackedInt32Array(43, 58, 77), PackedInt32Array(64, 74, 43, 77, 60, 59)])
+outlines = Array[PackedVector2Array]([PackedVector2Array(-120, 120, -96, 120, -32, 192, -32, 216, 224, 216, 248, 192, 248, -48, 248, -184, 192, -184, 64, -184, 64, -144, -32, -144, -32, -184, -64, -152, -88, -152, -88, -128, -96, -120, -120, -120)])
+source_geometry_mode = 1
+source_geometry_group_name = &"navigation_polygon_source_group"
+
+[sub_resource type="NavigationPolygon" id="NavigationPolygon_46qe0"]
+vertices = PackedVector2Array(-266, 502, -502, 502, -502, 458, -266, 458)
+polygons = Array[PackedInt32Array]([PackedInt32Array(0, 1, 2, 3)])
+outlines = Array[PackedVector2Array]([PackedVector2Array(-512, 512, -256, 512, -256, 448, -512, 448)])
+source_geometry_group_name = &"navigation_polygon_source_group"
+
+[sub_resource type="NavigationPolygon" id="NavigationPolygon_rqb6j"]
+vertices = PackedVector2Array(-266, 438, -502, 438, -502, 298, -266, 298)
+polygons = Array[PackedInt32Array]([PackedInt32Array(0, 1, 2, 3)])
+outlines = Array[PackedVector2Array]([PackedVector2Array(-512, 448, -256, 448, -256, 288, -512, 288)])
+source_geometry_group_name = &"navigation_polygon_source_group"
+
+[sub_resource type="NavigationPolygon" id="NavigationPolygon_q5l1j"]
+vertices = PackedVector2Array(-266, 278, -494, 278, -494, 164, -444, 114, -266, 114)
+polygons = Array[PackedInt32Array]([PackedInt32Array(0, 1, 2, 3, 4)])
+outlines = Array[PackedVector2Array]([PackedVector2Array(-256, 288, -256, 104, -448, 104, -504, 160, -504, 288)])
+source_geometry_group_name = &"navigation_polygon_source_group"
+
+[sub_resource type="NavigationPolygon" id="NavigationPolygon_txd4j"]
+vertices = PackedVector2Array(-1130, 116, -1220, 206, -1238, 206, -1238, 18, -1130, 18)
+polygons = Array[PackedInt32Array]([PackedInt32Array(0, 1, 2, 3, 4)])
+outlines = Array[PackedVector2Array]([PackedVector2Array(-1248, 8, -1248, 216, -1216, 216, -1120, 120, -1120, 8)])
+source_geometry_group_name = &"navigation_polygon_source_group"
+
+[sub_resource type="NavigationPolygon" id="NavigationPolygon_ar3qy"]
+vertices = PackedVector2Array(-1138, -102, -1130, -102, -1130, -18, -1194, -18, -1194, -10, -1238, -10, -1238, -206, -1138, -124, -1220, -206)
+polygons = Array[PackedInt32Array]([PackedInt32Array(0, 1, 2, 3), PackedInt32Array(3, 4, 5, 6), PackedInt32Array(7, 0, 3, 6, 8)])
+outlines = Array[PackedVector2Array]([PackedVector2Array(-1248, 0, -1184, 0, -1184, -8, -1120, -8, -1120, -112, -1128, -112, -1128, -128, -1216, -216, -1248, -216)])
+source_geometry_group_name = &"navigation_polygon_source_group"
+
+[sub_resource type="NavigationPolygon" id="NavigationPolygon_22n00"]
+vertices = PackedVector2Array(269, 372, -491, 372, -491, -292, 269, -292)
+polygons = Array[PackedInt32Array]([PackedInt32Array(0, 1, 2, 3)])
+outlines = Array[PackedVector2Array]([PackedVector2Array(-495, -296, -495, 376, 273, 376, 273, -296)])
+parsed_geometry_type = 1
+source_geometry_mode = 1
+source_geometry_group_name = &"navigation_polygon_source_group"
+agent_radius = 4.0
 
 [sub_resource type="Animation" id="Animation_2qwia"]
 length = 0.001
@@ -115,54 +172,18 @@ shader_parameter/colorampMix = 0.5
 shader_parameter/isColoramp = true
 shader_parameter/coloramp = SubResource("GradientTexture1D_ugkl3")
 
-[sub_resource type="NavigationPolygon" id="NavigationPolygon_x2io3"]
-vertices = PackedVector2Array(462, 156, 462, 302, 388, 302, 274, 188, 274, 50, 388, 50, 526, 92, 434, 4, 526, -92, 494, -124, 434, -262, 494, -262)
-polygons = Array[PackedInt32Array]([PackedInt32Array(0, 1, 2, 3, 4, 5), PackedInt32Array(6, 0, 5, 7), PackedInt32Array(8, 6, 7, 9), PackedInt32Array(7, 10, 11, 9)])
-outlines = Array[PackedVector2Array]([PackedVector2Array(264, 40, 264, 192, 384, 312, 472, 312, 472, 160, 536, 96, 536, -96, 504, -128, 504, -272, 424, -272, 424, 0, 384, 40)])
-source_geometry_group_name = &"navigation_polygon_source_group"
-
-[sub_resource type="NavigationPolygon" id="NavigationPolygon_h07k4"]
-resource_local_to_scene = true
-vertices = PackedVector2Array(74, -134, 139, -51, 131, -43, 52, -49, 50, -59, 174, 22, 164, 22, 167, 19, -60, -142, -42, -160, -42, -134, -70, -74, -22, 43, -22, -5, 24, 25, 24, 73, 129, -34, 89, -31, 50, -39, 220, 206, 197, 206, 197, 168, 199, 168, 238, 188, 238, -174, 199, 90, 173, 90, 173, 70, 174, 70, 169, 10, 169, -34, 167, -43, 74, -174, 159, -51, 149, -53, 42, -67, 33, -69, 9, -69, 9, -73, -22, -73, -22, -74, -78, -142, -78, -124, -92, 110, -92, -110, -70, -26, -39, -26, -39, -25, -70, -5, 9, -25, 9, -29, 33, -29, 129, -31, 89, -5, 59, -5, 42, -31, 59, 25, -70, 25, -73, 25, 24, 85, -25, 73, -25, 43, 26, 85, 26, 73, 24, 133, 56, 133, 56, 136, 59, 136, 59, 148, 57, 148, 57, 196, 59, 196, 59, 206, -22, 206, -22, 188, -110, 110, -110, -110, -73, 73)
-polygons = Array[PackedInt32Array]([PackedInt32Array(0, 1, 2, 3, 4), PackedInt32Array(5, 6, 7), PackedInt32Array(8, 9, 10, 11), PackedInt32Array(12, 13, 14, 15), PackedInt32Array(3, 2, 16, 17, 18), PackedInt32Array(19, 20, 21, 22, 23), PackedInt32Array(24, 23, 22, 25), PackedInt32Array(25, 26, 27, 28), PackedInt32Array(24, 25, 28, 5), PackedInt32Array(24, 5, 7, 29), PackedInt32Array(24, 29, 30), PackedInt32Array(24, 30, 31), PackedInt32Array(32, 24, 31, 33), PackedInt32Array(0, 32, 33, 34), PackedInt32Array(0, 34, 1), PackedInt32Array(0, 4, 35), PackedInt32Array(10, 0, 35, 36), PackedInt32Array(36, 37, 38), PackedInt32Array(10, 36, 38), PackedInt32Array(38, 39, 40), PackedInt32Array(10, 38, 40), PackedInt32Array(10, 40, 11), PackedInt32Array(41, 8, 11, 42), PackedInt32Array(43, 44, 42, 11, 45), PackedInt32Array(45, 46, 47, 48), PackedInt32Array(49, 50, 51), PackedInt32Array(16, 52, 17), PackedInt32Array(18, 17, 53, 54, 55), PackedInt32Array(51, 55, 54, 56, 14, 13), PackedInt32Array(48, 57, 58), PackedInt32Array(59, 60, 61, 12, 15, 62), PackedInt32Array(15, 63, 62), PackedInt32Array(64, 65, 66), PackedInt32Array(66, 67, 68, 69), PackedInt32Array(70, 71, 72, 73), PackedInt32Array(69, 70, 73, 74, 64, 66), PackedInt32Array(43, 75, 76, 44), PackedInt32Array(49, 51, 13), PackedInt32Array(47, 49, 13, 48), PackedInt32Array(43, 45, 48, 58), PackedInt32Array(43, 58, 77), PackedInt32Array(64, 74, 43, 77, 60, 59)])
-outlines = Array[PackedVector2Array]([PackedVector2Array(-120, 120, -96, 120, -32, 192, -32, 216, 224, 216, 248, 192, 248, -48, 248, -184, 192, -184, 64, -184, 64, -144, -32, -144, -32, -184, -64, -152, -88, -152, -88, -128, -96, -120, -120, -120)])
-source_geometry_mode = 1
-source_geometry_group_name = &"navigation_polygon_source_group"
-
-[sub_resource type="NavigationPolygon" id="NavigationPolygon_46qe0"]
-vertices = PackedVector2Array(-266, 502, -502, 502, -502, 458, -266, 458)
-polygons = Array[PackedInt32Array]([PackedInt32Array(0, 1, 2, 3)])
-outlines = Array[PackedVector2Array]([PackedVector2Array(-512, 512, -256, 512, -256, 448, -512, 448)])
-source_geometry_group_name = &"navigation_polygon_source_group"
-
-[sub_resource type="NavigationPolygon" id="NavigationPolygon_rqb6j"]
-vertices = PackedVector2Array(-266, 438, -502, 438, -502, 298, -266, 298)
-polygons = Array[PackedInt32Array]([PackedInt32Array(0, 1, 2, 3)])
-outlines = Array[PackedVector2Array]([PackedVector2Array(-512, 448, -256, 448, -256, 288, -512, 288)])
-source_geometry_group_name = &"navigation_polygon_source_group"
-
-[sub_resource type="NavigationPolygon" id="NavigationPolygon_q5l1j"]
-vertices = PackedVector2Array(-266, 278, -494, 278, -494, 164, -444, 114, -266, 114)
-polygons = Array[PackedInt32Array]([PackedInt32Array(0, 1, 2, 3, 4)])
-outlines = Array[PackedVector2Array]([PackedVector2Array(-256, 288, -256, 104, -448, 104, -504, 160, -504, 288)])
-source_geometry_group_name = &"navigation_polygon_source_group"
-
-[sub_resource type="NavigationPolygon" id="NavigationPolygon_txd4j"]
-vertices = PackedVector2Array(-1130, 116, -1220, 206, -1238, 206, -1238, 18, -1130, 18)
-polygons = Array[PackedInt32Array]([PackedInt32Array(0, 1, 2, 3, 4)])
-outlines = Array[PackedVector2Array]([PackedVector2Array(-1248, 8, -1248, 216, -1216, 216, -1120, 120, -1120, 8)])
-source_geometry_group_name = &"navigation_polygon_source_group"
-
-[sub_resource type="NavigationPolygon" id="NavigationPolygon_ar3qy"]
-vertices = PackedVector2Array(-1138, -102, -1130, -102, -1130, -18, -1194, -18, -1194, -10, -1238, -10, -1238, -206, -1138, -124, -1220, -206)
-polygons = Array[PackedInt32Array]([PackedInt32Array(0, 1, 2, 3), PackedInt32Array(3, 4, 5, 6), PackedInt32Array(7, 0, 3, 6, 8)])
-outlines = Array[PackedVector2Array]([PackedVector2Array(-1248, 0, -1184, 0, -1184, -8, -1120, -8, -1120, -112, -1128, -112, -1128, -128, -1216, -216, -1248, -216)])
-source_geometry_group_name = &"navigation_polygon_source_group"
-
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_twual"]
 shader = ExtResource("15_ui16x")
 shader_parameter/grain_amount = 0.05
 shader_parameter/grain_size = 0.25
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_olk8u"]
+shader = ExtResource("22_dqfq6")
+shader_parameter/shake_power = 0.03
+shader_parameter/shake_rate = 1.0
+shader_parameter/shake_speed = 5.0
+shader_parameter/shake_block_size = 30.5
+shader_parameter/shake_color_rate = 0.01
 
 [node name="Main" type="Node2D"]
 script = ExtResource("1_6u7sh")
@@ -179,7 +200,7 @@ offset_right = 40.0
 offset_bottom = 40.0
 
 [node name="PlayerSpawnLocation" type="Marker2D" parent="."]
-position = Vector2(-657, -27)
+position = Vector2(-653, -52)
 
 [node name="Environment" parent="." instance=ExtResource("1_halep")]
 
@@ -188,12 +209,16 @@ z_index = 5
 
 [node name="Crowbar" parent="Environment/Items" instance=ExtResource("3_ax4cu")]
 z_index = -2
-position = Vector2(-601, -231)
+position = Vector2(-627, -217)
 
 [node name="FlashlightItem" parent="Environment/Items" instance=ExtResource("5_6ojie")]
-position = Vector2(-1192, 176)
+position = Vector2(-876, 208)
+rotation = -0.785397
 
-[node name="Inanimate" type="Node2D" parent="Environment"]
+[node name="BlasterItem" parent="Environment/Items" instance=ExtResource("5_bmbqo")]
+position = Vector2(951, -153)
+
+[node name="Inanimate" type="Node2D" parent="Environment" groups=["navigation_polygon_source_group"]]
 
 [node name="CryoMachine" parent="Environment/Inanimate" instance=ExtResource("16_idydh")]
 position = Vector2(-710, -100)
@@ -210,105 +235,124 @@ rotation = -0.261799
 position = Vector2(-504, -260)
 
 [node name="Crate6" parent="Environment/Inanimate" instance=ExtResource("8_74hus")]
-position = Vector2(-411, 20)
-rotation = 0.523598
+position = Vector2(-412, 18)
+rotation = 1.57079
 
 [node name="Crate7" parent="Environment/Inanimate" instance=ExtResource("8_74hus")]
-position = Vector2(-420, 82)
+position = Vector2(-422, 83)
 rotation = 0.261799
 
 [node name="Crate8" parent="Environment/Inanimate" instance=ExtResource("8_74hus")]
 position = Vector2(-1007, -17)
 
 [node name="Crate9" parent="Environment/Inanimate" instance=ExtResource("8_74hus")]
-position = Vector2(-1038, -18)
+position = Vector2(-1036, -31)
+rotation = 0.261799
 
 [node name="Crate10" parent="Environment/Inanimate" instance=ExtResource("8_74hus")]
-position = Vector2(-1038, 51)
+position = Vector2(-954, -50)
+rotation = 0.261799
 
 [node name="Crate11" parent="Environment/Inanimate" instance=ExtResource("8_74hus")]
-position = Vector2(-1041, 81)
+position = Vector2(-985, -48)
+rotation = 0.261799
 
 [node name="Crate12" parent="Environment/Inanimate" instance=ExtResource("8_74hus")]
-position = Vector2(-944, 81)
+position = Vector2(-922, -62)
+rotation = -0.261799
 
 [node name="Crate13" parent="Environment/Inanimate" instance=ExtResource("8_74hus")]
-position = Vector2(-942, 110)
+position = Vector2(-1068, -20)
+rotation = -0.261799
 
 [node name="Crate14" parent="Environment/Inanimate" instance=ExtResource("8_74hus")]
-position = Vector2(-944, 141)
+position = Vector2(-1098, -0.999969)
+rotation = 0.261799
 
 [node name="Crate15" parent="Environment/Inanimate" instance=ExtResource("8_74hus")]
-position = Vector2(-909, 51)
+position = Vector2(-860, -74)
+rotation = 0.261799
 
 [node name="Crate16" parent="Environment/Inanimate" instance=ExtResource("8_74hus")]
-position = Vector2(-911, 82)
+position = Vector2(-892, -74)
 
 [node name="Crate17" parent="Environment/Inanimate" instance=ExtResource("8_74hus")]
-position = Vector2(-912, 112)
+position = Vector2(-1108, 32)
+rotation = -0.261799
 
 [node name="Crate18" parent="Environment/Inanimate" instance=ExtResource("8_74hus")]
-position = Vector2(-912, 144)
+position = Vector2(-1011, 78)
+rotation = -0.261799
 
 [node name="Crate19" parent="Environment/Inanimate" instance=ExtResource("8_74hus")]
-position = Vector2(-909, 174)
+position = Vector2(-1102, 106)
 
 [node name="Crate20" parent="Environment/Inanimate" instance=ExtResource("8_74hus")]
-position = Vector2(-911, 204)
+position = Vector2(-1040, 92)
 
 [node name="Crate21" parent="Environment/Inanimate" instance=ExtResource("8_74hus")]
-position = Vector2(-909, 235)
+position = Vector2(-887, 174)
 
 [node name="Crate22" parent="Environment/Inanimate" instance=ExtResource("8_74hus")]
-position = Vector2(-879, 233)
+position = Vector2(-920, 174)
 
 [node name="Crate23" parent="Environment/Inanimate" instance=ExtResource("8_74hus")]
-position = Vector2(-880, 204)
+position = Vector2(-978, 87)
+rotation = 0.261799
 
 [node name="Crate24" parent="Environment/Inanimate" instance=ExtResource("8_74hus")]
-position = Vector2(-879, 174)
+position = Vector2(-1071, 98)
+rotation = -0.261799
 
 [node name="Crate25" parent="Environment/Inanimate" instance=ExtResource("8_74hus")]
-position = Vector2(-880, 129)
+position = Vector2(-814, 53)
+rotation = 0.261799
 
 [node name="Crate26" parent="Environment/Inanimate" instance=ExtResource("8_74hus")]
-position = Vector2(-877, 92)
+position = Vector2(-808, -9.99998)
+rotation = 0.261799
 
 [node name="Crate27" parent="Environment/Inanimate" instance=ExtResource("8_74hus")]
-position = Vector2(-877, 58)
+position = Vector2(-826, -70)
+rotation = -0.261799
 
 [node name="Crate28" parent="Environment/Inanimate" instance=ExtResource("8_74hus")]
-position = Vector2(-879, 25)
+position = Vector2(-825, -40)
+rotation = -0.261799
 
 [node name="Crate29" parent="Environment/Inanimate" instance=ExtResource("8_74hus")]
-position = Vector2(-842, 78)
+position = Vector2(-849, 78)
 
 [node name="Crate30" parent="Environment/Inanimate" instance=ExtResource("8_74hus")]
-position = Vector2(-843, 112)
+position = Vector2(-814, 117)
 
 [node name="Crate31" parent="Environment/Inanimate" instance=ExtResource("8_74hus")]
-position = Vector2(-849, 143)
+position = Vector2(-804, 85)
+rotation = -0.261799
 
 [node name="Crate32" parent="Environment/Inanimate" instance=ExtResource("8_74hus")]
-position = Vector2(-817, 146)
+position = Vector2(-814, 149)
+rotation = -0.261799
 
 [node name="Crate33" parent="Environment/Inanimate" instance=ExtResource("8_74hus")]
-position = Vector2(-849, 176)
+position = Vector2(-817, 21)
 
 [node name="Crate34" parent="Environment/Inanimate" instance=ExtResource("8_74hus")]
-position = Vector2(-817, 176)
+position = Vector2(-814, 190)
+rotation = -0.261799
 
 [node name="Crate35" parent="Environment/Inanimate" instance=ExtResource("8_74hus")]
-position = Vector2(-819, 204)
+position = Vector2(-843, 228)
 
 [node name="Crate36" parent="Environment/Inanimate" instance=ExtResource("8_74hus")]
-position = Vector2(-849, 204)
+position = Vector2(-944, 92)
+rotation = -0.261799
 
 [node name="Crate37" parent="Environment/Inanimate" instance=ExtResource("8_74hus")]
-position = Vector2(-849, 233)
+position = Vector2(-846, 176)
 
 [node name="Crate38" parent="Environment/Inanimate" instance=ExtResource("8_74hus")]
-position = Vector2(-819, 235)
+position = Vector2(-814, 233)
 
 [node name="Forklift3" parent="Environment/Inanimate" instance=ExtResource("9_rxupm")]
 position = Vector2(-981, -17)
@@ -318,12 +362,24 @@ rotation = 3.14159
 position = Vector2(-1216, 0)
 
 [node name="Forklift2" parent="Environment/Inanimate" instance=ExtResource("9_rxupm")]
-position = Vector2(-843, 52)
+position = Vector2(-849, 52)
 rotation = 1.57079
 
 [node name="Crate5" parent="Environment/Inanimate" instance=ExtResource("8_74hus")]
-position = Vector2(-445, 6.99998)
+position = Vector2(-445, 8)
+rotation = 0.523598
+
+[node name="Crate39" parent="Environment/Inanimate" instance=ExtResource("8_74hus")]
+position = Vector2(-196, -64)
 rotation = -0.523598
+
+[node name="Crate40" parent="Environment/Inanimate" instance=ExtResource("8_74hus")]
+position = Vector2(-163, -78)
+rotation = 0.261799
+
+[node name="Crate41" parent="Environment/Inanimate" instance=ExtResource("8_74hus")]
+position = Vector2(-149, -44)
+rotation = -0.261799
 
 [node name="hallway dead guy" parent="Environment/Inanimate" instance=ExtResource("10_p5tb0")]
 position = Vector2(-467, 35)
@@ -353,6 +409,9 @@ rotation = 1.57081
 [node name="CryoBed5" parent="Environment/Interactable" instance=ExtResource("4_0fems")]
 position = Vector2(-607, -48)
 rotation = 1.57081
+
+[node name="Note" parent="Environment/Interactable" instance=ExtResource("12_ylmx7")]
+position = Vector2(-646, -174)
 
 [node name="DarknessLevel" type="CanvasModulate" parent="." groups=["Darkness"]]
 visible = false
@@ -474,49 +533,49 @@ light_offset = 0
 [node name="CargoLights" type="Node2D" parent="Lights"]
 
 [node name="Light2" parent="Lights/CargoLights" groups=["Cargo_Light"] instance=ExtResource("4_7cj7q")]
-position = Vector2(82, 177)
+position = Vector2(-173, 192)
 texture = null
 light_texture = ExtResource("5_wy17f")
 light_offset = 0
 
 [node name="Light3" parent="Lights/CargoLights" groups=["Cargo_Light"] instance=ExtResource("4_7cj7q")]
-position = Vector2(82, 100)
+position = Vector2(-171, 160)
 texture = null
 light_texture = ExtResource("5_wy17f")
 light_offset = 0
 
 [node name="Light5" parent="Lights/CargoLights" groups=["Cargo_Light"] instance=ExtResource("4_7cj7q")]
-position = Vector2(82, 0)
+position = Vector2(24, -21)
 texture = null
 light_texture = ExtResource("5_wy17f")
 light_offset = 0
 
 [node name="Light6" parent="Lights/CargoLights" groups=["Cargo_Light"] instance=ExtResource("4_7cj7q")]
-position = Vector2(82, 262)
+position = Vector2(-153, 198)
 texture = null
 light_texture = ExtResource("5_wy17f")
 light_offset = 0
 
 [node name="Light7" parent="Lights/CargoLights" groups=["Cargo_Light"] instance=ExtResource("4_7cj7q")]
-position = Vector2(177, 0)
+position = Vector2(24, -10)
 texture = null
 light_texture = ExtResource("5_wy17f")
 light_offset = 0
 
 [node name="Light8" parent="Lights/CargoLights" groups=["Cargo_Light"] instance=ExtResource("4_7cj7q")]
-position = Vector2(177, 100)
+position = Vector2(-27, 18)
 texture = null
 light_texture = ExtResource("5_wy17f")
 light_offset = 0
 
 [node name="Light9" parent="Lights/CargoLights" groups=["Cargo_Light"] instance=ExtResource("4_7cj7q")]
-position = Vector2(177, 177)
+position = Vector2(-163, 177)
 texture = null
 light_texture = ExtResource("5_wy17f")
 light_offset = 0
 
 [node name="Light10" parent="Lights/CargoLights" groups=["Cargo_Light"] instance=ExtResource("4_7cj7q")]
-position = Vector2(177, 262)
+position = Vector2(-171, 140)
 texture = null
 light_texture = ExtResource("5_wy17f")
 light_offset = 0
@@ -540,7 +599,7 @@ light_texture = ExtResource("5_wy17f")
 light_offset = 0
 
 [node name="Light14" parent="Lights/CargoLights" groups=["Cargo_Light"] instance=ExtResource("4_7cj7q")]
-position = Vector2(285, 209)
+position = Vector2(-181, 164)
 texture = null
 light_texture = ExtResource("5_wy17f")
 light_offset = 0
@@ -680,38 +739,19 @@ shape = SubResource("SegmentShape2D_2sq0y")
 [node name="Entities" type="Node2D" parent="."]
 
 [node name="Eus" parent="Entities" instance=ExtResource("17_7u0ol")]
-position = Vector2(-540, -289)
-rotation = 3.14159
+position = Vector2(-541, 538)
+rotation = 6.28318
 
 [node name="InsaneCrew" parent="Entities" instance=ExtResource("16_ee52r")]
-position = Vector2(-653, -252)
+z_index = 4
+position = Vector2(-367, 140)
+rotation = -0.785397
 
 [node name="Blob" parent="Entities" instance=ExtResource("19_igytc")]
 position = Vector2(-345, 361)
 
-[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
-libraries = {
-"": SubResource("AnimationLibrary_pgkf5")
-}
-
-[node name="CanvasLayer" type="CanvasLayer" parent="AnimationPlayer"]
-
-[node name="ColorRect" type="ColorRect" parent="AnimationPlayer/CanvasLayer"]
-offset_right = 320.0
-offset_bottom = 180.0
-color = Color(0, 0, 0, 1)
-
-[node name="CanvasLayer" type="CanvasLayer" parent="."]
-layer = -8
-
-[node name="ColorRect" type="ColorRect" parent="CanvasLayer"]
-material = SubResource("ShaderMaterial_ilnn4")
-anchors_preset = 15
-anchor_right = 1.0
-anchor_bottom = 1.0
-grow_horizontal = 2
-grow_vertical = 2
-color = Color(0, 0, 0, 1)
+[node name="EusBoss" parent="Entities" instance=ExtResource("19_sumik")]
+position = Vector2(1094, 20)
 
 [node name="NavigationRegion2D2" type="NavigationRegion2D" parent="."]
 visible = false
@@ -743,10 +783,53 @@ navigation_polygon = SubResource("NavigationPolygon_txd4j")
 visible = false
 navigation_polygon = SubResource("NavigationPolygon_ar3qy")
 
-[node name="CanvasLayer2" type="CanvasLayer" parent="."]
+[node name="NavigationRegion2D8" type="NavigationRegion2D" parent="."]
+position = Vector2(1167, -144)
+navigation_polygon = SubResource("NavigationPolygon_22n00")
+use_edge_connections = false
 
-[node name="ColorRect" type="ColorRect" parent="CanvasLayer2"]
+[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+libraries = {
+"": SubResource("AnimationLibrary_pgkf5")
+}
+
+[node name="CanvasLayer" type="CanvasLayer" parent="AnimationPlayer"]
+visible = false
+
+[node name="ColorRect" type="ColorRect" parent="AnimationPlayer/CanvasLayer"]
+offset_right = 320.0
+offset_bottom = 180.0
+color = Color(0, 0, 0, 1)
+
+[node name="Space" type="CanvasLayer" parent="."]
+layer = -8
+visible = false
+
+[node name="ColorRect" type="ColorRect" parent="Space"]
+material = SubResource("ShaderMaterial_ilnn4")
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+color = Color(0, 0, 0, 1)
+
+[node name="Grain" type="CanvasLayer" parent="."]
+visible = false
+
+[node name="ColorRect" type="ColorRect" parent="Grain"]
 material = SubResource("ShaderMaterial_twual")
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="Glitch" type="CanvasLayer" parent="." groups=["Glitch"]]
+visible = false
+
+[node name="ColorRect" type="ColorRect" parent="Glitch"]
+material = SubResource("ShaderMaterial_olk8u")
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
@@ -758,6 +841,18 @@ position = Vector2(-1100, 109)
 
 [node name="BlobSpawnLocation" type="Marker2D" parent="."]
 position = Vector2(-498, 336)
+
+[node name="Marker2D" type="Marker2D" parent="." groups=["EusBossSpawn"]]
+position = Vector2(833, 64)
+
+[node name="Marker2D2" type="Marker2D" parent="." groups=["EusBossSpawn"]]
+position = Vector2(1203, 76)
+
+[node name="Marker2D3" type="Marker2D" parent="." groups=["EusBossSpawn"]]
+position = Vector2(833, -292)
+
+[node name="Marker2D4" type="Marker2D" parent="." groups=["EusBossSpawn"]]
+position = Vector2(1329, -306)
 
 [connection signal="body_exited" from="Lights/ExitCryo" to="." method="_on_exit_cryo_body_exited"]
 [connection signal="body_exited" from="Lights/EnterCryo" to="." method="_on_enter_cryo_body_exited"]

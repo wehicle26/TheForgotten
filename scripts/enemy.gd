@@ -11,7 +11,7 @@ signal hit_player
 @export var player: Player
 @export var lunge_speed = 50
 @export var attack_range = 60
-@export var rotation_speed = .5
+@export var rotation_speed = PI/2
 @export var attack_damage = 1
 @export var knockback_force = 50
 @export var stun_time = .25
@@ -81,6 +81,10 @@ func path_to_player():
 	direction = to_local(next_path_position).normalized()
 	sprite_2d.look_at(next_path_position)
 	velocity = direction * speed
+
+
+func path_to_player_lerp(t):
+	pass
 
 
 func retreat_from_player():

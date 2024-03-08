@@ -12,12 +12,8 @@ signal out_of_ammo
 @onready var attack_timer = $AttackTimer
 @onready var arm_timer = $ArmTimer
 
-@onready var audio_stream_player_2d = $AudioStreamPlayer2D
 
 @export var bullet_scene: PackedScene = preload("res://scenes/Bullet.tscn")
-const LASER_SHOT_SILENCED = preload("res://sounds/151022__bubaproducer__laser-shot-silenced.wav")
-const RELOAD_BLASTER = preload("res://sounds/reload_blaster.wav")
-const BLASTER_CLICK = preload("res://sounds/blaster_click.wav")
 
 @export var num_bullets = 1
 
@@ -41,8 +37,8 @@ func _process(_delta):
 func reload():
 	print("reloading")
 	reload_timer.start()
-	audio_stream_player_2d.set_stream(RELOAD_BLASTER)
-	audio_stream_player_2d.play()
+	#audio_stream_player_2d.set_stream(RELOAD_BLASTER)
+	#audio_stream_player_2d.play()
 	bullets_in_clip = clip_size
 	await reload_timer.timeout
 	animated_sprite_2d.set_frame(3)
@@ -59,12 +55,14 @@ func fire_gun():
 		bullets_in_clip -= 1
 		print(bullets_in_clip)
 		if bullets_in_clip == -1:
-			audio_stream_player_2d.set_stream(BLASTER_CLICK)
-			audio_stream_player_2d.play()
+			#audio_stream_player_2d.set_stream(BLASTER_CLICK)
+			#audio_stream_player_2d.play()
 			return
-
-		audio_stream_player_2d.set_stream(LASER_SHOT_SILENCED)
-		audio_stream_player_2d.play()
+			
+		var pitch = randf_range(.6, .8)
+		SoundManager.play_custom_sound(global_transform, "event:/blaster_shoot", 0.4, pitch)
+		#audio_stream_player_2d.set_stream(LASER_SHOT_SILENCED)
+		#audio_stream_player_2d.play()
 
 		animated_sprite_2d.set_frame(bullets_in_clip)
 		muzzle_flash.show()
@@ -97,6 +95,10 @@ func fire_gun():
 
 		muzzle_flash.hide()
 		muzzle_flash_2.hide()
+
+
+func shoot_laser():
+	pass
 
 
 func spawn_bullet(pos, rot):

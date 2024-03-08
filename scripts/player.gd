@@ -25,6 +25,7 @@ signal unfreeze
 
 const CROSSHAIR_004 = preload("res://art/player/crosshair004.png")
 var FlashlightScene: PackedScene = preload("res://scenes/Flashlight.tscn")
+var GunScene: PackedScene = preload("res://scenes/Gun.tscn")
 
 var collision: bool = false
 var speed = 0
@@ -37,6 +38,7 @@ var knockback_force = 500
 var attack_position = 0
 var stun_time = .25
 var flashlight: Light
+var gun: Gun
 
 func _ready():
 	#gun.get_node("ArmTimer").timeout.connect(_lower_arm)
@@ -109,9 +111,12 @@ func get_input():
 	#if not swinging:
 	input_dir = Input.get_vector("move_left", "move_right", "move_up", "move_down")
 	velocity = input_dir * speed + knockback
-	if Input.is_action_pressed("shoot") and has_gun and current_weapon == "blaster":
-		pass
-		#gun.fire_gun()
+	if Input.is_action_pressed("shoot") and inventory.blaster and current_weapon == "blaster":
+		if not is_instance_valid(gun):
+			gun = GunScene.instantiate()
+			add_child(gun)
+		gun.fire_gun()
+
 	return input_dir
 
 

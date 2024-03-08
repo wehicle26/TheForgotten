@@ -13,7 +13,7 @@ var player: Player
 
 func _ready():
 	SoundManager.play_main_loop(SoundManager.MAIN_LOOP_CURIOUS)
-	#cutscene_player.play("Intro")
+	#s.play("Intro")
 	#await cutscene_player.animation_finished
 	get_tree().call_group("Light", "turn_off")
 	get_tree().call_group("Hallway_Light", "turn_off")
