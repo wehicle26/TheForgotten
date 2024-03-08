@@ -1,17 +1,19 @@
 extends ProgressBar
 @onready var player = $"../.."
 @onready var canvas_layer = $".."
+@onready var health = $"../../Health"
 
 
-
-
-func update():
-	value = player.currentHealth
-	
-
-# Called when the node enters the scene tree for the first time.
 func _ready():
+	health.healthChanged.connect(update)
 	update()
+	
+func update():
+	value = health.health
+	print (value)
+	
+# Called when the node enters the scene tree for the first time.
+
 
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
