@@ -27,10 +27,10 @@ func damage():
 		#SoundManager.play_custom_sound(global_transform, "event:/roach_hit", 0.5)
 	#sprite_2d.material.set_shader_parameter("active", true)
 	sprite_2d.modulate = red
-	var timer = get_tree().create_timer(0.5)
-	await timer.timeout
-	#sprite_2d.material.set_shader_parameter("active", false)
+	await get_tree().create_timer(0.2).timeout
 	sprite_2d.modulate = white
+		
+	#sprite_2d.material.set_shader_parameter("active", false)
 
 func _ready():
 	#sprite_2d.material.set_shader_parameter("active", false)

@@ -33,7 +33,7 @@ var knockback = Vector2.ZERO
 var isPlaying = true
 var input_dir: Vector2
 var has_gun: bool = false
-var current_weapon = "crowbar"
+var current_weapon = "blaster"
 var knockback_force = 500
 var attack_position = 0
 var stun_time = .25
@@ -130,7 +130,8 @@ func _physics_process(_delta):
 
 
 func _lower_arm():
-	animation_player.play("Walk")
+	pass
+	#animation_player.play("Walk")
 
 
 func _on_crowbar_hitbox_area_entered(area):

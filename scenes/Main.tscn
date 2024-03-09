@@ -200,7 +200,7 @@ offset_right = 40.0
 offset_bottom = 40.0
 
 [node name="PlayerSpawnLocation" type="Marker2D" parent="."]
-position = Vector2(-653, -52)
+position = Vector2(897, -185)
 
 [node name="Environment" parent="." instance=ExtResource("1_halep")]
 
@@ -751,7 +751,7 @@ rotation = -0.785397
 position = Vector2(-345, 361)
 
 [node name="EusBoss" parent="Entities" instance=ExtResource("19_sumik")]
-position = Vector2(1094, 20)
+position = Vector2(1360, 182)
 
 [node name="NavigationRegion2D2" type="NavigationRegion2D" parent="."]
 visible = false
