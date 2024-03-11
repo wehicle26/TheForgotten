@@ -83,10 +83,6 @@ func path_to_player():
 	velocity = direction * speed
 
 
-func path_to_player_lerp(t):
-	pass
-
-
 func retreat_from_player():
 	next_path_position = navigation_agent_2d.get_next_path_position() * -1
 	direction = to_local(next_path_position).normalized()

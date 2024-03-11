@@ -1,28 +1,25 @@
 extends State
 
+class_name PlayerWalkShoot
+
 @export var player: Player
 
 func _ready():
 	player.freeze.connect(_freeze_player)
 
- 
+
 func _freeze_player():
 	transitioned.emit(self, "playerFreeze")
 
 
 func _input(_event):
-	if Input.is_action_pressed("run"):
-		transitioned.emit(self, "playerRun")
-	if Input.is_action_pressed("shoot") and player.inventory.crowbar:
-		transitioned.emit(self, "playerAttack")
-	if Input.is_action_pressed("shoot") and player.inventory.blaster and player.current_weapon == "blaster":
-		player.idle_timer.stop()
-		transitioned.emit(self, "playerWalkShoot")
+	pass
 
 
 func enter():
 	player.speed = player.walk_speed
-	player.animation_player.play("Walk")
+	player.animation_player.play("Walk_Shoot")
+	#player.gun.fire_gun()
 
 
 func update(_delta):
@@ -31,10 +28,13 @@ func update(_delta):
 
 func physics_update(_delta):
 	if DialogueManager.is_dialogue_active:
-		transitioned.emit(self, "playerIdle")
+		return
 	var input_dir = player.get_input()
 	player.look_at(player.get_global_mouse_position())
 	player.global_rotation += PI / 2
-
+	
 	if input_dir == Vector2.ZERO:
-		transitioned.emit(self, "playerIdle")
+		transitioned.emit(self, "playerShoot")
+
+func _on_arm_timer_timeout():
+	transitioned.emit(self, "playerWalk")

@@ -10,7 +10,7 @@ func enter():
 	enemy.speed = enemy.default_speed
 
 
-func update(delta):
+func update(_delta):
 	pass
 
 

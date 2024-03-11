@@ -342,8 +342,4 @@ one_shot = true
 wait_time = 0.5
 one_shot = true
 
-[node name="ArmTimer" type="Timer" parent="."]
-wait_time = 2.0
-one_shot = true
-
 [connection signal="out_of_ammo" from="." to="." method="_on_out_of_ammo"]

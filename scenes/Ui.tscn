@@ -1,6 +1,6 @@
 [gd_scene load_steps=7 format=3 uid="uid://dx367olnv4jly"]
 
-[ext_resource type="FontFile" uid="uid://cccdc64xh1vwf" path="res://ui/Millennia-Regular.otf" id="1_jfeun"]
+[ext_resource type="FontFile" uid="uid://cj8rhodwww8xo" path="res://ui/Millennia-Regular.otf" id="1_jfeun"]
 [ext_resource type="Script" path="res://scripts/ui.gd" id="1_mk2rm"]
 [ext_resource type="Texture2D" uid="uid://bmeaxme02o2r8" path="res://art/environment/splash1_320x160.png" id="3_6mtop"]
 

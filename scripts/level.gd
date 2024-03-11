@@ -26,7 +26,7 @@ func _ready():
 
 	animation_player.play("fade_in")
 	await animation_player.animation_finished
-
+s
 
 func _on_exit_cryo_body_exited(body):
 	if body is Player:

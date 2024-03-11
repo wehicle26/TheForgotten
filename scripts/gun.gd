@@ -14,7 +14,6 @@ signal out_of_ammo
 @onready var animated_sprite_2d = $AnimatedSprite2D
 @onready var reload_timer = $ReloadTimer
 @onready var attack_timer = $AttackTimer
-@onready var arm_timer = $ArmTimer
 @onready var bullet_scene: PackedScene = preload("res://scenes/Bullet.tscn")
 
 @export var attack_damage = 1;
@@ -22,19 +21,25 @@ signal out_of_ammo
 @export var stun_time = .01;
 @export var num_bullets = 1
 @export var clip_size = 6
-var bullets_in_clip
 
+var player: Player
+var bullets_in_clip
+var beam_speed = randf_range(0.4, 0.8)
+var beam_wobble = randf_range(0.05, 0.2)
+var beam_xStretch = randf_range(2, 4)
 
 func _ready():
 	bullets_in_clip = clip_size
+	player = get_parent()
 
 
 func _process(_delta):
 	if bullets_in_clip == -1:
 		out_of_ammo.emit()
-	if arm_timer.is_stopped():
-		position = Vector2(9, -6)
-		z_index = 0
+	if player.arm_timer.is_stopped():
+		hide()
+		#position = Vector2(9, -6)
+		#z_index = 0
 		#animated_sprite_2d.set_animation("holster")
 
 func _physics_process(_delta):
@@ -65,7 +70,6 @@ func fire_gun():
 	#get_parent().animation_player.play("Walk_Shoot")
 	animated_sprite_2d.set_animation("fire")
 	show()
-	arm_timer.start()
 	if reload_timer.is_stopped() and attack_timer.is_stopped():
 		bullets_in_clip -= 1
 		print(bullets_in_clip)
@@ -86,26 +90,8 @@ func fire_gun():
 		#muzzle_flash_2.play("shoot")
 		attack_timer.start()
 		if num_bullets == 1:
+			player.arm_timer.start()
 			shoot_laser()
-			#spawn_bullet(bullet_spawn.global_position, global_rotation)
-		if num_bullets == 2:
-			spawn_bullet(bullet_spawn.global_position, global_rotation + PI / 16)
-			spawn_bullet(bullet_spawn.global_position, global_rotation - PI / 16)
-		if num_bullets == 3:
-			spawn_bullet(bullet_spawn.global_position, global_rotation)
-			spawn_bullet(bullet_spawn.global_position, global_rotation + PI / 16)
-			spawn_bullet(bullet_spawn.global_position, global_rotation - PI / 16)
-		if num_bullets == 4:
-			spawn_bullet(bullet_spawn.global_position, global_rotation + PI / 32)
-			spawn_bullet(bullet_spawn.global_position, global_rotation - PI / 32)
-			spawn_bullet(bullet_spawn.global_position, global_rotation + PI / 16)
-			spawn_bullet(bullet_spawn.global_position, global_rotation - PI / 16)
-		if num_bullets == 5:
-			spawn_bullet(bullet_spawn.global_position, global_rotation)
-			spawn_bullet(bullet_spawn.global_position, global_rotation + PI / 32)
-			spawn_bullet(bullet_spawn.global_position, global_rotation - PI / 32)
-			spawn_bullet(bullet_spawn.global_position, global_rotation + PI / 16)
-			spawn_bullet(bullet_spawn.global_position, global_rotation - PI / 16)
 
 		await muzzle_flash.animation_finished
 		#and muzzle_flash_2.animation_finished
@@ -115,11 +101,23 @@ func fire_gun():
 
 
 func shoot_laser():
+	#player.apply_shake()
 	gpu_particles_2d.emitting = true
-	line_2d.material.set_shader_parameter("speed", randf_range(0.4, 0.8))
+	beam_speed = randf_range(0.4, 0.8)
+	beam_wobble = randf_range(0.05, 0.2)
+	beam_xStretch = randf_range(2, 4)
+	line_2d.material.set_shader_parameter("speed", beam_speed)
 	#line_2d.material.set_shader_parameter("laserSize", randf_range(0.4, 0.8))
-	line_2d.material.set_shader_parameter("wobbliness", randf_range(0.05, 0.2))
-	line_2d.material.set_shader_parameter("xStretch", randf_range(2, 4))
+	line_2d.material.set_shader_parameter("wobbliness", beam_wobble)
+	line_2d.material.set_shader_parameter("xStretch", beam_xStretch)
+	
+	var tween1 = get_tree().create_tween()
+	tween1.tween_property(self, "beam_speed", beam_speed - 0.2, .2).set_trans(Tween.TRANS_BACK)
+	var tween2 = get_tree().create_tween()
+	tween2.tween_property(self, "beam_wobble", beam_wobble - 0.1, .2).set_trans(Tween.TRANS_BACK)
+	var tween3 = get_tree().create_tween()
+	tween3.tween_property(self, "beam_xStretch", beam_xStretch - 1, .2).set_trans(Tween.TRANS_BACK)
+	
 	line_2d.visible = true
 	ray_cast_2d.enabled = true
 	await get_tree().create_timer(.2).timeout
