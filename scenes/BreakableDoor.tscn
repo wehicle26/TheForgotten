@@ -1,33 +1,15 @@
-[gd_scene load_steps=12 format=3 uid="uid://cpu2pabqnow4x"]
+[gd_scene load_steps=14 format=3 uid="uid://cpu2pabqnow4x"]
 
 [ext_resource type="Texture2D" uid="uid://c6p1hgjq0me8n" path="res://art/environment/breakable_door.png" id="1_2iic0"]
 [ext_resource type="Script" path="res://scripts/breakableDoor.gd" id="1_gjtk4"]
 [ext_resource type="PackedScene" uid="uid://cjwohg5ed45jj" path="res://scenes/Hitbox.tscn" id="3_dtg6w"]
+[ext_resource type="Texture2D" uid="uid://blxw14pfg2b3q" path="res://art/environment/breakable_door_n.png" id="4_b1xt6"]
+
+[sub_resource type="CanvasItemMaterial" id="CanvasItemMaterial_4vcxw"]
+light_mode = 2
 
 [sub_resource type="OccluderPolygon2D" id="OccluderPolygon2D_pfmr8"]
 polygon = PackedVector2Array(-10, -48, 6, -48, 6, -24, 5, -24, 5, -19, 6, -19, 6, -18, 7, -18, 7, -16, 8, -16, 8, -10, 7, -10, 7, -4, 8, -4, 8, 3, 7, 3, 7, 9, 8, 9, 8, 16, 7, 16, 7, 18, 6, 18, 6, 19, 5, 19, 5, 24, 6, 24, 6, 48, -10, 48, -10, 34, -9, 34, -9, 33, -8, 33, -8, 32, -7, 32, -7, 31, -6, 31, -6, 27, -5, 27, -5, 26, -4, 26, -4, 25, -3, 25, -3, 24, -1, 24, -1, 1, 0, 1, 0, -1, -1, -1, -1, -24, -3, -24, -3, -25, -4, -25, -4, -26, -5, -26, -5, -27, -6, -27, -6, -31, -7, -31, -7, -32, -8, -32, -8, -33, -9, -33, -9, -34, -10, -34)
-
-[sub_resource type="AtlasTexture" id="AtlasTexture_m4rl4"]
-atlas = ExtResource("1_2iic0")
-region = Rect2(0, 0, 32, 96)
-
-[sub_resource type="AtlasTexture" id="AtlasTexture_ykr0j"]
-atlas = ExtResource("1_2iic0")
-region = Rect2(32, 0, 32, 96)
-
-[sub_resource type="SpriteFrames" id="SpriteFrames_ack0h"]
-animations = [{
-"frames": [{
-"duration": 1.0,
-"texture": SubResource("AtlasTexture_m4rl4")
-}, {
-"duration": 1.0,
-"texture": SubResource("AtlasTexture_ykr0j")
-}],
-"loop": false,
-"name": &"default",
-"speed": 10.0
-}]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_ymuu6"]
 size = Vector2(16, 96)
@@ -54,29 +36,52 @@ damping_max = 50.0
 color = Color(0.505882, 0.592157, 0.588235, 1)
 alpha_curve = SubResource("CurveTexture_5tuao")
 
+[sub_resource type="Animation" id="Animation_w7r0o"]
+length = 0.2
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Sprite2D:visible")
+tracks/0/interp = 1
+tracks/0/loop_wrap = false
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [true]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("Sprite2D:frame")
+tracks/1/interp = 1
+tracks/1/loop_wrap = false
+tracks/1/keys = {
+"times": PackedFloat32Array(0, 0.1),
+"transitions": PackedFloat32Array(1, 1),
+"update": 1,
+"values": [0, 1]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_unpa8"]
+_data = {
+"default": SubResource("Animation_w7r0o")
+}
+
+[sub_resource type="CanvasTexture" id="CanvasTexture_qmebq"]
+diffuse_texture = ExtResource("1_2iic0")
+normal_texture = ExtResource("4_b1xt6")
+
 [node name="BreakableDoor" type="StaticBody2D"]
+material = SubResource("CanvasItemMaterial_4vcxw")
 script = ExtResource("1_gjtk4")
 
 [node name="LightOccluder2D" type="LightOccluder2D" parent="."]
 occluder = SubResource("OccluderPolygon2D_pfmr8")
 
-[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
-texture_filter = 1
-sprite_frames = SubResource("SpriteFrames_ack0h")
-metadata/_aseprite_wizard_config_ = {
-"layer": "",
-"o_ex_p": "",
-"o_folder": "res://art/environment/",
-"o_name": "breakable_door",
-"only_visible": true,
-"op_exp": false,
-"source": "res://art/environment/door2.aseprite"
-}
-
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 position = Vector2(-2, 0)
 shape = SubResource("RectangleShape2D_ymuu6")
-disabled = true
 
 [node name="Hitbox" parent="." instance=ExtResource("3_dtg6w")]
 
@@ -92,3 +97,25 @@ process_material = SubResource("ParticleProcessMaterial_7bq8o")
 lifetime = 0.5
 one_shot = true
 explosiveness = 1.0
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+libraries = {
+"": SubResource("AnimationLibrary_unpa8")
+}
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+texture_filter = 1
+texture = SubResource("CanvasTexture_qmebq")
+hframes = 2
+metadata/_aseprite_wizard_config_ = {
+"i_mode": -1,
+"keep_anim_length": false,
+"layer": "",
+"o_ex_p": "",
+"o_folder": "res://art/environment/",
+"o_name": "breakable_door_n",
+"only_visible": true,
+"op_exp": false,
+"player": "AnimationPlayer",
+"source": "res://art/environment/door2.aseprite"
+}

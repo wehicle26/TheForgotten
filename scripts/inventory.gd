@@ -16,3 +16,5 @@ func insert(item: InventoryItem):
 		flashlight = true
 	if item.name == "blaster":
 		blaster = true
+	
+	emit_changed()

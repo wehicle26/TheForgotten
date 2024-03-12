@@ -17,6 +17,7 @@ func _input(_event):
 
 
 func enter():
+	player.can_shoot = true
 	player.speed = player.walk_speed
 	player.animation_player.play("Walk_Shoot")
 	#player.gun.fire_gun()

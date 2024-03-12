@@ -51,7 +51,10 @@ position = Vector2(1, -0.5)
 shape = SubResource("RectangleShape2D_xk5k6")
 
 [node name="LineOfSight" parent="." index="5"]
-max_view_distance = 500
+rotation = 1.5708
+cone_of_vision = 0.098
+angle_between_rays = 0.012
+max_view_distance = 550
 
 [node name="Sprite2D" parent="." index="8"]
 texture_filter = 1

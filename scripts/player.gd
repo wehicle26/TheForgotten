@@ -38,11 +38,12 @@ var knockback = Vector2.ZERO
 var isPlaying = true
 var input_dir: Vector2
 var has_gun: bool = false
-var current_weapon = "blaster"
+var current_weapon = "crowbar"
 var knockback_force = 500
 var attack_position = 0
 var stun_time = .25
-var flashlight: Light
+var flashlight: Light 
+var can_shoot: bool = false
 
 var shake_strength: float = 0.0
 var rand = RandomNumberGenerator.new()
@@ -139,14 +140,10 @@ func get_input():
 	input_dir = Input.get_vector("move_left", "move_right", "move_up", "move_down")
 	velocity = input_dir * speed + knockback
 				
-	if (
-	Input.is_action_pressed("shoot")
-	and inventory.blaster
-	and current_weapon == "blaster"
-	and (state_machine.current_state == "playerShoot"
-	or state_machine.current_state == "playerWalkShoot")
-	):
+	if Input.is_action_pressed("shoot") and inventory.blaster and (state_machine.current_state.name == "PlayerShoot" or state_machine.current_state.name == "PlayerWalkShoot"):
 		gun.fire_gun()
+	else:
+		can_shoot = false
 		
 	return input_dir
 

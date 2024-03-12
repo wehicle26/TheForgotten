@@ -6,12 +6,16 @@ enum { PROLOGUE, LEVEL_1 }
 @onready var player_spawn_location = $PlayerSpawnLocation
 @onready var entities = $Entities
 @onready var animation_player = $AnimationPlayer
+@onready var space = $Space
+@onready var grain = $Grain
 
 var PlayerScene: PackedScene = preload("res://scenes/Player.tscn")
 var player: Player
 
 
 func _ready():
+	space.visible = true
+	grain.visible = true
 	SoundManager.play_main_loop(SoundManager.MAIN_LOOP_CURIOUS)
 	#s.play("Intro")
 	#await cutscene_player.animation_finished
@@ -26,16 +30,14 @@ func _ready():
 
 	animation_player.play("fade_in")
 	await animation_player.animation_finished
-s
 
 func _on_exit_cryo_body_exited(body):
 	if body is Player:
 		SoundManager.set_main_loop_parameter(SoundManager.MAIN_LOOP_EERIE)
 		get_tree().call_group("Cryo_Light", "turn_off")
-		get_tree().call_group("Trick_Light", "turn_on")
+		#get_tree().call_group("Trick_Light", "turn_on")
 		SoundManager.set_footstep_parameter("event:/footsteps_hallway")
-		if GlobalState.encounter1:
-			get_tree().call_group("Hallway_Light", "turn_on")
+		get_tree().call_group("Hallway_Light", "turn_on")
 
 
 func _on_enter_cryo_body_exited(body):
@@ -90,3 +92,20 @@ func _on_enter_medical_body_exited(body):
 	if body is Player:
 		SoundManager.set_main_loop_parameter(SoundManager.MAIN_LOOP_GARBLED)
 		SoundManager.set_footstep_parameter("event:/footsteps_medical")
+
+
+func _on_event_1_body_exited(body):
+	if body is Player and not GlobalState.encounter1:
+		GlobalState.encounter1 = true
+		get_tree().call_group("Hallway_Light", "turn_off")
+		await get_tree().create_timer(0.2).timeout
+		get_tree().call_group("Hallway_Light", "turn_on")
+		SoundManager.stop_main_loop()
+		SoundManager.play_custom_sound(player.global_transform, "event:/stinger1", 0.9)
+		var glitch: CanvasLayer = get_tree().get_first_node_in_group("Glitch")
+		glitch.visible = true
+		get_tree().call_group("goo", "show_goo")
+		await get_tree().create_timer(5).timeout
+		glitch.visible = false
+		SoundManager.play_main_loop(SoundManager.MAIN_LOOP_CURIOUS)
+		get_tree().call_group("goo", "hide_goo")

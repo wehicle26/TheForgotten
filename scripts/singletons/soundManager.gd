@@ -105,7 +105,8 @@ func initialize_sounds():
 
 
 func play_main_loop(loop_level):
-	event = FmodServer.create_event_instance("event:/the_forgotten2.rpp")
+	if not is_instance_valid(event):
+		event = FmodServer.create_event_instance("event:/the_forgotten2.rpp")
 	event.set_volume(.3)
 	event.start()
 	set_main_loop_parameter(loop_level)

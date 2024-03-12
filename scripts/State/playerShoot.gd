@@ -17,6 +17,7 @@ func _input(_event):
 
 
 func enter():
+	player.can_shoot = true
 	player.speed = 0
 	player.animation_player.play("Shoot")
 	#player.gun.fire_gun()
@@ -29,7 +30,6 @@ func update(_delta):
 func physics_update(_delta):
 	if DialogueManager.is_dialogue_active:
 		return
-						
 
 	var input_dir = player.get_input()
 	player.look_at(player.get_global_mouse_position())

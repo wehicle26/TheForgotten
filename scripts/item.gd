@@ -13,6 +13,7 @@ var interact: Callable = func():
 
 func collect(inventory: Inventory):
 	inventory.insert(itemRes)
+	SoundManager.play_custom_sound(global_transform, "event:/item_pickup", 0.7)
 	queue_free()
 
 

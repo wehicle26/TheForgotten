@@ -963,6 +963,7 @@ one_shot = true
 explosiveness = 1.0
 
 [node name="CanvasLayer" type="CanvasLayer" parent="."]
+layer = 2
 
 [node name="Barframebg" type="Sprite2D" parent="CanvasLayer"]
 position = Vector2(30.5, 11.25)

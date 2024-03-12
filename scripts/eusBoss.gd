@@ -69,9 +69,9 @@ func smooth_look(delta):
 	var angle_delta = rotation_speed * delta
 	angle = lerp_angle(r, angle, 1.0)
 	angle = clamp(angle, r - angle_delta, r + angle_delta)
-	sprite_2d.global_rotation = angle
-	hitbox.global_rotation = angle
-	collision_shape_2d.global_rotation = angle
+	#sprite_2d.global_rotation = angle
+	#hitbox.global_rotation = angle
+	#collision_shape_2d.global_rotation = angle
 
 func _player_spotted():
 	is_player_spotted = true
