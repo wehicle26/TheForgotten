@@ -13,7 +13,7 @@ func _freeze_player():
 func _input(_event):
 	if Input.is_action_pressed("run"):
 		transitioned.emit(self, "playerRun")
-	if Input.is_action_pressed("shoot") and player.inventory.crowbar:
+	if Input.is_action_pressed("shoot") and player.inventory.crowbar and player.current_weapon == "crowbar":
 		transitioned.emit(self, "playerAttack")
 	if Input.is_action_pressed("shoot") and player.inventory.blaster and player.current_weapon == "blaster":
 		player.idle_timer.stop()

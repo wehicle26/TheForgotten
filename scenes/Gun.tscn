@@ -312,8 +312,6 @@ explosiveness = 1.0
 [node name="Line2D" type="Line2D" parent="BulletSpawn"]
 self_modulate = Color(0.25098, 0.152941, 0.317647, 1)
 material = SubResource("ShaderMaterial_k6l7o")
-position = Vector2(2, 23)
-rotation = -1.57079
 points = PackedVector2Array(24, -2, 221, -2.00049)
 texture = ExtResource("5_x0sy1")
 texture_mode = 2
@@ -328,7 +326,10 @@ animation = &"shoot"
 enabled = false
 target_position = Vector2(0, -200)
 collide_with_areas = true
-collide_with_bodies = false
+
+[node name="RayCast2D2" type="RayCast2D" parent="BulletSpawn"]
+target_position = Vector2(0, -200)
+collision_mask = 256
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
 sprite_frames = SubResource("SpriteFrames_uo2ek")

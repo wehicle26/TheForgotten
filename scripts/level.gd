@@ -8,14 +8,19 @@ enum { PROLOGUE, LEVEL_1 }
 @onready var animation_player = $AnimationPlayer
 @onready var space = $Space
 @onready var grain = $Grain
+@onready var overlay = $Overlay
+@onready var blob_spawn_location = $BlobSpawnLocation
+
 
 var PlayerScene: PackedScene = preload("res://scenes/Player.tscn")
+var blobScene: PackedScene = preload("res://scenes/Blob.tscn")
 var player: Player
 
 
 func _ready():
 	space.visible = true
 	grain.visible = true
+	overlay.visible = true
 	SoundManager.play_main_loop(SoundManager.MAIN_LOOP_CURIOUS)
 	#s.play("Intro")
 	#await cutscene_player.animation_finished
@@ -92,6 +97,11 @@ func _on_enter_medical_body_exited(body):
 	if body is Player:
 		SoundManager.set_main_loop_parameter(SoundManager.MAIN_LOOP_GARBLED)
 		SoundManager.set_footstep_parameter("event:/footsteps_medical")
+		if not GlobalState.encounter3:
+			GlobalState.encounter3 = true
+			var blob = blobScene.instantiate()
+			entities.add_child(blob)
+			blob.global_position = blob_spawn_location.global_position
 
 
 func _on_event_1_body_exited(body):
@@ -107,5 +117,8 @@ func _on_event_1_body_exited(body):
 		get_tree().call_group("goo", "show_goo")
 		await get_tree().create_timer(5).timeout
 		glitch.visible = false
-		SoundManager.play_main_loop(SoundManager.MAIN_LOOP_CURIOUS)
 		get_tree().call_group("goo", "hide_goo")
+		get_tree().call_group("Hallway_Light", "turn_off")
+		await get_tree().create_timer(0.2).timeout
+		get_tree().call_group("Hallway_Light", "turn_on")
+		SoundManager.play_main_loop(SoundManager.MAIN_LOOP_CURIOUS)

@@ -1,4 +1,5 @@
 shader_type canvas_item;
+render_mode unshaded;
 
 uniform sampler2D NOISE_1: repeat_enable;
 uniform sampler2D NOISE_2: repeat_enable;

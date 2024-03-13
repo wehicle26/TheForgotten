@@ -10,6 +10,7 @@ signal out_of_ammo
 @onready var muzzle_flash = $BulletSpawn/MuzzleFlash
 @onready var line_2d = $BulletSpawn/Line2D
 @onready var ray_cast_2d = $BulletSpawn/RayCast2D
+@onready var ray_cast_2d_2 = $BulletSpawn/RayCast2D2
 @onready var gpu_particles_2d = $BulletSpawn/GPUParticles2D
 @onready var animated_sprite_2d = $AnimatedSprite2D
 @onready var reload_timer = $ReloadTimer
@@ -24,6 +25,7 @@ signal out_of_ammo
 
 var player: Player
 var bullets_in_clip
+var collision_point: Vector2
 var beam_speed = randf_range(0.4, 0.8)
 var beam_wobble = randf_range(0.05, 0.2)
 var beam_xStretch = randf_range(2, 4)
@@ -42,7 +44,9 @@ func _process(_delta):
 		#z_index = 0
 		#animated_sprite_2d.set_animation("holster")
 
+
 func _physics_process(_delta):
+		collision_point = ray_cast_2d_2.get_collision_point()
 		if ray_cast_2d.is_colliding() and ray_cast_2d.get_collider() is Hitbox:
 			var attack = Attack.new()
 			attack.attack_damage = attack_damage
@@ -103,6 +107,17 @@ func fire_gun():
 func shoot_laser():
 	#player.apply_shake()
 	gpu_particles_2d.emitting = true
+	#line_2d = Line2D.new()
+	#line_2d.position.x = 2
+	#line_2d.position.y = 23
+	#line_2d.rotation = -PI/2
+	line_2d.clear_points()
+	line_2d.add_point(ray_cast_2d.position)
+	if ray_cast_2d_2.is_colliding():
+		line_2d.add_point(to_local(collision_point))
+	else:
+		line_2d.add_point(Vector2(0, -200))
+		
 	beam_speed = randf_range(0.4, 0.8)
 	beam_wobble = randf_range(0.05, 0.2)
 	beam_xStretch = randf_range(2, 4)
@@ -122,6 +137,7 @@ func shoot_laser():
 	ray_cast_2d.enabled = true
 	await get_tree().create_timer(.2).timeout
 	line_2d.visible = false
+	#line_2d.queue_free()
 
 
 func spawn_bullet(pos, rot):

@@ -1,4 +1,4 @@
-[gd_scene load_steps=14 format=3 uid="uid://cpu2pabqnow4x"]
+[gd_scene load_steps=23 format=3 uid="uid://cpu2pabqnow4x"]
 
 [ext_resource type="Texture2D" uid="uid://c6p1hgjq0me8n" path="res://art/environment/breakable_door.png" id="1_2iic0"]
 [ext_resource type="Script" path="res://scripts/breakableDoor.gd" id="1_gjtk4"]
@@ -8,33 +8,53 @@
 [sub_resource type="CanvasItemMaterial" id="CanvasItemMaterial_4vcxw"]
 light_mode = 2
 
-[sub_resource type="OccluderPolygon2D" id="OccluderPolygon2D_pfmr8"]
-polygon = PackedVector2Array(-10, -48, 6, -48, 6, -24, 5, -24, 5, -19, 6, -19, 6, -18, 7, -18, 7, -16, 8, -16, 8, -10, 7, -10, 7, -4, 8, -4, 8, 3, 7, 3, 7, 9, 8, 9, 8, 16, 7, 16, 7, 18, 6, 18, 6, 19, 5, 19, 5, 24, 6, 24, 6, 48, -10, 48, -10, 34, -9, 34, -9, 33, -8, 33, -8, 32, -7, 32, -7, 31, -6, 31, -6, 27, -5, 27, -5, 26, -4, 26, -4, 25, -3, 25, -3, 24, -1, 24, -1, 1, 0, 1, 0, -1, -1, -1, -1, -24, -3, -24, -3, -25, -4, -25, -4, -26, -5, -26, -5, -27, -6, -27, -6, -31, -7, -31, -7, -32, -8, -32, -8, -33, -9, -33, -9, -34, -10, -34)
+[sub_resource type="OccluderPolygon2D" id="OccluderPolygon2D_pijym"]
+polygon = PackedVector2Array(5, -24, 5, -19, 6, -19, 6, -18, 7, -18, 7, -16, 8, -16, 8, -10, 7, -10, 7, -4, 8, -4, 8, 4, 7, 4, 7, 10, 8, 10, 8, 16, 7, 16, 7, 18, 6, 18, 6, 19, 5, 19, 5, 24, -1, 24, -1, 1, 0, 1, 0, -1, -1, -1, -1, -24)
+
+[sub_resource type="OccluderPolygon2D" id="OccluderPolygon2D_hce60"]
+polygon = PackedVector2Array(6, -48, 6, -24, -3, -24, -3, -25, -4, -25, -4, -26, -5, -26, -5, -27, -6, -27, -6, -31, -7, -31, -7, -32, -8, -32, -8, -33, -9, -33, -9, -34, -10, -34, -10, -48)
+
+[sub_resource type="OccluderPolygon2D" id="OccluderPolygon2D_ag7lx"]
+polygon = PackedVector2Array(6, 24, 6, 48, -10, 48, -10, 34, -9, 34, -9, 33, -8, 33, -8, 32, -7, 32, -7, 31, -6, 31, -6, 27, -5, 27, -5, 26, -4, 26, -4, 25, -3, 25, -3, 24)
+
+[sub_resource type="OccluderPolygon2D" id="OccluderPolygon2D_5b4b8"]
+polygon = PackedVector2Array(5, -24, 5, -23, 4, -23, 4, -22, 3, -22, 3, -21, 2, -21, 2, -18, 1, -18, 1, -15, 0, -15, 0, -14, -1, -14, -1, -13, -2, -13, -2, -12, -4, -12, -4, -11, -6, -11, -6, -10, -7, -10, -7, -8, -8, -8, -8, -6, -9, -6, -9, -5, -10, -5, -10, -6, -11, -6, -11, -7, -12, -7, -12, -9, -13, -9, -13, -10, -14, -10, -14, -11, -15, -11, -15, -12, -14, -12, -14, -14, -13, -14, -13, -15, -12, -15, -12, -16, -11, -16, -11, -17, -10, -17, -10, -18, -9, -18, -9, -19, -8, -19, -8, -20, -7, -20, -7, -21, -6, -21, -6, -22, -5, -22, -5, -23, -4, -23, -4, -24)
+
+[sub_resource type="OccluderPolygon2D" id="OccluderPolygon2D_bm7is"]
+polygon = PackedVector2Array(-24.1394, 5.41183, -24.115, 4.41213, -25.1147, 4.3877, -25.0658, 2.3883, -26.0655, 2.36386, -26.0167, 0.364462, -27.0164, 0.34003, -26.9919, -0.659672, -28.9913, -0.708537, -28.9669, -1.70824, -30.9663, -1.7571, -30.9419, -2.7568, -31.9416, -2.78124, -31.9172, -3.78094, -32.9169, -3.80537, -32.8924, -4.80507, -33.8921, -4.8295, -33.8188, -7.82861, -34.8185, -7.85304, -34.7452, -10.8521, -35.7449, -10.8766, -35.7205, -11.8763, -36.7202, -11.9007, -36.6958, -12.9004, -37.6955, -12.9248, -37.671, -13.9245, -28.6737, -13.7047, -28.6982, -12.705, -27.6985, -12.6805, -27.6985, -12.6805, -27.7229, -11.6808, -26.7232, -11.6564, -26.7476, -10.6567, -25.7479, -10.6323, -25.7724, -9.63255, -24.7726, -9.60812, -24.7971, -8.60842, -23.7974, -8.58399, -23.8218, -7.58429, -22.8221, -7.55985, -22.8465, -6.56015, -21.8468, -6.53572, -21.8713, -5.53602, -20.8716, -5.51159, -20.896, -4.51188, -19.8963, -4.48745, -19.9207, -3.48775, -18.921, -3.46332, -18.9455, -2.46362, -18.9699, -1.46391, -17.9702, -1.43948, -17.9946, -0.439781, -18.9943, -0.464213, -19.0188, 0.535488, -20.0185, 0.511055, -20.0429, 1.51076, -21.0426, 1.48632, -21.0915, 3.48573, -22.0912, 3.4613, -22.1156, 4.461, -23.1153, 4.43656, -23.1397, 5.43627)
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_ymuu6"]
-size = Vector2(16, 96)
+size = Vector2(15, 48)
 
-[sub_resource type="Curve" id="Curve_nfdls"]
-_data = [Vector2(0, 1), 0.0, 0.0, 0, 0, Vector2(1, 0), 0.0, 0.0, 0, 0]
+[sub_resource type="Curve" id="Curve_k0chp"]
+_data = [Vector2(0, 1), 0.0, 0.0, 0, 0, Vector2(1, 0.384615), 0.0, 0.0, 0, 0]
 point_count = 2
 
-[sub_resource type="CurveTexture" id="CurveTexture_5tuao"]
-curve = SubResource("Curve_nfdls")
+[sub_resource type="CurveTexture" id="CurveTexture_ndauy"]
+curve = SubResource("Curve_k0chp")
 
-[sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_7bq8o"]
+[sub_resource type="Gradient" id="Gradient_12gab"]
+interpolation_mode = 1
+offsets = PackedFloat32Array(0, 0.329897, 0.701031)
+colors = PackedColorArray(0.745098, 0.466667, 0.168627, 1, 0.909804, 0.756863, 0.439216, 1, 0.921569, 0.929412, 0.913725, 1)
+
+[sub_resource type="GradientTexture1D" id="GradientTexture1D_qmn1f"]
+gradient = SubResource("Gradient_12gab")
+
+[sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_mq2ye"]
 resource_local_to_scene = true
 particle_flag_disable_z = true
-emission_shape_offset = Vector3(7, 0, 0)
+particle_flag_damping_as_friction = true
 emission_shape_scale = Vector3(1, 1, 0)
-direction = Vector3(0, 1, 0)
-flatness = 0.5
-initial_velocity_min = 25.0
-initial_velocity_max = 50.0
+angle_min = -90.0
+angle_max = 90.0
+spread = 20.0
+initial_velocity_min = 100.0
+initial_velocity_max = 150.0
 gravity = Vector3(0, 0, 0)
-damping_min = 25.0
-damping_max = 50.0
-color = Color(0.505882, 0.592157, 0.588235, 1)
-alpha_curve = SubResource("CurveTexture_5tuao")
+damping_max = 11.584
+color_ramp = SubResource("GradientTexture1D_qmn1f")
+alpha_curve = SubResource("CurveTexture_ndauy")
 
 [sub_resource type="Animation" id="Animation_w7r0o"]
 length = 0.2
@@ -72,29 +92,50 @@ _data = {
 diffuse_texture = ExtResource("1_2iic0")
 normal_texture = ExtResource("4_b1xt6")
 
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_od5js"]
+size = Vector2(16, 24)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_dnpsa"]
+size = Vector2(16, 24)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_cqrmm"]
+size = Vector2(9, 48)
+
 [node name="BreakableDoor" type="StaticBody2D"]
 material = SubResource("CanvasItemMaterial_4vcxw")
 script = ExtResource("1_gjtk4")
 
 [node name="LightOccluder2D" type="LightOccluder2D" parent="."]
-occluder = SubResource("OccluderPolygon2D_pfmr8")
+occluder = SubResource("OccluderPolygon2D_pijym")
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
-position = Vector2(-2, 0)
-shape = SubResource("RectangleShape2D_ymuu6")
+[node name="LightOccluder2D2" type="LightOccluder2D" parent="."]
+occluder = SubResource("OccluderPolygon2D_hce60")
+
+[node name="LightOccluder2D3" type="LightOccluder2D" parent="."]
+occluder = SubResource("OccluderPolygon2D_ag7lx")
+
+[node name="LightOccluder2D4" type="LightOccluder2D" parent="."]
+visible = false
+occluder = SubResource("OccluderPolygon2D_5b4b8")
+
+[node name="LightOccluder2D5" type="LightOccluder2D" parent="."]
+visible = false
+position = Vector2(-33, 11)
+rotation = 3.11716
+occluder = SubResource("OccluderPolygon2D_bm7is")
 
 [node name="Hitbox" parent="." instance=ExtResource("3_dtg6w")]
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Hitbox"]
-position = Vector2(-2, 0)
+position = Vector2(3.5, 0)
 shape = SubResource("RectangleShape2D_ymuu6")
 
-[node name="RightFoot" type="GPUParticles2D" parent="."]
-visible = false
+[node name="Sparks" type="GPUParticles2D" parent="."]
+position = Vector2(8, 0)
 emitting = false
-amount = 4
-process_material = SubResource("ParticleProcessMaterial_7bq8o")
-lifetime = 0.5
+amount = 16
+process_material = SubResource("ParticleProcessMaterial_mq2ye")
+lifetime = 0.25
 one_shot = true
 explosiveness = 1.0
 
@@ -119,3 +160,15 @@ metadata/_aseprite_wizard_config_ = {
 "player": "AnimationPlayer",
 "source": "res://art/environment/door2.aseprite"
 }
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+position = Vector2(-2, -36)
+shape = SubResource("RectangleShape2D_od5js")
+
+[node name="CollisionShape2D2" type="CollisionShape2D" parent="."]
+position = Vector2(-2, 36)
+shape = SubResource("RectangleShape2D_dnpsa")
+
+[node name="CollisionShape2D3" type="CollisionShape2D" parent="."]
+position = Vector2(3.5, 0)
+shape = SubResource("RectangleShape2D_cqrmm")
