@@ -3,16 +3,20 @@ extends Control
 var current_level: Level
 var level_2: PackedScene = preload("res://scenes/Main.tscn")
 var intro: PackedScene = preload("res://scenes/Intro.tscn")
+var options = "res://scenes/Options.tscn"
 @onready var background = $Background
 @onready var button_container = $ButtonContainer
 @onready var animation_player = $AnimationPlayer
 
 
 func _ready():
-	SoundManager.play_main_loop(SoundManager.MAIN_LOOP_INTRO)
+	if not GlobalState.playing: 
+		SoundManager.play_main_loop(SoundManager.MAIN_LOOP_INTRO)
+		GlobalState.playing = true
 
 
 func _on_start_game_button_pressed():
+	SoundManager.play_custom_sound(null, "event:/ui_release", 0.2)
 	#current_level = intro.instantiate()
 	#current_level = level_2.instantiate()
 	animation_player.play("fade_out")
@@ -25,8 +29,22 @@ func _on_start_game_button_pressed():
 
 
 func _on_options_button_pressed():
-	pass  # Replace with function body.
+	SoundManager.play_custom_sound(null, "event:/ui_release", 0.2)
+	get_tree().change_scene_to_file(options)
 
 
 func _on_quit_button_pressed():
+	SoundManager.play_custom_sound(null, "event:/ui_release", 0.2)
 	get_tree().quit()
+
+
+func _on_options_button_mouse_entered():
+	SoundManager.play_custom_sound(null, "event:/ui_hover", 0.2)
+
+
+func _on_start_game_button_mouse_entered():
+	SoundManager.play_custom_sound(null, "event:/ui_hover", 0.2)
+
+
+func _on_quit_button_mouse_entered():
+	SoundManager.play_custom_sound(null, "event:/ui_hover", 0.2)

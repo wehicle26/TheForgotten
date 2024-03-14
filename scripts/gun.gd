@@ -11,6 +11,7 @@ signal out_of_ammo
 @onready var line_2d = $BulletSpawn/Line2D
 @onready var ray_cast_2d = $BulletSpawn/RayCast2D
 @onready var ray_cast_2d_2 = $BulletSpawn/RayCast2D2
+@onready var laser_hitbox = $BulletSpawn/LaserHitbox
 @onready var gpu_particles_2d = $BulletSpawn/GPUParticles2D
 @onready var animated_sprite_2d = $AnimatedSprite2D
 @onready var reload_timer = $ReloadTimer
@@ -46,15 +47,16 @@ func _process(_delta):
 
 
 func _physics_process(_delta):
-		collision_point = ray_cast_2d_2.get_collision_point()
-		if ray_cast_2d.is_colliding() and ray_cast_2d.get_collider() is Hitbox:
-			var attack = Attack.new()
-			attack.attack_damage = attack_damage
-			attack.knockback_force = knockback_force
-			attack.attack_position = global_position
-			attack.stun_time = stun_time
-			ray_cast_2d.get_collider().damage(attack)
-			ray_cast_2d.enabled = false
+	collision_point = ray_cast_2d_2.get_collision_point()
+		
+		#if ray_cast_2d.is_colliding() and ray_cast_2d.get_collider() is Hitbox:
+			#var attack = Attack.new()
+			#attack.attack_damage = attack_damage
+			#attack.knockback_force = knockback_force
+			#attack.attack_position = global_position
+			#attack.stun_time = stun_time
+			#ray_cast_2d.get_collider().damage(attack)
+			#ray_cast_2d.enabled = false
 
 
 func reload():
@@ -134,7 +136,15 @@ func shoot_laser():
 	tween3.tween_property(self, "beam_xStretch", beam_xStretch - 1, .2).set_trans(Tween.TRANS_BACK)
 	
 	line_2d.visible = true
-	ray_cast_2d.enabled = true
+	#ray_cast_2d.enabled = true
+	for area in laser_hitbox.get_overlapping_areas():
+		if area is Hitbox:
+			var attack = Attack.new()
+			attack.attack_damage = attack_damage
+			attack.knockback_force = knockback_force
+			attack.attack_position = global_position
+			attack.stun_time = stun_time
+			area.damage(attack)
 	await get_tree().create_timer(.2).timeout
 	line_2d.visible = false
 	#line_2d.queue_free()

@@ -104,7 +104,7 @@ func _on_aggro_timer_timeout():
 
 
 func _on_hitbox_area_entered(area):
-	if area is Hitbox:
+	if area is Hitbox and not area.get_parent() is Enemy:
 		hit_player.emit()
 		var attack = Attack.new()
 		attack.attack_damage = attack_damage

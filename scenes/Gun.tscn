@@ -1,4 +1,4 @@
-[gd_scene load_steps=48 format=3 uid="uid://uxy816amcxf0"]
+[gd_scene load_steps=49 format=3 uid="uid://uxy816amcxf0"]
 
 [ext_resource type="Texture2D" uid="uid://b50yos60kjpva" path="res://art/player/blaster.png" id="1_137mn"]
 [ext_resource type="Script" path="res://scripts/gun.gd" id="1_a1byo"]
@@ -235,6 +235,9 @@ animations = [{
 "speed": 20.0
 }]
 
+[sub_resource type="SegmentShape2D" id="SegmentShape2D_l3ugm"]
+b = Vector2(0, -200)
+
 [sub_resource type="AtlasTexture" id="AtlasTexture_ix7rh"]
 atlas = ExtResource("1_137mn")
 region = Rect2(96, 0, 32, 32)
@@ -323,6 +326,7 @@ sprite_frames = SubResource("SpriteFrames_s7cbo")
 animation = &"shoot"
 
 [node name="RayCast2D" type="RayCast2D" parent="BulletSpawn"]
+visible = false
 enabled = false
 target_position = Vector2(0, -200)
 collide_with_areas = true
@@ -330,6 +334,11 @@ collide_with_areas = true
 [node name="RayCast2D2" type="RayCast2D" parent="BulletSpawn"]
 target_position = Vector2(0, -200)
 collision_mask = 256
+
+[node name="LaserHitbox" type="Area2D" parent="BulletSpawn"]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="BulletSpawn/LaserHitbox"]
+shape = SubResource("SegmentShape2D_l3ugm")
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
 sprite_frames = SubResource("SpriteFrames_uo2ek")

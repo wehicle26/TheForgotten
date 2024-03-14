@@ -196,6 +196,16 @@ rotation = 2.90358
 target_position = Vector2(0, 75)
 collision_mask = 2
 
+[node name="FirstRay5" type="RayCast2D" parent="Rays" index="4"]
+rotation = 2.90358
+target_position = Vector2(9.97057, 73.4206)
+collision_mask = 2
+
+[node name="FirstRay6" type="RayCast2D" parent="Rays" index="5"]
+rotation = 2.90358
+target_position = Vector2(-42.0068, 62.8683)
+collision_mask = 2
+
 [node name="TrickItem" type="Sprite2D" parent="." index="7"]
 material = SubResource("ShaderMaterial_wpgrl")
 rotation = 2.51152
