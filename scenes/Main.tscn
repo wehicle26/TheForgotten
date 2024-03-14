@@ -860,7 +860,6 @@ visible = false
 navigation_polygon = SubResource("NavigationPolygon_ls1gp")
 
 [node name="NavigationRegion2D10" type="NavigationRegion2D" parent="Navigation"]
-visible = false
 navigation_polygon = SubResource("NavigationPolygon_f3kmn")
 
 [node name="NavigationRegion2D11" type="NavigationRegion2D" parent="Navigation"]

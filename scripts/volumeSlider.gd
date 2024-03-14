@@ -1,7 +1,15 @@
 extends HSlider
 
+var master: FmodBus
+var music: FmodBus
+var fx: FmodBus
+
 func _ready():
-	var master: FmodBus = FmodServer.get_bus("bus:/")
-	var busses: FmodBank
-	print(FmodServer.get_all_banks())
-	#print(busses.get_bus_list())
+	master = FmodServer.get_bus("bus:/")
+	music = FmodServer.get_bus("bus:/Music")
+	fx = FmodServer.get_bus("bus:/Fx")
+	value = GlobalState.master_volume
+
+
+func _on_value_changed(value):
+	master.volume = value

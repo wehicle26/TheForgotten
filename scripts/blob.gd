@@ -120,4 +120,4 @@ func _ready():
 
 
 func play_enemy_move_sound():
-	SoundManager.play_custom_sound(global_transform, "events:/blob_move", 0.6)
+	SoundManager.play_custom_sound(global_transform, "event:/blob_move", 0.6)
