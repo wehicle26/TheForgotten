@@ -18,6 +18,8 @@ func damage(attack: Attack):
 	if body.has_method("damage"):
 		body.damage()
 	health -= attack.attack_damage
+	if body is Blob:
+		body.label.text = str(health)
 	var knockback_direction = (global_position - attack.attack_position).normalized()
 	body.velocity = knockback_direction * attack.knockback_force
 	healthChanged.emit()

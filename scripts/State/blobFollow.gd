@@ -21,7 +21,7 @@ func enter():
 	player = get_tree().get_first_node_in_group("Player")
 
 
-func physics_update(delta):
+func physics_update(_delta):
 	var direction = player.global_position - enemy.global_position
 	#enemy.path_to_player()
 	enemy.calculate_direction()

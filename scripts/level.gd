@@ -100,7 +100,7 @@ func _on_enter_medical_body_exited(body):
 		if not GlobalState.encounter3:
 			GlobalState.encounter3 = true
 			var blob = blobScene.instantiate()
-			entities.add_child(blob)
+			entities.call_deferred("add_child", blob)
 			blob.global_position = blob_spawn_location.global_position
 
 

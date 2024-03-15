@@ -178,32 +178,37 @@ libraries = {
 
 [node name="FirstRay" type="RayCast2D" parent="Rays" index="0"]
 rotation = -3.05776
-target_position = Vector2(0, 75)
+target_position = Vector2(-4.68128, 75.6577)
 collision_mask = 2
 
 [node name="FirstRay2" type="RayCast2D" parent="Rays" index="1"]
 rotation = -2.90755
-target_position = Vector2(0, 75)
+target_position = Vector2(-4.47065, 76.1118)
 collision_mask = 2
 
 [node name="FirstRay3" type="RayCast2D" parent="Rays" index="2"]
 rotation = 3.06893
-target_position = Vector2(0, 75)
+target_position = Vector2(4.5287, 75.5281)
 collision_mask = 2
 
 [node name="FirstRay4" type="RayCast2D" parent="Rays" index="3"]
 rotation = 2.90358
-target_position = Vector2(0, 75)
+target_position = Vector2(4.40421, 75.1572)
 collision_mask = 2
 
 [node name="FirstRay5" type="RayCast2D" parent="Rays" index="4"]
 rotation = 2.90358
-target_position = Vector2(9.97057, 73.4206)
+target_position = Vector2(16.273, 72.8916)
 collision_mask = 2
 
 [node name="FirstRay6" type="RayCast2D" parent="Rays" index="5"]
 rotation = 2.90358
-target_position = Vector2(-42.0068, 62.8683)
+target_position = Vector2(-47.3661, 59.5101)
+collision_mask = 2
+
+[node name="FirstRay7" type="RayCast2D" parent="Rays" index="6"]
+rotation = 2.90358
+target_position = Vector2(-17.9187, 73.8574)
 collision_mask = 2
 
 [node name="TrickItem" type="Sprite2D" parent="." index="7"]

@@ -31,6 +31,7 @@ signal unfreeze
 const CROSSHAIR_004 = preload("res://art/player/crosshair004.png")
 var FlashlightScene: PackedScene = preload("res://scenes/Flashlight.tscn")
 var GunScene: PackedScene = preload("res://scenes/Gun.tscn")
+var main = "res://scenes/Main.tscn"
 
 var collision: bool = false
 var speed = 0
@@ -60,8 +61,16 @@ func randomOffset():
 	)
 
 
+func _respawn():
+	GlobalState.encounter1 = false
+	GlobalState.encounter2 = false
+	GlobalState.encounter3 = false
+	get_tree().change_scene_to_file(main)
+
+
 func _ready():
 	#gun.get_node("ArmTimer").timeout.connect(_lower_arm)
+	health.game_over.connect(_respawn)
 	sprite_2d.material.set_shader_parameter("active", false)
 	SoundManager.initialize_player_sounds(self)
 	inventory = Inventory.new()
@@ -131,6 +140,11 @@ func _input(event):
 	#gun.num_bullets = 4
 	#if event.is_action_pressed("5"):
 	#gun.num_bullets = 5
+	if event.is_action_pressed("switch_weapon"):
+		if current_weapon == "blaster":
+			current_weapon = "crowbar"
+		else:
+			current_weapon = "blaster"
 	if event.is_action_pressed("flashlight_toggle") and inventory.flashlight:
 		flashlight.toggle()
 

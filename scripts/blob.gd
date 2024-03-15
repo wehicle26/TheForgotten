@@ -1,9 +1,12 @@
 extends Enemy
 
+class_name Blob
 signal split
 
 @onready var danger: Node2D = $Danger
 @onready var hitbox = $Hitbox
+@onready var health = $Health
+@onready var label = $Label
 
 var split_count = 0
 var current_scale = 1
@@ -22,9 +25,8 @@ var direction_array = [
 ]
 
 func kill(_splat_direction):
-	
 	SoundManager.play_custom_sound(global_transform, "event:/blob_splat", 0.8)
-	if split_count < 3:
+	if split_count < 2:
 		split.emit()
 		split_count += 1
 	else:
@@ -38,7 +40,7 @@ func split_blob():
 	animation_player.play("Split")
 	await animation_player.animation_finished
 	var entities = get_tree().get_first_node_in_group("Entities")
-	var new_blob = blobScene.instantiate()
+	var new_blob: Blob = blobScene.instantiate()
 	default_speed += 10
 	new_blob.default_speed = default_speed
 	new_blob.split_count = split_count
@@ -47,6 +49,8 @@ func split_blob():
 	new_blob.scale = Vector2(current_scale, current_scale)
 	new_blob.global_position = position + Vector2(15, 0)
 	entities.add_child(new_blob)
+	new_blob.health.health -= 2 * split_count
+	#new_blob.health.max_health -= 2
 	
 	new_blob = blobScene.instantiate()
 	new_blob.split_count = split_count
@@ -55,6 +59,8 @@ func split_blob():
 	new_blob.scale = Vector2(current_scale, current_scale)
 	new_blob.global_position = position + Vector2(-15, 0)
 	entities.add_child(new_blob)
+	new_blob.health.health -= 2 * split_count
+	#new_blob.health.max_health -= 2
 	
 	queue_free()
 
@@ -89,13 +95,13 @@ func calculate_direction():
 				danger_array[0] = 2
 		i += 1
 	
-	var context_array: Array
+	var context_array: Array = []
 	i = 0
 	for dir in interest_array:
 		context_array.append(dir - danger_array[i])
 		i += 1
-	var max = context_array.max()
-	var best_direction: Vector2  = direction_array[context_array.find(max)]
+	var max_value = context_array.max()
+	var best_direction: Vector2  = direction_array[context_array.find(max_value)]
 	velocity = direction * speed
 	var steering_force: Vector2 = (best_direction * speed) - velocity
 	velocity += steering_force
@@ -120,4 +126,4 @@ func _ready():
 
 
 func play_enemy_move_sound():
-	SoundManager.play_custom_sound(global_transform, "event:/blob_move", 0.6)
+	SoundManager.play_custom_sound(global_transform, "event:/blob_move", 0.2)

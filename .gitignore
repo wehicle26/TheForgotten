@@ -6,3 +6,4 @@ bin/
 .vscode/launch.json
 .vscode/settings.json
 .vscode/tasks.json
+addons/fmod/libs/windows/~libGodotFmod.windows.editor.x86_64.dll
