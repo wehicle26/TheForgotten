@@ -1,4 +1,4 @@
-[gd_scene load_steps=56 format=3 uid="uid://blhmkefans43h"]
+[gd_scene load_steps=58 format=3 uid="uid://blhmkefans43h"]
 
 [ext_resource type="Script" path="res://scripts/player.gd" id="1_ucx17"]
 [ext_resource type="Texture2D" uid="uid://bvrqydcwjh4ma" path="res://art/player/Spaceman_old.png" id="2_5f2j7"]
@@ -8,6 +8,8 @@
 [ext_resource type="Texture2D" uid="uid://dwyd5hjqgn0c1" path="res://art/player/Spaceman_old_n.png" id="3_bmv8b"]
 [ext_resource type="Texture2D" uid="uid://dxuikfhogasjc" path="res://art/environment/BarframeEmpty.png" id="3_p5c8f"]
 [ext_resource type="Texture2D" uid="uid://bbojnt5mcfcfb" path="res://art/environment/invbox.png" id="4_acot0"]
+[ext_resource type="Texture2D" uid="uid://c28hjfcxxold1" path="res://ui/tile_0123.png" id="4_gsq5d"]
+[ext_resource type="Theme" uid="uid://cdpahudvr7n3t" path="res://ui/Ui.tres" id="4_q16au"]
 [ext_resource type="Script" path="res://scripts/playerCamera.gd" id="5_tm3ug"]
 [ext_resource type="Texture2D" uid="uid://o8apxff56yf3" path="res://art/player/spaceman.png" id="9_4p7br"]
 [ext_resource type="Texture2D" uid="uid://rwveppyb3ifm" path="res://art/player/Spaceman_v2_feet.png" id="9_cbwmm"]
@@ -961,6 +963,33 @@ process_material = SubResource("ParticleProcessMaterial_0cq5t")
 lifetime = 0.5
 one_shot = true
 explosiveness = 1.0
+
+[node name="Tutorial" type="CanvasLayer" parent="."]
+layer = 3
+
+[node name="HBoxContainer" type="HBoxContainer" parent="Tutorial"]
+modulate = Color(1, 1, 1, 0)
+top_level = true
+anchors_preset = -1
+anchor_left = 0.553
+anchor_top = 0.556
+anchor_right = 0.769
+anchor_bottom = 0.644
+offset_left = 0.0399933
+offset_top = -0.0800095
+offset_right = -0.0800171
+offset_bottom = 0.0799866
+grow_horizontal = 0
+grow_vertical = 2
+theme = ExtResource("4_q16au")
+
+[node name="TextureRect" type="TextureRect" parent="Tutorial/HBoxContainer"]
+layout_mode = 2
+texture = ExtResource("4_gsq5d")
+
+[node name="Label" type="Label" parent="Tutorial/HBoxContainer"]
+layout_mode = 2
+text = "to attack"
 
 [node name="CanvasLayer" type="CanvasLayer" parent="."]
 layer = 2

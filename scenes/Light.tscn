@@ -9,7 +9,7 @@ diffuse_texture = ExtResource("1_njchp")
 normal_texture = ExtResource("2_vy16v")
 
 [node name="Light" type="Sprite2D" groups=["Light"]]
-z_index = 4
+z_index = 10
 texture_filter = 1
 texture = SubResource("CanvasTexture_1cd5k")
 script = ExtResource("1_b7ajr")

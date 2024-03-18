@@ -14,6 +14,9 @@ signal unfreeze
 @export var random_strength: float = 0.5
 @export var shake_fade: float = 5.0
 
+@onready var h_box_container = $Tutorial/HBoxContainer
+@onready var tut_sprite = $Tutorial/HBoxContainer/TextureRect
+@onready var label = $Tutorial/HBoxContainer/Label
 @onready var state_machine = $StateMachine
 @onready var hitbox = $Hitbox
 @onready var idle_timer = $IdleTimer
@@ -27,7 +30,10 @@ signal unfreeze
 @onready var currentHealth: int = health.max_health
 @onready var max_Health: int = health.max_health
 @onready var gun = $Gun
+@onready var canvas_layer = $CanvasLayer
 
+const left_click_sprite = preload("res://ui/tile_0077.png")
+const toggle_sprite = preload("res://ui/tile_0123.png")
 const CROSSHAIR_004 = preload("res://art/player/crosshair004.png")
 var FlashlightScene: PackedScene = preload("res://scenes/Flashlight.tscn")
 var GunScene: PackedScene = preload("res://scenes/Gun.tscn")
@@ -39,15 +45,45 @@ var knockback = Vector2.ZERO
 var isPlaying = true
 var input_dir: Vector2
 var has_gun: bool = false
-var current_weapon = "blaster"
+var current_weapon = "crowbar"
 var knockback_force = 500
 var attack_position = 0
 var stun_time = .25
 var flashlight: Light 
 var can_shoot: bool = false
+var can_run: bool = true
 
 var shake_strength: float = 0.0
 var rand = RandomNumberGenerator.new()
+
+func show_tut(tut):
+	if tut == "crowbar":
+		tut_sprite.texture = left_click_sprite
+		label.text = "attack"
+		h_box_container.visible = true
+		var tween = get_tree().create_tween()
+		tween.tween_property(h_box_container, "modulate", Color.WHITE, 3).set_trans(Tween.TRANS_BACK)
+		await tween.finished
+		tween = get_tree().create_tween()
+		tween.tween_property(h_box_container, "modulate", Color.TRANSPARENT, 3).set_trans(Tween.TRANS_BACK)
+		await tween.finished
+		label.text = "hold"
+		tween = get_tree().create_tween()
+		tween.tween_property(h_box_container, "modulate", Color.WHITE, 3).set_trans(Tween.TRANS_BACK)
+		await tween.finished
+		tween = get_tree().create_tween()
+		tween.tween_property(h_box_container, "modulate", Color.TRANSPARENT, 3).set_trans(Tween.TRANS_BACK)
+		
+	if tut == "flashlight":
+		tut_sprite.texture = toggle_sprite
+		label.text = "toggle"
+		h_box_container.visible = true
+		var tween = get_tree().create_tween()
+		tween.tween_property(h_box_container, "modulate", Color.WHITE, 3).set_trans(Tween.TRANS_BACK)
+		await tween.finished
+		tween = get_tree().create_tween()
+		tween.tween_property(h_box_container, "modulate", Color.TRANSPARENT, 3).set_trans(Tween.TRANS_BACK)
+		await tween.finished
 
 
 func apply_shake():
@@ -70,9 +106,11 @@ func _respawn():
 
 func _ready():
 	#gun.get_node("ArmTimer").timeout.connect(_lower_arm)
+	can_run = false
 	health.game_over.connect(_respawn)
 	sprite_2d.material.set_shader_parameter("active", false)
 	SoundManager.initialize_player_sounds(self)
+	SoundManager.inittialize_speech_sound(self)
 	inventory = Inventory.new()
 	inventory.changed.connect(_inventory_changed)
 

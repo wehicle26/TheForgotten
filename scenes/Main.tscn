@@ -1,7 +1,9 @@
-[gd_scene load_steps=47 format=3 uid="uid://b71gis6vgkvkg"]
+[gd_scene load_steps=53 format=3 uid="uid://b71gis6vgkvkg"]
 
 [ext_resource type="Script" path="res://scripts/level.gd" id="1_6u7sh"]
 [ext_resource type="PackedScene" uid="uid://bob88w6sefucj" path="res://scenes/Environment.tscn" id="1_halep"]
+[ext_resource type="Script" path="res://scripts/pauseMenu.gd" id="2_dal01"]
+[ext_resource type="Texture2D" uid="uid://cpfwf80v78ypw" path="res://ui/bubble.png" id="2_j5ncj"]
 [ext_resource type="PackedScene" uid="uid://cyj8triea8w13" path="res://scenes/Crowbar.tscn" id="3_ax4cu"]
 [ext_resource type="PackedScene" uid="uid://c7u77qm7btd2s" path="res://scenes/CryoBed.tscn" id="4_0fems"]
 [ext_resource type="PackedScene" uid="uid://ch0016cku2p02" path="res://scenes/Light.tscn" id="4_7cj7q"]
@@ -15,6 +17,7 @@
 [ext_resource type="PackedScene" uid="uid://8bdjhnsaqthg" path="res://scenes/hallway_dead_guy.tscn" id="10_p5tb0"]
 [ext_resource type="PackedScene" uid="uid://cuee4phykn8mk" path="res://scenes/PowerCore.tscn" id="10_quu3m"]
 [ext_resource type="PackedScene" uid="uid://c1ks08dpslaga" path="res://scenes/Note.tscn" id="12_ylmx7"]
+[ext_resource type="PackedScene" uid="uid://cg4o4mpdmhkyp" path="res://scenes/EscapePod.tscn" id="14_fifaw"]
 [ext_resource type="Shader" path="res://shaders/grain.gdshader" id="15_ui16x"]
 [ext_resource type="PackedScene" uid="uid://d2eli84d2uqkm" path="res://scenes/InsaneCrew.tscn" id="16_ee52r"]
 [ext_resource type="PackedScene" uid="uid://bv8yf3ytm2yc1" path="res://scenes/CryoMachine.tscn" id="16_idydh"]
@@ -27,14 +30,26 @@
 resource_local_to_scene = true
 b = Vector2(0, 100)
 
+[sub_resource type="SegmentShape2D" id="SegmentShape2D_70311"]
+b = Vector2(125, 0)
+
+[sub_resource type="SegmentShape2D" id="SegmentShape2D_q6x6p"]
+b = Vector2(0, 90)
+
+[sub_resource type="SegmentShape2D" id="SegmentShape2D_1ranx"]
+b = Vector2(0, 100)
+
 [sub_resource type="SegmentShape2D" id="SegmentShape2D_81hyv"]
 b = Vector2(50, 0)
 
 [sub_resource type="SegmentShape2D" id="SegmentShape2D_2sq0y"]
 b = Vector2(50, 0)
 
-[sub_resource type="SegmentShape2D" id="SegmentShape2D_70311"]
-b = Vector2(125, 0)
+[sub_resource type="SegmentShape2D" id="SegmentShape2D_b3rao"]
+b = Vector2(0, 45)
+
+[sub_resource type="SegmentShape2D" id="SegmentShape2D_f08v3"]
+b = Vector2(90, 0)
 
 [sub_resource type="NavigationPolygon" id="NavigationPolygon_x2io3"]
 vertices = PackedVector2Array(462, 156, 462, 302, 388, 302, 274, 188, 274, 142, 388, 50, 238, 142, 238, 82, 274, 82, 274, 50, 434, 4, 434, -262, 494, -262, 494, -124, 526, -92, 526, 92)
@@ -85,15 +100,6 @@ polygons = Array[PackedInt32Array]([PackedInt32Array(0, 1, 2, 3), PackedInt32Arr
 outlines = Array[PackedVector2Array]([PackedVector2Array(-1248, 0, -1184, 0, -1184, -8, -1120, -8, -1120, -112, -1128, -112, -1128, -128, -1216, -216, -1248, -216)])
 source_geometry_mode = 1
 source_geometry_group_name = &"navigation_polygon_source_group"
-
-[sub_resource type="NavigationPolygon" id="NavigationPolygon_22n00"]
-vertices = PackedVector2Array(269, 372, -491, 372, -491, -292, 269, -292)
-polygons = Array[PackedInt32Array]([PackedInt32Array(0, 1, 2, 3)])
-outlines = Array[PackedVector2Array]([PackedVector2Array(-495, -296, -495, 376, 273, 376, 273, -296)])
-parsed_geometry_type = 1
-source_geometry_mode = 1
-source_geometry_group_name = &"navigation_polygon_source_group"
-agent_radius = 4.0
 
 [sub_resource type="NavigationPolygon" id="NavigationPolygon_ls1gp"]
 vertices = PackedVector2Array(-574, 338, -574, 302, -546, 302, -546, 338, -558, 540, -558, 412, -526, 338, -526, 526, -540, 558, -350, 526, -350, 502, -322, 502, -322, 526, -324, 558, -306, 526, -306, 540, -604, 366, -676, 338, -668, 366, -764, 270, -772, 242, -962, 242, -988, 270, -1006, 252, -1006, 242, -990, 242, -962, 206, -990, 206)
@@ -229,16 +235,21 @@ visibility_layer = 3
 z_index = 10
 color = Color(0, 0, 0, 1)
 
-[node name="HUD" type="Control" parent="."]
-layout_mode = 3
-anchors_preset = 0
-offset_right = 40.0
-offset_bottom = 40.0
+[node name="PauseMenu" type="CanvasLayer" parent="."]
+process_mode = 2
+layer = 50
+visible = false
+script = ExtResource("2_dal01")
 
-[node name="TextureProgressBar" type="TextureProgressBar" parent="HUD"]
-layout_mode = 0
-offset_right = 40.0
-offset_bottom = 40.0
+[node name="TextureRect" type="TextureRect" parent="PauseMenu"]
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_right = 8.0
+offset_bottom = 20.0
+grow_horizontal = 2
+grow_vertical = 2
+texture = ExtResource("2_j5ncj")
 
 [node name="Environment" parent="." instance=ExtResource("1_halep")]
 
@@ -248,7 +259,7 @@ z_index = 5
 [node name="Crowbar" parent="Environment/Items" instance=ExtResource("3_ax4cu")]
 z_index = -2
 material = null
-position = Vector2(-599, -231)
+position = Vector2(-602, -207)
 
 [node name="FlashlightItem" parent="Environment/Items" instance=ExtResource("5_6ojie")]
 material = null
@@ -264,65 +275,65 @@ position = Vector2(-288, 513)
 [node name="CryoMachine" parent="Environment/Inanimate" instance=ExtResource("16_idydh")]
 position = Vector2(-710, -100)
 
-[node name="Node2D" type="Node2D" parent="Environment/Inanimate"]
+[node name="BridgeCrates" type="Node2D" parent="Environment/Inanimate"]
 
-[node name="Crate39" parent="Environment/Inanimate/Node2D" instance=ExtResource("8_74hus")]
-position = Vector2(-196, -64)
+[node name="Crate39" parent="Environment/Inanimate/BridgeCrates" instance=ExtResource("8_74hus")]
+position = Vector2(-113, -26)
 rotation = -0.523598
 
-[node name="Crate40" parent="Environment/Inanimate/Node2D" instance=ExtResource("8_74hus")]
-position = Vector2(-163, -78)
+[node name="Crate40" parent="Environment/Inanimate/BridgeCrates" instance=ExtResource("8_74hus")]
+position = Vector2(-74, -25)
 rotation = 0.261799
 
-[node name="Crate41" parent="Environment/Inanimate/Node2D" instance=ExtResource("8_74hus")]
-position = Vector2(-149, -44)
+[node name="Crate41" parent="Environment/Inanimate/BridgeCrates" instance=ExtResource("8_74hus")]
+position = Vector2(-39, -37)
 rotation = -0.261799
 
-[node name="Crate42" parent="Environment/Inanimate/Node2D" instance=ExtResource("8_74hus")]
+[node name="Crate42" parent="Environment/Inanimate/BridgeCrates" instance=ExtResource("8_74hus")]
 position = Vector2(74, 3)
 
-[node name="Crate43" parent="Environment/Inanimate/Node2D" instance=ExtResource("8_74hus")]
+[node name="Crate43" parent="Environment/Inanimate/BridgeCrates" instance=ExtResource("8_74hus")]
 position = Vector2(37, 82)
 rotation = 0.261799
 
-[node name="Crate44" parent="Environment/Inanimate/Node2D" instance=ExtResource("8_74hus")]
+[node name="Crate44" parent="Environment/Inanimate/BridgeCrates" instance=ExtResource("8_74hus")]
 position = Vector2(42, 5)
 rotation = 0.261799
 
-[node name="Crate45" parent="Environment/Inanimate/Node2D" instance=ExtResource("8_74hus")]
+[node name="Crate45" parent="Environment/Inanimate/BridgeCrates" instance=ExtResource("8_74hus")]
 position = Vector2(70, 76)
 rotation = -0.261799
 
-[node name="Crate46" parent="Environment/Inanimate/Node2D" instance=ExtResource("8_74hus")]
+[node name="Crate46" parent="Environment/Inanimate/BridgeCrates" instance=ExtResource("8_74hus")]
 position = Vector2(10, 3)
 
-[node name="Crate47" parent="Environment/Inanimate/Node2D" instance=ExtResource("8_74hus")]
+[node name="Crate47" parent="Environment/Inanimate/BridgeCrates" instance=ExtResource("8_74hus")]
 position = Vector2(-22, 5)
 rotation = -0.261799
 
-[node name="Crate48" parent="Environment/Inanimate/Node2D" instance=ExtResource("8_74hus")]
+[node name="Crate48" parent="Environment/Inanimate/BridgeCrates" instance=ExtResource("8_74hus")]
 position = Vector2(-54, 9)
 rotation = -0.523598
 
-[node name="Crate49" parent="Environment/Inanimate/Node2D" instance=ExtResource("8_74hus")]
+[node name="Crate49" parent="Environment/Inanimate/BridgeCrates" instance=ExtResource("8_74hus")]
 position = Vector2(-90, 10)
 rotation = 0.261799
 
-[node name="Crate50" parent="Environment/Inanimate/Node2D" instance=ExtResource("8_74hus")]
+[node name="Crate50" parent="Environment/Inanimate/BridgeCrates" instance=ExtResource("8_74hus")]
 position = Vector2(-125, 11)
 rotation = -0.261799
 
-[node name="Crate51" parent="Environment/Inanimate/Node2D" instance=ExtResource("8_74hus")]
+[node name="Crate51" parent="Environment/Inanimate/BridgeCrates" instance=ExtResource("8_74hus")]
 position = Vector2(-157, 10)
 
-[node name="Crate52" parent="Environment/Inanimate/Node2D" instance=ExtResource("8_74hus")]
+[node name="Crate52" parent="Environment/Inanimate/BridgeCrates" instance=ExtResource("8_74hus")]
 position = Vector2(2.00002, 82)
 rotation = -0.261799
 
-[node name="Crate53" parent="Environment/Inanimate/Node2D" instance=ExtResource("8_74hus")]
+[node name="Crate53" parent="Environment/Inanimate/BridgeCrates" instance=ExtResource("8_74hus")]
 position = Vector2(-25, 106)
 
-[node name="Crate54" parent="Environment/Inanimate/Node2D" instance=ExtResource("8_74hus")]
+[node name="Crate54" parent="Environment/Inanimate/BridgeCrates" instance=ExtResource("8_74hus")]
 position = Vector2(-132, 103)
 rotation = 0.261799
 
@@ -511,8 +522,17 @@ position = Vector2(-607, -48)
 rotation = 1.57081
 
 [node name="Note" parent="Environment/Interactable" instance=ExtResource("12_ylmx7")]
+z_index = 4
 material = null
-position = Vector2(-646, -174)
+position = Vector2(-647, -175)
+
+[node name="Note2" parent="Environment/Interactable" instance=ExtResource("12_ylmx7")]
+material = null
+position = Vector2(-506, -180)
+rotation = -0.543868
+
+[node name="EscapePod" parent="Environment/Interactable" instance=ExtResource("14_fifaw")]
+position = Vector2(-1008, -154)
 
 [node name="Triggers" type="Node2D" parent="."]
 
@@ -532,6 +552,14 @@ collision_mask = 2
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Triggers/EnterCryo"]
 shape = SubResource("SegmentShape2D_xjm62")
 
+[node name="Event1" type="Area2D" parent="Triggers"]
+position = Vector2(-570, -49)
+collision_layer = 2
+collision_mask = 2
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Triggers/Event1"]
+shape = SubResource("SegmentShape2D_70311")
+
 [node name="EnterCargo" type="Area2D" parent="Triggers"]
 position = Vector2(-742, 72)
 collision_layer = 2
@@ -549,6 +577,22 @@ collision_mask = 2
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Triggers/ExitCargo"]
 position = Vector2(0, -10)
 shape = SubResource("SegmentShape2D_xjm62")
+
+[node name="EscapePods" type="Area2D" parent="Triggers"]
+position = Vector2(-912, -194)
+collision_layer = 2
+collision_mask = 2
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Triggers/EscapePods"]
+shape = SubResource("SegmentShape2D_q6x6p")
+
+[node name="Event2" type="Area2D" parent="Triggers"]
+position = Vector2(-956, -48)
+collision_layer = 2
+collision_mask = 2
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Triggers/Event2"]
+shape = SubResource("SegmentShape2D_1ranx")
 
 [node name="ExitShaft" type="Area2D" parent="Triggers"]
 position = Vector2(-1000, 224)
@@ -582,13 +626,29 @@ collision_mask = 2
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Triggers/EnterMedical"]
 shape = SubResource("SegmentShape2D_2sq0y")
 
-[node name="Event1" type="Area2D" parent="Triggers"]
-position = Vector2(-570, -49)
+[node name="EnterBathroom" type="Area2D" parent="Triggers"]
+position = Vector2(-125, -199)
 collision_layer = 2
 collision_mask = 2
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="Triggers/Event1"]
-shape = SubResource("SegmentShape2D_70311")
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Triggers/EnterBathroom"]
+shape = SubResource("SegmentShape2D_b3rao")
+
+[node name="ExitBathroom" type="Area2D" parent="Triggers"]
+position = Vector2(-131, -199)
+collision_layer = 2
+collision_mask = 2
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Triggers/ExitBathroom"]
+shape = SubResource("SegmentShape2D_b3rao")
+
+[node name="Event5" type="Area2D" parent="Triggers"]
+position = Vector2(-222, -91)
+collision_layer = 2
+collision_mask = 2
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Triggers/Event5"]
+shape = SubResource("SegmentShape2D_f08v3")
 
 [node name="Lights" type="Node2D" parent="."]
 position = Vector2(-1045, -100)
@@ -649,27 +709,13 @@ light_texture = ExtResource("6_g4f4m")
 position = Vector2(479, -85)
 light_texture = ExtResource("6_g4f4m")
 
-[node name="Light8" parent="Lights/HallwayLights" groups=["Hallway_Light"] instance=ExtResource("4_7cj7q")]
-position = Vector2(574, -9)
-rotation = 2.35619
-light_texture = ExtResource("6_g4f4m")
-
 [node name="Light9" parent="Lights/HallwayLights" groups=["Hallway_Light"] instance=ExtResource("4_7cj7q")]
 position = Vector2(458, 122)
 rotation = 0.785397
 light_texture = ExtResource("6_g4f4m")
 
-[node name="Light10" parent="Lights/HallwayLights" groups=["Hallway_Light"] instance=ExtResource("4_7cj7q")]
-position = Vector2(560, 222)
-rotation = -2.35619
-light_texture = ExtResource("6_g4f4m")
-
 [node name="Light11" parent="Lights/HallwayLights" groups=["Hallway_Light"] instance=ExtResource("4_7cj7q")]
 position = Vector2(479, 68)
-light_texture = ExtResource("6_g4f4m")
-
-[node name="Light12" parent="Lights/HallwayLights" groups=["Hallway_Light"] instance=ExtResource("4_7cj7q")]
-position = Vector2(319, 157)
 light_texture = ExtResource("6_g4f4m")
 
 [node name="Light13" parent="Lights/HallwayLights" groups=["Hallway_Light"] instance=ExtResource("4_7cj7q")]
@@ -704,7 +750,8 @@ light_texture = ExtResource("5_wy17f")
 light_offset = 0
 
 [node name="CeilingLight4" parent="Lights/HallwayLights" groups=["Hallway_Light"] instance=ExtResource("4_7cj7q")]
-position = Vector2(517, -28)
+position = Vector2(558, 20)
+scale = Vector2(0.75, 0.75)
 texture = null
 light_texture = ExtResource("5_wy17f")
 light_offset = 0
@@ -767,11 +814,6 @@ light_offset = 0
 
 [node name="WallLights" type="Node2D" parent="Lights/CargoLights"]
 
-[node name="Light22" parent="Lights/CargoLights/WallLights" groups=["Cargo_Light"] instance=ExtResource("4_7cj7q")]
-position = Vector2(-65, 100)
-rotation = 1.77701e-05
-light_texture = ExtResource("6_g4f4m")
-
 [node name="Light23" parent="Lights/CargoLights/WallLights" groups=["Cargo_Light"] instance=ExtResource("4_7cj7q")]
 position = Vector2(-65, 209)
 rotation = 1.77701e-05
@@ -817,52 +859,38 @@ position = Vector2(-367, 140)
 rotation = -0.785397
 
 [node name="Navigation" type="Node2D" parent="."]
+visible = false
 
 [node name="NavigationRegion2D2" type="NavigationRegion2D" parent="Navigation"]
-visible = false
 position = Vector2(-992, 0)
 navigation_polygon = SubResource("NavigationPolygon_x2io3")
 
 [node name="NavigationRegion2D" type="NavigationRegion2D" parent="Navigation"]
-visible = false
 position = Vector2(-992, 0)
 navigation_polygon = SubResource("NavigationPolygon_h07k4")
 
 [node name="NavigationRegion2D3" type="NavigationRegion2D" parent="Navigation"]
-visible = false
 navigation_polygon = SubResource("NavigationPolygon_46qe0")
 
 [node name="NavigationRegion2D4" type="NavigationRegion2D" parent="Navigation"]
-visible = false
 navigation_polygon = SubResource("NavigationPolygon_rqb6j")
 
 [node name="NavigationRegion2D5" type="NavigationRegion2D" parent="Navigation"]
-visible = false
 navigation_polygon = SubResource("NavigationPolygon_q5l1j")
 
 [node name="NavigationRegion2D6" type="NavigationRegion2D" parent="Navigation"]
-visible = false
 navigation_polygon = SubResource("NavigationPolygon_txd4j")
 
 [node name="NavigationRegion2D7" type="NavigationRegion2D" parent="Navigation"]
-visible = false
 navigation_polygon = SubResource("NavigationPolygon_ar3qy")
 
-[node name="NavigationRegion2D8" type="NavigationRegion2D" parent="Navigation"]
-visible = false
-position = Vector2(1167, -144)
-navigation_polygon = SubResource("NavigationPolygon_22n00")
-use_edge_connections = false
-
 [node name="NavigationRegion2D9" type="NavigationRegion2D" parent="Navigation"]
-visible = false
 navigation_polygon = SubResource("NavigationPolygon_ls1gp")
 
 [node name="NavigationRegion2D10" type="NavigationRegion2D" parent="Navigation"]
 navigation_polygon = SubResource("NavigationPolygon_f3kmn")
 
 [node name="NavigationRegion2D11" type="NavigationRegion2D" parent="Navigation"]
-visible = false
 navigation_polygon = SubResource("NavigationPolygon_tmpel")
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="."]
@@ -914,6 +942,7 @@ grow_horizontal = 2
 grow_vertical = 2
 
 [node name="Overlay" type="CanvasLayer" parent="."]
+visible = false
 
 [node name="ColorRect" type="ColorRect" parent="Overlay"]
 material = SubResource("ShaderMaterial_5pnrb")
@@ -924,10 +953,13 @@ grow_horizontal = 2
 grow_vertical = 2
 
 [node name="PlayerSpawnLocation" type="Marker2D" parent="."]
-position = Vector2(-656, -15)
+position = Vector2(-652, -127)
 
 [node name="SpiderSpawnLocation" type="Marker2D" parent="."]
-position = Vector2(-878, -63)
+position = Vector2(-850, 189)
+
+[node name="SpiderSpawnLocation2" type="Marker2D" parent="."]
+position = Vector2(-537, 527)
 
 [node name="BlobSpawnLocation" type="Marker2D" parent="."]
 position = Vector2(-495, 326)
@@ -951,10 +983,15 @@ position = Vector2(-467, 16)
 
 [connection signal="body_exited" from="Triggers/ExitCryo" to="." method="_on_exit_cryo_body_exited"]
 [connection signal="body_exited" from="Triggers/EnterCryo" to="." method="_on_enter_cryo_body_exited"]
+[connection signal="body_exited" from="Triggers/Event1" to="." method="_on_event_1_body_exited"]
 [connection signal="body_exited" from="Triggers/EnterCargo" to="." method="_on_enter_cargo_body_exited"]
 [connection signal="body_exited" from="Triggers/ExitCargo" to="." method="_on_exit_cargo_body_exited"]
+[connection signal="body_exited" from="Triggers/EscapePods" to="." method="_on_drop_pods_body_exited"]
+[connection signal="body_exited" from="Triggers/Event2" to="." method="_on_event_2_body_exited"]
 [connection signal="body_exited" from="Triggers/ExitShaft" to="." method="_on_exit_shaft_body_exited"]
 [connection signal="body_exited" from="Triggers/EnterShaft" to="." method="_on_enter_shaft_body_exited"]
 [connection signal="body_exited" from="Triggers/ExitMedical" to="." method="_on_exit_medical_body_exited"]
 [connection signal="body_exited" from="Triggers/EnterMedical" to="." method="_on_enter_medical_body_exited"]
-[connection signal="body_exited" from="Triggers/Event1" to="." method="_on_event_1_body_exited"]
+[connection signal="body_exited" from="Triggers/EnterBathroom" to="." method="_on_enter_bathroom_body_exited"]
+[connection signal="body_exited" from="Triggers/ExitBathroom" to="." method="_on_exit_bathroom_body_exited"]
+[connection signal="body_exited" from="Triggers/Event5" to="." method="_on_event_2_body_exited"]

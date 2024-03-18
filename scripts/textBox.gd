@@ -14,6 +14,7 @@ var letter_index = 0
 var letter_time = 0.03
 var space_time = 0.06
 var punctuation_time = 0.2
+var body = null
 
 signal finished_displaying
 
@@ -34,10 +35,15 @@ func display_text(text_to_display: String):
 		await resized
 		await resized
 		custom_minimum_size.y = size.y
-
+	
+	#if get_parent() is Player:
+		#pass
+		#position.x -= size.x / 2
+		#position.y -= size.y + 24
 	global_position.x -= size.x / 2
 	global_position.y -= size.y + 24
-
+	
+	
 	label.text = ""
 	
 	pivot_offset = Vector2(size.x / 2, size.y)

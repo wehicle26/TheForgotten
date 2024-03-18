@@ -6,3 +6,4 @@ func _ready():
 
 func _on_interact(inventory: Inventory):
 	super.collect(inventory)
+	player.show_tut("flashlight")

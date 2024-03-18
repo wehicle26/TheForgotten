@@ -1,15 +1,16 @@
-[gd_scene load_steps=18 format=3 uid="uid://clo08muxcwc4o"]
+[gd_scene load_steps=19 format=3 uid="uid://clo08muxcwc4o"]
 
 [ext_resource type="PackedScene" uid="uid://duwl5sldekn2r" path="res://scenes/Enemy.tscn" id="1_cgsu8"]
 [ext_resource type="Script" path="res://scripts/blob.gd" id="2_gvefa"]
-[ext_resource type="Texture2D" uid="uid://dxs12cbudrsbb" path="res://art/enemy/blob.png" id="3_aa0a7"]
-[ext_resource type="Texture2D" uid="uid://xijyrw7il51k" path="res://art/enemy/blob_n.png" id="4_a22o2"]
+[ext_resource type="Texture2D" uid="uid://dxs12cbudrsbb" path="res://art/enemy/Blob.png" id="3_aa0a7"]
+[ext_resource type="Texture2D" uid="uid://xijyrw7il51k" path="res://art/enemy/Blob_n.png" id="4_a22o2"]
 [ext_resource type="PackedScene" uid="uid://bvxg5kctr4jyl" path="res://scenes/StateMachine.tscn" id="5_mmqxe"]
 [ext_resource type="Script" path="res://scripts/State/blobIdle.gd" id="6_qftkk"]
 [ext_resource type="Script" path="res://scripts/State/blobFollow.gd" id="7_ar1fy"]
 [ext_resource type="Script" path="res://scripts/State/blobAttack.gd" id="8_nlswb"]
 [ext_resource type="Script" path="res://scripts/State/enemyRetreat.gd" id="9_fa6l7"]
 [ext_resource type="Script" path="res://scripts/State/blobSplit.gd" id="10_65e4d"]
+[ext_resource type="PackedScene" uid="uid://cb3n68rjgonos" path="res://scenes/Danger.tscn" id="11_re03d"]
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_5vkyc"]
 radius = 15.0333
@@ -156,49 +157,12 @@ enemy = NodePath("../..")
 
 [node name="GPUParticles2D" type="GPUParticles2D" parent="." index="11"]
 
-[node name="Danger" type="Node2D" parent="." index="12"]
-
-[node name="N" type="RayCast2D" parent="Danger" index="0"]
-rotation = -3.14159
-target_position = Vector2(0, 30)
-collision_mask = 2
-
-[node name="NE" type="RayCast2D" parent="Danger" index="1"]
-rotation = -2.3562
-target_position = Vector2(0, 30)
-collision_mask = 2
-
-[node name="E" type="RayCast2D" parent="Danger" index="2"]
-rotation = -1.5708
-target_position = Vector2(0, 30)
-collision_mask = 2
-
-[node name="SE" type="RayCast2D" parent="Danger" index="3"]
-rotation = -0.785395
-target_position = Vector2(0, 30)
-collision_mask = 2
-
-[node name="S" type="RayCast2D" parent="Danger" index="4"]
-target_position = Vector2(0, 30)
-collision_mask = 2
-
-[node name="SW" type="RayCast2D" parent="Danger" index="5"]
-rotation = 0.785398
-target_position = Vector2(0, 30)
-collision_mask = 2
-
-[node name="W" type="RayCast2D" parent="Danger" index="6"]
-rotation = 1.5708
-target_position = Vector2(0, 30)
-collision_mask = 2
-
-[node name="NW" type="RayCast2D" parent="Danger" index="7"]
-rotation = -3.92699
-target_position = Vector2(0, 30)
-collision_mask = 2
+[node name="Danger" parent="." index="12" instance=ExtResource("11_re03d")]
 
 [node name="Label" type="Label" parent="." index="13"]
 offset_left = -20.0
 offset_top = -50.0
 offset_right = 20.0
 offset_bottom = -27.0
+
+[editable path="Danger"]
