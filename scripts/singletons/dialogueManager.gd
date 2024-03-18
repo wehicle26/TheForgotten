@@ -55,7 +55,7 @@ func start_dialogue(pos: Vector2, lines: Array[String]):
 	
 	is_dialogue_active = true
 
-func _show_text_box(body = null):
+func _show_text_box(_body = null):
 	#if body is Player:
 		##body.text_box = text_box
 		##body.text_box.position = to_local(text_box_position)

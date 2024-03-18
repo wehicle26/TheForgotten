@@ -5,7 +5,7 @@ class_name Spider
 @onready var danger: Node2D = $Danger
 @onready var hitbox = $Hitbox
 @onready var health = $Health
-@onready var label = $Label
+#@onready var label = $Label
 
 var interest_array: Array = []
 var danger_array = []
