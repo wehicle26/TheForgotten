@@ -1,19 +1,27 @@
-[gd_scene load_steps=9 format=3 uid="uid://cuee4phykn8mk"]
+[gd_scene load_steps=12 format=3 uid="uid://cfw6pvedmjgw7"]
 
 [ext_resource type="Script" path="res://scripts/powerCore.gd" id="1_6jqm5"]
 [ext_resource type="Texture2D" uid="uid://dfovcdvs1lwcg" path="res://art/environment/power_core.png" id="1_nck0q"]
+[ext_resource type="PackedScene" uid="uid://drc50lwybh48x" path="res://scenes/Item.tscn" id="1_pnhcj"]
 [ext_resource type="Texture2D" uid="uid://67cu1tyq75e5" path="res://art/environment/power_core_n.png" id="2_f45ve"]
 
-[sub_resource type="OccluderPolygon2D" id="OccluderPolygon2D_o6w8l"]
-polygon = PackedVector2Array(21, -22, 21, -15, 20, -15, 20, -14, 19, -14, 19, -13, 18, -13, 18, -12, 17, -12, 17, -11, 16, -11, 16, -10, 15, -10, 15, -9, 14, -9, 14, -7, 15, -7, 15, -4, 16, -4, 16, 4, 15, 4, 15, 7, 14, 7, 14, 9, 15, 9, 15, 10, 16, 10, 16, 11, 17, 11, 17, 12, 18, 12, 18, 13, 19, 13, 19, 14, 20, 14, 20, 15, 21, 15, 21, 22, 14, 22, 14, 21, 13, 21, 13, 20, 12, 20, 12, 19, 11, 19, 11, 18, 10, 18, 10, 17, 9, 17, 9, 16, 8, 16, 8, 15, 7, 15, 7, 14, 6, 14, 6, 15, 3, 15, 3, 16, -3, 16, -3, 15, -6, 15, -6, 14, -7, 14, -7, 15, -8, 15, -8, 16, -9, 16, -9, 17, -10, 17, -10, 18, -11, 18, -11, 19, -12, 19, -12, 20, -13, 20, -13, 21, -14, 21, -14, 22, -21, 22, -21, 15, -20, 15, -20, 14, -19, 14, -19, 13, -18, 13, -18, 12, -17, 12, -17, 11, -16, 11, -16, 10, -15, 10, -15, 9, -14, 9, -14, 7, -15, 7, -15, 4, -16, 4, -16, -4, -15, -4, -15, -7, -14, -7, -14, -9, -15, -9, -15, -10, -16, -10, -16, -11, -17, -11, -17, -12, -18, -12, -18, -13, -19, -13, -19, -14, -20, -14, -20, -15, -21, -15, -21, -22, -14, -22, -14, -21, -13, -21, -13, -20, -12, -20, -12, -19, -11, -19, -11, -18, -10, -18, -10, -17, -9, -17, -9, -16, -8, -16, -8, -15, -7, -15, -7, -14, -6, -14, -6, -15, -3, -15, -3, -16, 3, -16, 3, -15, 6, -15, 6, -14, 7, -14, 7, -15, 8, -15, 8, -16, 9, -16, 9, -17, 10, -17, 10, -18, 11, -18, 11, -19, 12, -19, 12, -20, 13, -20, 13, -21, 14, -21, 14, -22)
+[sub_resource type="OccluderPolygon2D" id="OccluderPolygon2D_yw7ke"]
+polygon = PackedVector2Array(13, -9, 13, -8, 14, -8, 14, -7, 15, -7, 15, -4, 16, -4, 16, 4, 15, 4, 15, 7, 14, 7, 14, 9, 15, 9, 15, 10, 16, 10, 16, 11, 17, 11, 17, 12, 18, 12, 18, 13, 19, 13, 19, 14, 20, 14, 20, 15, 21, 15, 21, 22, 14, 22, 14, 21, 13, 21, 13, 20, 12, 20, 12, 19, 11, 19, 11, 18, 10, 18, 10, 17, 9, 17, 9, 16, 8, 16, 8, 15, 7, 15, 7, 14, 6, 14, 6, 15, 3, 15, 3, 16, -3, 16, -3, 15, -6, 15, -6, 14, -7, 14, -7, 15, -8, 15, -8, 16, -9, 16, -9, 17, -10, 17, -10, 18, -11, 18, -11, 19, -12, 19, -12, 20, -13, 20, -13, 21, -14, 21, -14, 22, -21, 22, -21, 15, -20, 15, -20, 14, -19, 14, -19, 13, -18, 13, -18, 12, -17, 12, -17, 11, -16, 11, -16, 10, -15, 10, -15, 9, -14, 9, -14, 7, -15, 7, -15, 4, -16, 4, -16, -4, -15, -4, -15, -7, -14, -7, -14, -9, -15, -9, -15, -10, -16, -10, -16, -11, -17, -11, -17, -12, -18, -12, -18, -13, -19, -13, -19, -14, -20, -14, -20, -15, -21, -15, -21, -22, -14, -22, -14, -21, -13, -21, -13, -20, -12, -20, -12, -19, -11, -19, -11, -18, -10, -18, -10, -17, -9, -17, -9, -16, -8, -16, -8, -15, -7, -15, -7, -14, -6, -14, -6, -15, -3, -15, -3, -16, 3, -16, 3, -15, 6, -15, 6, -14, 7, -14, 8, -14, 8, -13, 9, -13, 9, -12, 11, -12, 11, -11, 12, -11, 12, -9)
 
-[sub_resource type="Animation" id="Animation_g5gt5"]
-length = 2.0
+[sub_resource type="CanvasTexture" id="CanvasTexture_8p6mw"]
+diffuse_texture = ExtResource("1_nck0q")
+normal_texture = ExtResource("2_f45ve")
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_7foap"]
+radius = 40.0
+
+[sub_resource type="Animation" id="Animation_kaii1"]
+length = 0.1
 loop_mode = 1
 tracks/0/type = "value"
 tracks/0/imported = false
 tracks/0/enabled = true
-tracks/0/path = NodePath("Sprite2D:visible")
+tracks/0/path = NodePath("../Sprite2D:visible")
 tracks/0/interp = 1
 tracks/0/loop_wrap = false
 tracks/0/keys = {
@@ -25,7 +33,35 @@ tracks/0/keys = {
 tracks/1/type = "value"
 tracks/1/imported = false
 tracks/1/enabled = true
-tracks/1/path = NodePath("Sprite2D:frame")
+tracks/1/path = NodePath("../Sprite2D:frame")
+tracks/1/interp = 1
+tracks/1/loop_wrap = false
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [0]
+}
+
+[sub_resource type="Animation" id="Animation_g5gt5"]
+length = 2.0
+loop_mode = 1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("../Sprite2D:visible")
+tracks/0/interp = 1
+tracks/0/loop_wrap = false
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [true]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("../Sprite2D:frame")
 tracks/1/interp = 1
 tracks/1/loop_wrap = false
 tracks/1/keys = {
@@ -37,37 +73,32 @@ tracks/1/keys = {
 
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_jn8f4"]
 _data = {
+"Broken": SubResource("Animation_kaii1"),
 "Cycle": SubResource("Animation_g5gt5")
 }
 
-[sub_resource type="CanvasTexture" id="CanvasTexture_mdfjj"]
-diffuse_texture = ExtResource("1_nck0q")
-normal_texture = ExtResource("2_f45ve")
-
-[sub_resource type="CircleShape2D" id="CircleShape2D_b2v4f"]
+[sub_resource type="CircleShape2D" id="CircleShape2D_apkqh"]
 radius = 16.0
 
-[node name="PowerCore" type="StaticBody2D"]
+[node name="PowerCore" instance=ExtResource("1_pnhcj")]
 script = ExtResource("1_6jqm5")
+broken = false
 
-[node name="LightOccluder2D" type="LightOccluder2D" parent="."]
-occluder = SubResource("OccluderPolygon2D_o6w8l")
+[node name="LightOccluder2D" type="LightOccluder2D" parent="." index="0"]
+occluder = SubResource("OccluderPolygon2D_yw7ke")
 
-[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
-libraries = {
-"": SubResource("AnimationLibrary_jn8f4")
-}
-autoplay = "Cycle"
+[node name="LightOccluder2D2" type="LightOccluder2D" parent="." index="1"]
+occluder = SubResource("OccluderPolygon2D_yw7ke")
 
-[node name="Sprite2D" type="Sprite2D" parent="."]
+[node name="Sprite2D" parent="." index="2"]
 texture_filter = 1
-texture = SubResource("CanvasTexture_mdfjj")
+material = null
+texture = SubResource("CanvasTexture_8p6mw")
 hframes = 4
 vframes = 3
-frame = 1
 metadata/_aseprite_wizard_config_ = {
 "i_mode": -1,
-"keep_anim_length": true,
+"keep_anim_length": false,
 "layer": "",
 "o_ex_p": "",
 "o_folder": "res://art/environment/",
@@ -75,9 +106,20 @@ metadata/_aseprite_wizard_config_ = {
 "only_visible": true,
 "op_exp": true,
 "player": "AnimationPlayer",
-"set_vis_track": true,
 "source": "res://art/environment/power core.aseprite"
 }
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
-shape = SubResource("CircleShape2D_b2v4f")
+[node name="CollisionShape2D" parent="." index="3"]
+shape = SubResource("CircleShape2D_7foap")
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="." index="4"]
+root_node = NodePath("../StaticBody2D")
+libraries = {
+"": SubResource("AnimationLibrary_jn8f4")
+}
+autoplay = "Cycle"
+
+[node name="StaticBody2D" type="StaticBody2D" parent="." index="5"]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="StaticBody2D" index="0"]
+shape = SubResource("CircleShape2D_apkqh")

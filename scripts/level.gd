@@ -20,6 +20,12 @@ var blobScene: PackedScene = preload("res://scenes/Blob.tscn")
 var spiderScene: PackedScene = preload("res://scenes/Spider.tscn")
 var player: Player
 var paused = false
+var combat = false
+var enemy_count = 0
+
+func _process(_delta):
+	pass
+
 
 func _input(event):
 	if event.is_action_pressed("pause"):
@@ -111,6 +117,7 @@ func _on_drop_pods_body_exited(body):
 		if not GlobalState.dialogue4:
 				GlobalState.dialogue4 = true
 				DialogueManager.start_passive_dialogue(player.global_position, ["A single functional escape pod..."])
+				SoundManager.set_main_loop_parameter(SoundManager.COMBAT_LOW)
 
 
 func _on_event_2_body_exited(body):
@@ -118,6 +125,19 @@ func _on_event_2_body_exited(body):
 		if not GlobalState.encounter2:
 			GlobalState.encounter2 = true
 			SoundManager.play_custom_sound(null, "event:/stinger2", 0.9)
+			var spider1 = spiderScene.instantiate()
+			entities.call_deferred("add_child", spider1)
+			#entities.add_child(spider)
+			spider1.global_position = spider_spawn_location.global_position
+			spider1.spider_dead.connect(_check_enemy_count)
+			var spider2 = spiderScene.instantiate()
+			entities.call_deferred("add_child", spider2)
+			#entities.add_child(spider)
+			spider2.global_position = spider_spawn_location_2.global_position
+			spider2.spider_dead.connect(_check_enemy_count)
+			SoundManager.set_main_loop_parameter(SoundManager.COMBAT_MID)
+			combat = true
+			enemy_count = 2
 
 
 func _on_exit_shaft_body_exited(body):
@@ -131,15 +151,14 @@ func _on_enter_shaft_body_exited(body):
 	if body is Player:
 		SoundManager.set_main_loop_parameter(SoundManager.MAIN_LOOP_GARBLED)
 		get_tree().call_group("Cargo_Light", "turn_off")
-		if not GlobalState.encounter3:
-			GlobalState.encounter3 = true
-			var spider = spiderScene.instantiate()
-			entities.call_deferred("add_child", spider)
-			spider.global_position = spider_spawn_location.global_position
-			spider = spiderScene.instantiate()
-			entities.call_deferred("add_child", spider)
-			spider.global_position = spider_spawn_location_2.global_position
 		SoundManager.set_footstep_parameter("event:/footsteps_metal")
+
+
+func _check_enemy_count():
+	enemy_count -= 1
+	if enemy_count == 0:
+		combat = false
+		SoundManager.set_main_loop_parameter(SoundManager.MAIN_LOOP_GARBLED)
 
 
 func _on_exit_medical_body_exited(body):
@@ -157,6 +176,8 @@ func _on_enter_medical_body_exited(body):
 			var blob = blobScene.instantiate()
 			entities.call_deferred("add_child", blob)
 			blob.global_position = blob_spawn_location.global_position
+			SoundManager.set_main_loop_parameter(SoundManager.COMBAT_MID_HIGH)
+			combat = true
 
 
 func _on_event_1_body_exited(body):

@@ -2,6 +2,8 @@ extends Enemy
 
 class_name Spider
 
+signal spider_dead
+
 @onready var danger: Node2D = $Danger
 @onready var hitbox = $Hitbox
 @onready var health = $Health
@@ -23,6 +25,7 @@ var direction_array = [
 func kill(_splat_direction):
 	SoundManager.play_custom_sound(global_transform, "event:/blob_splat", 0.8)
 	queue_free()
+	spider_dead.emit()
 
 
 func path_to_player():
@@ -88,6 +91,7 @@ func _ready():
 	print(direction_array)
 	sprite_2d.modulate = white
 	line_of_sight.player_spotted.connect(_player_spotted)
+	
 
 
 func play_enemy_move_sound():

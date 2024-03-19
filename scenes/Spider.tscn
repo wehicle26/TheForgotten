@@ -83,7 +83,7 @@ _data = {
 "Walk": SubResource("Animation_ynrdh")
 }
 
-[node name="Spider" instance=ExtResource("1_y4t55")]
+[node name="Spider" groups=["Spider"] instance=ExtResource("1_y4t55")]
 script = ExtResource("2_hho8a")
 attack_range = 40
 

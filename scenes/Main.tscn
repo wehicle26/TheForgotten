@@ -15,7 +15,7 @@
 [ext_resource type="PackedScene" uid="uid://fcefbjw8babe" path="res://scenes/Forklift.tscn" id="9_rxupm"]
 [ext_resource type="PackedScene" uid="uid://cpu2pabqnow4x" path="res://scenes/BreakableDoor.tscn" id="10_3i61v"]
 [ext_resource type="PackedScene" uid="uid://8bdjhnsaqthg" path="res://scenes/hallway_dead_guy.tscn" id="10_p5tb0"]
-[ext_resource type="PackedScene" uid="uid://cuee4phykn8mk" path="res://scenes/PowerCore.tscn" id="10_quu3m"]
+[ext_resource type="PackedScene" uid="uid://cfw6pvedmjgw7" path="res://scenes/PowerCore.tscn" id="10_quu3m"]
 [ext_resource type="PackedScene" uid="uid://c1ks08dpslaga" path="res://scenes/Note.tscn" id="12_ylmx7"]
 [ext_resource type="PackedScene" uid="uid://cg4o4mpdmhkyp" path="res://scenes/EscapePod.tscn" id="14_fifaw"]
 [ext_resource type="Shader" path="res://shaders/grain.gdshader" id="15_ui16x"]
@@ -259,7 +259,7 @@ z_index = 5
 [node name="Crowbar" parent="Environment/Items" instance=ExtResource("3_ax4cu")]
 z_index = -2
 material = null
-position = Vector2(-602, -207)
+position = Vector2(-843, -113)
 
 [node name="FlashlightItem" parent="Environment/Items" instance=ExtResource("5_6ojie")]
 material = null
@@ -476,9 +476,6 @@ rotation = 0.261799
 position = Vector2(-981, -17)
 rotation = 3.14159
 
-[node name="PowerCore" parent="Environment/Inanimate" instance=ExtResource("10_quu3m")]
-position = Vector2(-1216, 0)
-
 [node name="Forklift2" parent="Environment/Inanimate" instance=ExtResource("9_rxupm")]
 position = Vector2(-849, 52)
 rotation = 1.57079
@@ -489,6 +486,17 @@ rotation = 0.523598
 
 [node name="hallway dead guy" parent="Environment/Inanimate" instance=ExtResource("10_p5tb0")]
 position = Vector2(-467, 35)
+
+[node name="PowerCore" parent="Environment/Inanimate" instance=ExtResource("10_quu3m")]
+position = Vector2(-1216, 0)
+
+[node name="PowerCore2" parent="Environment/Inanimate" instance=ExtResource("10_quu3m")]
+position = Vector2(-1216, -48)
+broken = true
+
+[node name="PowerCore3" parent="Environment/Inanimate" instance=ExtResource("10_quu3m")]
+position = Vector2(-1216, -96)
+broken = true
 
 [node name="Interactable" type="Node2D" parent="Environment"]
 
@@ -953,13 +961,13 @@ grow_horizontal = 2
 grow_vertical = 2
 
 [node name="PlayerSpawnLocation" type="Marker2D" parent="."]
-position = Vector2(-652, -127)
+position = Vector2(-868, -145)
 
 [node name="SpiderSpawnLocation" type="Marker2D" parent="."]
 position = Vector2(-850, 189)
 
 [node name="SpiderSpawnLocation2" type="Marker2D" parent="."]
-position = Vector2(-537, 527)
+position = Vector2(-1227, 176)
 
 [node name="BlobSpawnLocation" type="Marker2D" parent="."]
 position = Vector2(-495, 326)

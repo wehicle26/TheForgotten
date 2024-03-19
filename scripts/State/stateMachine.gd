@@ -40,6 +40,6 @@ func on_child_transition(state, new_state_name):
 		current_state.exit()
 
 	#print("Current: ", current_state.name)
-	print("New: ", new_state.name)
+	#print("New: ", new_state.name)
 	new_state.enter()
 	current_state = new_state

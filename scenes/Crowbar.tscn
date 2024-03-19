@@ -1,9 +1,16 @@
-[gd_scene load_steps=6 format=3 uid="uid://cyj8triea8w13"]
+[gd_scene load_steps=8 format=3 uid="uid://cyj8triea8w13"]
 
 [ext_resource type="PackedScene" uid="uid://drc50lwybh48x" path="res://scenes/Item.tscn" id="1_lv1ju"]
 [ext_resource type="Texture2D" uid="uid://cgbpnygvtaqv4" path="res://art/item/crowbar.png" id="2_taavo"]
 [ext_resource type="Resource" uid="uid://o6jcpo4ol4yu" path="res://art/item/crowbar.tres" id="2_tieya"]
 [ext_resource type="Script" path="res://scripts/crowbar.gd" id="2_ts241"]
+[ext_resource type="Shader" path="res://shaders/shine.gdshader" id="4_p28t3"]
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_akot2"]
+shader = ExtResource("4_p28t3")
+shader_parameter/shine_color = Vector4(1, 1, 1, 1)
+shader_parameter/shine_speed = 3.0
+shader_parameter/shine_size = 0.12
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_8dd3s"]
 radius = 16.0312
@@ -14,6 +21,7 @@ itemRes = ExtResource("2_tieya")
 action_name = "pick up"
 
 [node name="Sprite2D" parent="." index="0"]
+material = SubResource("ShaderMaterial_akot2")
 texture = ExtResource("2_taavo")
 
 [node name="CollisionShape2D" parent="." index="1"]
