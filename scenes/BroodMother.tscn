@@ -1,0 +1,297 @@
+[gd_scene load_steps=20 format=3 uid="uid://c3cf160taxu74"]
+
+[ext_resource type="PackedScene" uid="uid://duwl5sldekn2r" path="res://scenes/Enemy.tscn" id="1_gxwpd"]
+[ext_resource type="Script" path="res://scripts/broodMother.gd" id="2_4eayv"]
+[ext_resource type="Texture2D" uid="uid://c10raru0e21hn" path="res://art/enemy/brood_mother.png" id="2_mp4tl"]
+[ext_resource type="Texture2D" uid="uid://dkaurqtxoubpw" path="res://art/enemy/brood_mother_n.png" id="3_46u5r"]
+[ext_resource type="PackedScene" uid="uid://bvxg5kctr4jyl" path="res://scenes/StateMachine.tscn" id="5_ilnps"]
+[ext_resource type="Script" path="res://scripts/State/spiderIdle.gd" id="6_3ndd4"]
+[ext_resource type="Script" path="res://scripts/State/spiderFollow.gd" id="7_gwebr"]
+[ext_resource type="Script" path="res://scripts/State/enemyAttack.gd" id="8_g5n4i"]
+[ext_resource type="Script" path="res://scripts/State/enemyRetreat.gd" id="9_pb2r4"]
+
+[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_ss482"]
+radius = 29.0
+height = 100.0
+
+[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_qk453"]
+radius = 9.0
+height = 64.0
+
+[sub_resource type="CanvasTexture" id="CanvasTexture_mbv57"]
+diffuse_texture = ExtResource("2_mp4tl")
+normal_texture = ExtResource("3_46u5r")
+
+[sub_resource type="Animation" id="Animation_fp70i"]
+length = 0.4
+loop_mode = 1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Sprite2D:visible")
+tracks/0/interp = 1
+tracks/0/loop_wrap = false
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [true]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("Sprite2D:frame")
+tracks/1/interp = 1
+tracks/1/loop_wrap = false
+tracks/1/keys = {
+"times": PackedFloat32Array(0, 0.1, 0.2, 0.3),
+"transitions": PackedFloat32Array(1, 1, 1, 1),
+"update": 1,
+"values": [0, 1, 2, 3]
+}
+
+[sub_resource type="Animation" id="Animation_f7xlt"]
+length = 0.3
+loop_mode = 1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Sprite2D:visible")
+tracks/0/interp = 1
+tracks/0/loop_wrap = false
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [true]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("Sprite2D:frame")
+tracks/1/interp = 1
+tracks/1/loop_wrap = false
+tracks/1/keys = {
+"times": PackedFloat32Array(0, 0.1, 0.2),
+"transitions": PackedFloat32Array(1, 1, 1),
+"update": 1,
+"values": [4, 5, 6]
+}
+
+[sub_resource type="Animation" id="Animation_3yf0q"]
+length = 0.3
+loop_mode = 1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Sprite2D:visible")
+tracks/0/interp = 1
+tracks/0/loop_wrap = false
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [true]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("Sprite2D:frame")
+tracks/1/interp = 1
+tracks/1/loop_wrap = false
+tracks/1/keys = {
+"times": PackedFloat32Array(0, 0.1, 0.2),
+"transitions": PackedFloat32Array(1, 1, 1),
+"update": 1,
+"values": [0, 7, 8]
+}
+
+[sub_resource type="Animation" id="Animation_pj1hk"]
+length = 1.3
+loop_mode = 1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Sprite2D:visible")
+tracks/0/interp = 1
+tracks/0/loop_wrap = false
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [true]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("Sprite2D:frame")
+tracks/1/interp = 1
+tracks/1/loop_wrap = false
+tracks/1/keys = {
+"times": PackedFloat32Array(0, 0.1, 0.2, 0.3, 0.4, 0.5, 0.6, 0.7, 0.8, 0.9, 1, 1.1, 1.2),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1),
+"update": 1,
+"values": [0, 9, 10, 11, 12, 13, 14, 15, 12, 11, 10, 9, 0]
+}
+
+[sub_resource type="Animation" id="Animation_rex3f"]
+length = 0.3
+loop_mode = 1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Sprite2D:visible")
+tracks/0/interp = 1
+tracks/0/loop_wrap = false
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [true]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("Sprite2D:frame")
+tracks/1/interp = 1
+tracks/1/loop_wrap = false
+tracks/1/keys = {
+"times": PackedFloat32Array(0, 0.1, 0.2),
+"transitions": PackedFloat32Array(1, 1, 1),
+"update": 1,
+"values": [13, 14, 15]
+}
+
+[sub_resource type="Animation" id="Animation_q2p1w"]
+length = 0.7
+loop_mode = 1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Sprite2D:visible")
+tracks/0/interp = 1
+tracks/0/loop_wrap = false
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [true]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("Sprite2D:frame")
+tracks/1/interp = 1
+tracks/1/loop_wrap = false
+tracks/1/keys = {
+"times": PackedFloat32Array(0, 0.1, 0.2, 0.3, 0.4, 0.5, 0.6),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1, 1),
+"update": 1,
+"values": [0, 7, 16, 17, 18, 17, 19]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_pu0ny"]
+_data = {
+"Birthing": SubResource("Animation_pj1hk"),
+"Death Lunge": SubResource("Animation_q2p1w"),
+"Fly": SubResource("Animation_f7xlt"),
+"Lay": SubResource("Animation_rex3f"),
+"Skitter": SubResource("Animation_fp70i"),
+"Spit": SubResource("Animation_3yf0q")
+}
+
+[node name="BroodMother" instance=ExtResource("1_gxwpd")]
+script = ExtResource("2_4eayv")
+
+[node name="CollisionShape2D" parent="Hitbox" index="1"]
+visible = true
+rotation = -1.5708
+shape = SubResource("CapsuleShape2D_ss482")
+
+[node name="CollisionShape2D" parent="." index="4"]
+rotation = -1.5708
+shape = SubResource("CapsuleShape2D_qk453")
+
+[node name="Sprite2D" parent="." index="8"]
+texture_filter = 1
+texture = SubResource("CanvasTexture_mbv57")
+hframes = 5
+vframes = 4
+frame = 4
+metadata/_aseprite_wizard_config_ = {
+"i_mode": -1,
+"keep_anim_length": false,
+"layer": "",
+"o_ex_p": "",
+"o_folder": "res://art/enemy/",
+"o_name": "brood_mother_n",
+"only_visible": true,
+"op_exp": false,
+"player": "AnimationPlayer",
+"source": "res://art/enemy/brood_mother.aseprite"
+}
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="." index="9"]
+libraries = {
+"": SubResource("AnimationLibrary_pu0ny")
+}
+
+[node name="StateMachine" parent="." index="10" node_paths=PackedStringArray("initial_state") instance=ExtResource("5_ilnps")]
+initial_state = NodePath("")
+
+[node name="BMIdle" type="Node" parent="StateMachine" index="0" node_paths=PackedStringArray("enemy")]
+script = ExtResource("6_3ndd4")
+enemy = NodePath("../..")
+
+[node name="BMFollow" type="Node" parent="StateMachine" index="1" node_paths=PackedStringArray("enemy")]
+script = ExtResource("7_gwebr")
+enemy = NodePath("../..")
+
+[node name="BMAttack" type="Node" parent="StateMachine" index="2" node_paths=PackedStringArray("enemy")]
+script = ExtResource("8_g5n4i")
+enemy = NodePath("../..")
+
+[node name="BMRetreat" type="Node" parent="StateMachine" index="3" node_paths=PackedStringArray("enemy")]
+script = ExtResource("9_pb2r4")
+enemy = NodePath("../..")
+
+[node name="Danger" type="Node2D" parent="." index="11"]
+
+[node name="N" type="RayCast2D" parent="Danger" index="0"]
+rotation = -3.14159
+target_position = Vector2(0, 30)
+collision_mask = 3
+
+[node name="NE" type="RayCast2D" parent="Danger" index="1"]
+rotation = -2.3562
+target_position = Vector2(0, 40)
+collision_mask = 3
+
+[node name="E" type="RayCast2D" parent="Danger" index="2"]
+rotation = -1.5708
+target_position = Vector2(0, 45)
+collision_mask = 3
+
+[node name="SE" type="RayCast2D" parent="Danger" index="3"]
+rotation = -0.785395
+target_position = Vector2(0, 40)
+collision_mask = 3
+
+[node name="S" type="RayCast2D" parent="Danger" index="4"]
+target_position = Vector2(0, 30)
+collision_mask = 3
+
+[node name="SW" type="RayCast2D" parent="Danger" index="5"]
+rotation = 0.785398
+target_position = Vector2(0, 40)
+collision_mask = 3
+
+[node name="W" type="RayCast2D" parent="Danger" index="6"]
+rotation = 1.5708
+target_position = Vector2(0, 45)
+collision_mask = 3
+
+[node name="NW" type="RayCast2D" parent="Danger" index="7"]
+rotation = -3.92699
+target_position = Vector2(0, 40)
+collision_mask = 3

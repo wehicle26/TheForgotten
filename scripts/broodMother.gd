@@ -1,18 +1,13 @@
 extends Enemy
 
-class_name Blob
+class_name BroodMother
 
-signal split
-signal blob_dead
 
 @onready var danger: Node2D = $Danger
 @onready var hitbox = $Hitbox
 @onready var health = $Health
-@onready var label = $Label
+#@onready var label = $Label
 
-var split_count = 0
-var current_scale = 1
-var blobScene: PackedScene = preload("res://scenes/Blob.tscn")
 var interest_array: Array = []
 var danger_array = []
 var direction_array = [
@@ -28,44 +23,7 @@ var direction_array = [
 
 func kill(_splat_direction):
 	SoundManager.play_custom_sound(global_transform, "event:/blob_splat", 0.8)
-	if split_count < 2:
-		split.emit()
-		split_count += 1
-	else:
-		queue_free()
-		blob_dead.emit()
-
-func split_blob():
-	hitbox.queue_free()
-	sprite_2d.modulate = white
-	#gpu_particles_2d.amount = 64
-	#gpu_particles_2d.emitting = true
-	animation_player.play("Split")
-	await animation_player.animation_finished
-	var entities = get_tree().get_first_node_in_group("Entities")
-	var new_blob: Blob = blobScene.instantiate()
-	default_speed += 10
-	new_blob.default_speed = default_speed
-	new_blob.split_count = split_count
-	current_scale -= .25
-	new_blob.current_scale = current_scale
-	new_blob.scale = Vector2(current_scale, current_scale)
-	new_blob.global_position = position + Vector2(15, 0)
-	entities.add_child(new_blob)
-	new_blob.health.health -= 2 * split_count
-	#new_blob.health.max_health -= 2
-	
-	new_blob = blobScene.instantiate()
-	new_blob.split_count = split_count
-	#current_scale -= .25
-	new_blob.current_scale = current_scale
-	new_blob.scale = Vector2(current_scale, current_scale)
-	new_blob.global_position = position + Vector2(-15, 0)
-	entities.add_child(new_blob)
-	new_blob.health.health -= 2 * split_count
-	#new_blob.health.max_health -= 2
-	
-	queue_free()
+	queue_free() 
 
 
 func path_to_player():
@@ -77,7 +35,7 @@ func path_to_player():
 	#velocity += steering_force #* delta
 
 
-func calculate_direction():
+func calculate_direction(reverse):
 	next_path_position = navigation_agent_2d.get_next_path_position()
 	direction = to_local(next_path_position).normalized()
 	sprite_2d.look_at(next_path_position)
@@ -103,8 +61,13 @@ func calculate_direction():
 	for dir in interest_array:
 		context_array.append(dir - danger_array[i])
 		i += 1
-	var max_value = context_array.max()
-	var best_direction: Vector2  = direction_array[context_array.find(max_value)]
+	
+	var best_value
+	if reverse:
+		best_value = context_array.min()
+	else:
+		best_value = context_array.max()
+	var best_direction: Vector2  = direction_array[context_array.find(best_value)]
 	velocity = direction * speed
 	var steering_force: Vector2 = (best_direction * speed) - velocity
 	velocity += steering_force
@@ -126,7 +89,9 @@ func _ready():
 	print(direction_array)
 	sprite_2d.modulate = white
 	line_of_sight.player_spotted.connect(_player_spotted)
+	
 
 
 func play_enemy_move_sound():
-	SoundManager.play_custom_sound(global_transform, "event:/blob_move", 0.2)
+	SoundManager.play_custom_sound(global_transform, "event:/spider_move", 0.2)
+

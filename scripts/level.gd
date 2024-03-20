@@ -176,6 +176,7 @@ func _on_enter_medical_body_exited(body):
 			var blob = blobScene.instantiate()
 			entities.call_deferred("add_child", blob)
 			blob.global_position = blob_spawn_location.global_position
+			enemy_count += 2
 			SoundManager.set_main_loop_parameter(SoundManager.COMBAT_MID_HIGH)
 			combat = true
 
