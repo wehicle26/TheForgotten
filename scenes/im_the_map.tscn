@@ -1,0 +1,166 @@
+[gd_scene load_steps=11 format=3 uid="uid://bg3m0cswb72yv"]
+
+[ext_resource type="Texture2D" uid="uid://dmrhmmmtmxui" path="res://art/environment/im the map.png" id="1_ga808"]
+[ext_resource type="Texture2D" uid="uid://biwc010yg1gyu" path="res://art/environment/im the map_n.png" id="2_7wv1c"]
+
+[sub_resource type="OccluderPolygon2D" id="OccluderPolygon2D_ludr6"]
+polygon = PackedVector2Array(13, 25, 13, 17, 12, 17, 12, 16, 11, 16, 11, 15, 8, 15, 8, 13, 6, 13, 6, 12, -6, 12, -6, 13, -8, 13, -8, 15, -11, 15, -11, 16, -12, 16, -12, 17, -13, 17, -13, 25, -12, 25, -12, 28, -11, 28, -11, 29, -6, 29, -6, 28, -4, 28, -4, 27, 4, 27, 4, 28, 6, 28, 6, 29, 11, 29, 11, 28, 12, 28, 12, 25)
+
+[sub_resource type="CanvasTexture" id="CanvasTexture_ekfc1"]
+diffuse_texture = ExtResource("1_ga808")
+normal_texture = ExtResource("2_7wv1c")
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_1jkfi"]
+size = Vector2(24, 15)
+
+[sub_resource type="Animation" id="Animation_cu2sc"]
+length = 0.1
+loop_mode = 1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Sprite2D:visible")
+tracks/0/interp = 1
+tracks/0/loop_wrap = false
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [true]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("Sprite2D:frame")
+tracks/1/interp = 1
+tracks/1/loop_wrap = false
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [8]
+}
+
+[sub_resource type="Animation" id="Animation_if7b2"]
+length = 0.2
+loop_mode = 1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Sprite2D:visible")
+tracks/0/interp = 1
+tracks/0/loop_wrap = false
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [true]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("Sprite2D:frame")
+tracks/1/interp = 1
+tracks/1/loop_wrap = false
+tracks/1/keys = {
+"times": PackedFloat32Array(0, 0.1),
+"transitions": PackedFloat32Array(1, 1),
+"update": 1,
+"values": [6, 7]
+}
+
+[sub_resource type="Animation" id="Animation_ud34s"]
+length = 0.3
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Sprite2D:visible")
+tracks/0/interp = 1
+tracks/0/loop_wrap = false
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [true]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("Sprite2D:frame")
+tracks/1/interp = 1
+tracks/1/loop_wrap = false
+tracks/1/keys = {
+"times": PackedFloat32Array(0, 0.1, 0.2),
+"transitions": PackedFloat32Array(1, 1, 1),
+"update": 1,
+"values": [3, 4, 5]
+}
+
+[sub_resource type="Animation" id="Animation_cbp28"]
+length = 0.3
+loop_mode = 1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Sprite2D:visible")
+tracks/0/interp = 1
+tracks/0/loop_wrap = false
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [true]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("Sprite2D:frame")
+tracks/1/interp = 1
+tracks/1/loop_wrap = false
+tracks/1/keys = {
+"times": PackedFloat32Array(0, 0.1, 0.2),
+"transitions": PackedFloat32Array(1, 1, 1),
+"update": 1,
+"values": [0, 1, 2]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_efwi0"]
+_data = {
+"fuzzy": SubResource("Animation_cu2sc"),
+"map": SubResource("Animation_if7b2"),
+"opening": SubResource("Animation_ud34s"),
+"static": SubResource("Animation_cbp28")
+}
+
+[node name="im the map" type="StaticBody2D"]
+
+[node name="LightOccluder2D" type="LightOccluder2D" parent="."]
+occluder = SubResource("OccluderPolygon2D_ludr6")
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+texture_filter = 1
+texture = SubResource("CanvasTexture_ekfc1")
+hframes = 3
+vframes = 3
+frame = 6
+metadata/_aseprite_wizard_config_ = {
+"i_mode": -1,
+"keep_anim_length": false,
+"layer": "",
+"o_ex_p": "",
+"o_folder": "res://art/environment",
+"o_name": "im the map",
+"only_visible": true,
+"op_exp": false,
+"player": "AnimationPlayer",
+"source": "res://art/environment/goo2 MAP.aseprite"
+}
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+position = Vector2(0, 20.5)
+shape = SubResource("RectangleShape2D_1jkfi")
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+libraries = {
+"": SubResource("AnimationLibrary_efwi0")
+}
