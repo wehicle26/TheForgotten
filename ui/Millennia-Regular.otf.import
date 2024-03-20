@@ -3,12 +3,12 @@
 importer="font_data_dynamic"
 type="FontFile"
 uid="uid://cj8rhodwww8xo"
-path="res://.godot/imported/Millennia-Regular(1).otf-c1cce40d586f2f9e75ecb495e533a69f.fontdata"
+path="res://.godot/imported/Millennia-Regular.otf-08f53715f61f9f836c090ccb9a386f2c.fontdata"
 
 [deps]
 
-source_file="res://ui/Millennia-Regular(1).otf"
-dest_files=["res://.godot/imported/Millennia-Regular(1).otf-c1cce40d586f2f9e75ecb495e533a69f.fontdata"]
+source_file="res://ui/Millennia-Regular.otf"
+dest_files=["res://.godot/imported/Millennia-Regular.otf-08f53715f61f9f836c090ccb9a386f2c.fontdata"]
 
 [params]
 

@@ -11,10 +11,17 @@ signal unfreeze
 @export var run_speed = 85
 @export var inventory: Inventory
 @export var swinging: bool = false
+@export var random_strength: float = 0.5
+@export var shake_fade: float = 5.0
+
+@onready var h_box_container = $Tutorial/HBoxContainer
+@onready var tut_sprite = $Tutorial/HBoxContainer/TextureRect
+@onready var label = $Tutorial/HBoxContainer/Label
+@onready var state_machine = $StateMachine
 @onready var hitbox = $Hitbox
 @onready var idle_timer = $IdleTimer
 @onready var player_camera = $PlayerCamera
-
+@onready var arm_timer = $ArmTimer
 @onready var animation_player = $AnimationPlayer
 #@onready var flashlight = $Flashlight
 @onready var sprite_2d = $Sprite2D
@@ -22,10 +29,15 @@ signal unfreeze
 @onready var feet = $Feet
 @onready var currentHealth: int = health.max_health
 @onready var max_Health: int = health.max_health
+@onready var gun = $Gun
+@onready var canvas_layer = $CanvasLayer
 
+const left_click_sprite = preload("res://ui/tile_0077.png")
+const toggle_sprite = preload("res://ui/tile_0123.png")
 const CROSSHAIR_004 = preload("res://art/player/crosshair004.png")
 var FlashlightScene: PackedScene = preload("res://scenes/Flashlight.tscn")
 var GunScene: PackedScene = preload("res://scenes/Gun.tscn")
+var main = "res://scenes/Main.tscn"
 
 var collision: bool = false
 var speed = 0
@@ -37,14 +49,79 @@ var current_weapon = "crowbar"
 var knockback_force = 500
 var attack_position = 0
 var stun_time = .25
-var flashlight: Light
-var gun: Gun
+var flashlight: Light 
+var can_shoot: bool = false
+var can_run: bool = true
+
+var shake_strength: float = 0.0
+var rand = RandomNumberGenerator.new()
+
+func show_tut(tut):
+	if tut == "crowbar":
+		tut_sprite.texture = left_click_sprite
+		label.text = "attack"
+		h_box_container.visible = true
+		var tween = get_tree().create_tween()
+		tween.tween_property(h_box_container, "modulate", Color.WHITE, 3).set_trans(Tween.TRANS_BACK)
+		await tween.finished
+		tween = get_tree().create_tween()
+		tween.tween_property(h_box_container, "modulate", Color.TRANSPARENT, 3).set_trans(Tween.TRANS_BACK)
+		await tween.finished
+		label.text = "hold"
+		tween = get_tree().create_tween()
+		tween.tween_property(h_box_container, "modulate", Color.WHITE, 3).set_trans(Tween.TRANS_BACK)
+		await tween.finished
+		tween = get_tree().create_tween()
+		tween.tween_property(h_box_container, "modulate", Color.TRANSPARENT, 3).set_trans(Tween.TRANS_BACK)
+		
+	if tut == "flashlight":
+		tut_sprite.texture = toggle_sprite
+		label.text = "toggle"
+		h_box_container.visible = true
+		var tween = get_tree().create_tween()
+		tween.tween_property(h_box_container, "modulate", Color.WHITE, 3).set_trans(Tween.TRANS_BACK)
+		await tween.finished
+		tween = get_tree().create_tween()
+		tween.tween_property(h_box_container, "modulate", Color.TRANSPARENT, 3).set_trans(Tween.TRANS_BACK)
+		await tween.finished
+
+
+func apply_shake():
+	shake_strength = random_strength
+
+
+func randomOffset():
+	return Vector2(
+		rand.randf_range(-shake_strength, shake_strength),
+		rand.randf_range(-shake_strength, shake_strength)
+	)
+
+
+func _respawn():
+	GlobalState.encounter1 = false
+	GlobalState.encounter2 = false
+	GlobalState.encounter3 = false
+	get_tree().change_scene_to_file(main)
+
 
 func _ready():
 	#gun.get_node("ArmTimer").timeout.connect(_lower_arm)
+	can_run = false
+	health.game_over.connect(_respawn)
 	sprite_2d.material.set_shader_parameter("active", false)
 	SoundManager.initialize_player_sounds(self)
+	SoundManager.inittialize_speech_sound(self)
 	inventory = Inventory.new()
+	inventory.changed.connect(_inventory_changed)
+
+
+func _inventory_changed():
+	if inventory.blaster and not is_instance_valid(gun):
+		pass
+	
+	if inventory.flashlight and not is_instance_valid(flashlight):
+		flashlight = FlashlightScene.instantiate()
+		add_child(flashlight)
 
 
 func play_sigh():
@@ -68,6 +145,7 @@ func unfreeze_player():
 
 
 func damage():
+	apply_shake()
 	freeze_player()
 	sprite_2d.material.set_shader_parameter("active", true)
 	SoundManager.play_custom_sound(self.global_transform, "event:/roach_bite", 0.7)
@@ -100,10 +178,12 @@ func _input(event):
 	#gun.num_bullets = 4
 	#if event.is_action_pressed("5"):
 	#gun.num_bullets = 5
+	if event.is_action_pressed("switch_weapon") and inventory.itemArray.size() > 1:
+		if current_weapon == "blaster":
+			current_weapon = "crowbar"
+		else:
+			current_weapon = "blaster"
 	if event.is_action_pressed("flashlight_toggle") and inventory.flashlight:
-		if not is_instance_valid(flashlight):
-			flashlight = FlashlightScene.instantiate()
-			add_child(flashlight)
 		flashlight.toggle()
 
 
@@ -111,17 +191,19 @@ func get_input():
 	#if not swinging:
 	input_dir = Input.get_vector("move_left", "move_right", "move_up", "move_down")
 	velocity = input_dir * speed + knockback
-	if Input.is_action_pressed("shoot") and inventory.blaster and current_weapon == "blaster":
-		if not is_instance_valid(gun):
-			gun = GunScene.instantiate()
-			add_child(gun)
+				
+	if Input.is_action_pressed("shoot") and inventory.blaster and (state_machine.current_state.name == "PlayerShoot" or state_machine.current_state.name == "PlayerWalkShoot"):
 		gun.fire_gun()
-
+	else:
+		can_shoot = false
+		
 	return input_dir
 
 
-func _process(_delta):
-	pass
+func _process(delta):
+	if shake_strength > 0:
+		shake_strength = lerpf(shake_strength, 0, shake_fade * delta)
+		player_camera.offset = randomOffset()
 
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
@@ -130,7 +212,8 @@ func _physics_process(_delta):
 
 
 func _lower_arm():
-	animation_player.play("Walk")
+	pass
+	#animation_player.play("Walk")
 
 
 func _on_crowbar_hitbox_area_entered(area):

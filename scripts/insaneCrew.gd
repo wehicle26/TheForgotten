@@ -8,12 +8,7 @@ class_name InsaneCrew
 
 func _ready():
 	lines = [
-	"Not.. safe.. here...",
-	"Everyone... dead...",
-	"Can't... take this...",
-	"It's too late... for me...",
-	"Need... to get... away...",
-	"Need to get out."
+	"Can't... take this... anymore...",
 	]
 
 	interact = Callable(self, "_on_interact")

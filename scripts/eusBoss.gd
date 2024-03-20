@@ -27,10 +27,10 @@ func damage():
 		#SoundManager.play_custom_sound(global_transform, "event:/roach_hit", 0.5)
 	#sprite_2d.material.set_shader_parameter("active", true)
 	sprite_2d.modulate = red
-	var timer = get_tree().create_timer(0.5)
-	await timer.timeout
-	#sprite_2d.material.set_shader_parameter("active", false)
+	await get_tree().create_timer(0.2).timeout
 	sprite_2d.modulate = white
+		
+	#sprite_2d.material.set_shader_parameter("active", false)
 
 func _ready():
 	#sprite_2d.material.set_shader_parameter("active", false)
@@ -69,9 +69,9 @@ func smooth_look(delta):
 	var angle_delta = rotation_speed * delta
 	angle = lerp_angle(r, angle, 1.0)
 	angle = clamp(angle, r - angle_delta, r + angle_delta)
-	sprite_2d.global_rotation = angle
-	hitbox.global_rotation = angle
-	collision_shape_2d.global_rotation = angle
+	#sprite_2d.global_rotation = angle
+	#hitbox.global_rotation = angle
+	#collision_shape_2d.global_rotation = angle
 
 func _player_spotted():
 	is_player_spotted = true

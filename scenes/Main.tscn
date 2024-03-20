@@ -1,7 +1,9 @@
-[gd_scene load_steps=43 format=3 uid="uid://b71gis6vgkvkg"]
+[gd_scene load_steps=53 format=3 uid="uid://b71gis6vgkvkg"]
 
 [ext_resource type="Script" path="res://scripts/level.gd" id="1_6u7sh"]
 [ext_resource type="PackedScene" uid="uid://bob88w6sefucj" path="res://scenes/Environment.tscn" id="1_halep"]
+[ext_resource type="Script" path="res://scripts/pauseMenu.gd" id="2_dal01"]
+[ext_resource type="Texture2D" uid="uid://cpfwf80v78ypw" path="res://ui/bubble.png" id="2_j5ncj"]
 [ext_resource type="PackedScene" uid="uid://cyj8triea8w13" path="res://scenes/Crowbar.tscn" id="3_ax4cu"]
 [ext_resource type="PackedScene" uid="uid://c7u77qm7btd2s" path="res://scenes/CryoBed.tscn" id="4_0fems"]
 [ext_resource type="PackedScene" uid="uid://ch0016cku2p02" path="res://scenes/Light.tscn" id="4_7cj7q"]
@@ -13,19 +15,28 @@
 [ext_resource type="PackedScene" uid="uid://fcefbjw8babe" path="res://scenes/Forklift.tscn" id="9_rxupm"]
 [ext_resource type="PackedScene" uid="uid://cpu2pabqnow4x" path="res://scenes/BreakableDoor.tscn" id="10_3i61v"]
 [ext_resource type="PackedScene" uid="uid://8bdjhnsaqthg" path="res://scenes/hallway_dead_guy.tscn" id="10_p5tb0"]
-[ext_resource type="PackedScene" uid="uid://cuee4phykn8mk" path="res://scenes/PowerCore.tscn" id="10_quu3m"]
+[ext_resource type="PackedScene" uid="uid://cfw6pvedmjgw7" path="res://scenes/PowerCore.tscn" id="10_quu3m"]
 [ext_resource type="PackedScene" uid="uid://c1ks08dpslaga" path="res://scenes/Note.tscn" id="12_ylmx7"]
+[ext_resource type="PackedScene" uid="uid://cg4o4mpdmhkyp" path="res://scenes/EscapePod.tscn" id="14_fifaw"]
 [ext_resource type="Shader" path="res://shaders/grain.gdshader" id="15_ui16x"]
 [ext_resource type="PackedScene" uid="uid://d2eli84d2uqkm" path="res://scenes/InsaneCrew.tscn" id="16_ee52r"]
 [ext_resource type="PackedScene" uid="uid://bv8yf3ytm2yc1" path="res://scenes/CryoMachine.tscn" id="16_idydh"]
 [ext_resource type="PackedScene" uid="uid://bo3acd3y8ucuy" path="res://scenes/Eus.tscn" id="17_7u0ol"]
 [ext_resource type="Shader" path="res://shaders/space.gdshader" id="18_ghgnd"]
-[ext_resource type="PackedScene" uid="uid://clo08muxcwc4o" path="res://scenes/Blob.tscn" id="19_igytc"]
-[ext_resource type="PackedScene" uid="uid://bb6pi7b5qrh6t" path="res://scenes/EusBoss.tscn" id="19_sumik"]
 [ext_resource type="Shader" path="res://shaders/glitch.gdshader" id="22_dqfq6"]
+[ext_resource type="Shader" path="res://shaders/vignette.gdshader" id="23_gq8o3"]
 
 [sub_resource type="SegmentShape2D" id="SegmentShape2D_xjm62"]
 resource_local_to_scene = true
+b = Vector2(0, 100)
+
+[sub_resource type="SegmentShape2D" id="SegmentShape2D_70311"]
+b = Vector2(125, 0)
+
+[sub_resource type="SegmentShape2D" id="SegmentShape2D_q6x6p"]
+b = Vector2(0, 90)
+
+[sub_resource type="SegmentShape2D" id="SegmentShape2D_1ranx"]
 b = Vector2(0, 100)
 
 [sub_resource type="SegmentShape2D" id="SegmentShape2D_81hyv"]
@@ -34,58 +45,82 @@ b = Vector2(50, 0)
 [sub_resource type="SegmentShape2D" id="SegmentShape2D_2sq0y"]
 b = Vector2(50, 0)
 
+[sub_resource type="SegmentShape2D" id="SegmentShape2D_b3rao"]
+b = Vector2(0, 45)
+
+[sub_resource type="SegmentShape2D" id="SegmentShape2D_f08v3"]
+b = Vector2(90, 0)
+
 [sub_resource type="NavigationPolygon" id="NavigationPolygon_x2io3"]
-vertices = PackedVector2Array(462, 156, 462, 302, 388, 302, 274, 188, 274, 50, 388, 50, 526, 92, 434, 4, 526, -92, 494, -124, 434, -262, 494, -262)
-polygons = Array[PackedInt32Array]([PackedInt32Array(0, 1, 2, 3, 4, 5), PackedInt32Array(6, 0, 5, 7), PackedInt32Array(8, 6, 7, 9), PackedInt32Array(7, 10, 11, 9)])
-outlines = Array[PackedVector2Array]([PackedVector2Array(264, 40, 264, 192, 384, 312, 472, 312, 472, 160, 536, 96, 536, -96, 504, -128, 504, -272, 424, -272, 424, 0, 384, 40)])
+vertices = PackedVector2Array(462, 156, 462, 302, 388, 302, 274, 188, 274, 142, 388, 50, 238, 142, 238, 82, 274, 82, 274, 50, 434, 4, 434, -262, 494, -262, 494, -124, 526, -92, 526, 92)
+polygons = Array[PackedInt32Array]([PackedInt32Array(0, 1, 2, 3, 4, 5), PackedInt32Array(4, 6, 7, 8), PackedInt32Array(8, 9, 5), PackedInt32Array(10, 11, 12, 13), PackedInt32Array(10, 13, 14, 15, 0), PackedInt32Array(5, 10, 0), PackedInt32Array(5, 4, 8)])
+outlines = Array[PackedVector2Array]([PackedVector2Array(264, 40, 264, 72.1035, 228, 72, 228, 152, 264, 152, 264, 192, 384, 312, 472, 312, 472, 160, 536, 96, 536, -96, 504, -128, 504, -272, 424, -272, 424, 0, 384, 40)])
+source_geometry_mode = 1
 source_geometry_group_name = &"navigation_polygon_source_group"
 
 [sub_resource type="NavigationPolygon" id="NavigationPolygon_h07k4"]
 resource_local_to_scene = true
-vertices = PackedVector2Array(74, -134, 139, -51, 131, -43, 52, -49, 50, -59, 174, 22, 164, 22, 167, 19, -60, -142, -42, -160, -42, -134, -70, -74, -22, 43, -22, -5, 24, 25, 24, 73, 129, -34, 89, -31, 50, -39, 220, 206, 197, 206, 197, 168, 199, 168, 238, 188, 238, -174, 199, 90, 173, 90, 173, 70, 174, 70, 169, 10, 169, -34, 167, -43, 74, -174, 159, -51, 149, -53, 42, -67, 33, -69, 9, -69, 9, -73, -22, -73, -22, -74, -78, -142, -78, -124, -92, 110, -92, -110, -70, -26, -39, -26, -39, -25, -70, -5, 9, -25, 9, -29, 33, -29, 129, -31, 89, -5, 59, -5, 42, -31, 59, 25, -70, 25, -73, 25, 24, 85, -25, 73, -25, 43, 26, 85, 26, 73, 24, 133, 56, 133, 56, 136, 59, 136, 59, 148, 57, 148, 57, 196, 59, 196, 59, 206, -22, 206, -22, 188, -110, 110, -110, -110, -73, 73)
-polygons = Array[PackedInt32Array]([PackedInt32Array(0, 1, 2, 3, 4), PackedInt32Array(5, 6, 7), PackedInt32Array(8, 9, 10, 11), PackedInt32Array(12, 13, 14, 15), PackedInt32Array(3, 2, 16, 17, 18), PackedInt32Array(19, 20, 21, 22, 23), PackedInt32Array(24, 23, 22, 25), PackedInt32Array(25, 26, 27, 28), PackedInt32Array(24, 25, 28, 5), PackedInt32Array(24, 5, 7, 29), PackedInt32Array(24, 29, 30), PackedInt32Array(24, 30, 31), PackedInt32Array(32, 24, 31, 33), PackedInt32Array(0, 32, 33, 34), PackedInt32Array(0, 34, 1), PackedInt32Array(0, 4, 35), PackedInt32Array(10, 0, 35, 36), PackedInt32Array(36, 37, 38), PackedInt32Array(10, 36, 38), PackedInt32Array(38, 39, 40), PackedInt32Array(10, 38, 40), PackedInt32Array(10, 40, 11), PackedInt32Array(41, 8, 11, 42), PackedInt32Array(43, 44, 42, 11, 45), PackedInt32Array(45, 46, 47, 48), PackedInt32Array(49, 50, 51), PackedInt32Array(16, 52, 17), PackedInt32Array(18, 17, 53, 54, 55), PackedInt32Array(51, 55, 54, 56, 14, 13), PackedInt32Array(48, 57, 58), PackedInt32Array(59, 60, 61, 12, 15, 62), PackedInt32Array(15, 63, 62), PackedInt32Array(64, 65, 66), PackedInt32Array(66, 67, 68, 69), PackedInt32Array(70, 71, 72, 73), PackedInt32Array(69, 70, 73, 74, 64, 66), PackedInt32Array(43, 75, 76, 44), PackedInt32Array(49, 51, 13), PackedInt32Array(47, 49, 13, 48), PackedInt32Array(43, 45, 48, 58), PackedInt32Array(43, 58, 77), PackedInt32Array(64, 74, 43, 77, 60, 59)])
-outlines = Array[PackedVector2Array]([PackedVector2Array(-120, 120, -96, 120, -32, 192, -32, 216, 224, 216, 248, 192, 248, -48, 248, -184, 192, -184, 64, -184, 64, -144, -32, -144, -32, -184, -64, -152, -88, -152, -88, -128, -96, -120, -120, -120)])
+vertices = PackedVector2Array(-150, -18, -202, -18, -201, -19, -237, -55, -238, -54, -238, -142, -60, -142, -42, -160, -42, -134, 125, -11, 52, -49, 50, -54, 55, -53, 133, -19, -105, -69, -101, -56, -123, -62, -24, 71, -14, 69, -15, 72, -24, 84, -47, -35, -48, -39, -39, -37, -39, -25, 41, -111, 42, -105, 21, -111, 150, -43, 160, -45, 158, -35, 151, -35, 205, 24, 201, 24, 207, 4, -48, 29, -46, 36, -72, 36, 97, 166, 122, 159, 122, 168, 73, 175, 202, 135, 195, 109, 202, 109, 238, 188, 31, 89, 57, 82, 57, 88, -22, 188, 144, 101, 149, 120, 134, 120, 131, 108, 124, -82, 124, -83, 140, -79, 151, -19, 143, -21, 58, -66, 99, -77, -87, 17, -92, -4, -89, -4, 192, 141, 170, 146, 170, 143, -224, -58, -196, -142, -164, -110, -198, -32, -146, -86, -110, -86, 98, -82, -110, 51, -109, 56, -136, 56, -150, 18, -133, 29, 95, 161, -211, -55, -146, -110, -78, -124, -10, -109, -17, -80, -61, -92, -92, -110, 220, 206, 202, 206, 202, 187, 204, 187, 199, 1, 199, -13, 201, -13, 9, -25, 9, -29, 33, -29, 119, 22, 50, -39, 123, -2, 123, 22, 42, -31, 119, 70, 154, 70, 154, 98, 95, 117, 91, 109, 105, 88, 150, 168, 154, 183, 154, 206, -22, 206, -92, 110, -110, 110, -110, 104, -88, 104, -52, 85, -52, 84, -136, 86, -146, 86, -238, 18, -146, 124, -228, 206, -238, 206, -201, -45, -110, -110, -64, -79, -78, -142, 74, -134, 74, -174, 238, -174, 115, -135, 76, -130, 18, -101, 193, -64, 188, -83, 195, -85, 213, -59, 202, 73, 217, 70, 114, -130, 105, 40, 67, 40, 65, 31, 202, 177, 201, 177, -88, 94, 76, -120, -72, 41, 202, 179, -133, -19, -145, -17, 29, 83, -83, -25, 40, 37, 0, 26, -2, 17, 49, 133, 183, -131, 156, -124)
+polygons = Array[PackedInt32Array]([PackedInt32Array(0, 1, 2), PackedInt32Array(3, 4, 5), PackedInt32Array(6, 7, 8), PackedInt32Array(9, 10, 11, 12, 13), PackedInt32Array(14, 15, 16), PackedInt32Array(17, 18, 19, 20), PackedInt32Array(21, 22, 23, 24), PackedInt32Array(25, 26, 27, 8), PackedInt32Array(28, 29, 30, 31), PackedInt32Array(32, 33, 34), PackedInt32Array(35, 36, 37), PackedInt32Array(38, 39, 40, 41), PackedInt32Array(42, 43, 44, 45), PackedInt32Array(46, 47, 48, 49), PackedInt32Array(50, 51, 52, 53), PackedInt32Array(54, 55, 56, 28), PackedInt32Array(28, 31, 57, 58, 12, 59, 60, 54), PackedInt32Array(61, 62, 63), PackedInt32Array(64, 65, 66, 42), PackedInt32Array(67, 3, 5, 68, 69), PackedInt32Array(0, 2, 70, 71, 72, 16), PackedInt32Array(60, 73, 54), PackedInt32Array(74, 75, 76, 77, 78), PackedInt32Array(41, 79, 38), PackedInt32Array(71, 80, 67, 69, 81), PackedInt32Array(82, 8, 83, 84, 85, 86), PackedInt32Array(87, 88, 89, 90, 45), PackedInt32Array(91, 92, 93, 34), PackedInt32Array(94, 95, 96, 97), PackedInt32Array(98, 99, 100, 97, 101), PackedInt32Array(102, 103, 104, 50), PackedInt32Array(102, 50, 53, 105, 106, 107), PackedInt32Array(40, 108, 109, 110, 111, 41), PackedInt32Array(112, 113, 114, 115), PackedInt32Array(116, 117, 20, 49), PackedInt32Array(77, 76, 118, 119, 120), PackedInt32Array(121, 122, 123, 120, 119), PackedInt32Array(124, 80, 71), PackedInt32Array(14, 72, 125, 86, 85, 126), PackedInt32Array(82, 127, 6, 8), PackedInt32Array(128, 129, 130, 131, 132), PackedInt32Array(27, 133, 83, 8), PackedInt32Array(134, 135, 136, 137), PackedInt32Array(44, 138, 139, 45), PackedInt32Array(131, 140, 132), PackedInt32Array(141, 142, 143, 97), PackedInt32Array(144, 145, 64, 42), PackedInt32Array(115, 146, 116, 49), PackedInt32Array(49, 112, 115), PackedInt32Array(128, 132, 147, 25, 8), PackedInt32Array(61, 37, 148, 74, 78), PackedInt32Array(45, 90, 149, 144), PackedInt32Array(45, 144, 42), PackedInt32Array(16, 150, 151, 0), PackedInt32Array(49, 20, 19, 152, 46), PackedInt32Array(63, 153, 21, 24, 61), PackedInt32Array(70, 124, 71), PackedInt32Array(154, 155, 156, 143), PackedInt32Array(12, 58, 13), PackedInt32Array(98, 10, 9, 99), PackedInt32Array(49, 48, 107, 157), PackedInt32Array(96, 101, 97), PackedInt32Array(37, 61, 24, 94, 35), PackedInt32Array(130, 45, 139), PackedInt32Array(130, 139, 32, 34), PackedInt32Array(34, 93, 137), PackedInt32Array(130, 34, 137), PackedInt32Array(130, 137, 136, 158), PackedInt32Array(158, 159, 131, 130), PackedInt32Array(72, 14, 16), PackedInt32Array(77, 0, 151, 78), PackedInt32Array(156, 35, 94), PackedInt32Array(156, 94, 97, 143), PackedInt32Array(141, 97, 102, 107), PackedInt32Array(107, 106, 157), PackedInt32Array(49, 157, 41, 111)])
+outlines = Array[PackedVector2Array]([PackedVector2Array(-120, 120, -96, 120, -32, 192, -32, 216, 224, 216, 248, 192, 248, -48, 248, -184, 192, -184, 64, -184, 64, -144, -32, -144, -32, -184, -64, -152, -88, -152, -88, -128, -96, -120, -120, -120, -120, -96, -136, -96, -136, -120, -160, -120, -192, -152, -248, -152, -248, -8, -160, -8, -160, 8, -248, 8, -248, 216, -224, 216, -136, 128, -136, 96, -120, 96)])
 source_geometry_mode = 1
 source_geometry_group_name = &"navigation_polygon_source_group"
 
 [sub_resource type="NavigationPolygon" id="NavigationPolygon_46qe0"]
-vertices = PackedVector2Array(-266, 502, -502, 502, -502, 458, -266, 458)
-polygons = Array[PackedInt32Array]([PackedInt32Array(0, 1, 2, 3)])
-outlines = Array[PackedVector2Array]([PackedVector2Array(-512, 512, -256, 512, -256, 448, -512, 448)])
+vertices = PackedVector2Array(-322, 458, -266, 458, -266, 502, -502, 502, -502, 458, -350, 458, -322, 438, -350, 438)
+polygons = Array[PackedInt32Array]([PackedInt32Array(0, 1, 2, 3), PackedInt32Array(3, 4, 5), PackedInt32Array(0, 3, 5), PackedInt32Array(6, 0, 5, 7)])
+outlines = Array[PackedVector2Array]([PackedVector2Array(-512, 512, -256, 512, -256, 448, -312, 448, -312, 428, -360, 428, -360, 448, -512, 448)])
+source_geometry_mode = 1
 source_geometry_group_name = &"navigation_polygon_source_group"
 
 [sub_resource type="NavigationPolygon" id="NavigationPolygon_rqb6j"]
-vertices = PackedVector2Array(-266, 438, -502, 438, -502, 298, -266, 298)
-polygons = Array[PackedInt32Array]([PackedInt32Array(0, 1, 2, 3)])
-outlines = Array[PackedVector2Array]([PackedVector2Array(-512, 448, -256, 448, -256, 288, -512, 288)])
+vertices = PackedVector2Array(-322, 298, -266, 298, -266, 438, -502, 438, -502, 298, -350, 298, -322, 278, -350, 278)
+polygons = Array[PackedInt32Array]([PackedInt32Array(0, 1, 2, 3), PackedInt32Array(3, 4, 5), PackedInt32Array(0, 3, 5, 6), PackedInt32Array(6, 5, 7)])
+outlines = Array[PackedVector2Array]([PackedVector2Array(-512, 448, -360, 448, -312, 448, -256, 448, -256, 288, -312, 288, -312, 268, -360, 268, -360.069, 288, -512, 288)])
+source_geometry_mode = 1
 source_geometry_group_name = &"navigation_polygon_source_group"
 
 [sub_resource type="NavigationPolygon" id="NavigationPolygon_q5l1j"]
 vertices = PackedVector2Array(-266, 278, -494, 278, -494, 164, -444, 114, -266, 114)
 polygons = Array[PackedInt32Array]([PackedInt32Array(0, 1, 2, 3, 4)])
-outlines = Array[PackedVector2Array]([PackedVector2Array(-256, 288, -256, 104, -448, 104, -504, 160, -504, 288)])
+outlines = Array[PackedVector2Array]([PackedVector2Array(-256, 288, -256, 104, -448, 104, -504, 160, -504, 288, -360, 288, -312, 288)])
+source_geometry_mode = 1
 source_geometry_group_name = &"navigation_polygon_source_group"
 
 [sub_resource type="NavigationPolygon" id="NavigationPolygon_txd4j"]
 vertices = PackedVector2Array(-1130, 116, -1220, 206, -1238, 206, -1238, 18, -1130, 18)
 polygons = Array[PackedInt32Array]([PackedInt32Array(0, 1, 2, 3, 4)])
 outlines = Array[PackedVector2Array]([PackedVector2Array(-1248, 8, -1248, 216, -1216, 216, -1120, 120, -1120, 8)])
+source_geometry_mode = 1
 source_geometry_group_name = &"navigation_polygon_source_group"
 
 [sub_resource type="NavigationPolygon" id="NavigationPolygon_ar3qy"]
 vertices = PackedVector2Array(-1138, -102, -1130, -102, -1130, -18, -1194, -18, -1194, -10, -1238, -10, -1238, -206, -1138, -124, -1220, -206)
 polygons = Array[PackedInt32Array]([PackedInt32Array(0, 1, 2, 3), PackedInt32Array(3, 4, 5, 6), PackedInt32Array(7, 0, 3, 6, 8)])
 outlines = Array[PackedVector2Array]([PackedVector2Array(-1248, 0, -1184, 0, -1184, -8, -1120, -8, -1120, -112, -1128, -112, -1128, -128, -1216, -216, -1248, -216)])
-source_geometry_group_name = &"navigation_polygon_source_group"
-
-[sub_resource type="NavigationPolygon" id="NavigationPolygon_22n00"]
-vertices = PackedVector2Array(269, 372, -491, 372, -491, -292, 269, -292)
-polygons = Array[PackedInt32Array]([PackedInt32Array(0, 1, 2, 3)])
-outlines = Array[PackedVector2Array]([PackedVector2Array(-495, -296, -495, 376, 273, 376, 273, -296)])
-parsed_geometry_type = 1
 source_geometry_mode = 1
 source_geometry_group_name = &"navigation_polygon_source_group"
-agent_radius = 4.0
+
+[sub_resource type="NavigationPolygon" id="NavigationPolygon_ls1gp"]
+vertices = PackedVector2Array(-574, 338, -574, 302, -546, 302, -546, 338, -558, 540, -558, 412, -526, 338, -526, 526, -540, 558, -350, 526, -350, 502, -322, 502, -322, 526, -324, 558, -306, 526, -306, 540, -604, 366, -676, 338, -668, 366, -764, 270, -772, 242, -962, 242, -988, 270, -1006, 252, -1006, 242, -990, 242, -962, 206, -990, 206)
+polygons = Array[PackedInt32Array]([PackedInt32Array(0, 1, 2, 3), PackedInt32Array(4, 5, 3, 6, 7, 8), PackedInt32Array(9, 10, 11, 12, 13), PackedInt32Array(12, 14, 15, 13), PackedInt32Array(9, 13, 8, 7), PackedInt32Array(3, 5, 16, 0), PackedInt32Array(17, 0, 16, 18), PackedInt32Array(17, 18, 19, 20), PackedInt32Array(21, 20, 19, 22, 23), PackedInt32Array(23, 24, 25), PackedInt32Array(21, 23, 25), PackedInt32Array(26, 21, 25, 27)])
+outlines = Array[PackedVector2Array]([PackedVector2Array(-1016, 232, -1016, 256, -992, 280, -768, 280, -672, 376, -608, 376, -568, 416, -568, 544, -544, 568, -320, 568, -296, 544, -296, 516, -312, 516, -312, 492, -360, 492, -360, 516, -516, 516, -516, 328, -536, 328, -536, 292, -584, 292, -584, 328, -672, 328, -768, 232, -952, 232, -952, 196, -1000, 196, -1000, 232)])
+source_geometry_mode = 1
+source_geometry_group_name = &"navigation_polygon_source_group"
+
+[sub_resource type="NavigationPolygon" id="NavigationPolygon_f3kmn"]
+vertices = PackedVector2Array(-107, -51, -107, -48, -108, -50, 20, 21, 19, 22, 19, 21, -73, 7, -70, -2, -63, 10, 50, -53, 50, -49, 25, -56, -133, -43, -133, -46, -120, -59, -125, -78, 78, -78, -45, -56, -350, 78, -404, 78, -393, 34, -205, -63, -49, 50, -49, 78, -109, 78, -103, 54, -40, -2, -39, 2, -27, 33, -23, 50, 78, -53, 61, -5, 78, -5, 78, 17, 59, 2, 32, -5, 42, 26, -12, -5, -322, 78, -322, 114, -350, 114, -417, 27, -417, 10, -388, 10, -421, -38, -430, -43, -430, -78, -213, -78, -388, -38, -105, -1, -149, 42, -142, 8, -158, 78, -181, 2, -144, 2, -179, -78, -174, -78, -166, -47, -181, -46, -5, -56, -39, -46, 24, -53, -4, -53, -70, -41, -413, 78, -430, 78, -430, 73, 50, 78, -1, 78, -1, 75, 19, 70, 78, 78, 54, 78, 55, 72, 78, 66)
+polygons = Array[PackedInt32Array]([PackedInt32Array(0, 1, 2), PackedInt32Array(3, 4, 5), PackedInt32Array(6, 7, 8), PackedInt32Array(9, 10, 11), PackedInt32Array(2, 12, 13, 14, 0), PackedInt32Array(0, 14, 15, 16, 17), PackedInt32Array(18, 19, 20, 21), PackedInt32Array(8, 22, 23, 24, 25, 6), PackedInt32Array(8, 26, 27), PackedInt32Array(28, 29, 22, 8, 27), PackedInt32Array(16, 30, 9, 11), PackedInt32Array(31, 32, 33, 34), PackedInt32Array(35, 34, 33, 36, 3, 37), PackedInt32Array(37, 3, 5), PackedInt32Array(37, 5, 28, 27), PackedInt32Array(38, 39, 40, 18), PackedInt32Array(41, 42, 43, 20), PackedInt32Array(44, 45, 46, 47, 48), PackedInt32Array(49, 6, 25, 50, 51), PackedInt32Array(43, 48, 47, 21), PackedInt32Array(51, 50, 52, 38, 53, 54), PackedInt32Array(21, 55, 56, 57, 58), PackedInt32Array(59, 60, 17), PackedInt32Array(11, 61, 62, 59), PackedInt32Array(21, 58, 53, 38, 18), PackedInt32Array(20, 43, 21), PackedInt32Array(13, 58, 57), PackedInt32Array(13, 57, 14), PackedInt32Array(17, 63, 0), PackedInt32Array(59, 17, 16), PackedInt32Array(59, 16, 11), PackedInt32Array(64, 65, 66), PackedInt32Array(67, 68, 69, 70), PackedInt32Array(71, 72, 73, 74)])
+outlines = Array[PackedVector2Array]([PackedVector2Array(-440, -88, 88, -88, 88, 88, -312, 88, -312, 124, -360, 124, -360, 88, -440, 88)])
+source_geometry_mode = 1
+source_geometry_group_name = &"navigation_polygon_source_group"
+
+[sub_resource type="NavigationPolygon" id="NavigationPolygon_tmpel"]
+vertices = PackedVector2Array(46, 156, 14, 188, 14, 182, -162, 114, -14, 114, -14, 170, 10, 170, 10, 114, 46, 114, -14, 182, -190, 114, -14, 274, -82, 274, -246, 114, -82, 348, -228, 494, -246, 494, -162, 78, -190, 78)
+polygons = Array[PackedInt32Array]([PackedInt32Array(0, 1, 2), PackedInt32Array(3, 4, 5), PackedInt32Array(6, 7, 8, 0, 2), PackedInt32Array(6, 2, 9, 5), PackedInt32Array(10, 9, 11, 12, 13), PackedInt32Array(14, 15, 16, 13, 12), PackedInt32Array(5, 9, 10, 3), PackedInt32Array(17, 3, 10, 18)])
+outlines = Array[PackedVector2Array]([PackedVector2Array(-256, 104, -256, 504, -224, 504, -72, 352, -72, 284, -4, 284, -4, 192, 4, 192, 4, 213, 56, 160, 56, 104, 0, 104, 0, 160, -4, 160, -4, 104, -152, 104, -152, 68, -200, 68, -200, 104)])
+source_geometry_mode = 1
+source_geometry_group_name = &"navigation_polygon_source_group"
 
 [sub_resource type="Animation" id="Animation_2qwia"]
 length = 0.001
@@ -180,27 +215,41 @@ shader_parameter/grain_size = 0.25
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_olk8u"]
 shader = ExtResource("22_dqfq6")
 shader_parameter/shake_power = 0.03
-shader_parameter/shake_rate = 1.0
+shader_parameter/shake_rate = 0.2
 shader_parameter/shake_speed = 5.0
 shader_parameter/shake_block_size = 30.5
 shader_parameter/shake_color_rate = 0.01
 
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_5pnrb"]
+shader = ExtResource("23_gq8o3")
+shader_parameter/alpha = 1.0
+shader_parameter/inner_radius = 0.0
+shader_parameter/outer_radius = 1.0
+
 [node name="Main" type="Node2D"]
 script = ExtResource("1_6u7sh")
 
-[node name="HUD" type="Control" parent="."]
-layout_mode = 3
-anchors_preset = 0
-offset_right = 40.0
-offset_bottom = 40.0
+[node name="DarknessLevel" type="CanvasModulate" parent="." groups=["Darkness"]]
+light_mask = 3
+visibility_layer = 3
+z_index = 10
+color = Color(0, 0, 0, 1)
 
-[node name="TextureProgressBar" type="TextureProgressBar" parent="HUD"]
-layout_mode = 0
-offset_right = 40.0
-offset_bottom = 40.0
+[node name="PauseMenu" type="CanvasLayer" parent="."]
+process_mode = 2
+layer = 50
+visible = false
+script = ExtResource("2_dal01")
 
-[node name="PlayerSpawnLocation" type="Marker2D" parent="."]
-position = Vector2(-653, -52)
+[node name="TextureRect" type="TextureRect" parent="PauseMenu"]
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_right = 8.0
+offset_bottom = 20.0
+grow_horizontal = 2
+grow_vertical = 2
+texture = ExtResource("2_j5ncj")
 
 [node name="Environment" parent="." instance=ExtResource("1_halep")]
 
@@ -209,19 +258,200 @@ z_index = 5
 
 [node name="Crowbar" parent="Environment/Items" instance=ExtResource("3_ax4cu")]
 z_index = -2
-position = Vector2(-627, -217)
+material = null
+position = Vector2(-843, -113)
 
 [node name="FlashlightItem" parent="Environment/Items" instance=ExtResource("5_6ojie")]
-position = Vector2(-876, 208)
+material = null
+position = Vector2(-1060, 136)
 rotation = -0.785397
 
 [node name="BlasterItem" parent="Environment/Items" instance=ExtResource("5_bmbqo")]
-position = Vector2(951, -153)
+material = null
+position = Vector2(-288, 513)
 
 [node name="Inanimate" type="Node2D" parent="Environment" groups=["navigation_polygon_source_group"]]
 
 [node name="CryoMachine" parent="Environment/Inanimate" instance=ExtResource("16_idydh")]
 position = Vector2(-710, -100)
+
+[node name="BridgeCrates" type="Node2D" parent="Environment/Inanimate"]
+
+[node name="Crate39" parent="Environment/Inanimate/BridgeCrates" instance=ExtResource("8_74hus")]
+position = Vector2(-113, -26)
+rotation = -0.523598
+
+[node name="Crate40" parent="Environment/Inanimate/BridgeCrates" instance=ExtResource("8_74hus")]
+position = Vector2(-74, -25)
+rotation = 0.261799
+
+[node name="Crate41" parent="Environment/Inanimate/BridgeCrates" instance=ExtResource("8_74hus")]
+position = Vector2(-39, -37)
+rotation = -0.261799
+
+[node name="Crate42" parent="Environment/Inanimate/BridgeCrates" instance=ExtResource("8_74hus")]
+position = Vector2(74, 3)
+
+[node name="Crate43" parent="Environment/Inanimate/BridgeCrates" instance=ExtResource("8_74hus")]
+position = Vector2(37, 82)
+rotation = 0.261799
+
+[node name="Crate44" parent="Environment/Inanimate/BridgeCrates" instance=ExtResource("8_74hus")]
+position = Vector2(42, 5)
+rotation = 0.261799
+
+[node name="Crate45" parent="Environment/Inanimate/BridgeCrates" instance=ExtResource("8_74hus")]
+position = Vector2(70, 76)
+rotation = -0.261799
+
+[node name="Crate46" parent="Environment/Inanimate/BridgeCrates" instance=ExtResource("8_74hus")]
+position = Vector2(10, 3)
+
+[node name="Crate47" parent="Environment/Inanimate/BridgeCrates" instance=ExtResource("8_74hus")]
+position = Vector2(-22, 5)
+rotation = -0.261799
+
+[node name="Crate48" parent="Environment/Inanimate/BridgeCrates" instance=ExtResource("8_74hus")]
+position = Vector2(-54, 9)
+rotation = -0.523598
+
+[node name="Crate49" parent="Environment/Inanimate/BridgeCrates" instance=ExtResource("8_74hus")]
+position = Vector2(-90, 10)
+rotation = 0.261799
+
+[node name="Crate50" parent="Environment/Inanimate/BridgeCrates" instance=ExtResource("8_74hus")]
+position = Vector2(-125, 11)
+rotation = -0.261799
+
+[node name="Crate51" parent="Environment/Inanimate/BridgeCrates" instance=ExtResource("8_74hus")]
+position = Vector2(-157, 10)
+
+[node name="Crate52" parent="Environment/Inanimate/BridgeCrates" instance=ExtResource("8_74hus")]
+position = Vector2(2.00002, 82)
+rotation = -0.261799
+
+[node name="Crate53" parent="Environment/Inanimate/BridgeCrates" instance=ExtResource("8_74hus")]
+position = Vector2(-25, 106)
+
+[node name="Crate54" parent="Environment/Inanimate/BridgeCrates" instance=ExtResource("8_74hus")]
+position = Vector2(-132, 103)
+rotation = 0.261799
+
+[node name="CargoCrates" type="Node2D" parent="Environment/Inanimate"]
+
+[node name="Crate8" parent="Environment/Inanimate/CargoCrates" instance=ExtResource("8_74hus")]
+position = Vector2(-1007, -17)
+
+[node name="Crate9" parent="Environment/Inanimate/CargoCrates" instance=ExtResource("8_74hus")]
+position = Vector2(-1036, -31)
+rotation = 0.261799
+
+[node name="Crate10" parent="Environment/Inanimate/CargoCrates" instance=ExtResource("8_74hus")]
+position = Vector2(-954, -50)
+rotation = 0.261799
+
+[node name="Crate11" parent="Environment/Inanimate/CargoCrates" instance=ExtResource("8_74hus")]
+position = Vector2(-985, -48)
+rotation = 0.261799
+
+[node name="Crate12" parent="Environment/Inanimate/CargoCrates" instance=ExtResource("8_74hus")]
+position = Vector2(-922, -62)
+rotation = -0.261799
+
+[node name="Crate13" parent="Environment/Inanimate/CargoCrates" instance=ExtResource("8_74hus")]
+position = Vector2(-1068, -20)
+rotation = -0.261799
+
+[node name="Crate14" parent="Environment/Inanimate/CargoCrates" instance=ExtResource("8_74hus")]
+position = Vector2(-1098, -0.999969)
+rotation = 0.261799
+
+[node name="Crate15" parent="Environment/Inanimate/CargoCrates" instance=ExtResource("8_74hus")]
+position = Vector2(-860, -74)
+rotation = 0.261799
+
+[node name="Crate16" parent="Environment/Inanimate/CargoCrates" instance=ExtResource("8_74hus")]
+position = Vector2(-892, -74)
+
+[node name="Crate17" parent="Environment/Inanimate/CargoCrates" instance=ExtResource("8_74hus")]
+position = Vector2(-1108, 32)
+rotation = -0.261799
+
+[node name="Crate18" parent="Environment/Inanimate/CargoCrates" instance=ExtResource("8_74hus")]
+position = Vector2(-1011, 78)
+rotation = -0.261799
+
+[node name="Crate19" parent="Environment/Inanimate/CargoCrates" instance=ExtResource("8_74hus")]
+position = Vector2(-1104, 112)
+
+[node name="Crate20" parent="Environment/Inanimate/CargoCrates" instance=ExtResource("8_74hus")]
+position = Vector2(-1040, 92)
+
+[node name="Crate21" parent="Environment/Inanimate/CargoCrates" instance=ExtResource("8_74hus")]
+position = Vector2(-878, 169)
+rotation = -0.261799
+
+[node name="Crate22" parent="Environment/Inanimate/CargoCrates" instance=ExtResource("8_74hus")]
+position = Vector2(-910, 174)
+rotation = -0.523598
+
+[node name="Crate23" parent="Environment/Inanimate/CargoCrates" instance=ExtResource("8_74hus")]
+position = Vector2(-978, 87)
+rotation = 0.261799
+
+[node name="Crate24" parent="Environment/Inanimate/CargoCrates" instance=ExtResource("8_74hus")]
+position = Vector2(-1073, 100)
+rotation = -0.261799
+
+[node name="Crate25" parent="Environment/Inanimate/CargoCrates" instance=ExtResource("8_74hus")]
+position = Vector2(-814, 53)
+rotation = 0.261799
+
+[node name="Crate26" parent="Environment/Inanimate/CargoCrates" instance=ExtResource("8_74hus")]
+position = Vector2(-808, -9.99998)
+rotation = 0.261799
+
+[node name="Crate27" parent="Environment/Inanimate/CargoCrates" instance=ExtResource("8_74hus")]
+position = Vector2(-826, -70)
+rotation = -0.261799
+
+[node name="Crate28" parent="Environment/Inanimate/CargoCrates" instance=ExtResource("8_74hus")]
+position = Vector2(-825, -40)
+rotation = -0.261799
+
+[node name="Crate29" parent="Environment/Inanimate/CargoCrates" instance=ExtResource("8_74hus")]
+position = Vector2(-849, 78)
+
+[node name="Crate30" parent="Environment/Inanimate/CargoCrates" instance=ExtResource("8_74hus")]
+position = Vector2(-814, 117)
+
+[node name="Crate31" parent="Environment/Inanimate/CargoCrates" instance=ExtResource("8_74hus")]
+position = Vector2(-804, 85)
+rotation = -0.261799
+
+[node name="Crate32" parent="Environment/Inanimate/CargoCrates" instance=ExtResource("8_74hus")]
+position = Vector2(-819, 150)
+rotation = -0.261799
+
+[node name="Crate33" parent="Environment/Inanimate/CargoCrates" instance=ExtResource("8_74hus")]
+position = Vector2(-817, 21)
+
+[node name="Crate34" parent="Environment/Inanimate/CargoCrates" instance=ExtResource("8_74hus")]
+position = Vector2(-817, 202)
+rotation = -0.261799
+
+[node name="Crate35" parent="Environment/Inanimate/CargoCrates" instance=ExtResource("8_74hus")]
+position = Vector2(-911, 96)
+
+[node name="Crate36" parent="Environment/Inanimate/CargoCrates" instance=ExtResource("8_74hus")]
+position = Vector2(-944, 92)
+rotation = -0.261799
+
+[node name="Crate37" parent="Environment/Inanimate/CargoCrates" instance=ExtResource("8_74hus")]
+position = Vector2(-846, 176)
+
+[node name="Crate38" parent="Environment/Inanimate/CargoCrates" instance=ExtResource("8_74hus")]
+position = Vector2(-814, 233)
 
 [node name="Crate" parent="Environment/Inanimate" instance=ExtResource("8_74hus")]
 position = Vector2(-564, -275)
@@ -242,124 +472,9 @@ rotation = 1.57079
 position = Vector2(-422, 83)
 rotation = 0.261799
 
-[node name="Crate8" parent="Environment/Inanimate" instance=ExtResource("8_74hus")]
-position = Vector2(-1007, -17)
-
-[node name="Crate9" parent="Environment/Inanimate" instance=ExtResource("8_74hus")]
-position = Vector2(-1036, -31)
-rotation = 0.261799
-
-[node name="Crate10" parent="Environment/Inanimate" instance=ExtResource("8_74hus")]
-position = Vector2(-954, -50)
-rotation = 0.261799
-
-[node name="Crate11" parent="Environment/Inanimate" instance=ExtResource("8_74hus")]
-position = Vector2(-985, -48)
-rotation = 0.261799
-
-[node name="Crate12" parent="Environment/Inanimate" instance=ExtResource("8_74hus")]
-position = Vector2(-922, -62)
-rotation = -0.261799
-
-[node name="Crate13" parent="Environment/Inanimate" instance=ExtResource("8_74hus")]
-position = Vector2(-1068, -20)
-rotation = -0.261799
-
-[node name="Crate14" parent="Environment/Inanimate" instance=ExtResource("8_74hus")]
-position = Vector2(-1098, -0.999969)
-rotation = 0.261799
-
-[node name="Crate15" parent="Environment/Inanimate" instance=ExtResource("8_74hus")]
-position = Vector2(-860, -74)
-rotation = 0.261799
-
-[node name="Crate16" parent="Environment/Inanimate" instance=ExtResource("8_74hus")]
-position = Vector2(-892, -74)
-
-[node name="Crate17" parent="Environment/Inanimate" instance=ExtResource("8_74hus")]
-position = Vector2(-1108, 32)
-rotation = -0.261799
-
-[node name="Crate18" parent="Environment/Inanimate" instance=ExtResource("8_74hus")]
-position = Vector2(-1011, 78)
-rotation = -0.261799
-
-[node name="Crate19" parent="Environment/Inanimate" instance=ExtResource("8_74hus")]
-position = Vector2(-1102, 106)
-
-[node name="Crate20" parent="Environment/Inanimate" instance=ExtResource("8_74hus")]
-position = Vector2(-1040, 92)
-
-[node name="Crate21" parent="Environment/Inanimate" instance=ExtResource("8_74hus")]
-position = Vector2(-887, 174)
-
-[node name="Crate22" parent="Environment/Inanimate" instance=ExtResource("8_74hus")]
-position = Vector2(-920, 174)
-
-[node name="Crate23" parent="Environment/Inanimate" instance=ExtResource("8_74hus")]
-position = Vector2(-978, 87)
-rotation = 0.261799
-
-[node name="Crate24" parent="Environment/Inanimate" instance=ExtResource("8_74hus")]
-position = Vector2(-1071, 98)
-rotation = -0.261799
-
-[node name="Crate25" parent="Environment/Inanimate" instance=ExtResource("8_74hus")]
-position = Vector2(-814, 53)
-rotation = 0.261799
-
-[node name="Crate26" parent="Environment/Inanimate" instance=ExtResource("8_74hus")]
-position = Vector2(-808, -9.99998)
-rotation = 0.261799
-
-[node name="Crate27" parent="Environment/Inanimate" instance=ExtResource("8_74hus")]
-position = Vector2(-826, -70)
-rotation = -0.261799
-
-[node name="Crate28" parent="Environment/Inanimate" instance=ExtResource("8_74hus")]
-position = Vector2(-825, -40)
-rotation = -0.261799
-
-[node name="Crate29" parent="Environment/Inanimate" instance=ExtResource("8_74hus")]
-position = Vector2(-849, 78)
-
-[node name="Crate30" parent="Environment/Inanimate" instance=ExtResource("8_74hus")]
-position = Vector2(-814, 117)
-
-[node name="Crate31" parent="Environment/Inanimate" instance=ExtResource("8_74hus")]
-position = Vector2(-804, 85)
-rotation = -0.261799
-
-[node name="Crate32" parent="Environment/Inanimate" instance=ExtResource("8_74hus")]
-position = Vector2(-814, 149)
-rotation = -0.261799
-
-[node name="Crate33" parent="Environment/Inanimate" instance=ExtResource("8_74hus")]
-position = Vector2(-817, 21)
-
-[node name="Crate34" parent="Environment/Inanimate" instance=ExtResource("8_74hus")]
-position = Vector2(-814, 190)
-rotation = -0.261799
-
-[node name="Crate35" parent="Environment/Inanimate" instance=ExtResource("8_74hus")]
-position = Vector2(-843, 228)
-
-[node name="Crate36" parent="Environment/Inanimate" instance=ExtResource("8_74hus")]
-position = Vector2(-944, 92)
-rotation = -0.261799
-
-[node name="Crate37" parent="Environment/Inanimate" instance=ExtResource("8_74hus")]
-position = Vector2(-846, 176)
-
-[node name="Crate38" parent="Environment/Inanimate" instance=ExtResource("8_74hus")]
-position = Vector2(-814, 233)
-
 [node name="Forklift3" parent="Environment/Inanimate" instance=ExtResource("9_rxupm")]
 position = Vector2(-981, -17)
 rotation = 3.14159
-
-[node name="PowerCore" parent="Environment/Inanimate" instance=ExtResource("10_quu3m")]
-position = Vector2(-1216, 0)
 
 [node name="Forklift2" parent="Environment/Inanimate" instance=ExtResource("9_rxupm")]
 position = Vector2(-849, 52)
@@ -369,20 +484,19 @@ rotation = 1.57079
 position = Vector2(-445, 8)
 rotation = 0.523598
 
-[node name="Crate39" parent="Environment/Inanimate" instance=ExtResource("8_74hus")]
-position = Vector2(-196, -64)
-rotation = -0.523598
-
-[node name="Crate40" parent="Environment/Inanimate" instance=ExtResource("8_74hus")]
-position = Vector2(-163, -78)
-rotation = 0.261799
-
-[node name="Crate41" parent="Environment/Inanimate" instance=ExtResource("8_74hus")]
-position = Vector2(-149, -44)
-rotation = -0.261799
-
 [node name="hallway dead guy" parent="Environment/Inanimate" instance=ExtResource("10_p5tb0")]
 position = Vector2(-467, 35)
+
+[node name="PowerCore" parent="Environment/Inanimate" instance=ExtResource("10_quu3m")]
+position = Vector2(-1216, 0)
+
+[node name="PowerCore2" parent="Environment/Inanimate" instance=ExtResource("10_quu3m")]
+position = Vector2(-1216, -48)
+broken = true
+
+[node name="PowerCore3" parent="Environment/Inanimate" instance=ExtResource("10_quu3m")]
+position = Vector2(-1216, -96)
+broken = true
 
 [node name="Interactable" type="Node2D" parent="Environment"]
 
@@ -391,31 +505,158 @@ position = Vector2(-578, -112)
 rotation = -3.14159
 
 [node name="CryoBed" parent="Environment/Interactable" instance=ExtResource("4_0fems")]
+material = null
 position = Vector2(-706, -48)
 rotation = -1.57079
 
 [node name="CryoBed2" parent="Environment/Interactable" instance=ExtResource("4_0fems")]
+material = null
 position = Vector2(-706, 16)
 rotation = -1.57079
 
 [node name="CryoBed3" parent="Environment/Interactable" instance=ExtResource("4_0fems")]
+material = null
 position = Vector2(-605, 16)
 rotation = 1.57081
 
 [node name="CryoBed4" parent="Environment/Interactable" instance=ExtResource("4_0fems")]
+material = null
 position = Vector2(-606, -16)
 rotation = 1.57081
 
 [node name="CryoBed5" parent="Environment/Interactable" instance=ExtResource("4_0fems")]
+material = null
 position = Vector2(-607, -48)
 rotation = 1.57081
 
 [node name="Note" parent="Environment/Interactable" instance=ExtResource("12_ylmx7")]
-position = Vector2(-646, -174)
+z_index = 4
+material = null
+position = Vector2(-647, -175)
 
-[node name="DarknessLevel" type="CanvasModulate" parent="." groups=["Darkness"]]
-visible = false
-color = Color(0, 0, 0, 1)
+[node name="Note2" parent="Environment/Interactable" instance=ExtResource("12_ylmx7")]
+material = null
+position = Vector2(-506, -180)
+rotation = -0.543868
+
+[node name="EscapePod" parent="Environment/Interactable" instance=ExtResource("14_fifaw")]
+position = Vector2(-1008, -154)
+
+[node name="Triggers" type="Node2D" parent="."]
+
+[node name="ExitCryo" type="Area2D" parent="Triggers"]
+position = Vector2(-570, -194)
+collision_layer = 2
+collision_mask = 2
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Triggers/ExitCryo"]
+shape = SubResource("SegmentShape2D_xjm62")
+
+[node name="EnterCryo" type="Area2D" parent="Triggers"]
+position = Vector2(-582, -194)
+collision_layer = 2
+collision_mask = 2
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Triggers/EnterCryo"]
+shape = SubResource("SegmentShape2D_xjm62")
+
+[node name="Event1" type="Area2D" parent="Triggers"]
+position = Vector2(-570, -49)
+collision_layer = 2
+collision_mask = 2
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Triggers/Event1"]
+shape = SubResource("SegmentShape2D_70311")
+
+[node name="EnterCargo" type="Area2D" parent="Triggers"]
+position = Vector2(-742, 72)
+collision_layer = 2
+collision_mask = 2
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Triggers/EnterCargo"]
+position = Vector2(0, -10)
+shape = SubResource("SegmentShape2D_xjm62")
+
+[node name="ExitCargo" type="Area2D" parent="Triggers"]
+position = Vector2(-730, 72)
+collision_layer = 2
+collision_mask = 2
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Triggers/ExitCargo"]
+position = Vector2(0, -10)
+shape = SubResource("SegmentShape2D_xjm62")
+
+[node name="EscapePods" type="Area2D" parent="Triggers"]
+position = Vector2(-912, -194)
+collision_layer = 2
+collision_mask = 2
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Triggers/EscapePods"]
+shape = SubResource("SegmentShape2D_q6x6p")
+
+[node name="Event2" type="Area2D" parent="Triggers"]
+position = Vector2(-956, -48)
+collision_layer = 2
+collision_mask = 2
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Triggers/Event2"]
+shape = SubResource("SegmentShape2D_1ranx")
+
+[node name="ExitShaft" type="Area2D" parent="Triggers"]
+position = Vector2(-1000, 224)
+collision_layer = 2
+collision_mask = 2
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Triggers/ExitShaft"]
+shape = SubResource("SegmentShape2D_81hyv")
+
+[node name="EnterShaft" type="Area2D" parent="Triggers"]
+position = Vector2(-1000, 230)
+collision_layer = 2
+collision_mask = 2
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Triggers/EnterShaft"]
+shape = SubResource("SegmentShape2D_81hyv")
+
+[node name="ExitMedical" type="Area2D" parent="Triggers"]
+position = Vector2(-361, 514)
+collision_layer = 2
+collision_mask = 2
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Triggers/ExitMedical"]
+shape = SubResource("SegmentShape2D_2sq0y")
+
+[node name="EnterMedical" type="Area2D" parent="Triggers"]
+position = Vector2(-361, 510)
+collision_layer = 2
+collision_mask = 2
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Triggers/EnterMedical"]
+shape = SubResource("SegmentShape2D_2sq0y")
+
+[node name="EnterBathroom" type="Area2D" parent="Triggers"]
+position = Vector2(-125, -199)
+collision_layer = 2
+collision_mask = 2
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Triggers/EnterBathroom"]
+shape = SubResource("SegmentShape2D_b3rao")
+
+[node name="ExitBathroom" type="Area2D" parent="Triggers"]
+position = Vector2(-131, -199)
+collision_layer = 2
+collision_mask = 2
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Triggers/ExitBathroom"]
+shape = SubResource("SegmentShape2D_b3rao")
+
+[node name="Event5" type="Area2D" parent="Triggers"]
+position = Vector2(-222, -91)
+collision_layer = 2
+collision_mask = 2
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Triggers/Event5"]
+shape = SubResource("SegmentShape2D_f08v3")
 
 [node name="Lights" type="Node2D" parent="."]
 position = Vector2(-1045, -100)
@@ -457,7 +698,7 @@ texture = null
 light_texture = ExtResource("5_wy17f")
 
 [node name="CeilingLight8" parent="Lights/CryoLights" groups=["Cryo_Light"] instance=ExtResource("4_7cj7q")]
-position = Vector2(392, 73)
+position = Vector2(346, 109)
 texture = null
 light_texture = ExtResource("5_wy17f")
 
@@ -476,27 +717,13 @@ light_texture = ExtResource("6_g4f4m")
 position = Vector2(479, -85)
 light_texture = ExtResource("6_g4f4m")
 
-[node name="Light8" parent="Lights/HallwayLights" groups=["Hallway_Light"] instance=ExtResource("4_7cj7q")]
-position = Vector2(574, -9)
-rotation = 2.35619
-light_texture = ExtResource("6_g4f4m")
-
 [node name="Light9" parent="Lights/HallwayLights" groups=["Hallway_Light"] instance=ExtResource("4_7cj7q")]
 position = Vector2(458, 122)
 rotation = 0.785397
 light_texture = ExtResource("6_g4f4m")
 
-[node name="Light10" parent="Lights/HallwayLights" groups=["Hallway_Light"] instance=ExtResource("4_7cj7q")]
-position = Vector2(560, 222)
-rotation = -2.35619
-light_texture = ExtResource("6_g4f4m")
-
 [node name="Light11" parent="Lights/HallwayLights" groups=["Hallway_Light"] instance=ExtResource("4_7cj7q")]
 position = Vector2(479, 68)
-light_texture = ExtResource("6_g4f4m")
-
-[node name="Light12" parent="Lights/HallwayLights" groups=["Hallway_Light"] instance=ExtResource("4_7cj7q")]
-position = Vector2(319, 157)
 light_texture = ExtResource("6_g4f4m")
 
 [node name="Light13" parent="Lights/HallwayLights" groups=["Hallway_Light"] instance=ExtResource("4_7cj7q")]
@@ -524,6 +751,19 @@ texture = null
 light_texture = ExtResource("5_wy17f")
 light_offset = 0
 
+[node name="CeilingLight3" parent="Lights/HallwayLights" groups=["Hallway_Light"] instance=ExtResource("4_7cj7q")]
+position = Vector2(517, -124)
+texture = null
+light_texture = ExtResource("5_wy17f")
+light_offset = 0
+
+[node name="CeilingLight4" parent="Lights/HallwayLights" groups=["Hallway_Light"] instance=ExtResource("4_7cj7q")]
+position = Vector2(558, 20)
+scale = Vector2(0.75, 0.75)
+texture = null
+light_texture = ExtResource("5_wy17f")
+light_offset = 0
+
 [node name="CeilingLight2" parent="Lights/HallwayLights" groups=["Hallway_Light"] instance=ExtResource("4_7cj7q")]
 position = Vector2(335, 209)
 texture = null
@@ -532,102 +772,58 @@ light_offset = 0
 
 [node name="CargoLights" type="Node2D" parent="Lights"]
 
-[node name="Light2" parent="Lights/CargoLights" groups=["Cargo_Light"] instance=ExtResource("4_7cj7q")]
-position = Vector2(-173, 192)
-texture = null
-light_texture = ExtResource("5_wy17f")
-light_offset = 0
-
-[node name="Light3" parent="Lights/CargoLights" groups=["Cargo_Light"] instance=ExtResource("4_7cj7q")]
-position = Vector2(-171, 160)
-texture = null
-light_texture = ExtResource("5_wy17f")
-light_offset = 0
-
 [node name="Light5" parent="Lights/CargoLights" groups=["Cargo_Light"] instance=ExtResource("4_7cj7q")]
-position = Vector2(24, -21)
-texture = null
-light_texture = ExtResource("5_wy17f")
-light_offset = 0
-
-[node name="Light6" parent="Lights/CargoLights" groups=["Cargo_Light"] instance=ExtResource("4_7cj7q")]
-position = Vector2(-153, 198)
-texture = null
-light_texture = ExtResource("5_wy17f")
-light_offset = 0
-
-[node name="Light7" parent="Lights/CargoLights" groups=["Cargo_Light"] instance=ExtResource("4_7cj7q")]
-position = Vector2(24, -10)
-texture = null
-light_texture = ExtResource("5_wy17f")
-light_offset = 0
-
-[node name="Light8" parent="Lights/CargoLights" groups=["Cargo_Light"] instance=ExtResource("4_7cj7q")]
-position = Vector2(-27, 18)
+position = Vector2(153, -58)
 texture = null
 light_texture = ExtResource("5_wy17f")
 light_offset = 0
 
 [node name="Light9" parent="Lights/CargoLights" groups=["Cargo_Light"] instance=ExtResource("4_7cj7q")]
-position = Vector2(-163, 177)
+position = Vector2(220, -58)
+texture = null
+light_texture = ExtResource("5_wy17f")
+light_offset = 0
+
+[node name="Light6" parent="Lights/CargoLights" groups=["Cargo_Light"] instance=ExtResource("4_7cj7q")]
+position = Vector2(286, 176)
+texture = null
+light_texture = ExtResource("5_wy17f")
+light_offset = 0
+
+[node name="Light7" parent="Lights/CargoLights" groups=["Cargo_Light"] instance=ExtResource("4_7cj7q")]
+position = Vector2(38, -58)
+texture = null
+light_texture = ExtResource("5_wy17f")
+light_offset = 0
+
+[node name="Light8" parent="Lights/CargoLights" groups=["Cargo_Light"] instance=ExtResource("4_7cj7q")]
+position = Vector2(-139, 37)
 texture = null
 light_texture = ExtResource("5_wy17f")
 light_offset = 0
 
 [node name="Light10" parent="Lights/CargoLights" groups=["Cargo_Light"] instance=ExtResource("4_7cj7q")]
-position = Vector2(-171, 140)
-texture = null
-light_texture = ExtResource("5_wy17f")
-light_offset = 0
-
-[node name="Light11" parent="Lights/CargoLights" groups=["Cargo_Light"] instance=ExtResource("4_7cj7q")]
-position = Vector2(-139, 146)
+position = Vector2(-139, 164)
 texture = null
 light_texture = ExtResource("5_wy17f")
 light_offset = 0
 
 [node name="Light13" parent="Lights/CargoLights" groups=["Cargo_Light"] instance=ExtResource("4_7cj7q")]
-position = Vector2(-139, 242)
+position = Vector2(-139, 230)
 texture = null
 light_texture = ExtResource("5_wy17f")
 light_offset = 0
 
 [node name="Light12" parent="Lights/CargoLights" groups=["Cargo_Light"] instance=ExtResource("4_7cj7q")]
-position = Vector2(-139, 4)
-texture = null
-light_texture = ExtResource("5_wy17f")
-light_offset = 0
-
-[node name="Light14" parent="Lights/CargoLights" groups=["Cargo_Light"] instance=ExtResource("4_7cj7q")]
-position = Vector2(-181, 164)
+position = Vector2(-139, -28)
 texture = null
 light_texture = ExtResource("5_wy17f")
 light_offset = 0
 
 [node name="WallLights" type="Node2D" parent="Lights/CargoLights"]
 
-[node name="Light19" parent="Lights/CargoLights/WallLights" groups=["Cargo_Light"] instance=ExtResource("4_7cj7q")]
-position = Vector2(299, 157)
-rotation = -3.14158
-light_texture = ExtResource("6_g4f4m")
-
-[node name="Light20" parent="Lights/CargoLights/WallLights" groups=["Cargo_Light"] instance=ExtResource("4_7cj7q")]
-position = Vector2(299, 267)
-rotation = -3.14158
-light_texture = ExtResource("6_g4f4m")
-
-[node name="Light21" parent="Lights/CargoLights/WallLights" groups=["Cargo_Light"] instance=ExtResource("4_7cj7q")]
-position = Vector2(299, 68)
-rotation = -3.14158
-light_texture = ExtResource("6_g4f4m")
-
-[node name="Light22" parent="Lights/CargoLights/WallLights" groups=["Cargo_Light"] instance=ExtResource("4_7cj7q")]
-position = Vector2(-65, 100)
-rotation = 1.77701e-05
-light_texture = ExtResource("6_g4f4m")
-
 [node name="Light23" parent="Lights/CargoLights/WallLights" groups=["Cargo_Light"] instance=ExtResource("4_7cj7q")]
-position = Vector2(-65, 196)
+position = Vector2(-65, 209)
 rotation = 1.77701e-05
 light_texture = ExtResource("6_g4f4m")
 
@@ -636,157 +832,74 @@ position = Vector2(-4, 257)
 rotation = -0.785379
 light_texture = ExtResource("6_g4f4m")
 
-[node name="Light25" parent="Lights/CargoLights/WallLights" groups=["Cargo_Light"] instance=ExtResource("4_7cj7q")]
-position = Vector2(46, 314)
-rotation = -1.57078
-light_texture = ExtResource("6_g4f4m")
-
-[node name="Light26" parent="Lights/CargoLights/WallLights" groups=["Cargo_Light"] instance=ExtResource("4_7cj7q")]
-position = Vector2(92, 314)
-rotation = -1.57078
-light_texture = ExtResource("6_g4f4m")
-
 [node name="Light27" parent="Lights/CargoLights/WallLights" groups=["Cargo_Light"] instance=ExtResource("4_7cj7q")]
-position = Vector2(-81, 125)
-rotation = -3.14157
+position = Vector2(-197, 132)
 light_texture = ExtResource("6_g4f4m")
 
 [node name="Light28" parent="Lights/CargoLights/WallLights" groups=["Cargo_Light"] instance=ExtResource("4_7cj7q")]
-position = Vector2(-81, 171)
-rotation = -3.14157
+position = Vector2(-197, 228)
 light_texture = ExtResource("6_g4f4m")
 
 [node name="Light29" parent="Lights/CargoLights/WallLights" groups=["Cargo_Light"] instance=ExtResource("4_7cj7q")]
-position = Vector2(-81, 75)
-rotation = -3.14157
+position = Vector2(-197, 36)
+rotation = -6.28318
 light_texture = ExtResource("6_g4f4m")
 
 [node name="Light30" parent="Lights/CargoLights/WallLights" groups=["Cargo_Light"] instance=ExtResource("4_7cj7q")]
-position = Vector2(-81, 29)
-rotation = -3.14157
+position = Vector2(-197, -28)
 light_texture = ExtResource("6_g4f4m")
 
 [node name="Light31" parent="Lights/CargoLights/WallLights" groups=["Cargo_Light"] instance=ExtResource("4_7cj7q")]
-position = Vector2(-65, 4)
+position = Vector2(-65, -6)
 light_texture = ExtResource("6_g4f4m")
 
-[node name="ExitCryo" type="Area2D" parent="Lights"]
-position = Vector2(475, -94)
-collision_layer = 2
-collision_mask = 2
-
-[node name="CollisionShape2D" type="CollisionShape2D" parent="Lights/ExitCryo"]
-shape = SubResource("SegmentShape2D_xjm62")
-
-[node name="EnterCryo" type="Area2D" parent="Lights"]
-position = Vector2(463, -94)
-collision_layer = 2
-collision_mask = 2
-
-[node name="CollisionShape2D" type="CollisionShape2D" parent="Lights/EnterCryo"]
-shape = SubResource("SegmentShape2D_xjm62")
-
-[node name="EnterCargo" type="Area2D" parent="Lights"]
-position = Vector2(303, 172)
-collision_layer = 2
-collision_mask = 2
-
-[node name="CollisionShape2D" type="CollisionShape2D" parent="Lights/EnterCargo"]
-position = Vector2(0, -10)
-shape = SubResource("SegmentShape2D_xjm62")
-
-[node name="ExitCargo" type="Area2D" parent="Lights"]
-position = Vector2(315, 172)
-collision_layer = 2
-collision_mask = 2
-
-[node name="CollisionShape2D" type="CollisionShape2D" parent="Lights/ExitCargo"]
-position = Vector2(0, -10)
-shape = SubResource("SegmentShape2D_xjm62")
-
-[node name="ExitShaft" type="Area2D" parent="Lights"]
-position = Vector2(45, 319)
-collision_layer = 2
-collision_mask = 2
-
-[node name="CollisionShape2D" type="CollisionShape2D" parent="Lights/ExitShaft"]
-shape = SubResource("SegmentShape2D_81hyv")
-
-[node name="EnterShaft" type="Area2D" parent="Lights"]
-position = Vector2(45, 330)
-collision_layer = 2
-collision_mask = 2
-
-[node name="CollisionShape2D" type="CollisionShape2D" parent="Lights/EnterShaft"]
-shape = SubResource("SegmentShape2D_81hyv")
-
-[node name="ExitMedical" type="Area2D" parent="Lights"]
-position = Vector2(684, 614)
-collision_layer = 2
-collision_mask = 2
-
-[node name="CollisionShape2D" type="CollisionShape2D" parent="Lights/ExitMedical"]
-shape = SubResource("SegmentShape2D_2sq0y")
-
-[node name="EnterMedical" type="Area2D" parent="Lights"]
-position = Vector2(684, 610)
-collision_layer = 2
-collision_mask = 2
-
-[node name="CollisionShape2D" type="CollisionShape2D" parent="Lights/EnterMedical"]
-shape = SubResource("SegmentShape2D_2sq0y")
-
-[node name="Entities" type="Node2D" parent="."]
+[node name="Entities" type="Node2D" parent="." groups=["Entities"]]
 
 [node name="Eus" parent="Entities" instance=ExtResource("17_7u0ol")]
-position = Vector2(-541, 538)
-rotation = 6.28318
+material = null
+position = Vector2(73, -163)
+rotation = 4.7592
 
 [node name="InsaneCrew" parent="Entities" instance=ExtResource("16_ee52r")]
 z_index = 4
+material = null
 position = Vector2(-367, 140)
 rotation = -0.785397
 
-[node name="Blob" parent="Entities" instance=ExtResource("19_igytc")]
-position = Vector2(-345, 361)
-
-[node name="EusBoss" parent="Entities" instance=ExtResource("19_sumik")]
-position = Vector2(1094, 20)
-
-[node name="NavigationRegion2D2" type="NavigationRegion2D" parent="."]
+[node name="Navigation" type="Node2D" parent="."]
 visible = false
+
+[node name="NavigationRegion2D2" type="NavigationRegion2D" parent="Navigation"]
 position = Vector2(-992, 0)
 navigation_polygon = SubResource("NavigationPolygon_x2io3")
 
-[node name="NavigationRegion2D" type="NavigationRegion2D" parent="."]
-visible = false
+[node name="NavigationRegion2D" type="NavigationRegion2D" parent="Navigation"]
 position = Vector2(-992, 0)
 navigation_polygon = SubResource("NavigationPolygon_h07k4")
 
-[node name="NavigationRegion2D3" type="NavigationRegion2D" parent="."]
-visible = false
+[node name="NavigationRegion2D3" type="NavigationRegion2D" parent="Navigation"]
 navigation_polygon = SubResource("NavigationPolygon_46qe0")
 
-[node name="NavigationRegion2D4" type="NavigationRegion2D" parent="."]
-visible = false
+[node name="NavigationRegion2D4" type="NavigationRegion2D" parent="Navigation"]
 navigation_polygon = SubResource("NavigationPolygon_rqb6j")
 
-[node name="NavigationRegion2D5" type="NavigationRegion2D" parent="."]
-visible = false
+[node name="NavigationRegion2D5" type="NavigationRegion2D" parent="Navigation"]
 navigation_polygon = SubResource("NavigationPolygon_q5l1j")
 
-[node name="NavigationRegion2D6" type="NavigationRegion2D" parent="."]
-visible = false
+[node name="NavigationRegion2D6" type="NavigationRegion2D" parent="Navigation"]
 navigation_polygon = SubResource("NavigationPolygon_txd4j")
 
-[node name="NavigationRegion2D7" type="NavigationRegion2D" parent="."]
-visible = false
+[node name="NavigationRegion2D7" type="NavigationRegion2D" parent="Navigation"]
 navigation_polygon = SubResource("NavigationPolygon_ar3qy")
 
-[node name="NavigationRegion2D8" type="NavigationRegion2D" parent="."]
-position = Vector2(1167, -144)
-navigation_polygon = SubResource("NavigationPolygon_22n00")
-use_edge_connections = false
+[node name="NavigationRegion2D9" type="NavigationRegion2D" parent="Navigation"]
+navigation_polygon = SubResource("NavigationPolygon_ls1gp")
+
+[node name="NavigationRegion2D10" type="NavigationRegion2D" parent="Navigation"]
+navigation_polygon = SubResource("NavigationPolygon_f3kmn")
+
+[node name="NavigationRegion2D11" type="NavigationRegion2D" parent="Navigation"]
+navigation_polygon = SubResource("NavigationPolygon_tmpel")
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="."]
 libraries = {
@@ -814,7 +927,7 @@ grow_horizontal = 2
 grow_vertical = 2
 color = Color(0, 0, 0, 1)
 
-[node name="Grain" type="CanvasLayer" parent="."]
+[node name="Grain" type="CanvasLayer" parent="." groups=["Grain"]]
 visible = false
 
 [node name="ColorRect" type="ColorRect" parent="Grain"]
@@ -836,11 +949,28 @@ anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
 
-[node name="SpaceRoachSpawnLocation" type="Marker2D" parent="."]
-position = Vector2(-1100, 109)
+[node name="Overlay" type="CanvasLayer" parent="."]
+visible = false
+
+[node name="ColorRect" type="ColorRect" parent="Overlay"]
+material = SubResource("ShaderMaterial_5pnrb")
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="PlayerSpawnLocation" type="Marker2D" parent="."]
+position = Vector2(-868, -145)
+
+[node name="SpiderSpawnLocation" type="Marker2D" parent="."]
+position = Vector2(-850, 189)
+
+[node name="SpiderSpawnLocation2" type="Marker2D" parent="."]
+position = Vector2(-1227, 176)
 
 [node name="BlobSpawnLocation" type="Marker2D" parent="."]
-position = Vector2(-498, 336)
+position = Vector2(-495, 326)
 
 [node name="Marker2D" type="Marker2D" parent="." groups=["EusBossSpawn"]]
 position = Vector2(833, 64)
@@ -854,11 +984,22 @@ position = Vector2(833, -292)
 [node name="Marker2D4" type="Marker2D" parent="." groups=["EusBossSpawn"]]
 position = Vector2(1329, -306)
 
-[connection signal="body_exited" from="Lights/ExitCryo" to="." method="_on_exit_cryo_body_exited"]
-[connection signal="body_exited" from="Lights/EnterCryo" to="." method="_on_enter_cryo_body_exited"]
-[connection signal="body_exited" from="Lights/EnterCargo" to="." method="_on_enter_cargo_body_exited"]
-[connection signal="body_exited" from="Lights/ExitCargo" to="." method="_on_exit_cargo_body_exited"]
-[connection signal="body_exited" from="Lights/ExitShaft" to="." method="_on_exit_shaft_body_exited"]
-[connection signal="body_exited" from="Lights/EnterShaft" to="." method="_on_enter_shaft_body_exited"]
-[connection signal="body_exited" from="Lights/ExitMedical" to="." method="_on_exit_medical_body_exited"]
-[connection signal="body_exited" from="Lights/EnterMedical" to="." method="_on_enter_medical_body_exited"]
+[node name="EusSpawn" type="Marker2D" parent="."]
+position = Vector2(-467, 16)
+
+[node name="CanvasLayer" type="CanvasLayer" parent="."]
+
+[connection signal="body_exited" from="Triggers/ExitCryo" to="." method="_on_exit_cryo_body_exited"]
+[connection signal="body_exited" from="Triggers/EnterCryo" to="." method="_on_enter_cryo_body_exited"]
+[connection signal="body_exited" from="Triggers/Event1" to="." method="_on_event_1_body_exited"]
+[connection signal="body_exited" from="Triggers/EnterCargo" to="." method="_on_enter_cargo_body_exited"]
+[connection signal="body_exited" from="Triggers/ExitCargo" to="." method="_on_exit_cargo_body_exited"]
+[connection signal="body_exited" from="Triggers/EscapePods" to="." method="_on_drop_pods_body_exited"]
+[connection signal="body_exited" from="Triggers/Event2" to="." method="_on_event_2_body_exited"]
+[connection signal="body_exited" from="Triggers/ExitShaft" to="." method="_on_exit_shaft_body_exited"]
+[connection signal="body_exited" from="Triggers/EnterShaft" to="." method="_on_enter_shaft_body_exited"]
+[connection signal="body_exited" from="Triggers/ExitMedical" to="." method="_on_exit_medical_body_exited"]
+[connection signal="body_exited" from="Triggers/EnterMedical" to="." method="_on_enter_medical_body_exited"]
+[connection signal="body_exited" from="Triggers/EnterBathroom" to="." method="_on_enter_bathroom_body_exited"]
+[connection signal="body_exited" from="Triggers/ExitBathroom" to="." method="_on_exit_bathroom_body_exited"]
+[connection signal="body_exited" from="Triggers/Event5" to="." method="_on_event_2_body_exited"]

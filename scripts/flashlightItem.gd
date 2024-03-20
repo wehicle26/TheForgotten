@@ -6,3 +6,5 @@ func _ready():
 
 func _on_interact(inventory: Inventory):
 	super.collect(inventory)
+	player = get_tree().get_first_node_in_group("Player")
+	player.show_tut("flashlight")

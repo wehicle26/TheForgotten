@@ -1,0 +1,177 @@
+[gd_scene load_steps=16 format=3 uid="uid://b20eqttftj3ir"]
+
+[ext_resource type="PackedScene" uid="uid://duwl5sldekn2r" path="res://scenes/Enemy.tscn" id="1_y4t55"]
+[ext_resource type="Script" path="res://scripts/spider.gd" id="2_hho8a"]
+[ext_resource type="Texture2D" uid="uid://dbbcvib2y67ve" path="res://art/enemy/spood.png" id="3_7lvca"]
+[ext_resource type="Texture2D" uid="uid://bbudnnqusfc76" path="res://art/enemy/spood_n.png" id="4_nt7os"]
+[ext_resource type="PackedScene" uid="uid://bvxg5kctr4jyl" path="res://scenes/StateMachine.tscn" id="5_lo1ql"]
+[ext_resource type="Script" path="res://scripts/State/spiderIdle.gd" id="6_ac8tw"]
+[ext_resource type="Script" path="res://scripts/State/spiderFollow.gd" id="7_768uu"]
+[ext_resource type="Script" path="res://scripts/State/enemyAttack.gd" id="8_jybhd"]
+[ext_resource type="Script" path="res://scripts/State/enemyRetreat.gd" id="9_itlue"]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_l0x51"]
+resource_local_to_scene = true
+radius = 14.0
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_b7p4p"]
+resource_local_to_scene = true
+radius = 8.0
+
+[sub_resource type="CanvasTexture" id="CanvasTexture_doaef"]
+diffuse_texture = ExtResource("3_7lvca")
+normal_texture = ExtResource("4_nt7os")
+
+[sub_resource type="Animation" id="Animation_0f7ns"]
+length = 0.3
+loop_mode = 1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Sprite2D:visible")
+tracks/0/interp = 1
+tracks/0/loop_wrap = false
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [true]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("Sprite2D:frame")
+tracks/1/interp = 1
+tracks/1/loop_wrap = false
+tracks/1/keys = {
+"times": PackedFloat32Array(0, 0.1, 0.2),
+"transitions": PackedFloat32Array(1, 1, 1),
+"update": 1,
+"values": [0, 1, 2]
+}
+
+[sub_resource type="Animation" id="Animation_ynrdh"]
+loop_mode = 1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Sprite2D:visible")
+tracks/0/interp = 1
+tracks/0/loop_wrap = false
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [true]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("Sprite2D:frame")
+tracks/1/interp = 1
+tracks/1/loop_wrap = false
+tracks/1/keys = {
+"times": PackedFloat32Array(0, 0.5),
+"transitions": PackedFloat32Array(1, 1),
+"update": 1,
+"values": [3, 4]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_jdd2k"]
+_data = {
+"Idle": SubResource("Animation_0f7ns"),
+"Walk": SubResource("Animation_ynrdh")
+}
+
+[node name="Spider" groups=["Spider"] instance=ExtResource("1_y4t55")]
+script = ExtResource("2_hho8a")
+attack_range = 40
+
+[node name="CollisionShape2D" parent="Hitbox" index="1"]
+shape = SubResource("CircleShape2D_l0x51")
+
+[node name="CollisionShape2D" parent="." index="4"]
+shape = SubResource("CircleShape2D_b7p4p")
+
+[node name="Sprite2D" parent="." index="8"]
+texture_filter = 1
+texture = SubResource("CanvasTexture_doaef")
+hframes = 3
+vframes = 2
+metadata/_aseprite_wizard_config_ = {
+"i_mode": -1,
+"keep_anim_length": false,
+"layer": "",
+"o_ex_p": "",
+"o_folder": "res://art/enemy/",
+"o_name": "spood",
+"only_visible": true,
+"op_exp": true,
+"player": "AnimationPlayer",
+"source": "res://art/enemy/spood.aseprite"
+}
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="." index="9"]
+libraries = {
+"": SubResource("AnimationLibrary_jdd2k")
+}
+
+[node name="StateMachine" parent="." index="10" node_paths=PackedStringArray("initial_state") instance=ExtResource("5_lo1ql")]
+initial_state = NodePath("SpiderFollow")
+
+[node name="Idle" type="Node" parent="StateMachine" index="0" node_paths=PackedStringArray("enemy")]
+script = ExtResource("6_ac8tw")
+enemy = NodePath("../..")
+
+[node name="SpiderFollow" type="Node" parent="StateMachine" index="1" node_paths=PackedStringArray("enemy")]
+script = ExtResource("7_768uu")
+enemy = NodePath("../..")
+
+[node name="SpiderAttack" type="Node" parent="StateMachine" index="2" node_paths=PackedStringArray("enemy")]
+script = ExtResource("8_jybhd")
+enemy = NodePath("../..")
+
+[node name="SpiderRetreat" type="Node" parent="StateMachine" index="3" node_paths=PackedStringArray("enemy")]
+script = ExtResource("9_itlue")
+enemy = NodePath("../..")
+
+[node name="Danger" type="Node2D" parent="." index="11"]
+
+[node name="N" type="RayCast2D" parent="Danger" index="0"]
+rotation = -3.14159
+target_position = Vector2(0, 10)
+collision_mask = 3
+
+[node name="NE" type="RayCast2D" parent="Danger" index="1"]
+rotation = -2.3562
+target_position = Vector2(0, 10)
+collision_mask = 3
+
+[node name="E" type="RayCast2D" parent="Danger" index="2"]
+rotation = -1.5708
+target_position = Vector2(0, 10)
+collision_mask = 3
+
+[node name="SE" type="RayCast2D" parent="Danger" index="3"]
+rotation = -0.785395
+target_position = Vector2(0, 10)
+collision_mask = 3
+
+[node name="S" type="RayCast2D" parent="Danger" index="4"]
+target_position = Vector2(0, 10)
+collision_mask = 3
+
+[node name="SW" type="RayCast2D" parent="Danger" index="5"]
+rotation = 0.785398
+target_position = Vector2(0, 10)
+collision_mask = 3
+
+[node name="W" type="RayCast2D" parent="Danger" index="6"]
+rotation = 1.5708
+target_position = Vector2(0, 10)
+collision_mask = 3
+
+[node name="NW" type="RayCast2D" parent="Danger" index="7"]
+rotation = -3.92699
+target_position = Vector2(0, 10)
+collision_mask = 3

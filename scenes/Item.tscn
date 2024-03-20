@@ -1,7 +1,10 @@
-[gd_scene load_steps=5 format=3 uid="uid://drc50lwybh48x"]
+[gd_scene load_steps=6 format=3 uid="uid://drc50lwybh48x"]
 
 [ext_resource type="Script" path="res://scripts/item.gd" id="1_jn2be"]
 [ext_resource type="Shader" path="res://shaders/shine.gdshader" id="2_mf7bj"]
+
+[sub_resource type="CanvasItemMaterial" id="CanvasItemMaterial_3167h"]
+light_mode = 2
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_h1au2"]
 shader = ExtResource("2_mf7bj")
@@ -13,6 +16,7 @@ shader_parameter/shine_size = 0.01
 resource_local_to_scene = true
 
 [node name="Item" type="Area2D"]
+material = SubResource("CanvasItemMaterial_3167h")
 collision_layer = 0
 collision_mask = 2
 script = ExtResource("1_jn2be")

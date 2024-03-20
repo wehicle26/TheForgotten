@@ -18,7 +18,7 @@ func enter():
 	transitioned.emit(self, "eusIdle")
 
 
-func update(delta):
+func update(_delta):
 	pass
 
 

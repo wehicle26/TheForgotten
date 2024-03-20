@@ -13,8 +13,8 @@
 [ext_resource type="Shader" path="res://shaders/glitch.gdshader" id="11_k780m"]
 
 [sub_resource type="CapsuleShape2D" id="CapsuleShape2D_wywix"]
-radius = 13.0
-height = 60.0
+radius = 17.0
+height = 86.0
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_xk5k6"]
 size = Vector2(54, 19)
@@ -42,6 +42,7 @@ wait_time = 1.0
 
 [node name="CollisionShape2D" parent="Hitbox" index="1"]
 visible = true
+position = Vector2(4, 0)
 rotation = -1.57079
 shape = SubResource("CapsuleShape2D_wywix")
 
@@ -50,7 +51,10 @@ position = Vector2(1, -0.5)
 shape = SubResource("RectangleShape2D_xk5k6")
 
 [node name="LineOfSight" parent="." index="5"]
-max_view_distance = 500
+rotation = 1.5708
+cone_of_vision = 0.098
+angle_between_rays = 0.012
+max_view_distance = 550
 
 [node name="Sprite2D" parent="." index="8"]
 texture_filter = 1

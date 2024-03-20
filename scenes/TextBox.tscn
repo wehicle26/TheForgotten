@@ -1,10 +1,11 @@
-[gd_scene load_steps=14 format=3 uid="uid://bx2ab51bychng"]
+[gd_scene load_steps=15 format=3 uid="uid://bx2ab51bychng"]
 
+[ext_resource type="Theme" uid="uid://cdpahudvr7n3t" path="res://ui/Ui.tres" id="1_nbjew"]
 [ext_resource type="Script" path="res://scripts/textBox.gd" id="1_p0uq2"]
 [ext_resource type="Texture2D" uid="uid://cpfwf80v78ypw" path="res://ui/bubble.png" id="2_sf68p"]
 [ext_resource type="Texture2D" uid="uid://4pmj1dkvslws" path="res://ui/tail.png" id="3_q0iww"]
 [ext_resource type="Texture2D" uid="uid://cp7x265qm68g1" path="res://ui/SpinArrow.png" id="4_yby1x"]
-[ext_resource type="FontFile" uid="uid://cccdc64xh1vwf" path="res://ui/Millennia-Regular.otf" id="5_2cq85"]
+[ext_resource type="FontFile" uid="uid://cj8rhodwww8xo" path="res://ui/Millennia-Regular.otf" id="5_2cq85"]
 
 [sub_resource type="CanvasItemMaterial" id="CanvasItemMaterial_rcusm"]
 light_mode = 1
@@ -77,6 +78,7 @@ z_index = 15
 material = SubResource("CanvasItemMaterial_rcusm")
 offset_right = 32.0
 offset_bottom = 32.0
+theme = ExtResource("1_nbjew")
 script = ExtResource("1_p0uq2")
 
 [node name="NinePatchRect" type="NinePatchRect" parent="."]

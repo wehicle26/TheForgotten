@@ -1,0 +1,74 @@
+[gd_scene load_steps=4 format=3 uid="uid://dt7axemubdd2s"]
+
+[ext_resource type="Theme" uid="uid://cdpahudvr7n3t" path="res://ui/Ui.tres" id="1_6y0re"]
+[ext_resource type="Script" path="res://scripts/options.gd" id="2_ssul8"]
+[ext_resource type="Texture2D" uid="uid://bmeaxme02o2r8" path="res://art/environment/splash1_320x160.png" id="3_0d55n"]
+
+[node name="Options" type="Control"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme = ExtResource("1_6y0re")
+script = ExtResource("2_ssul8")
+
+[node name="Background" type="TextureRect" parent="."]
+self_modulate = Color(1, 1, 1, 0.360784)
+layout_mode = 0
+offset_right = 320.0
+offset_bottom = 180.0
+texture = ExtResource("3_0d55n")
+expand_mode = 1
+
+[node name="ButtonContainer" type="VBoxContainer" parent="."]
+layout_mode = 1
+anchors_preset = -1
+anchor_left = 0.2
+anchor_right = 0.8
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+alignment = 1
+
+[node name="Label" type="Label" parent="ButtonContainer"]
+layout_mode = 2
+text = "MASTER VOLUME"
+horizontal_alignment = 1
+
+[node name="MasterVolumeSlider" type="HSlider" parent="ButtonContainer"]
+layout_mode = 2
+max_value = 1.0
+step = 0.001
+
+[node name="Label2" type="Label" parent="ButtonContainer"]
+layout_mode = 2
+text = "MUSIC VOLUME"
+horizontal_alignment = 1
+
+[node name="MusicVolumeSlider" type="HSlider" parent="ButtonContainer"]
+layout_mode = 2
+max_value = 1.0
+step = 0.001
+
+[node name="Label3" type="Label" parent="ButtonContainer"]
+layout_mode = 2
+text = "SFX VOLUME"
+horizontal_alignment = 1
+
+[node name="SfxVolumeSlider" type="HSlider" parent="ButtonContainer"]
+layout_mode = 2
+max_value = 1.0
+step = 0.001
+
+[node name="BackButton" type="Button" parent="ButtonContainer"]
+layout_mode = 2
+theme_override_colors/font_hover_color = Color(0.647059, 0.188235, 0.188235, 1)
+text = "BACK"
+
+[connection signal="value_changed" from="ButtonContainer/MasterVolumeSlider" to="." method="_on_master_volume_slider_value_changed"]
+[connection signal="value_changed" from="ButtonContainer/MusicVolumeSlider" to="." method="_on_music_volume_slider_value_changed"]
+[connection signal="value_changed" from="ButtonContainer/SfxVolumeSlider" to="." method="_on_sfx_volume_slider_value_changed"]
+[connection signal="mouse_entered" from="ButtonContainer/BackButton" to="." method="_on_back_button_mouse_entered"]
+[connection signal="pressed" from="ButtonContainer/BackButton" to="." method="_on_back_button_pressed"]

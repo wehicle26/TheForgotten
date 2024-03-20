@@ -39,7 +39,8 @@ func physics_update(delta):
 
 
 func _hit_player():
-	tween.kill()
+	if is_instance_valid(tween):
+		tween.kill()
 	enemy.velocity = Vector2.ZERO
 	enemy.speed = 0
 	enemy.has_crashed = true
