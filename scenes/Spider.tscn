@@ -93,6 +93,9 @@ shape = SubResource("CircleShape2D_l0x51")
 [node name="CollisionShape2D" parent="." index="4"]
 shape = SubResource("CircleShape2D_b7p4p")
 
+[node name="LineOfSight" parent="." index="5"]
+visible = false
+
 [node name="Sprite2D" parent="." index="8"]
 texture_filter = 1
 texture = SubResource("CanvasTexture_doaef")
@@ -139,39 +142,39 @@ enemy = NodePath("../..")
 
 [node name="N" type="RayCast2D" parent="Danger" index="0"]
 rotation = -3.14159
-target_position = Vector2(0, 10)
+target_position = Vector2(0, 15)
 collision_mask = 3
 
 [node name="NE" type="RayCast2D" parent="Danger" index="1"]
 rotation = -2.3562
-target_position = Vector2(0, 10)
+target_position = Vector2(0, 20)
 collision_mask = 3
 
 [node name="E" type="RayCast2D" parent="Danger" index="2"]
 rotation = -1.5708
-target_position = Vector2(0, 10)
+target_position = Vector2(0, 15)
 collision_mask = 3
 
 [node name="SE" type="RayCast2D" parent="Danger" index="3"]
 rotation = -0.785395
-target_position = Vector2(0, 10)
+target_position = Vector2(0, 20)
 collision_mask = 3
 
 [node name="S" type="RayCast2D" parent="Danger" index="4"]
-target_position = Vector2(0, 10)
+target_position = Vector2(0, 15)
 collision_mask = 3
 
 [node name="SW" type="RayCast2D" parent="Danger" index="5"]
 rotation = 0.785398
-target_position = Vector2(0, 10)
+target_position = Vector2(0, 20)
 collision_mask = 3
 
 [node name="W" type="RayCast2D" parent="Danger" index="6"]
 rotation = 1.5708
-target_position = Vector2(0, 10)
+target_position = Vector2(0, 15)
 collision_mask = 3
 
 [node name="NW" type="RayCast2D" parent="Danger" index="7"]
 rotation = -3.92699
-target_position = Vector2(0, 10)
+target_position = Vector2(0, 20)
 collision_mask = 3

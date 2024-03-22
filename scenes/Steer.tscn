@@ -1,0 +1,57 @@
+[gd_scene load_steps=3 format=3 uid="uid://xdeg26xy5gow"]
+
+[ext_resource type="Script" path="res://scripts/steer.gd" id="1_t03ux"]
+
+[sub_resource type="Curve" id="Curve_q7auo"]
+_data = [Vector2(0, 1), 0.0, 0.0, 0, 0, Vector2(1, 0), 0.0, 0.0, 0, 0]
+point_count = 2
+
+[node name="Steer" type="Node2D"]
+script = ExtResource("1_t03ux")
+
+[node name="Danger" type="Node2D" parent="."]
+visible = false
+
+[node name="N" type="RayCast2D" parent="Danger"]
+rotation = -3.14159
+target_position = Vector2(0, 35)
+collision_mask = 3
+
+[node name="NE" type="RayCast2D" parent="Danger"]
+rotation = -2.3562
+target_position = Vector2(0, 45)
+collision_mask = 3
+
+[node name="E" type="RayCast2D" parent="Danger"]
+rotation = -1.5708
+collision_mask = 3
+
+[node name="SE" type="RayCast2D" parent="Danger"]
+rotation = -0.785395
+target_position = Vector2(0, 45)
+collision_mask = 3
+
+[node name="S" type="RayCast2D" parent="Danger"]
+target_position = Vector2(0, 35)
+collision_mask = 3
+
+[node name="SW" type="RayCast2D" parent="Danger"]
+rotation = 0.785398
+target_position = Vector2(0, 45)
+collision_mask = 3
+
+[node name="W" type="RayCast2D" parent="Danger"]
+rotation = 1.5708
+collision_mask = 3
+
+[node name="NW" type="RayCast2D" parent="Danger"]
+rotation = -3.92699
+target_position = Vector2(0, 45)
+collision_mask = 3
+
+[node name="Line2D" type="Line2D" parent="."]
+position = Vector2(-92, 0)
+scale = Vector2(1.85714, 1)
+points = PackedVector2Array(49.5385, 0, 69.4615, 0)
+width_curve = SubResource("Curve_q7auo")
+default_color = Color(0, 0.894118, 0.576471, 1)

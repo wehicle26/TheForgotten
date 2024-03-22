@@ -1,4 +1,4 @@
-[gd_scene load_steps=53 format=3 uid="uid://b71gis6vgkvkg"]
+[gd_scene load_steps=55 format=3 uid="uid://b71gis6vgkvkg"]
 
 [ext_resource type="Script" path="res://scripts/level.gd" id="1_6u7sh"]
 [ext_resource type="PackedScene" uid="uid://bob88w6sefucj" path="res://scenes/Environment.tscn" id="1_halep"]
@@ -23,6 +23,7 @@
 [ext_resource type="PackedScene" uid="uid://bv8yf3ytm2yc1" path="res://scenes/CryoMachine.tscn" id="16_idydh"]
 [ext_resource type="PackedScene" uid="uid://bo3acd3y8ucuy" path="res://scenes/Eus.tscn" id="17_7u0ol"]
 [ext_resource type="Shader" path="res://shaders/space.gdshader" id="18_ghgnd"]
+[ext_resource type="PackedScene" uid="uid://c3cf160taxu74" path="res://scenes/BroodMother.tscn" id="22_bn7b0"]
 [ext_resource type="Shader" path="res://shaders/glitch.gdshader" id="22_dqfq6"]
 [ext_resource type="Shader" path="res://shaders/vignette.gdshader" id="23_gq8o3"]
 
@@ -120,6 +121,12 @@ vertices = PackedVector2Array(46, 156, 14, 188, 14, 182, -162, 114, -14, 114, -1
 polygons = Array[PackedInt32Array]([PackedInt32Array(0, 1, 2), PackedInt32Array(3, 4, 5), PackedInt32Array(6, 7, 8, 0, 2), PackedInt32Array(6, 2, 9, 5), PackedInt32Array(10, 9, 11, 12, 13), PackedInt32Array(14, 15, 16, 13, 12), PackedInt32Array(5, 9, 10, 3), PackedInt32Array(17, 3, 10, 18)])
 outlines = Array[PackedVector2Array]([PackedVector2Array(-256, 104, -256, 504, -224, 504, -72, 352, -72, 284, -4, 284, -4, 192, 4, 192, 4, 213, 56, 160, 56, 104, 0, 104, 0, 160, -4, 160, -4, 104, -152, 104, -152, 68, -200, 68, -200, 104)])
 source_geometry_mode = 1
+source_geometry_group_name = &"navigation_polygon_source_group"
+
+[sub_resource type="NavigationPolygon" id="NavigationPolygon_7e3s0"]
+vertices = PackedVector2Array(462, 92, 462, 124, 412, 174, 242, 174, 242, 54, 380, -174, 404, -150, 106, 54, 106, -86, 202, -86, 202, -174, 494, 60, 436, -150, 462, -92, 462, -124, 494, -60)
+polygons = Array[PackedInt32Array]([PackedInt32Array(0, 1, 2, 3, 4, 5, 6), PackedInt32Array(4, 7, 8, 9), PackedInt32Array(9, 10, 5, 4), PackedInt32Array(11, 0, 6, 12, 13), PackedInt32Array(12, 14, 13), PackedInt32Array(11, 13, 15)])
+outlines = Array[PackedVector2Array]([PackedVector2Array(96, -96, 96, 64, 232, 64, 232, 184, 416, 184, 472, 128, 472, 96, 504, 64, 504, -64, 472, -96, 472, -128, 440, -160, 408, -160, 384, -184, 192, -184, 192, -96)])
 source_geometry_group_name = &"navigation_polygon_source_group"
 
 [sub_resource type="Animation" id="Animation_2qwia"]
@@ -260,7 +267,7 @@ z_index = 5
 [node name="Crowbar" parent="Environment/Items" instance=ExtResource("3_ax4cu")]
 z_index = -2
 material = null
-position = Vector2(-843, -113)
+position = Vector2(129, -37)
 
 [node name="FlashlightItem" parent="Environment/Items" instance=ExtResource("5_6ojie")]
 material = null
@@ -269,7 +276,7 @@ rotation = -0.785397
 
 [node name="BlasterItem" parent="Environment/Items" instance=ExtResource("5_bmbqo")]
 material = null
-position = Vector2(-288, 513)
+position = Vector2(153, -4)
 
 [node name="Inanimate" type="Node2D" parent="Environment" groups=["navigation_polygon_source_group"]]
 
@@ -867,6 +874,9 @@ material = null
 position = Vector2(-367, 140)
 rotation = -0.785397
 
+[node name="BroodMother" parent="Entities" instance=ExtResource("22_bn7b0")]
+position = Vector2(318, 39)
+
 [node name="Navigation" type="Node2D" parent="."]
 visible = false
 
@@ -901,6 +911,9 @@ navigation_polygon = SubResource("NavigationPolygon_f3kmn")
 
 [node name="NavigationRegion2D11" type="NavigationRegion2D" parent="Navigation"]
 navigation_polygon = SubResource("NavigationPolygon_tmpel")
+
+[node name="NavigationRegion2D8" type="NavigationRegion2D" parent="Navigation"]
+navigation_polygon = SubResource("NavigationPolygon_7e3s0")
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="."]
 libraries = {
@@ -962,7 +975,7 @@ grow_horizontal = 2
 grow_vertical = 2
 
 [node name="PlayerSpawnLocation" type="Marker2D" parent="."]
-position = Vector2(-868, -145)
+position = Vector2(125, -13)
 
 [node name="SpiderSpawnLocation" type="Marker2D" parent="."]
 position = Vector2(-850, 189)
@@ -983,7 +996,7 @@ position = Vector2(1203, 76)
 position = Vector2(833, -292)
 
 [node name="Marker2D4" type="Marker2D" parent="." groups=["EusBossSpawn"]]
-position = Vector2(1329, -306)
+position = Vector2(1200, -288)
 
 [node name="EusSpawn" type="Marker2D" parent="."]
 position = Vector2(-467, 16)

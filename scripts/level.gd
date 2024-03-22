@@ -65,6 +65,7 @@ func _ready():
 	if not GlobalState.dialogue1:
 		GlobalState.dialogue1 = true
 		DialogueManager.start_passive_dialogue(player.global_position, ["Where is everyone?"])
+		SoundManager.play_main_loop(SoundManager.COMBAT_HIGH)
 
 func _on_exit_cryo_body_exited(body):
 	if body is Player:
