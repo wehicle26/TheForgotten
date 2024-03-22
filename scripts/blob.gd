@@ -1,7 +1,9 @@
 extends Enemy
 
 class_name Blob
+
 signal split
+signal blob_dead
 
 @onready var danger: Node2D = $Danger
 @onready var hitbox = $Hitbox
@@ -31,6 +33,7 @@ func kill(_splat_direction):
 		split_count += 1
 	else:
 		queue_free()
+		blob_dead.emit()
 
 func split_blob():
 	hitbox.queue_free()

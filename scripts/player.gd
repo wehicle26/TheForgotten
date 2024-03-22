@@ -178,7 +178,7 @@ func _input(event):
 	#gun.num_bullets = 4
 	#if event.is_action_pressed("5"):
 	#gun.num_bullets = 5
-	if event.is_action_pressed("switch_weapon") and inventory.itemArray.size() > 1:
+	if event.is_action_pressed("switch_weapon"):
 		if current_weapon == "blaster":
 			current_weapon = "crowbar"
 		else:

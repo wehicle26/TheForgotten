@@ -65,6 +65,7 @@ func _ready():
 	if not GlobalState.dialogue1:
 		GlobalState.dialogue1 = true
 		DialogueManager.start_passive_dialogue(player.global_position, ["Where is everyone?"])
+		SoundManager.play_main_loop(SoundManager.COMBAT_HIGH)
 
 func _on_exit_cryo_body_exited(body):
 	if body is Player:
@@ -176,6 +177,7 @@ func _on_enter_medical_body_exited(body):
 			var blob = blobScene.instantiate()
 			entities.call_deferred("add_child", blob)
 			blob.global_position = blob_spawn_location.global_position
+			enemy_count += 2
 			SoundManager.set_main_loop_parameter(SoundManager.COMBAT_MID_HIGH)
 			combat = true
 

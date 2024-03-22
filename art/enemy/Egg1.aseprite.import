@@ -1,0 +1,14 @@
+[remap]
+
+importer="aseprite_wizard.plugin.noop"
+type="PackedDataContainer"
+uid="uid://c0ps3bdmunl4y"
+path="res://.godot/imported/Egg1.aseprite-4b77df8527ad1c81729943a13ff30942.res"
+
+[deps]
+
+source_file="res://art/enemy/Egg1.aseprite"
+dest_files=["res://.godot/imported/Egg1.aseprite-4b77df8527ad1c81729943a13ff30942.res"]
+
+[params]
+

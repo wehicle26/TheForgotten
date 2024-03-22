@@ -17,10 +17,10 @@ func randomize_wander():
 
 
 func enter():
-	enemy.animation_player.play("Walk")
+	enemy.animation_player.play("Skitter")
 	player = get_tree().get_first_node_in_group("Player")
 	randomize_wander()
-
+	print("hello")
 
 func update(delta):
 	if wander_time > 0:

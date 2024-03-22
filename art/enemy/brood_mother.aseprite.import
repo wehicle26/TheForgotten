@@ -1,0 +1,14 @@
+[remap]
+
+importer="aseprite_wizard.plugin.noop"
+type="PackedDataContainer"
+uid="uid://dml1h2qh88qii"
+path="res://.godot/imported/brood_mother.aseprite-b0f36903efdb87e4a3d2f35d42ca327a.res"
+
+[deps]
+
+source_file="res://art/enemy/brood_mother.aseprite"
+dest_files=["res://.godot/imported/brood_mother.aseprite-b0f36903efdb87e4a3d2f35d42ca327a.res"]
+
+[params]
+

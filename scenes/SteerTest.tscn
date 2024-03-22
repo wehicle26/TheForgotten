@@ -1,0 +1,59 @@
+[gd_scene load_steps=7 format=3 uid="uid://qamitmffd4rq"]
+
+[ext_resource type="Script" path="res://scripts/SteerTest.gd" id="1_np5ro"]
+[ext_resource type="Texture2D" uid="uid://cpivewnoe1mdo" path="res://art/environment/Spaceman_V3NoArms.png" id="2_8soev"]
+[ext_resource type="PackedScene" uid="uid://cb3n68rjgonos" path="res://scenes/Danger.tscn" id="3_lgd6k"]
+
+[sub_resource type="Curve2D" id="Curve2D_va3ub"]
+_data = {
+"points": PackedVector2Array(0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 31, 37, 0, 0, 0, 0, 104, 24, 0, 0, 0, 0, 73, 111, 0, 0, 0, 0, 204, 85, 0, 0, 0, 0, 290, 159, 0, 0, 0, 0, 396, 224, 0, 0, 0, 0, 370, 22, 0, 0, 0, 0, 210, -40, 0, 0, 0, 0, 0, 0)
+}
+point_count = 10
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_4v0be"]
+
+[sub_resource type="Curve" id="Curve_b4ub5"]
+_data = [Vector2(0, 1), 0.0, 0.0, 0, 0, Vector2(0.979253, 0), 0.0, 0.0, 0, 0]
+point_count = 2
+
+[node name="SteerTest" type="Node2D"]
+
+[node name="Path2D" type="Path2D" parent="."]
+curve = SubResource("Curve2D_va3ub")
+
+[node name="PathFollow2D" type="PathFollow2D" parent="Path2D"]
+rotation = 0.873406
+
+[node name="CharacterBody2D" type="CharacterBody2D" parent="Path2D/PathFollow2D"]
+motion_mode = 1
+script = ExtResource("1_np5ro")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Path2D/PathFollow2D/CharacterBody2D"]
+shape = SubResource("CircleShape2D_4v0be")
+
+[node name="Sprite2D" type="Sprite2D" parent="Path2D/PathFollow2D/CharacterBody2D"]
+texture = ExtResource("2_8soev")
+
+[node name="Danger" parent="Path2D/PathFollow2D/CharacterBody2D" instance=ExtResource("3_lgd6k")]
+
+[node name="Line2D" type="Line2D" parent="Path2D/PathFollow2D/CharacterBody2D"]
+points = PackedVector2Array(0, 0, 34.6799, -41.3921)
+width_curve = SubResource("Curve_b4ub5")
+default_color = Color(0, 1, 1, 1)
+
+[node name="Label" type="Label" parent="Path2D/PathFollow2D/CharacterBody2D"]
+offset_left = -55.8938
+offset_top = 26.2274
+offset_right = -15.8938
+offset_bottom = 49.2274
+rotation = -0.894755
+text = "fsdf"
+
+[node name="StaticBody2D" type="StaticBody2D" parent="."]
+
+[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="StaticBody2D"]
+polygon = PackedVector2Array(-6, 50, 56, 117, 68, 86, 112, 116, 191, 168, 275, 137, 309, 226, 422, 199, 420, 6, 348, 25, 324, -48, 162, -35, 80, -70, -50, -53, -82, -4, -59, -154, 530, -57, 442, 287, -43, 173)
+
+[node name="Camera2D" type="Camera2D" parent="."]
+position = Vector2(208, 93)
+zoom = Vector2(0.5, 0.5)

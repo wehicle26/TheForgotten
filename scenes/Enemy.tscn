@@ -13,7 +13,7 @@ light_mode = 2
 radius = 26.0192
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_ofe1f"]
-radius = 30.0167
+radius = 12.816
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_6wd5v"]
 shader = ExtResource("10_2cumw")

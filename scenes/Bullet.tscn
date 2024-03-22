@@ -10,7 +10,7 @@
 [sub_resource type="Gradient" id="Gradient_orsmv"]
 colors = PackedColorArray(1, 1, 1, 1, 1, 1, 1, 0)
 
-[sub_resource type="GradientTexture1D" id="GradientTexture1D_r5jyx"]
+[sub_resource type="GradientTexture1D" id="GradientTexture1D_xq57h"]
 gradient = SubResource("Gradient_orsmv")
 
 [sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_0xj3g"]
@@ -19,7 +19,7 @@ spread = 86.68
 initial_velocity_max = 25.0
 gravity = Vector3(0, 0, 0)
 color = Color(1, 0.972549, 0, 1)
-color_ramp = SubResource("GradientTexture1D_r5jyx")
+color_ramp = SubResource("GradientTexture1D_xq57h")
 
 [sub_resource type="Gradient" id="Gradient_3iu6o"]
 colors = PackedColorArray(1, 0.164706, 0.121569, 1, 1, 1, 1, 0)

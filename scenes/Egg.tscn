@@ -1,0 +1,96 @@
+[gd_scene load_steps=8 format=3 uid="uid://c4va6arsto042"]
+
+[ext_resource type="Script" path="res://scripts/egg.gd" id="1_8odey"]
+[ext_resource type="Texture2D" uid="uid://c37phhm8nwwwq" path="res://art/enemy/egg1.png" id="2_sf7y4"]
+[ext_resource type="Texture2D" uid="uid://02pvkoev1jiy" path="res://art/enemy/egg1_n.png" id="3_abcal"]
+
+[sub_resource type="Animation" id="Animation_hu556"]
+length = 0.1
+loop_mode = 1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Sprite2D:visible")
+tracks/0/interp = 1
+tracks/0/loop_wrap = false
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [true]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("Sprite2D:frame")
+tracks/1/interp = 1
+tracks/1/loop_wrap = false
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [0]
+}
+
+[sub_resource type="Animation" id="Animation_xfcv7"]
+length = 0.8
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Sprite2D:visible")
+tracks/0/interp = 1
+tracks/0/loop_wrap = false
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [true]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("Sprite2D:frame")
+tracks/1/interp = 1
+tracks/1/loop_wrap = false
+tracks/1/keys = {
+"times": PackedFloat32Array(0, 0.1, 0.2, 0.3, 0.4, 0.5, 0.6, 0.7),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1, 1, 1),
+"update": 1,
+"values": [0, 1, 2, 3, 4, 5, 6, 7]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_8idve"]
+_data = {
+"RESET": SubResource("Animation_hu556"),
+"Squish": SubResource("Animation_xfcv7")
+}
+
+[sub_resource type="CanvasTexture" id="CanvasTexture_63t3m"]
+diffuse_texture = ExtResource("2_sf7y4")
+normal_texture = ExtResource("3_abcal")
+
+[node name="Egg" type="Node2D"]
+script = ExtResource("1_8odey")
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+libraries = {
+"": SubResource("AnimationLibrary_8idve")
+}
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+texture_filter = 1
+texture = SubResource("CanvasTexture_63t3m")
+hframes = 3
+vframes = 3
+metadata/_aseprite_wizard_config_ = {
+"i_mode": -1,
+"keep_anim_length": false,
+"layer": "",
+"o_ex_p": "",
+"o_folder": "res://art/enemy/",
+"o_name": "egg1_n",
+"only_visible": true,
+"op_exp": false,
+"player": "AnimationPlayer",
+"source": "res://art/enemy/Egg1.aseprite"
+}
