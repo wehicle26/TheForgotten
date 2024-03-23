@@ -50,22 +50,22 @@ var attack_array: Array = [
 
 func _on_navigation_timer_timeout():
 	player = get_tree().get_first_node_in_group("Player")
-	
-	var display_interest = ""
-	var display_danger = ""
-	var display_context = ""
-	for j in range(0, 7):
-		display_interest += str("%.01f" % interest_array[j]) + " "
-		display_danger += str("%.01f" % danger_array[j]) + " "
-		display_context += str("%.01f" % context_array[j]) + " "
-	label.text = "Direction: " + str(direction) \
-	+ "\nInterest: " + display_interest \
-	+ "\nDanger: " + display_danger \
-	+ "\nContext: " + display_context \
-	+ str("\nBest Direction: ", best_direction) \
-	+ "\nDistance to player: " + str(int(global_position.distance_to(player.global_position))) \
-	+ str("\nState:  ", state_machine.current_state.name)
 	make_path()
+	
+	#var display_interest = ""
+	#var display_danger = ""
+	#var display_context = ""
+	#for j in range(0, 7):
+		#display_interest += str("%.01f" % interest_array[j]) + " "
+		#display_danger += str("%.01f" % danger_array[j]) + " "
+		#display_context += str("%.01f" % context_array[j]) + " "
+	#label.text = "Direction: " + str(direction) \
+	#+ "\nInterest: " + display_interest \
+	#+ "\nDanger: " + display_danger \
+	#+ "\nContext: " + display_context \
+	#+ str("\nBest Direction: ", best_direction) \
+	#+ "\nDistance to player: " + str(int(global_position.distance_to(player.global_position))) \
+	#+ str("\nState:  ", state_machine.current_state.name)
 
 
 func get_next_attack():

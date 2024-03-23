@@ -39,10 +39,12 @@ func pause():
 	get_tree().paused = true
 	SoundManager.pause()
 
+
 func _unpause():
 	await get_tree().create_timer(.2).timeout
 	paused = false
-	
+
+
 func _ready():
 	pause_menu.unpaused.connect(_unpause)
 	space.visible = true
@@ -65,7 +67,6 @@ func _ready():
 	if not GlobalState.dialogue1:
 		GlobalState.dialogue1 = true
 		DialogueManager.start_passive_dialogue(player.global_position, ["Where is everyone?"])
-		SoundManager.play_main_loop(SoundManager.COMBAT_HIGH)
 
 func _on_exit_cryo_body_exited(body):
 	if body is Player:
@@ -87,6 +88,33 @@ func _on_enter_cryo_body_exited(body):
 		get_tree().call_group("Cryo_Light", "turn_on")
 		get_tree().call_group("Hallway_Light", "turn_off")
 		SoundManager.set_footstep_parameter("event:/footsteps")
+
+
+func _on_event_1_body_exited(body):
+	if body is Player and not GlobalState.encounter1:
+		GlobalState.encounter1 = true
+		player.walk_speed = 20
+		player.can_run = false
+		player.freeze_player()
+		get_tree().call_group("Hallway_Light", "turn_off")
+		await get_tree().create_timer(0.2).timeout
+		get_tree().call_group("Hallway_Light", "turn_on")
+		player.unfreeze_player()
+		SoundManager.stop_main_loop()
+		SoundManager.play_custom_sound(player.global_transform, "event:/stinger1", 0.9)
+		var glitch: CanvasLayer = get_tree().get_first_node_in_group("Glitch")
+		glitch.visible = true
+		get_tree().call_group("goo", "show_goo")
+		await get_tree().create_timer(5).timeout
+		glitch.visible = false
+		get_tree().call_group("goo", "hide_goo")
+		get_tree().call_group("Hallway_Light", "turn_off")
+		await get_tree().create_timer(0.2).timeout
+		get_tree().call_group("Hallway_Light", "turn_on")
+		SoundManager.play_main_loop(SoundManager.MAIN_LOOP_CURIOUS)
+		var lines: Array[String] = ["Huh...?",]
+		DialogueManager.start_passive_dialogue(player.global_position, lines)
+		player.walk_speed = 45
 
 
 func _on_enter_cargo_body_exited(body):
@@ -181,33 +209,6 @@ func _on_enter_medical_body_exited(body):
 			SoundManager.set_main_loop_parameter(SoundManager.COMBAT_MID_HIGH)
 			combat = true
 
-
-func _on_event_1_body_exited(body):
-	if body is Player and not GlobalState.encounter1:
-		GlobalState.encounter1 = true
-		player.walk_speed = 20
-		player.can_run = false
-		player.freeze_player()
-		get_tree().call_group("Hallway_Light", "turn_off")
-		await get_tree().create_timer(0.2).timeout
-		get_tree().call_group("Hallway_Light", "turn_on")
-		player.unfreeze_player()
-		SoundManager.stop_main_loop()
-		SoundManager.play_custom_sound(player.global_transform, "event:/stinger1", 0.9)
-		var glitch: CanvasLayer = get_tree().get_first_node_in_group("Glitch")
-		glitch.visible = true
-		get_tree().call_group("goo", "show_goo")
-		await get_tree().create_timer(5).timeout
-		glitch.visible = false
-		get_tree().call_group("goo", "hide_goo")
-		get_tree().call_group("Hallway_Light", "turn_off")
-		await get_tree().create_timer(0.2).timeout
-		get_tree().call_group("Hallway_Light", "turn_on")
-		SoundManager.play_main_loop(SoundManager.MAIN_LOOP_CURIOUS)
-		var lines: Array[String] = ["Huh...?",]
-		DialogueManager.start_passive_dialogue(player.global_position, lines)
-		player.walk_speed = 45
-		#player.can_run = true
 
 func _on_enter_bathroom_body_exited(body):
 	if body is Player:

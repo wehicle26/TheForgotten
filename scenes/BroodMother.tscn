@@ -253,7 +253,7 @@ libraries = {
 }
 
 [node name="StateMachine" parent="." index="11" node_paths=PackedStringArray("initial_state") instance=ExtResource("5_ilnps")]
-initial_state = NodePath("BMRetreat")
+initial_state = NodePath("BMIdle")
 
 [node name="BMIdle" type="Node" parent="StateMachine" index="0" node_paths=PackedStringArray("enemy")]
 script = ExtResource("6_dg2d0")

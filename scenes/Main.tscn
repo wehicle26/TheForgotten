@@ -1,4 +1,4 @@
-[gd_scene load_steps=55 format=3 uid="uid://b71gis6vgkvkg"]
+[gd_scene load_steps=54 format=3 uid="uid://b71gis6vgkvkg"]
 
 [ext_resource type="Script" path="res://scripts/level.gd" id="1_6u7sh"]
 [ext_resource type="PackedScene" uid="uid://bob88w6sefucj" path="res://scenes/Environment.tscn" id="1_halep"]
@@ -23,7 +23,6 @@
 [ext_resource type="PackedScene" uid="uid://bv8yf3ytm2yc1" path="res://scenes/CryoMachine.tscn" id="16_idydh"]
 [ext_resource type="PackedScene" uid="uid://bo3acd3y8ucuy" path="res://scenes/Eus.tscn" id="17_7u0ol"]
 [ext_resource type="Shader" path="res://shaders/space.gdshader" id="18_ghgnd"]
-[ext_resource type="PackedScene" uid="uid://c3cf160taxu74" path="res://scenes/BroodMother.tscn" id="22_bn7b0"]
 [ext_resource type="Shader" path="res://shaders/glitch.gdshader" id="22_dqfq6"]
 [ext_resource type="Shader" path="res://shaders/vignette.gdshader" id="23_gq8o3"]
 
@@ -50,6 +49,7 @@ b = Vector2(50, 0)
 b = Vector2(0, 45)
 
 [sub_resource type="SegmentShape2D" id="SegmentShape2D_f08v3"]
+resource_local_to_scene = true
 b = Vector2(90, 0)
 
 [sub_resource type="NavigationPolygon" id="NavigationPolygon_x2io3"]
@@ -267,7 +267,7 @@ z_index = 5
 [node name="Crowbar" parent="Environment/Items" instance=ExtResource("3_ax4cu")]
 z_index = -2
 material = null
-position = Vector2(129, -37)
+position = Vector2(-603, -207)
 
 [node name="FlashlightItem" parent="Environment/Items" instance=ExtResource("5_6ojie")]
 material = null
@@ -514,33 +514,38 @@ rotation = -3.14159
 
 [node name="CryoBed" parent="Environment/Interactable" instance=ExtResource("4_0fems")]
 material = null
-position = Vector2(-706, -48)
-rotation = -1.57079
+position = Vector2(-697, -16)
+rotation = -0.000115296
+smashed = true
+
+[node name="CryoBed6" parent="Environment/Interactable" instance=ExtResource("4_0fems")]
+material = null
+position = Vector2(-697, -48)
+rotation = -0.000115296
 
 [node name="CryoBed2" parent="Environment/Interactable" instance=ExtResource("4_0fems")]
 material = null
-position = Vector2(-706, 16)
-rotation = -1.57079
+position = Vector2(-697, 16)
 
 [node name="CryoBed3" parent="Environment/Interactable" instance=ExtResource("4_0fems")]
 material = null
-position = Vector2(-605, 16)
-rotation = 1.57081
+position = Vector2(-615, 16)
+rotation = 3.14159
 
 [node name="CryoBed4" parent="Environment/Interactable" instance=ExtResource("4_0fems")]
 material = null
-position = Vector2(-606, -16)
-rotation = 1.57081
+position = Vector2(-615, -16)
+rotation = 3.14159
 
 [node name="CryoBed5" parent="Environment/Interactable" instance=ExtResource("4_0fems")]
 material = null
-position = Vector2(-607, -48)
-rotation = 1.57081
+position = Vector2(-615, -48)
+rotation = 3.14159
 
 [node name="Note" parent="Environment/Interactable" instance=ExtResource("12_ylmx7")]
 z_index = 4
 material = null
-position = Vector2(-647, -175)
+position = Vector2(-646, -175)
 
 [node name="Note2" parent="Environment/Interactable" instance=ExtResource("12_ylmx7")]
 material = null
@@ -874,9 +879,6 @@ material = null
 position = Vector2(-367, 140)
 rotation = -0.785397
 
-[node name="BroodMother" parent="Entities" instance=ExtResource("22_bn7b0")]
-position = Vector2(318, 39)
-
 [node name="Navigation" type="Node2D" parent="."]
 visible = false
 
@@ -975,7 +977,7 @@ grow_horizontal = 2
 grow_vertical = 2
 
 [node name="PlayerSpawnLocation" type="Marker2D" parent="."]
-position = Vector2(125, -13)
+position = Vector2(-672, -27)
 
 [node name="SpiderSpawnLocation" type="Marker2D" parent="."]
 position = Vector2(-850, 189)
@@ -1016,4 +1018,4 @@ position = Vector2(-467, 16)
 [connection signal="body_exited" from="Triggers/EnterMedical" to="." method="_on_enter_medical_body_exited"]
 [connection signal="body_exited" from="Triggers/EnterBathroom" to="." method="_on_enter_bathroom_body_exited"]
 [connection signal="body_exited" from="Triggers/ExitBathroom" to="." method="_on_exit_bathroom_body_exited"]
-[connection signal="body_exited" from="Triggers/Event5" to="." method="_on_event_2_body_exited"]
+[connection signal="body_exited" from="Triggers/Event5" to="." method="_on_event_5_body_exited"]

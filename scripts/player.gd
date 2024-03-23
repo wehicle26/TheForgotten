@@ -98,9 +98,7 @@ func randomOffset():
 
 
 func _respawn():
-	GlobalState.encounter1 = false
-	GlobalState.encounter2 = false
-	GlobalState.encounter3 = false
+	GlobalState.reset()
 	get_tree().change_scene_to_file(main)
 
 
