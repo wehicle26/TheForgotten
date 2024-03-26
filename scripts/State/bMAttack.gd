@@ -19,7 +19,10 @@ func enter():
 	enemy.velocity = Vector2.ZERO
 	enemy.speed = 0
 	enemy.move_sound_timer.stop()
-	await get_tree().create_timer(randf_range(1, 3)).timeout
+	if not enemy.berserk:
+		await get_tree().create_timer(randf_range(1, 3)).timeout
+	else:
+		await get_tree().create_timer(randf_range(0.5, 1)).timeout
 	enemy.get_node("AnimationPlayer").play("Skitter")
 	
 	SoundManager.play_custom_sound(enemy.global_transform, "event:/spider_attack", 0.8)

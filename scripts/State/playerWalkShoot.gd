@@ -35,7 +35,14 @@ func physics_update(_delta):
 	player.global_rotation += PI / 2
 	
 	if input_dir == Vector2.ZERO:
-		transitioned.emit(self, "playerShoot")
+			if player.current_weapon == "crowbar":
+				transitioned.emit(self, "playerIdle")
+				
+			transitioned.emit(self, "playerShoot")
+	
+	if player.current_weapon == "crowbar":
+		transitioned.emit(self, "playerWalk")
+
 
 func _on_arm_timer_timeout():
 	transitioned.emit(self, "playerWalk")

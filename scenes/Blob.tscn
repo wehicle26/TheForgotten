@@ -8,7 +8,7 @@
 [ext_resource type="Script" path="res://scripts/State/blobIdle.gd" id="6_qftkk"]
 [ext_resource type="Script" path="res://scripts/State/blobFollow.gd" id="7_ar1fy"]
 [ext_resource type="Script" path="res://scripts/State/blobAttack.gd" id="8_nlswb"]
-[ext_resource type="Script" path="res://scripts/State/enemyRetreat.gd" id="9_fa6l7"]
+[ext_resource type="Script" path="res://scripts/State/blobRetreat.gd" id="9_x060p"]
 [ext_resource type="Script" path="res://scripts/State/blobSplit.gd" id="10_65e4d"]
 [ext_resource type="PackedScene" uid="uid://cb3n68rjgonos" path="res://scenes/Danger.tscn" id="11_re03d"]
 
@@ -99,7 +99,7 @@ _data = {
 diffuse_texture = ExtResource("3_aa0a7")
 normal_texture = ExtResource("4_a22o2")
 
-[node name="Blob" groups=["Blob"] instance=ExtResource("1_cgsu8")]
+[node name="Blob" groups=["Blob", "Enemy"] instance=ExtResource("1_cgsu8")]
 script = ExtResource("2_gvefa")
 
 [node name="CollisionShape2D" parent="Hitbox" index="1"]
@@ -147,8 +147,8 @@ enemy = NodePath("../..")
 script = ExtResource("8_nlswb")
 enemy = NodePath("../..")
 
-[node name="Retreat" type="Node" parent="StateMachine" index="3" node_paths=PackedStringArray("enemy")]
-script = ExtResource("9_fa6l7")
+[node name="BlobRetreat" type="Node" parent="StateMachine" index="3" node_paths=PackedStringArray("enemy")]
+script = ExtResource("9_x060p")
 enemy = NodePath("../..")
 
 [node name="BlobSplit" type="Node" parent="StateMachine" index="4" node_paths=PackedStringArray("enemy")]
@@ -160,6 +160,7 @@ enemy = NodePath("../..")
 [node name="Danger" parent="." index="12" instance=ExtResource("11_re03d")]
 
 [node name="Label" type="Label" parent="." index="13"]
+visible = false
 offset_left = -20.0
 offset_top = -50.0
 offset_right = 20.0

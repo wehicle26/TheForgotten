@@ -4,8 +4,8 @@
 [ext_resource type="Texture2D" uid="uid://1wumcp3unt64" path="res://art/environment/lights/Player_LightCone_resized.png" id="2_jvkro"]
 [ext_resource type="Script" path="res://scripts/battery.gd" id="3_8s21s"]
 
-[node name="Flashlight" node_paths=PackedStringArray("battery") instance=ExtResource("1_7kp6n")]
-z_index = 7
+[node name="Flashlight" node_paths=PackedStringArray("battery") groups=["Flashlight"] instance=ExtResource("1_7kp6n")]
+y_sort_enabled = true
 texture = null
 light_texture = ExtResource("2_jvkro")
 height = 10

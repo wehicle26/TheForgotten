@@ -13,18 +13,35 @@ enum { PROLOGUE, LEVEL_1 }
 @onready var blob_spawn_location = $BlobSpawnLocation
 @onready var spider_spawn_location = $SpiderSpawnLocation
 @onready var spider_spawn_location_2 = $SpiderSpawnLocation2
+@onready var spider_spawn_location_3 = $SpiderSpawnLocation3
+@onready var roach_spawn = $RoachSpawn
+@onready var boss_spawn = $BossSpawn
+@onready var boss_checkpoint = $BossCheckpoint
+
 
 
 var PlayerScene: PackedScene = preload("res://scenes/Player.tscn")
 var blobScene: PackedScene = preload("res://scenes/Blob.tscn")
 var spiderScene: PackedScene = preload("res://scenes/Spider.tscn")
+var broodMotherScene: PackedScene = preload("res://scenes/BroodMother.tscn")
+var roachScene: PackedScene = preload("res://scenes/SpaceRoach.tscn")
+var broodMother: BroodMother
 var player: Player
 var paused = false
 var combat = false
 var enemy_count = 0
+var last_count = 0
 
 func _process(_delta):
-	pass
+	if GlobalState.encounter2:
+		enemy_count = get_tree().get_nodes_in_group("Enemy").size()
+		if enemy_count >= 1 and enemy_count != last_count:
+			var loop_level = 5 + enemy_count
+			SoundManager.set_main_loop_parameter(clamp(loop_level, 5, 8))
+		elif enemy_count == 0:
+			SoundManager.set_main_loop_parameter(SoundManager.MAIN_LOOP_GARBLED)
+
+		last_count = enemy_count
 
 
 func _input(event):
@@ -46,6 +63,7 @@ func _unpause():
 
 
 func _ready():
+	GlobalState.game_running = true
 	pause_menu.unpaused.connect(_unpause)
 	space.visible = true
 	grain.visible = true
@@ -158,15 +176,20 @@ func _on_event_2_body_exited(body):
 			entities.call_deferred("add_child", spider1)
 			#entities.add_child(spider)
 			spider1.global_position = spider_spawn_location.global_position
-			spider1.spider_dead.connect(_check_enemy_count)
+			#spider1.spider_dead.connect(_check_enemy_count)
 			var spider2 = spiderScene.instantiate()
 			entities.call_deferred("add_child", spider2)
 			#entities.add_child(spider)
 			spider2.global_position = spider_spawn_location_2.global_position
-			spider2.spider_dead.connect(_check_enemy_count)
+			#spider2.spider_dead.connect(_check_enemy_count)
+			var spider3 = spiderScene.instantiate()
+			entities.call_deferred("add_child", spider3)
+			#entities.add_child(spider)
+			spider3.global_position = spider_spawn_location_3.global_position
+			#spider3.spider_dead.connect(_check_enemy_count)
 			SoundManager.set_main_loop_parameter(SoundManager.COMBAT_MID)
 			combat = true
-			enemy_count = 2
+			enemy_count = 3
 
 
 func _on_exit_shaft_body_exited(body):
@@ -192,13 +215,13 @@ func _check_enemy_count():
 
 func _on_exit_medical_body_exited(body):
 	if body is Player:
-		SoundManager.set_main_loop_parameter(SoundManager.MAIN_LOOP_GARBLED)
+		#SoundManager.set_main_loop_parameter(SoundManager.MAIN_LOOP_GARBLED)
 		SoundManager.set_footstep_parameter("event:/footsteps_metal")
 
 
 func _on_enter_medical_body_exited(body):
 	if body is Player:
-		SoundManager.set_main_loop_parameter(SoundManager.MAIN_LOOP_GARBLED)
+		#SoundManager.set_main_loop_parameter(SoundManager.MAIN_LOOP_GARBLED)
 		SoundManager.set_footstep_parameter("event:/footsteps_medical")
 		if not GlobalState.encounter4:
 			GlobalState.encounter4 = true
@@ -225,3 +248,27 @@ func _on_event_5_body_exited(body):
 	if body is Player:
 		get_tree().call_group("Trick_Light", "turn_on")
 
+
+func _on_boss_event_body_exited(body):
+	if body is Player and not GlobalState.boss_encounter:
+		GlobalState.boss_encounter = true
+		SoundManager.set_main_loop_parameter(SoundManager.COMBAT_LOW)
+		broodMother = broodMotherScene.instantiate()
+		broodMother.global_position = boss_spawn.global_position
+		entities.add_child(broodMother)
+
+func checkpoint():
+	get_tree().call_group("Enemy", "queue_free")
+	player.global_position = boss_checkpoint.global_position
+	player.health.health = player.health.max_health
+	GlobalState.boss_encounter = false
+	SoundManager.set_main_loop_parameter(SoundManager.MAIN_LOOP_GARBLED)
+
+
+func _on_event_6_body_exited(body):
+	if body is Player and not GlobalState.encounter6:
+		pass
+		#GlobalState.encounter6 = true
+		#var roach: Enemy = roachScene.instantiate()
+		#roach.global_position = roach_spawn.global_position
+		#entities.add_child(roach)

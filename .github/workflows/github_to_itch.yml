@@ -52,12 +52,12 @@ jobs:
   - name: Export Windows Desktop
     run: |
      mkdir -p ./bin
-     ./godot --headless --path ./ --export-release "Windows Desktop" ./bin/The Forgotten.exe
+     ./godot --headless --path ./ --export-release "Windows Desktop" ./bin/The Forgotten.zip
     
   - name: Export macOS
     run: |
      mkdir -p ./bin
-     ./godot --headless --path ./ --export-release "macOS" ./bin/The Forgotten.dmg
+     ./godot --headless --path ./ --export-release "macOS" ./bin/The Forgotten.zip
     
   - name: Export Linux/X11
     run: |

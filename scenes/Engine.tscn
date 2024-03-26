@@ -35,7 +35,7 @@ _data = {
 "default": SubResource("Animation_1nyk1")
 }
 
-[node name="Node2D" type="StaticBody2D"]
+[node name="Engine" type="StaticBody2D"]
 
 [node name="LightOccluder2D" type="LightOccluder2D" parent="."]
 

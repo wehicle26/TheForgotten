@@ -1,0 +1,14 @@
+[remap]
+
+importer="aseprite_wizard.plugin.noop"
+type="PackedDataContainer"
+uid="uid://d03ax0boe3f66"
+path="res://.godot/imported/keycard.aseprite-dee68a1faea6ba40d3d40691fb0f0da2.res"
+
+[deps]
+
+source_file="res://art/item/keycard.aseprite"
+dest_files=["res://.godot/imported/keycard.aseprite-dee68a1faea6ba40d3d40691fb0f0da2.res"]
+
+[params]
+

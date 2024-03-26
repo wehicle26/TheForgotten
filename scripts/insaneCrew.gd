@@ -29,8 +29,8 @@ func _on_interact():
 
 
 func pitch_black():
-	get_tree().call_group("Cryo_Light", "turn_off")
+	get_tree().call_group("Flashlight", "turn_off")
 
 
 func restore_light():
-	get_tree().call_group("Cryo_Light", "turn_on")
+	get_tree().call_group("Flashlight", "turn_on")

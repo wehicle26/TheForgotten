@@ -10,7 +10,7 @@ polygon = PackedVector2Array(20, -3, 20, 9, 19, 9, 19, 10, 18, 10, 18, 11, 17, 1
 [sub_resource type="OccluderPolygon2D" id="OccluderPolygon2D_ky1c8"]
 polygon = PackedVector2Array(-4, -23, -9, -23, -9, -19, -4, -19)
 
-[sub_resource type="CanvasTexture" id="CanvasTexture_inxej"]
+[sub_resource type="CanvasTexture" id="CanvasTexture_nf657"]
 diffuse_texture = ExtResource("2_egvs8")
 normal_texture = ExtResource("4_taa7u")
 
@@ -19,7 +19,6 @@ radius = 12.0
 height = 42.0
 
 [sub_resource type="Animation" id="Animation_7u3y2"]
-length = 0.4
 loop_mode = 1
 tracks/0/type = "value"
 tracks/0/imported = false
@@ -40,7 +39,7 @@ tracks/1/path = NodePath("Sprite2D:frame")
 tracks/1/interp = 1
 tracks/1/loop_wrap = false
 tracks/1/keys = {
-"times": PackedFloat32Array(0, 0.1, 0.2, 0.3),
+"times": PackedFloat32Array(0, 0.25, 0.5, 0.75),
 "transitions": PackedFloat32Array(1, 1, 1, 1),
 "update": 1,
 "values": [0, 1, 2, 1]
@@ -64,7 +63,7 @@ occluder = SubResource("OccluderPolygon2D_ky1c8")
 [node name="Sprite2D" type="Sprite2D" parent="."]
 texture_filter = 1
 position = Vector2(6, 4)
-texture = SubResource("CanvasTexture_inxej")
+texture = SubResource("CanvasTexture_nf657")
 hframes = 2
 vframes = 2
 metadata/_aseprite_wizard_config_ = {

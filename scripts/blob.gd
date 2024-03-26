@@ -37,6 +37,7 @@ func kill(_splat_direction):
 
 func split_blob():
 	hitbox.queue_free()
+	#health.queue_free()
 	sprite_2d.modulate = white
 	#gpu_particles_2d.amount = 64
 	#gpu_particles_2d.emitting = true
@@ -51,21 +52,23 @@ func split_blob():
 	new_blob.current_scale = current_scale
 	new_blob.scale = Vector2(current_scale, current_scale)
 	new_blob.global_position = position + Vector2(15, 0)
-	entities.add_child(new_blob)
-	new_blob.health.health -= 2 * split_count
 	#new_blob.health.max_health -= 2
 	
-	new_blob = blobScene.instantiate()
-	new_blob.split_count = split_count
+	var new_blob2 = blobScene.instantiate()
+	new_blob2.split_count = split_count
 	#current_scale -= .25
-	new_blob.current_scale = current_scale
-	new_blob.scale = Vector2(current_scale, current_scale)
-	new_blob.global_position = position + Vector2(-15, 0)
-	entities.add_child(new_blob)
-	new_blob.health.health -= 2 * split_count
+	new_blob2.current_scale = current_scale
+	new_blob2.scale = Vector2(current_scale, current_scale)
+	new_blob2.global_position = position + Vector2(-15, 0)
 	#new_blob.health.max_health -= 2
 	
 	queue_free()
+	
+	entities.add_child(new_blob)
+	entities.add_child(new_blob2)
+	
+	new_blob.health.health -= 2 * split_count
+	new_blob2.health.health -= 2 * split_count
 
 
 func path_to_player():
@@ -77,7 +80,7 @@ func path_to_player():
 	#velocity += steering_force #* delta
 
 
-func calculate_direction():
+func calculate_direction(reverse):
 	next_path_position = navigation_agent_2d.get_next_path_position()
 	direction = to_local(next_path_position).normalized()
 	sprite_2d.look_at(next_path_position)
@@ -97,12 +100,19 @@ func calculate_direction():
 			else:
 				danger_array[0] = 2
 		i += 1
-	
+
 	var context_array: Array = []
 	i = 0
 	for dir in interest_array:
 		context_array.append(dir - danger_array[i])
 		i += 1
+		
+	var best_value
+	if reverse:
+		best_value = context_array.min()
+	else:
+		best_value = context_array.max()
+
 	var max_value = context_array.max()
 	var best_direction: Vector2  = direction_array[context_array.find(max_value)]
 	velocity = direction * speed

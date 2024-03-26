@@ -5,9 +5,6 @@ extends State
 
 var player: Player
 
-func _ready():
-	pass
-
 
 func enter():
 	player = get_tree().get_first_node_in_group("Player")
