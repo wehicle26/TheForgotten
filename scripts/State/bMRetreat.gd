@@ -7,6 +7,14 @@ class_name BMRetreat
 var player: Player
 var direction
 
+func _ready():
+	enemy.dead.connect(_dead)
+
+
+func _dead():
+	transitioned.emit(self, "BMDead")
+
+
 func enter():
 	player = get_tree().get_first_node_in_group("Player")
 	enemy.speed = enemy.default_speed

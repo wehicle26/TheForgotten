@@ -10,6 +10,11 @@ var retreat: bool = false
 func  _ready():
 	enemy = get_parent().get_parent()
 	enemy.hit_player.connect(_hit_player)
+	enemy.dead.connect(_dead)
+
+
+func _dead():
+	transitioned.emit(self, "BMDead")
 
 
 func enter():
@@ -30,7 +35,7 @@ func enter():
 	var tween = get_tree().create_tween()
 	enemy.speed = enemy.lunge_speed
 	
-	tween.tween_property(enemy, "speed", enemy.default_speed, 0.5).set_trans(Tween.TRANS_BACK)
+	tween.tween_property(enemy, "speed", enemy.default_speed, 3).set_trans(Tween.TRANS_BACK)
 	await tween.finished
 	
 	transitioned.emit(self, "BMRetreat")
@@ -40,7 +45,7 @@ func physics_update(_delta):
 		transitioned.emit(self, "BMRetreat")
 	var _direction = player.global_position - enemy.global_position
 	#enemy.look_at(direction)
-	#enemy.calculate_direction(false)
+	enemy.calculate_direction("follow")
 #
 	#if direction.length() > attack_range:
 		#transitioned.emit(self, "follow")

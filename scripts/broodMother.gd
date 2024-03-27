@@ -2,6 +2,8 @@ extends Enemy
 
 class_name BroodMother
 
+signal dead
+
 var spit_scene: PackedScene = preload("res://scenes/Spit.tscn")
 var egg_scene: PackedScene = preload("res://scenes/Egg.tscn")
 @onready var danger: Node2D = $Danger
@@ -11,6 +13,7 @@ var egg_scene: PackedScene = preload("res://scenes/Egg.tscn")
 #@onready var steer = $Steer
 @onready var state_machine = $StateMachine
 @onready var collision_shape_2d = $CollisionShape2D
+@onready var light = $Light
 
 var berserk = false
 
@@ -71,7 +74,8 @@ func _on_navigation_timer_timeout():
 
 func get_next_attack():
 	if health.health >= 75:
-		return attack_array[0]
+		#return attack_array[0]
+		return attack_array[2]
 	elif health.health < 75 and health.health >= 50:
 		return attack_array.slice(0, 1).pick_random()
 	elif health.health < 50 and health.health >= 25:
@@ -93,7 +97,8 @@ func spit():
 	#spit_proj.global_rotation = global_rotation
 	#spit_proj.global_position = spit_spawn.global_position
 	spit_proj.transform = spit_spawn.global_transform
-	
+	SoundManager.play_custom_sound(global_transform, "event:/bm_spit", 1)
+	light.turn_off()
 	if not berserk:
 		await get_tree().create_timer(randf_range(1, 3)).timeout
 	else:
@@ -102,9 +107,11 @@ func spit():
 
 func kill(_splat_direction):
 	SoundManager.play_custom_sound(global_transform, "event:/blob_splat", 0.8)
-	animation_player.play("Death")
 	await animation_player.animation_finished
-	queue_free() 
+	hitbox.queue_free()
+	dead.emit()
+	move_sound_timer.stop()
+	#queue_free()
 
 
 func get_path_direction():
@@ -124,7 +131,8 @@ func calculate_direction(action):
 	#danger.rotation = 0
 	if is_instance_valid(player):
 		sprite_2d.look_at(player.global_position)
-		#collision_shape_2d.look_at(player.global_position)
+		collision_shape_2d.look_at(player.global_position)
+		collision_shape_2d.rotation += PI/2
 		hitbox.look_at(player.global_position)
 		spit_spawn.look_at(player.global_position)
 
@@ -133,8 +141,9 @@ func calculate_direction(action):
 	var i = 0
 	for dir in direction_array:
 		interest_array.append(direction.dot(dir))
-		#if not action == "follow":
-			#interest_array[i] += strafe_array[i]
+		if not action == "follow":
+			 
+			interest_array[i] += strafe_array[i]
 		i += 1
 	
 	danger_array.resize(8)
@@ -176,6 +185,7 @@ func calculate_direction(action):
 
 func damage():
 	sprite_2d.modulate = red
+	SoundManager.play_custom_sound(global_transform, "event:/bm_screech", 1)
 	var timer = get_tree().create_timer(0.5)
 	await timer.timeout
 	#sprite_2d.material.set_shader_parameter("active", false)

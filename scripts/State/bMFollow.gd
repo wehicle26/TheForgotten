@@ -7,6 +7,14 @@ class_name BMFollow
 var player: Player
 
 
+func _ready():
+	enemy.dead.connect(_dead)
+
+
+func _dead():
+	transitioned.emit(self, "BMDead")
+
+
 func enter():
 	enemy.animation_player.play("Skitter")
 	enemy.move_sound_timer.start()
@@ -23,4 +31,5 @@ func physics_update(_delta):
 	#if direction.length() > 250 and enemy.aggro_timer.is_stopped:
 		#transitioned.emit(self, "idle")
 	if (direction.length() < enemy.attack_range) and enemy.is_player_spotted:
-		transitioned.emit(self, "BMSpit")
+		var next_state: String = enemy.get_next_attack()
+		transitioned.emit(self, next_state)
