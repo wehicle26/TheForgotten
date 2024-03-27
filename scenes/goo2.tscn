@@ -1,0 +1,98 @@
+[gd_scene load_steps=7 format=3 uid="uid://bqog8an22nige"]
+
+[ext_resource type="Texture2D" uid="uid://ct60o202qh5sr" path="res://art/environment/goo2.png" id="1_rn46v"]
+[ext_resource type="Texture2D" uid="uid://b5kv2udwer0qj" path="res://art/environment/goo2_n.png" id="2_reh42"]
+
+[sub_resource type="CanvasTexture" id="CanvasTexture_pvyk8"]
+diffuse_texture = ExtResource("1_rn46v")
+normal_texture = ExtResource("2_reh42")
+
+[sub_resource type="Animation" id="Animation_240ac"]
+length = 0.1
+loop_mode = 1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Sprite2D:visible")
+tracks/0/interp = 1
+tracks/0/loop_wrap = false
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [true]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("Sprite2D:frame")
+tracks/1/interp = 1
+tracks/1/loop_wrap = false
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [0]
+}
+
+[sub_resource type="Animation" id="Animation_5jr1n"]
+length = 0.3
+loop_mode = 1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Sprite2D:visible")
+tracks/0/interp = 1
+tracks/0/loop_wrap = false
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [true]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("Sprite2D:frame")
+tracks/1/interp = 1
+tracks/1/loop_wrap = false
+tracks/1/keys = {
+"times": PackedFloat32Array(0, 0.1, 0.2),
+"transitions": PackedFloat32Array(1, 1, 1),
+"update": 1,
+"values": [1, 2, 3]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_x7wfi"]
+_data = {
+"CLEAN": SubResource("Animation_240ac"),
+"OOZE": SubResource("Animation_5jr1n")
+}
+
+[node name="goo2" type="StaticBody2D"]
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+texture_filter = 1
+texture = SubResource("CanvasTexture_pvyk8")
+hframes = 2
+vframes = 2
+metadata/_aseprite_wizard_config_ = {
+"i_mode": -1,
+"keep_anim_length": false,
+"layer": "",
+"o_ex_p": "",
+"o_folder": "res://art/environment",
+"o_name": "goo2_n",
+"only_visible": true,
+"op_exp": true,
+"player": "AnimationPlayer",
+"source": "res://art/environment/goo2.aseprite"
+}
+
+[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="."]
+polygon = PackedVector2Array(-56, -23, -52, -13, -34, -13, -2, -14, 21, -17, 36, -18, 47, -17, 51, -20, 51, -24, -57, -24)
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+libraries = {
+"": SubResource("AnimationLibrary_x7wfi")
+}
