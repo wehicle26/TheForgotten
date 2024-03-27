@@ -928,6 +928,7 @@ radius = 4.0
 height = 18.0
 
 [node name="Player" type="CharacterBody2D" groups=["Player"]]
+z_index = 6
 y_sort_enabled = true
 collision_layer = 10
 collision_mask = 3
@@ -1017,26 +1018,31 @@ scale = Vector2(0.352431, 0.359375)
 texture = ExtResource("3_p5c8f")
 
 [node name="Invbox" type="Sprite2D" parent="CanvasLayer"]
+visible = false
 position = Vector2(124.5, 168.5)
 scale = Vector2(0.46875, 0.46875)
 texture = ExtResource("4_acot0")
 
 [node name="Invbox2" type="Sprite2D" parent="CanvasLayer"]
+visible = false
 position = Vector2(140.5, 168.5)
 scale = Vector2(0.46875, 0.46875)
 texture = ExtResource("4_acot0")
 
 [node name="Invbox3" type="Sprite2D" parent="CanvasLayer"]
+visible = false
 position = Vector2(156.5, 168.5)
 scale = Vector2(0.46875, 0.46875)
 texture = ExtResource("4_acot0")
 
 [node name="Invbox4" type="Sprite2D" parent="CanvasLayer"]
+visible = false
 position = Vector2(172.5, 168.5)
 scale = Vector2(0.46875, 0.46875)
 texture = ExtResource("4_acot0")
 
 [node name="Invbox5" type="Sprite2D" parent="CanvasLayer"]
+visible = false
 position = Vector2(188.5, 168.5)
 scale = Vector2(0.46875, 0.46875)
 texture = ExtResource("4_acot0")
@@ -1051,7 +1057,6 @@ scale = Vector2(8.76, 5.52)
 color = Color(0.027451, 0.0470588, 0.0470588, 1)
 
 [node name="PlayerCamera" type="Camera2D" parent="."]
-zoom = Vector2(0.5, 0.5)
 script = ExtResource("5_tm3ug")
 
 [node name="Feet" type="AnimationPlayer" parent="."]
@@ -1129,6 +1134,7 @@ player = NodePath("../..")
 shape = SubResource("CapsuleShape2D_4c1uc")
 
 [node name="Hitbox" parent="." node_paths=PackedStringArray("health") instance=ExtResource("10_40kik")]
+collision_layer = 17
 health = NodePath("../Health")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Hitbox"]

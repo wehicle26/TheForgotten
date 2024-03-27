@@ -83,8 +83,9 @@ _data = {
 "Walk": SubResource("Animation_ynrdh")
 }
 
-[node name="Spider" groups=["Spider"] instance=ExtResource("1_y4t55")]
+[node name="Spider" groups=["Enemy", "Spider"] instance=ExtResource("1_y4t55")]
 script = ExtResource("2_hho8a")
+lunge_speed = 150
 attack_range = 40
 
 [node name="CollisionShape2D" parent="Hitbox" index="1"]

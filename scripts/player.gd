@@ -34,10 +34,11 @@ signal unfreeze
 
 const left_click_sprite = preload("res://ui/tile_0077.png")
 const toggle_sprite = preload("res://ui/tile_0123.png")
+const swap_sprite = preload("res://ui/tile_0082.png")
 const CROSSHAIR_004 = preload("res://art/player/crosshair004.png")
 var FlashlightScene: PackedScene = preload("res://scenes/Flashlight.tscn")
 var GunScene: PackedScene = preload("res://scenes/Gun.tscn")
-var main = "res://scenes/Main.tscn"
+var mainScene = "res://scenes/Main.tscn"
 
 var collision: bool = false
 var speed = 0
@@ -84,6 +85,17 @@ func show_tut(tut):
 		tween = get_tree().create_tween()
 		tween.tween_property(h_box_container, "modulate", Color.TRANSPARENT, 3).set_trans(Tween.TRANS_BACK)
 		await tween.finished
+		
+	if tut == "blaster":
+		tut_sprite.texture = swap_sprite
+		label.text = "swap"
+		h_box_container.visible = true
+		var tween = get_tree().create_tween()
+		tween.tween_property(h_box_container, "modulate", Color.WHITE, 3).set_trans(Tween.TRANS_BACK)
+		await tween.finished
+		tween = get_tree().create_tween()
+		tween.tween_property(h_box_container, "modulate", Color.TRANSPARENT, 3).set_trans(Tween.TRANS_BACK)
+		await tween.finished
 
 
 func apply_shake():
@@ -98,10 +110,12 @@ func randomOffset():
 
 
 func _respawn():
-	GlobalState.encounter1 = false
-	GlobalState.encounter2 = false
-	GlobalState.encounter3 = false
-	get_tree().change_scene_to_file(main)
+	if not GlobalState.boss_encounter:
+		GlobalState.reset()
+		get_tree().change_scene_to_file(mainScene)
+	else:
+		var main = get_tree().get_first_node_in_group("Main")
+		main.checkpoint()
 
 
 func _ready():
@@ -178,11 +192,14 @@ func _input(event):
 	#gun.num_bullets = 4
 	#if event.is_action_pressed("5"):
 	#gun.num_bullets = 5
-	if event.is_action_pressed("switch_weapon"):
+	if event.is_action_pressed("switch_weapon") and inventory.blaster:
+		animation_player.play("RESET")
+		gun.hide()
 		if current_weapon == "blaster":
 			current_weapon = "crowbar"
 		else:
 			current_weapon = "blaster"
+		SoundManager.play_custom_sound(global_transform, "event:/weapon_swap", 0.6 )
 	if event.is_action_pressed("flashlight_toggle") and inventory.flashlight:
 		flashlight.toggle()
 
@@ -192,7 +209,11 @@ func get_input():
 	input_dir = Input.get_vector("move_left", "move_right", "move_up", "move_down")
 	velocity = input_dir * speed + knockback
 				
-	if Input.is_action_pressed("shoot") and inventory.blaster and (state_machine.current_state.name == "PlayerShoot" or state_machine.current_state.name == "PlayerWalkShoot"):
+	if Input.is_action_pressed("shoot") and \
+	inventory.blaster and \
+	current_weapon == "blaster" \
+	and (state_machine.current_state.name == "PlayerShoot" or \
+	state_machine.current_state.name == "PlayerWalkShoot"):
 		gun.fire_gun()
 	else:
 		can_shoot = false

@@ -12,7 +12,7 @@ var egg_scene: PackedScene = preload("res://scenes/Egg.tscn")
 @onready var state_machine = $StateMachine
 @onready var collision_shape_2d = $CollisionShape2D
 
-
+var berserk = false
 
 #@onready var line_2d = $Line2D
 @onready var label = $CanvasLayer/Label
@@ -44,12 +44,14 @@ var strafe_array: Array = [
 var best_direction
 var attack_array: Array = [
 	"BMSpit",
-	"BMLay"
+	"BMLay",
+	"BMLunge"
 ]
 
 
 func _on_navigation_timer_timeout():
 	player = get_tree().get_first_node_in_group("Player")
+	make_path()
 	
 	var display_interest = ""
 	var display_danger = ""
@@ -65,31 +67,43 @@ func _on_navigation_timer_timeout():
 	+ str("\nBest Direction: ", best_direction) \
 	+ "\nDistance to player: " + str(int(global_position.distance_to(player.global_position))) \
 	+ str("\nState:  ", state_machine.current_state.name)
-	make_path()
 
 
 func get_next_attack():
-	return attack_array.pick_random()
+	if health.health >= 75:
+		return attack_array[0]
+	elif health.health < 75 and health.health >= 50:
+		return attack_array.slice(0, 1).pick_random()
+	elif health.health < 50 and health.health >= 25:
+		return attack_array.pick_random()
+	else:
+		berserk = true
+		return attack_array.pick_random()
 
 
 func lay():
 	var egg = egg_scene.instantiate()
 	egg.global_position = global_position
-	owner.add_child(egg)
+	get_parent().add_child(egg)
 
 
 func spit():
 	var spit_proj: Spit = spit_scene.instantiate()
-	owner.add_child(spit_proj)
+	get_parent().add_child(spit_proj)
 	#spit_proj.global_rotation = global_rotation
 	#spit_proj.global_position = spit_spawn.global_position
 	spit_proj.transform = spit_spawn.global_transform
 	
-	await get_tree().create_timer(randf_range(1, 3)).timeout
+	if not berserk:
+		await get_tree().create_timer(randf_range(1, 3)).timeout
+	else:
+		await get_tree().create_timer(randf_range(0.5, 1)).timeout
 
 
 func kill(_splat_direction):
 	SoundManager.play_custom_sound(global_transform, "event:/blob_splat", 0.8)
+	animation_player.play("Death")
+	await animation_player.animation_finished
 	queue_free() 
 
 
@@ -144,12 +158,17 @@ func calculate_direction(action):
 		i += 1
 	
 	var best_value = 0
-	#if reverse:
 		#best_value = context_array.min()
 	#else:
 	best_value = context_array.max()
+		
 	best_direction = direction_array[context_array.find(best_value)]
+	
+	if action == "retreat":
+		best_direction = Vector2(-best_direction.x, -best_direction.y)
 	#line_2d.points[1] = best_direction
+	if action == "idle":
+		return
 	velocity = direction * speed
 	var steering_force: Vector2 = (best_direction * speed) - velocity
 	velocity += steering_force
@@ -171,6 +190,8 @@ func _ready():
 	print(direction_array)
 	sprite_2d.modulate = white
 	line_of_sight.player_spotted.connect(_player_spotted)
+	SoundManager.play_custom_sound(global_transform, "event:/boss_spawn", 1)
+	await get_tree().create_timer(7).timeout
 	
 
 

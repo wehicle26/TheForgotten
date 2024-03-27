@@ -6,8 +6,7 @@
 [ext_resource type="Texture2D" uid="uid://uh5m3jdl2yyb" path="res://art/environment/note.png" id="3_e1aj8"]
 [ext_resource type="Texture2D" uid="uid://najit2dw8bk1" path="res://art/environment/note_n.png" id="4_fj0hv"]
 
-[sub_resource type="CanvasTexture" id="CanvasTexture_jknqc"]
-resource_local_to_scene = true
+[sub_resource type="CanvasTexture" id="CanvasTexture_2dchu"]
 diffuse_texture = ExtResource("3_e1aj8")
 normal_texture = ExtResource("4_fj0hv")
 
@@ -20,16 +19,16 @@ action_name = "read"
 
 [node name="Sprite2D" parent="." index="0"]
 texture_filter = 1
-texture = SubResource("CanvasTexture_jknqc")
+texture = SubResource("CanvasTexture_2dchu")
 metadata/_aseprite_wizard_config_ = {
 "i_mode": 1,
 "keep_anim_length": false,
 "layer": "",
 "o_ex_p": "",
 "o_folder": "res://art/environment/",
-"o_name": "note",
+"o_name": "note_n",
 "only_visible": true,
-"op_exp": true,
+"op_exp": false,
 "player": "",
 "source": "res://art/environment/note.aseprite"
 }

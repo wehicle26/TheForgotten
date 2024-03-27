@@ -3,7 +3,7 @@ extends Node2D
 class_name Spit
 
 @export var speed = 700
-@export var knockback_force = 700
+@export var knockback_force = 200
 @export var stun_time = 5
 @onready var gpu_particles_2d = $GPUParticles2D
 

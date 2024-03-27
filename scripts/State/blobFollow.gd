@@ -24,10 +24,9 @@ func enter():
 func physics_update(_delta):
 	var direction = player.global_position - enemy.global_position
 	#enemy.path_to_player()
-	enemy.calculate_direction()
+	enemy.calculate_direction(false)
 
 	if direction.length() > 250 and enemy.aggro_timer.is_stopped:
 		transitioned.emit(self, "BlobIdle")
 	if (direction.length() < enemy.attack_range) and enemy.is_player_spotted:
-		pass
-		#transitioned.emit(self, "attack")
+		transitioned.emit(self, "BlobAttack")

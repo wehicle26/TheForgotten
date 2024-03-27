@@ -14,9 +14,13 @@ func enter():
 	enemy.velocity = Vector2.ZERO
 	
 	enemy.get_node("AnimationPlayer").play("Fly")
-	await get_tree().create_timer(randf_range(1, 3)).timeout
+	if not enemy.berserk:
+		await get_tree().create_timer(randf_range(1, 3)).timeout
+	else:
+		await get_tree().create_timer(randf_range(0.5, 1)).timeout
 	enemy.get_node("AnimationPlayer").play("Spit")
 	enemy.spit()
+	SoundManager.play_custom_sound(enemy.global_transform, "event:/bm_attack", 1)
 	await enemy.get_node("AnimationPlayer").animation_finished
 	
 	transitioned.emit(self, "BMRetreat")

@@ -1,4 +1,4 @@
-[gd_scene load_steps=8 format=3 uid="uid://bv8yf3ytm2yc1"]
+[gd_scene load_steps=10 format=3 uid="uid://bv8yf3ytm2yc1"]
 
 [ext_resource type="Script" path="res://scripts/cryoMachine.gd" id="2_33tf2"]
 [ext_resource type="Texture2D" uid="uid://cwn23onickl1b" path="res://art/environment/cryo_machine.png" id="2_egvs8"]
@@ -10,13 +10,45 @@ polygon = PackedVector2Array(20, -3, 20, 9, 19, 9, 19, 10, 18, 10, 18, 11, 17, 1
 [sub_resource type="OccluderPolygon2D" id="OccluderPolygon2D_ky1c8"]
 polygon = PackedVector2Array(-4, -23, -9, -23, -9, -19, -4, -19)
 
-[sub_resource type="CanvasTexture" id="CanvasTexture_5isoy"]
+[sub_resource type="CanvasTexture" id="CanvasTexture_nf657"]
 diffuse_texture = ExtResource("2_egvs8")
 normal_texture = ExtResource("4_taa7u")
 
 [sub_resource type="CapsuleShape2D" id="CapsuleShape2D_xavja"]
 radius = 12.0
 height = 42.0
+
+[sub_resource type="Animation" id="Animation_7u3y2"]
+loop_mode = 1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Sprite2D:visible")
+tracks/0/interp = 1
+tracks/0/loop_wrap = false
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [true]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("Sprite2D:frame")
+tracks/1/interp = 1
+tracks/1/loop_wrap = false
+tracks/1/keys = {
+"times": PackedFloat32Array(0, 0.25, 0.5, 0.75),
+"transitions": PackedFloat32Array(1, 1, 1, 1),
+"update": 1,
+"values": [0, 1, 2, 1]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_epl6p"]
+_data = {
+"default": SubResource("Animation_7u3y2")
+}
 
 [node name="CryoMachine" type="StaticBody2D"]
 z_index = 5
@@ -30,18 +62,21 @@ occluder = SubResource("OccluderPolygon2D_ky1c8")
 
 [node name="Sprite2D" type="Sprite2D" parent="."]
 texture_filter = 1
-texture = SubResource("CanvasTexture_5isoy")
+position = Vector2(6, 4)
+texture = SubResource("CanvasTexture_nf657")
+hframes = 2
+vframes = 2
 metadata/_aseprite_wizard_config_ = {
-"i_mode": 1,
-"keep_anim_length": false,
+"i_mode": 0,
+"keep_anim_length": true,
 "layer": "",
 "o_ex_p": "",
 "o_folder": "res://art/environment/",
 "o_name": "cryo_machine_n",
 "only_visible": true,
-"op_exp": false,
-"player": "",
-"source": "res://art/environment/cryo_machine.aseprite"
+"op_exp": true,
+"player": "AnimationPlayer",
+"source": "res://art/environment/cryo hummer on my d.aseprite"
 }
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
@@ -56,3 +91,9 @@ shape = SubResource("CapsuleShape2D_xavja")
 [node name="CollisionShape2D3" type="CollisionShape2D" parent="."]
 position = Vector2(-8, -17)
 shape = SubResource("CapsuleShape2D_xavja")
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+libraries = {
+"": SubResource("AnimationLibrary_epl6p")
+}
+autoplay = "default"

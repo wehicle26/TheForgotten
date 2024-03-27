@@ -1,10 +1,10 @@
-[gd_scene load_steps=55 format=3 uid="uid://b71gis6vgkvkg"]
+[gd_scene load_steps=56 format=3 uid="uid://b71gis6vgkvkg"]
 
 [ext_resource type="Script" path="res://scripts/level.gd" id="1_6u7sh"]
 [ext_resource type="PackedScene" uid="uid://bob88w6sefucj" path="res://scenes/Environment.tscn" id="1_halep"]
 [ext_resource type="Script" path="res://scripts/pauseMenu.gd" id="2_dal01"]
-[ext_resource type="Texture2D" uid="uid://cpfwf80v78ypw" path="res://ui/bubble.png" id="2_j5ncj"]
 [ext_resource type="PackedScene" uid="uid://cyj8triea8w13" path="res://scenes/Crowbar.tscn" id="3_ax4cu"]
+[ext_resource type="PackedScene" uid="uid://dt7axemubdd2s" path="res://scenes/Options.tscn" id="3_yt4ky"]
 [ext_resource type="PackedScene" uid="uid://c7u77qm7btd2s" path="res://scenes/CryoBed.tscn" id="4_0fems"]
 [ext_resource type="PackedScene" uid="uid://ch0016cku2p02" path="res://scenes/Light.tscn" id="4_7cj7q"]
 [ext_resource type="PackedScene" uid="uid://ds2pj4x60dosv" path="res://art/item/FlashlightItem.tscn" id="5_6ojie"]
@@ -12,6 +12,8 @@
 [ext_resource type="Texture2D" uid="uid://bs1j2sjkfkrod" path="res://art/environment/lights/wall light2.png" id="5_wy17f"]
 [ext_resource type="Texture2D" uid="uid://cp2ay5o5a8tbb" path="res://art/environment/lights/LightCone_resized.png" id="6_g4f4m"]
 [ext_resource type="PackedScene" uid="uid://dgq8wmrdicq3d" path="res://scenes/Crate.tscn" id="8_74hus"]
+[ext_resource type="PackedScene" uid="uid://d1uvwlrgj3fct" path="res://scenes/Medkit.tscn" id="8_vk42x"]
+[ext_resource type="PackedScene" uid="uid://cvcoeq1w2ndl4" path="res://scenes/Keycard.tscn" id="9_5mm25"]
 [ext_resource type="PackedScene" uid="uid://fcefbjw8babe" path="res://scenes/Forklift.tscn" id="9_rxupm"]
 [ext_resource type="PackedScene" uid="uid://cpu2pabqnow4x" path="res://scenes/BreakableDoor.tscn" id="10_3i61v"]
 [ext_resource type="PackedScene" uid="uid://8bdjhnsaqthg" path="res://scenes/hallway_dead_guy.tscn" id="10_p5tb0"]
@@ -23,7 +25,6 @@
 [ext_resource type="PackedScene" uid="uid://bv8yf3ytm2yc1" path="res://scenes/CryoMachine.tscn" id="16_idydh"]
 [ext_resource type="PackedScene" uid="uid://bo3acd3y8ucuy" path="res://scenes/Eus.tscn" id="17_7u0ol"]
 [ext_resource type="Shader" path="res://shaders/space.gdshader" id="18_ghgnd"]
-[ext_resource type="PackedScene" uid="uid://c3cf160taxu74" path="res://scenes/BroodMother.tscn" id="22_bn7b0"]
 [ext_resource type="Shader" path="res://shaders/glitch.gdshader" id="22_dqfq6"]
 [ext_resource type="Shader" path="res://shaders/vignette.gdshader" id="23_gq8o3"]
 
@@ -50,7 +51,14 @@ b = Vector2(50, 0)
 b = Vector2(0, 45)
 
 [sub_resource type="SegmentShape2D" id="SegmentShape2D_f08v3"]
+resource_local_to_scene = true
 b = Vector2(90, 0)
+
+[sub_resource type="SegmentShape2D" id="SegmentShape2D_m8ttj"]
+b = Vector2(80, 0)
+
+[sub_resource type="SegmentShape2D" id="SegmentShape2D_27tpe"]
+b = Vector2(0, 80)
 
 [sub_resource type="NavigationPolygon" id="NavigationPolygon_x2io3"]
 vertices = PackedVector2Array(462, 156, 462, 302, 388, 302, 274, 188, 274, 142, 388, 50, 238, 142, 238, 82, 274, 82, 274, 50, 434, 4, 434, -262, 494, -262, 494, -124, 526, -92, 526, 92)
@@ -85,20 +93,6 @@ source_geometry_group_name = &"navigation_polygon_source_group"
 vertices = PackedVector2Array(-266, 278, -494, 278, -494, 164, -444, 114, -266, 114)
 polygons = Array[PackedInt32Array]([PackedInt32Array(0, 1, 2, 3, 4)])
 outlines = Array[PackedVector2Array]([PackedVector2Array(-256, 288, -256, 104, -448, 104, -504, 160, -504, 288, -360, 288, -312, 288)])
-source_geometry_mode = 1
-source_geometry_group_name = &"navigation_polygon_source_group"
-
-[sub_resource type="NavigationPolygon" id="NavigationPolygon_txd4j"]
-vertices = PackedVector2Array(-1130, 116, -1220, 206, -1238, 206, -1238, 18, -1130, 18)
-polygons = Array[PackedInt32Array]([PackedInt32Array(0, 1, 2, 3, 4)])
-outlines = Array[PackedVector2Array]([PackedVector2Array(-1248, 8, -1248, 216, -1216, 216, -1120, 120, -1120, 8)])
-source_geometry_mode = 1
-source_geometry_group_name = &"navigation_polygon_source_group"
-
-[sub_resource type="NavigationPolygon" id="NavigationPolygon_ar3qy"]
-vertices = PackedVector2Array(-1138, -102, -1130, -102, -1130, -18, -1194, -18, -1194, -10, -1238, -10, -1238, -206, -1138, -124, -1220, -206)
-polygons = Array[PackedInt32Array]([PackedInt32Array(0, 1, 2, 3), PackedInt32Array(3, 4, 5, 6), PackedInt32Array(7, 0, 3, 6, 8)])
-outlines = Array[PackedVector2Array]([PackedVector2Array(-1248, 0, -1184, 0, -1184, -8, -1120, -8, -1120, -112, -1128, -112, -1128, -128, -1216, -216, -1248, -216)])
 source_geometry_mode = 1
 source_geometry_group_name = &"navigation_polygon_source_group"
 
@@ -233,11 +227,10 @@ shader_parameter/alpha = 1.0
 shader_parameter/inner_radius = 0.0
 shader_parameter/outer_radius = 1.0
 
-[node name="Main" type="Node2D"]
+[node name="Main" type="Node2D" groups=["Main"]]
 script = ExtResource("1_6u7sh")
 
 [node name="DarknessLevel" type="CanvasModulate" parent="." groups=["Darkness"]]
-visible = false
 light_mask = 3
 visibility_layer = 3
 z_index = 10
@@ -249,15 +242,7 @@ layer = 50
 visible = false
 script = ExtResource("2_dal01")
 
-[node name="TextureRect" type="TextureRect" parent="PauseMenu"]
-anchors_preset = 15
-anchor_right = 1.0
-anchor_bottom = 1.0
-offset_right = 8.0
-offset_bottom = 20.0
-grow_horizontal = 2
-grow_vertical = 2
-texture = ExtResource("2_j5ncj")
+[node name="Options" parent="PauseMenu" instance=ExtResource("3_yt4ky")]
 
 [node name="Environment" parent="." instance=ExtResource("1_halep")]
 
@@ -267,16 +252,28 @@ z_index = 5
 [node name="Crowbar" parent="Environment/Items" instance=ExtResource("3_ax4cu")]
 z_index = -2
 material = null
-position = Vector2(129, -37)
+position = Vector2(-602, -203)
 
 [node name="FlashlightItem" parent="Environment/Items" instance=ExtResource("5_6ojie")]
 material = null
-position = Vector2(-1060, 136)
+position = Vector2(-1063, 143)
 rotation = -0.785397
 
 [node name="BlasterItem" parent="Environment/Items" instance=ExtResource("5_bmbqo")]
 material = null
-position = Vector2(153, -4)
+position = Vector2(-283, 513)
+
+[node name="Medkit" parent="Environment/Items" instance=ExtResource("8_vk42x")]
+position = Vector2(18, 180)
+
+[node name="Medkit3" parent="Environment/Items" instance=ExtResource("8_vk42x")]
+position = Vector2(-386, 511)
+
+[node name="Medkit2" parent="Environment/Items" instance=ExtResource("8_vk42x")]
+position = Vector2(174, -140)
+
+[node name="Keycard" parent="Environment/Items" instance=ExtResource("9_5mm25")]
+position = Vector2(-280, -492)
 
 [node name="Inanimate" type="Node2D" parent="Environment" groups=["navigation_polygon_source_group"]]
 
@@ -514,37 +511,62 @@ rotation = -3.14159
 
 [node name="CryoBed" parent="Environment/Interactable" instance=ExtResource("4_0fems")]
 material = null
-position = Vector2(-706, -48)
-rotation = -1.57079
+position = Vector2(-697, -16)
+rotation = -0.000115296
+smashed = true
+
+[node name="CryoBed6" parent="Environment/Interactable" instance=ExtResource("4_0fems")]
+material = null
+position = Vector2(-697, -48)
+rotation = -0.000115296
 
 [node name="CryoBed2" parent="Environment/Interactable" instance=ExtResource("4_0fems")]
 material = null
-position = Vector2(-706, 16)
-rotation = -1.57079
+position = Vector2(-697, 16)
 
 [node name="CryoBed3" parent="Environment/Interactable" instance=ExtResource("4_0fems")]
 material = null
-position = Vector2(-605, 16)
-rotation = 1.57081
+position = Vector2(-615, 16)
+rotation = 3.14159
 
 [node name="CryoBed4" parent="Environment/Interactable" instance=ExtResource("4_0fems")]
 material = null
-position = Vector2(-606, -16)
-rotation = 1.57081
+position = Vector2(-615, -16)
+rotation = 3.14159
 
 [node name="CryoBed5" parent="Environment/Interactable" instance=ExtResource("4_0fems")]
 material = null
-position = Vector2(-607, -48)
-rotation = 1.57081
+position = Vector2(-615, -48)
+rotation = 3.14159
 
 [node name="Note" parent="Environment/Interactable" instance=ExtResource("12_ylmx7")]
 z_index = 4
 material = null
-position = Vector2(-647, -175)
+position = Vector2(-646, -175)
 
 [node name="Note2" parent="Environment/Interactable" instance=ExtResource("12_ylmx7")]
 material = null
 position = Vector2(-506, -180)
+rotation = -0.543868
+
+[node name="Note3" parent="Environment/Interactable" instance=ExtResource("12_ylmx7")]
+material = null
+position = Vector2(-791, -86)
+rotation = -0.543868
+
+[node name="Note4" parent="Environment/Interactable" instance=ExtResource("12_ylmx7")]
+material = null
+position = Vector2(-543, 401)
+rotation = -0.543868
+
+[node name="Note5" parent="Environment/Interactable" instance=ExtResource("12_ylmx7")]
+material = null
+position = Vector2(-103, 325)
+rotation = -0.543868
+
+[node name="Note6" parent="Environment/Interactable" instance=ExtResource("12_ylmx7")]
+material = null
+position = Vector2(176, 140)
 rotation = -0.543868
 
 [node name="EscapePod" parent="Environment/Interactable" instance=ExtResource("14_fifaw")]
@@ -665,6 +687,22 @@ collision_mask = 2
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Triggers/Event5"]
 shape = SubResource("SegmentShape2D_f08v3")
+
+[node name="Event6" type="Area2D" parent="Triggers"]
+position = Vector2(-216, -262)
+collision_layer = 0
+collision_mask = 2
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Triggers/Event6"]
+shape = SubResource("SegmentShape2D_m8ttj")
+
+[node name="BossEvent" type="Area2D" parent="Triggers"]
+position = Vector2(97, -40)
+collision_layer = 0
+collision_mask = 2
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Triggers/BossEvent"]
+shape = SubResource("SegmentShape2D_27tpe")
 
 [node name="Lights" type="Node2D" parent="."]
 position = Vector2(-1045, -100)
@@ -874,9 +912,6 @@ material = null
 position = Vector2(-367, 140)
 rotation = -0.785397
 
-[node name="BroodMother" parent="Entities" instance=ExtResource("22_bn7b0")]
-position = Vector2(318, 39)
-
 [node name="Navigation" type="Node2D" parent="."]
 visible = false
 
@@ -896,12 +931,6 @@ navigation_polygon = SubResource("NavigationPolygon_rqb6j")
 
 [node name="NavigationRegion2D5" type="NavigationRegion2D" parent="Navigation"]
 navigation_polygon = SubResource("NavigationPolygon_q5l1j")
-
-[node name="NavigationRegion2D6" type="NavigationRegion2D" parent="Navigation"]
-navigation_polygon = SubResource("NavigationPolygon_txd4j")
-
-[node name="NavigationRegion2D7" type="NavigationRegion2D" parent="Navigation"]
-navigation_polygon = SubResource("NavigationPolygon_ar3qy")
 
 [node name="NavigationRegion2D9" type="NavigationRegion2D" parent="Navigation"]
 navigation_polygon = SubResource("NavigationPolygon_ls1gp")
@@ -974,14 +1003,20 @@ anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
 
+[node name="BossCheckpoint" type="Marker2D" parent="."]
+position = Vector2(41, 12)
+
 [node name="PlayerSpawnLocation" type="Marker2D" parent="."]
-position = Vector2(125, -13)
+position = Vector2(-651, -11)
 
 [node name="SpiderSpawnLocation" type="Marker2D" parent="."]
 position = Vector2(-850, 189)
 
 [node name="SpiderSpawnLocation2" type="Marker2D" parent="."]
-position = Vector2(-1227, 176)
+position = Vector2(-872, -65)
+
+[node name="SpiderSpawnLocation3" type="Marker2D" parent="."]
+position = Vector2(-1186, 96)
 
 [node name="BlobSpawnLocation" type="Marker2D" parent="."]
 position = Vector2(-495, 326)
@@ -1003,6 +1038,12 @@ position = Vector2(-467, 16)
 
 [node name="CanvasLayer" type="CanvasLayer" parent="."]
 
+[node name="BossSpawn" type="Marker2D" parent="."]
+position = Vector2(399, 140)
+
+[node name="RoachSpawn" type="Marker2D" parent="."]
+position = Vector2(-401, -496)
+
 [connection signal="body_exited" from="Triggers/ExitCryo" to="." method="_on_exit_cryo_body_exited"]
 [connection signal="body_exited" from="Triggers/EnterCryo" to="." method="_on_enter_cryo_body_exited"]
 [connection signal="body_exited" from="Triggers/Event1" to="." method="_on_event_1_body_exited"]
@@ -1016,4 +1057,6 @@ position = Vector2(-467, 16)
 [connection signal="body_exited" from="Triggers/EnterMedical" to="." method="_on_enter_medical_body_exited"]
 [connection signal="body_exited" from="Triggers/EnterBathroom" to="." method="_on_enter_bathroom_body_exited"]
 [connection signal="body_exited" from="Triggers/ExitBathroom" to="." method="_on_exit_bathroom_body_exited"]
-[connection signal="body_exited" from="Triggers/Event5" to="." method="_on_event_2_body_exited"]
+[connection signal="body_exited" from="Triggers/Event5" to="." method="_on_event_5_body_exited"]
+[connection signal="body_exited" from="Triggers/Event6" to="." method="_on_event_6_body_exited"]
+[connection signal="body_exited" from="Triggers/BossEvent" to="." method="_on_boss_event_body_exited"]

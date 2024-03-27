@@ -7,6 +7,7 @@ class_name BMIdle
 var player: Player
 var move_direction: Vector2
 var wander_time: float
+@onready var line_of_sight = $"../../LineOfSight"
 
 func enter():
 	player = get_tree().get_first_node_in_group("Player")
@@ -15,13 +16,12 @@ func enter():
 	#transitioned.emit(self, "BMRetreat")
 
 func physics_update(_delta):
-	pass
-	#var _direction = player.global_position - enemy.global_position
-	#enemy.look_at(direction)
-	#enemy.calculate_direction(true)
+	player = get_tree().get_first_node_in_group("Player")
+	var direction = player.global_position - enemy.global_position
+	enemy.calculate_direction("idle")
 #
-	#if direction.length() > attack_range:
-		#transitioned.emit(self, "follow")
+	if direction.length() < enemy.attack_range and enemy.is_player_spotted:
+		transitioned.emit(self, "BMFollow")
 
 
 func randomize_wander():

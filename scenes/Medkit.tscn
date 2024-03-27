@@ -1,0 +1,38 @@
+[gd_scene load_steps=6 format=3 uid="uid://d1uvwlrgj3fct"]
+
+[ext_resource type="Script" path="res://scripts/medkit.gd" id="1_f8x5k"]
+[ext_resource type="Texture2D" uid="uid://bmygfiefy1jr7" path="res://art/item/medkit.png" id="1_vftut"]
+[ext_resource type="Texture2D" uid="uid://bmoyw0lie4hpa" path="res://art/item/medkit_n.png" id="2_v271x"]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_jlyve"]
+radius = 17.0
+
+[sub_resource type="CanvasTexture" id="CanvasTexture_80ri7"]
+diffuse_texture = ExtResource("1_vftut")
+normal_texture = ExtResource("2_v271x")
+
+[node name="Medkit" type="Area2D"]
+collision_layer = 0
+collision_mask = 2
+script = ExtResource("1_f8x5k")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+shape = SubResource("CircleShape2D_jlyve")
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+texture_filter = 1
+texture = SubResource("CanvasTexture_80ri7")
+metadata/_aseprite_wizard_config_ = {
+"i_mode": 1,
+"keep_anim_length": false,
+"layer": "",
+"o_ex_p": "",
+"o_folder": "res://art/item/",
+"o_name": "medkit_n",
+"only_visible": true,
+"op_exp": false,
+"player": "",
+"source": "res://art/item/medkit.aseprite"
+}
+
+[connection signal="body_entered" from="." to="." method="_on_body_entered"]

@@ -1,0 +1,39 @@
+[gd_scene load_steps=8 format=3 uid="uid://cvcoeq1w2ndl4"]
+
+[ext_resource type="PackedScene" uid="uid://drc50lwybh48x" path="res://scenes/Item.tscn" id="1_fkx5q"]
+[ext_resource type="Script" path="res://scripts/keycard.gd" id="2_jifao"]
+[ext_resource type="Resource" uid="uid://ok4ofegw578y" path="res://art/item/keycard.tres" id="3_0cehf"]
+[ext_resource type="Texture2D" uid="uid://o2xc478ygqm7" path="res://art/item/keycard.png" id="3_umaj0"]
+[ext_resource type="Texture2D" uid="uid://dggeg5bmm1kse" path="res://art/item/keycard_n.png" id="4_a42b5"]
+
+[sub_resource type="CanvasTexture" id="CanvasTexture_8f3nd"]
+diffuse_texture = ExtResource("3_umaj0")
+normal_texture = ExtResource("4_a42b5")
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_7betu"]
+resource_local_to_scene = true
+radius = 25.02
+
+[node name="Keycard" instance=ExtResource("1_fkx5q")]
+script = ExtResource("2_jifao")
+itemRes = ExtResource("3_0cehf")
+action_name = "pick up"
+
+[node name="Sprite2D" parent="." index="0"]
+texture_filter = 1
+texture = SubResource("CanvasTexture_8f3nd")
+metadata/_aseprite_wizard_config_ = {
+"i_mode": 1,
+"keep_anim_length": false,
+"layer": "",
+"o_ex_p": "",
+"o_folder": "res://art/item/",
+"o_name": "keycard",
+"only_visible": true,
+"op_exp": false,
+"player": "",
+"source": "res://art/item/keycard.aseprite"
+}
+
+[node name="CollisionShape2D" parent="." index="1"]
+shape = SubResource("CircleShape2D_7betu")
