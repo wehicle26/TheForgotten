@@ -37,6 +37,7 @@
 [ext_resource type="PackedScene" uid="uid://ct7ourn5qoi1d" path="res://scenes/goo 4.tscn" id="34_6apeg"]
 [ext_resource type="PackedScene" uid="uid://c3degpyqcf8sx" path="res://scenes/goo5.tscn" id="35_457ab"]
 [ext_resource type="PackedScene" uid="uid://dg0ww4sifttdq" path="res://scenes/goo6.tscn" id="36_82x1q"]
+[ext_resource type="PackedScene" uid="uid://b22lifd4o6b78" path="res://scenes/bio bubbler.tscn" id="37_sdbie"]
 
 [sub_resource type="SegmentShape2D" id="SegmentShape2D_xjm62"]
 resource_local_to_scene = true
@@ -540,6 +541,12 @@ position = Vector2(-577, 17)
 
 [node name="goo5" parent="Environment/Inanimate" instance=ExtResource("35_457ab")]
 position = Vector2(-480, -64)
+
+[node name="goo6" parent="Environment/Inanimate" instance=ExtResource("36_82x1q")]
+position = Vector2(-528, -224)
+
+[node name="bio bubbler" parent="Environment/Inanimate" instance=ExtResource("37_sdbie")]
+position = Vector2(-456, 424)
 
 [node name="Interactable" type="Node2D" parent="Environment"]
 
@@ -1065,7 +1072,7 @@ grow_vertical = 2
 position = Vector2(41, 12)
 
 [node name="PlayerSpawnLocation" type="Marker2D" parent="."]
-position = Vector2(-184, -68)
+position = Vector2(-412, 407)
 
 [node name="SpiderSpawnLocation" type="Marker2D" parent="."]
 position = Vector2(-850, 189)
@@ -1129,9 +1136,6 @@ position = Vector2(144, -97)
 [node name="Node2D8" parent="." instance=ExtResource("19_i3gnf")]
 position = Vector2(228, 112)
 rotation = -1.57079
-
-[node name="goo6" parent="." instance=ExtResource("36_82x1q")]
-position = Vector2(-528, -256)
 
 [connection signal="body_exited" from="Triggers/ExitCryo" to="." method="_on_exit_cryo_body_exited"]
 [connection signal="body_exited" from="Triggers/EnterCryo" to="." method="_on_enter_cryo_body_exited"]
