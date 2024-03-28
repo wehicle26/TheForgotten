@@ -3,7 +3,7 @@
 [ext_resource type="Script" path="res://scripts/spit.gd" id="1_r6mvs"]
 [ext_resource type="Texture2D" uid="uid://d4n3udpgqatid" path="res://art/bullet/orb_27__65x65.png" id="1_sgbtn"]
 [ext_resource type="Texture2D" uid="uid://bif8mpc8de0q" path="res://art/bullet/circle_05.png" id="2_wy54j"]
-[ext_resource type="Texture2D" uid="uid://dgccom3njtb52" path="res://art/bullet/trace_06_rotated.png" id="3_jmtsh"]
+[ext_resource type="Texture2D" uid="uid://byvpydf2m4tf3" path="res://art/bullet/trace_05_rotated.png" id="4_il4xd"]
 [ext_resource type="Script" path="res://scripts/trail.gd" id="4_u0vwx"]
 [ext_resource type="PackedScene" uid="uid://cjwohg5ed45jj" path="res://scenes/Hitbox.tscn" id="5_ybtxs"]
 [ext_resource type="PackedScene" uid="uid://ch0016cku2p02" path="res://scenes/Light.tscn" id="7_a8r8y"]
@@ -75,7 +75,8 @@ color_ramp = SubResource("GradientTexture1D_r5jyx")
 alpha_curve = SubResource("CurveTexture_opqqs")
 
 [sub_resource type="Gradient" id="Gradient_tjhg4"]
-colors = PackedColorArray(1, 0.164706, 0.121569, 1, 1, 1, 1, 0)
+offsets = PackedFloat32Array(0, 0.179592, 0.465306, 0.677551, 1)
+colors = PackedColorArray(0.815686, 0.854902, 0.568627, 1, 0.658824, 0.792157, 0.345098, 1, 0.458824, 0.654902, 0.262745, 1, 0.27451, 0.509804, 0.196078, 1, 0.145098, 0.337255, 0.180392, 1)
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_gpb2r"]
 radius = 28.6356
@@ -109,9 +110,10 @@ randomness = 0.31
 [node name="Trail" type="Line2D" parent="."]
 width = 15.0
 gradient = SubResource("Gradient_tjhg4")
-texture = ExtResource("3_jmtsh")
+texture = ExtResource("4_il4xd")
 texture_mode = 2
 script = ExtResource("4_u0vwx")
+length = 300
 
 [node name="Hitbox" parent="." instance=ExtResource("5_ybtxs")]
 scale = Vector2(0.125, 0.125)

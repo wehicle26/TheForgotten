@@ -6,12 +6,6 @@ class_name BlobRetreat
 
 var player: Player
 
-func _split():
-	transitioned.emit(self, "blobSplit")
-
-
-func _ready():
-	enemy.split.connect(_split)
 
 func enter():
 	player = get_tree().get_first_node_in_group("Player")

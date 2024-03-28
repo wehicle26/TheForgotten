@@ -5,38 +5,38 @@
 [node name="N" type="RayCast2D" parent="."]
 rotation = -3.14159
 target_position = Vector2(0, 30)
-collision_mask = 3
+collision_mask = 512
 
 [node name="NE" type="RayCast2D" parent="."]
 rotation = -2.3562
 target_position = Vector2(0, 30)
-collision_mask = 3
+collision_mask = 512
 
 [node name="E" type="RayCast2D" parent="."]
 rotation = -1.5708
 target_position = Vector2(0, 30)
-collision_mask = 3
+collision_mask = 512
 
 [node name="SE" type="RayCast2D" parent="."]
 rotation = -0.785395
 target_position = Vector2(0, 30)
-collision_mask = 3
+collision_mask = 512
 
 [node name="S" type="RayCast2D" parent="."]
 target_position = Vector2(0, 30)
-collision_mask = 3
+collision_mask = 512
 
 [node name="SW" type="RayCast2D" parent="."]
 rotation = 0.785398
 target_position = Vector2(0, 30)
-collision_mask = 3
+collision_mask = 512
 
 [node name="W" type="RayCast2D" parent="."]
 rotation = 1.5708
 target_position = Vector2(0, 30)
-collision_mask = 3
+collision_mask = 512
 
 [node name="NW" type="RayCast2D" parent="."]
 rotation = -3.92699
 target_position = Vector2(0, 30)
-collision_mask = 3
+collision_mask = 512

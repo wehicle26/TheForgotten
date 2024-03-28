@@ -20,6 +20,8 @@ var berserk = false
 #@onready var line_2d = $Line2D
 @onready var label = $CanvasLayer/Label
 
+
+var arena_center = Vector2(296, -14)
 var interest_array: Array = []
 var danger_array = []
 var direction_array = [
@@ -142,7 +144,6 @@ func calculate_direction(action):
 	for dir in direction_array:
 		interest_array.append(direction.dot(dir))
 		if not action == "follow":
-			 
 			interest_array[i] += strafe_array[i]
 		i += 1
 	

@@ -122,7 +122,7 @@ func _on_event_1_body_exited(body):
 		SoundManager.play_custom_sound(player.global_transform, "event:/stinger1", 0.9)
 		glitch.visible = true
 		get_tree().call_group("goo", "show_goo")
-		await get_tree().create_timer(5).timeout
+		await get_tree().create_timer(16).timeout
 		glitch.visible = false
 		get_tree().call_group("goo", "hide_goo")
 		get_tree().call_group("Hallway_Light", "turn_off")

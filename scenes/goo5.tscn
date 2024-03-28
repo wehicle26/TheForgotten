@@ -1,5 +1,6 @@
-[gd_scene load_steps=6 format=3 uid="uid://c3degpyqcf8sx"]
+[gd_scene load_steps=7 format=3 uid="uid://c3degpyqcf8sx"]
 
+[ext_resource type="Script" path="res://scripts/goo3.gd" id="1_ow5oi"]
 [ext_resource type="Texture2D" uid="uid://0c7yfyu8yshw" path="res://art/environment/goo5.png" id="1_oyk67"]
 [ext_resource type="Texture2D" uid="uid://cg52u23ljg38f" path="res://art/environment/goo5_n.png" id="2_od802"]
 
@@ -40,7 +41,8 @@ _data = {
 "default": SubResource("Animation_4ee8t")
 }
 
-[node name="goo5" type="StaticBody2D"]
+[node name="goo5" type="Node2D" groups=["goo"]]
+script = ExtResource("1_ow5oi")
 
 [node name="Sprite2D" type="Sprite2D" parent="."]
 texture_filter = 1
