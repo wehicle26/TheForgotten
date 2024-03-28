@@ -1160,6 +1160,11 @@ one_shot = true
 [node name="IdleTimer" type="Timer" parent="."]
 one_shot = true
 
+[node name="RayCast2D2" type="RayCast2D" parent="."]
+position = Vector2(9, 0)
+target_position = Vector2(0, -322)
+collision_mask = 256
+
 [connection signal="area_entered" from="Hitbox" to="." method="_on_hitbox_area_entered"]
 [connection signal="body_entered" from="Hitbox" to="." method="_on_hitbox_body_entered"]
 [connection signal="area_entered" from="CrowbarHitbox" to="." method="_on_crowbar_hitbox_area_entered"]

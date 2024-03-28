@@ -12,7 +12,7 @@ func enter():
 	enemy.velocity = Vector2.ZERO
 	enemy.split_blob()
 	
-	transitioned.emit(self, "blobFollow")
+	#transitioned.emit(self, "blobFollow")
 
 func physics_update(_delta):
 	pass

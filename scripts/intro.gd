@@ -41,7 +41,7 @@ func _input(event):
 		print(hit_count)
 		play_let_me_out()
 		apply_shake()
-		await get_tree().create_timer(.3).timeout
+		await get_tree().create_timer(.15).timeout
 		sprite_2d.visible = true
 		sprite_2d.frame = hit_count
 		hit_count += 1

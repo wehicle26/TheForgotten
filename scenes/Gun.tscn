@@ -236,7 +236,7 @@ animations = [{
 }]
 
 [sub_resource type="SegmentShape2D" id="SegmentShape2D_l3ugm"]
-b = Vector2(0, -200)
+b = Vector2(0, -300)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_ix7rh"]
 atlas = ExtResource("1_137mn")
@@ -328,12 +328,8 @@ animation = &"shoot"
 [node name="RayCast2D" type="RayCast2D" parent="BulletSpawn"]
 visible = false
 enabled = false
-target_position = Vector2(0, -200)
+target_position = Vector2(0, -300)
 collide_with_areas = true
-
-[node name="RayCast2D2" type="RayCast2D" parent="BulletSpawn"]
-target_position = Vector2(0, -200)
-collision_mask = 256
 
 [node name="LaserHitbox" type="Area2D" parent="BulletSpawn"]
 

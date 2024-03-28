@@ -20,6 +20,8 @@ func _ready():
 func _on_back_button_pressed():
 	SoundManager.play_custom_sound(null, "event:/ui_release", 0.2)
 	GlobalState.master_volume = master_volume_slider.value
+	GlobalState.music_volume = music_volume_slider.value
+	GlobalState.sfx_volume = sfx_volume_slider.value
 	if not GlobalState.game_running:
 		get_tree().change_scene_to_file(ui)
 	else:

@@ -9,6 +9,14 @@ var move_direction: Vector2
 var wander_time: float
 @onready var line_of_sight = $"../../LineOfSight"
 
+func _ready():
+	enemy.dead.connect(_dead)
+
+
+func _dead():
+	transitioned.emit(self, "BMDead")
+
+
 func enter():
 	player = get_tree().get_first_node_in_group("Player")
 	enemy.speed = 25

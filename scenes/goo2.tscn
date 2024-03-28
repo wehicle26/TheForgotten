@@ -1,5 +1,6 @@
-[gd_scene load_steps=7 format=3 uid="uid://bqog8an22nige"]
+[gd_scene load_steps=8 format=3 uid="uid://bqog8an22nige"]
 
+[ext_resource type="Script" path="res://scripts/goo1.gd" id="1_40mcv"]
 [ext_resource type="Texture2D" uid="uid://ct60o202qh5sr" path="res://art/environment/goo2.png" id="1_rn46v"]
 [ext_resource type="Texture2D" uid="uid://b5kv2udwer0qj" path="res://art/environment/goo2_n.png" id="2_reh42"]
 
@@ -69,7 +70,9 @@ _data = {
 "OOZE": SubResource("Animation_5jr1n")
 }
 
-[node name="goo2" type="StaticBody2D"]
+[node name="goo2" type="StaticBody2D" groups=["goo"]]
+z_index = 5
+script = ExtResource("1_40mcv")
 
 [node name="Sprite2D" type="Sprite2D" parent="."]
 texture_filter = 1

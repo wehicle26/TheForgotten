@@ -100,11 +100,16 @@ diffuse_texture = ExtResource("3_aa0a7")
 normal_texture = ExtResource("4_a22o2")
 
 [node name="Blob" groups=["Blob", "Enemy"] instance=ExtResource("1_cgsu8")]
+collision_layer = 2
 script = ExtResource("2_gvefa")
+lunge_speed = 100
 
 [node name="CollisionShape2D" parent="Hitbox" index="1"]
 visible = true
 shape = SubResource("CircleShape2D_5vkyc")
+
+[node name="Health" parent="." index="3"]
+max_health = 20
 
 [node name="CollisionShape2D" parent="." index="4"]
 shape = SubResource("CircleShape2D_f1vm1")
@@ -158,6 +163,31 @@ enemy = NodePath("../..")
 [node name="GPUParticles2D" type="GPUParticles2D" parent="." index="11"]
 
 [node name="Danger" parent="." index="12" instance=ExtResource("11_re03d")]
+
+[node name="N" parent="Danger" index="0"]
+target_position = Vector2(0, 20)
+
+[node name="NE" parent="Danger" index="1"]
+target_position = Vector2(0, 25)
+
+[node name="E" parent="Danger" index="2"]
+target_position = Vector2(0, 20)
+
+[node name="SE" parent="Danger" index="3"]
+target_position = Vector2(0, 25)
+collision_mask = 2
+
+[node name="S" parent="Danger" index="4"]
+target_position = Vector2(0, 20)
+
+[node name="SW" parent="Danger" index="5"]
+target_position = Vector2(0, 25)
+
+[node name="W" parent="Danger" index="6"]
+target_position = Vector2(0, 20)
+
+[node name="NW" parent="Danger" index="7"]
+target_position = Vector2(0, 25)
 
 [node name="Label" type="Label" parent="." index="13"]
 visible = false

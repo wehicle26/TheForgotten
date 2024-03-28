@@ -5,13 +5,6 @@ extends State
 
 var player: Player
 
-func _split():
-	transitioned.emit(self, "blobSplit")
-
-
-func _ready():
-	enemy.split.connect(_split)
-
 
 func enter():
 	enemy.speed = enemy.default_speed

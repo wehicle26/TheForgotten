@@ -17,7 +17,7 @@ enum { PROLOGUE, LEVEL_1 }
 @onready var roach_spawn = $RoachSpawn
 @onready var boss_spawn = $BossSpawn
 @onready var boss_checkpoint = $BossCheckpoint
-
+@onready var glitch = $Glitch
 
 
 var PlayerScene: PackedScene = preload("res://scenes/Player.tscn")
@@ -120,10 +120,9 @@ func _on_event_1_body_exited(body):
 		player.unfreeze_player()
 		SoundManager.stop_main_loop()
 		SoundManager.play_custom_sound(player.global_transform, "event:/stinger1", 0.9)
-		var glitch: CanvasLayer = get_tree().get_first_node_in_group("Glitch")
 		glitch.visible = true
 		get_tree().call_group("goo", "show_goo")
-		await get_tree().create_timer(5).timeout
+		await get_tree().create_timer(16).timeout
 		glitch.visible = false
 		get_tree().call_group("goo", "hide_goo")
 		get_tree().call_group("Hallway_Light", "turn_off")
@@ -163,7 +162,7 @@ func _on_drop_pods_body_exited(body):
 	if body is Player:
 		if not GlobalState.dialogue4:
 				GlobalState.dialogue4 = true
-				DialogueManager.start_passive_dialogue(player.global_position, ["A single functional escape pod..."])
+				#DialogueManager.start_passive_dialogue(player.global_position, ["A single functional escape pod..."])
 				SoundManager.set_main_loop_parameter(SoundManager.COMBAT_LOW)
 
 
@@ -189,6 +188,13 @@ func _on_event_2_body_exited(body):
 			#spider3.spider_dead.connect(_check_enemy_count)
 			SoundManager.set_main_loop_parameter(SoundManager.COMBAT_MID)
 			combat = true
+			var spiderLight: Light = get_tree().get_first_node_in_group("SpiderLight")
+			get_tree().call_group("Cargo_Light", "turn_off")
+			await get_tree().create_timer(2).timeout
+			spiderLight.turn_on()
+			glitch.visible = true
+			await get_tree().create_timer(2).timeout
+			glitch.visible = false
 			enemy_count = 3
 
 
@@ -261,8 +267,9 @@ func checkpoint():
 	get_tree().call_group("Enemy", "queue_free")
 	player.global_position = boss_checkpoint.global_position
 	player.health.health = player.health.max_health
+	player.health.healthChanged.emit()
 	GlobalState.boss_encounter = false
-	SoundManager.set_main_loop_parameter(SoundManager.MAIN_LOOP_GARBLED)
+	#SoundManager.set_main_loop_parameter(SoundManager.MAIN_LOOP_GARBLED)
 
 
 func _on_event_6_body_exited(body):

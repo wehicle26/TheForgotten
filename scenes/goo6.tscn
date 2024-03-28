@@ -1,5 +1,6 @@
-[gd_scene load_steps=6 format=3 uid="uid://dg0ww4sifttdq"]
+[gd_scene load_steps=7 format=3 uid="uid://dg0ww4sifttdq"]
 
+[ext_resource type="Script" path="res://scripts/goo3.gd" id="1_3pop1"]
 [ext_resource type="Texture2D" uid="uid://baehu25vnmj21" path="res://art/environment/goo6.png" id="1_dthhc"]
 [ext_resource type="Texture2D" uid="uid://c5lh4alvstjwn" path="res://art/environment/goo6_n.png" id="1_ltkfb"]
 
@@ -40,7 +41,8 @@ _data = {
 "default": SubResource("Animation_rmmfv")
 }
 
-[node name="goo6" type="StaticBody2D"]
+[node name="goo6" type="Node2D"]
+script = ExtResource("1_3pop1")
 
 [node name="Sprite2D" type="Sprite2D" parent="."]
 texture_filter = 1

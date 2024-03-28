@@ -31,6 +31,7 @@ signal unfreeze
 @onready var max_Health: int = health.max_health
 @onready var gun = $Gun
 @onready var canvas_layer = $CanvasLayer
+@onready var ray_cast_2d_2 = $RayCast2D2
 
 const left_click_sprite = preload("res://ui/tile_0077.png")
 const toggle_sprite = preload("res://ui/tile_0123.png")
@@ -240,6 +241,7 @@ func _lower_arm():
 func _on_crowbar_hitbox_area_entered(area):
 	if area is Hitbox:
 		var attack = Attack.new()
+		attack.attack_type = "crowbar"
 		attack.attack_damage = attack_damage
 		attack.knockback_force = knockback_force
 		attack.attack_position = global_position

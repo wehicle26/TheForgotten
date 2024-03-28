@@ -10,8 +10,8 @@ signal out_of_ammo
 @onready var muzzle_flash = $BulletSpawn/MuzzleFlash
 @onready var line_2d = $BulletSpawn/Line2D
 @onready var ray_cast_2d = $BulletSpawn/RayCast2D
-@onready var ray_cast_2d_2 = $BulletSpawn/RayCast2D2
 @onready var laser_hitbox = $BulletSpawn/LaserHitbox
+@onready var collision_shape_2d = $BulletSpawn/LaserHitbox/CollisionShape2D
 @onready var gpu_particles_2d = $BulletSpawn/GPUParticles2D
 @onready var animated_sprite_2d = $AnimatedSprite2D
 @onready var reload_timer = $ReloadTimer
@@ -47,7 +47,7 @@ func _process(_delta):
 
 
 func _physics_process(_delta):
-	collision_point = ray_cast_2d_2.get_collision_point()
+	collision_point = player.ray_cast_2d_2.get_collision_point()
 		
 		#if ray_cast_2d.is_colliding() and ray_cast_2d.get_collider() is Hitbox:
 			#var attack = Attack.new()
@@ -115,10 +115,13 @@ func shoot_laser():
 	#line_2d.rotation = -PI/2
 	line_2d.clear_points()
 	line_2d.add_point(ray_cast_2d.position)
-	if ray_cast_2d_2.is_colliding():
+	if player.ray_cast_2d_2.is_colliding():
 		line_2d.add_point(to_local(collision_point))
+		collision_shape_2d.shape.b = to_local(collision_point)
+		
 	else:
-		line_2d.add_point(Vector2(0, -200))
+		line_2d.add_point(Vector2(0, -300))
+		collision_shape_2d.shape.b.y = -300
 		
 	beam_speed = randf_range(0.4, 0.8)
 	beam_wobble = randf_range(0.05, 0.2)
@@ -140,6 +143,7 @@ func shoot_laser():
 	for area in laser_hitbox.get_overlapping_areas():
 		if area is Hitbox:
 			var attack = Attack.new()
+			attack.attack_type = "blaster"
 			attack.attack_damage = attack_damage
 			attack.knockback_force = knockback_force
 			attack.attack_position = global_position
