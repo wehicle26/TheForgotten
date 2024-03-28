@@ -142,6 +142,7 @@ func play_custom_sound(transform, custom_event, volume, pitch: float = 1):
 	new_event.set_volume(volume)
 	new_event.set_pitch(pitch)
 	new_event.start()
+	return new_event
 
 
 func play_eus_sound():

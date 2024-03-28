@@ -2,13 +2,13 @@ extends Enemy
 
 class_name Blob
 
-signal split
 signal blob_dead
 
 @onready var danger: Node2D = $Danger
 @onready var hitbox = $Hitbox
 @onready var health = $Health
 @onready var label = $Label
+@onready var state_machine = $StateMachine
 
 var split_count = 0
 var current_scale = 1
@@ -29,14 +29,16 @@ var direction_array = [
 func kill(_splat_direction):
 	SoundManager.play_custom_sound(global_transform, "event:/blob_splat", 0.8)
 	if split_count < 2:
-		split.emit()
+		split_blob()
 		split_count += 1
 	else:
 		queue_free()
 		blob_dead.emit()
 
 func split_blob():
-	hitbox.queue_free()
+	hitbox.monitoring = false
+	speed = 0
+	velocity = Vector2.ZERO
 	#health.queue_free()
 	sprite_2d.modulate = white
 	#gpu_particles_2d.amount = 64
@@ -52,7 +54,7 @@ func split_blob():
 	new_blob.current_scale = current_scale
 	new_blob.scale = Vector2(current_scale, current_scale)
 	new_blob.global_position = position + Vector2(15, 0)
-	#new_blob.health.max_health -= 2
+	#new_blob.health.health -= 5
 	
 	var new_blob2 = blobScene.instantiate()
 	new_blob2.split_count = split_count
@@ -60,7 +62,7 @@ func split_blob():
 	new_blob2.current_scale = current_scale
 	new_blob2.scale = Vector2(current_scale, current_scale)
 	new_blob2.global_position = position + Vector2(-15, 0)
-	#new_blob.health.max_health -= 2
+	#new_blob2.health.health -= 5
 	
 	queue_free()
 	

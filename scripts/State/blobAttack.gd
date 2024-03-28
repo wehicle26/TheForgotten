@@ -6,14 +6,10 @@ extends State
 var player: Player
 var retreat: bool = false
 
-func _split():
-	transitioned.emit(self, "blobSplit")
-
 
 func  _ready():
 	enemy = get_parent().get_parent()
 	enemy.hit_player.connect(_hit_player)
-	enemy.split.connect(_split)
 
 
 func enter():
@@ -31,7 +27,7 @@ func enter():
 	var tween = get_tree().create_tween()
 	enemy.speed = enemy.lunge_speed
 	
-	tween.tween_property(enemy, "speed", enemy.default_speed, 0.5).set_trans(Tween.TRANS_BACK)
+	tween.tween_property(enemy, "speed", enemy.default_speed, 1).set_trans(Tween.TRANS_BACK)
 	await tween.finished
 	
 	transitioned.emit(self, "BlobRetreat")

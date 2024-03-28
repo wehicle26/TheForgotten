@@ -10,7 +10,7 @@ func _ready():
 	lines = [
 	"Can't... take this... anymore...",
 	]
-
+	SoundManager.play_custom_sound(global_transform, "event:/insane_breathe", 0.4)
 	interact = Callable(self, "_on_interact")
 	SoundManager.inittialize_speech_sound(self)
 

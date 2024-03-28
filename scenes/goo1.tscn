@@ -1,6 +1,7 @@
-[gd_scene load_steps=7 format=3 uid="uid://bjdo168oeu7y7"]
+[gd_scene load_steps=8 format=3 uid="uid://bjdo168oeu7y7"]
 
 [ext_resource type="Texture2D" uid="uid://pf6tfuq45i7k" path="res://art/environment/goo1.png" id="1_e2mib"]
+[ext_resource type="Script" path="res://scripts/goo1.gd" id="1_xeuab"]
 [ext_resource type="Texture2D" uid="uid://dsjy8p3bjb2eo" path="res://art/environment/goo1_n.png" id="2_eobbi"]
 
 [sub_resource type="CanvasTexture" id="CanvasTexture_i7dxf"]
@@ -69,7 +70,8 @@ _data = {
 "OOZE": SubResource("Animation_kd32v")
 }
 
-[node name="Node2D" type="StaticBody2D"]
+[node name="Goo1" type="StaticBody2D" groups=["goo"]]
+script = ExtResource("1_xeuab")
 
 [node name="LightOccluder2D" type="LightOccluder2D" parent="."]
 
