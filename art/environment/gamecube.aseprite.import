@@ -1,0 +1,14 @@
+[remap]
+
+importer="aseprite_wizard.plugin.noop"
+type="PackedDataContainer"
+uid="uid://bnecgfi1xsb0e"
+path="res://.godot/imported/gamecube.aseprite-0c3eeea8d84d0b34818c2441d2c6ab2b.res"
+
+[deps]
+
+source_file="res://art/environment/gamecube.aseprite"
+dest_files=["res://.godot/imported/gamecube.aseprite-0c3eeea8d84d0b34818c2441d2c6ab2b.res"]
+
+[params]
+

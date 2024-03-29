@@ -1,0 +1,29 @@
+[gd_scene load_steps=4 format=3 uid="uid://cm7nrakm7047c"]
+
+[ext_resource type="Texture2D" uid="uid://d0vl05ccqjiu3" path="res://art/environment/broken pod sprite.png" id="1_326es"]
+[ext_resource type="Texture2D" uid="uid://daxmbtq2ow2ky" path="res://art/environment/broken pod sprite_n.png" id="2_bolyv"]
+
+[sub_resource type="CanvasTexture" id="CanvasTexture_ehld0"]
+diffuse_texture = ExtResource("1_326es")
+normal_texture = ExtResource("2_bolyv")
+
+[node name="Node2D" type="StaticBody2D"]
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+texture_filter = 1
+texture = SubResource("CanvasTexture_ehld0")
+metadata/_aseprite_wizard_config_ = {
+"i_mode": 1,
+"keep_anim_length": false,
+"layer": "",
+"o_ex_p": "",
+"o_folder": "res://art/environment",
+"o_name": "broken pod sprite_n",
+"only_visible": true,
+"op_exp": true,
+"player": "",
+"source": "res://art/environment/broken pod sprite.aseprite"
+}
+
+[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="."]
+polygon = PackedVector2Array(-41, 28, -41, -17, 22, -19, 25, 6, 9, 36, -8, 29)
