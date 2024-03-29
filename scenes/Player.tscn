@@ -937,7 +937,7 @@ wall_min_slide_angle = 0.0
 script = ExtResource("1_ucx17")
 attack_damage = 2
 walk_speed = 45
-run_speed = 65
+run_speed = 55
 
 [node name="Gun" parent="." instance=ExtResource("23_p7sd8")]
 z_index = 1
@@ -1165,9 +1165,13 @@ position = Vector2(9, 0)
 target_position = Vector2(0, -322)
 collision_mask = 256
 
+[node name="SwapTimer" type="Timer" parent="."]
+one_shot = true
+
 [connection signal="area_entered" from="Hitbox" to="." method="_on_hitbox_area_entered"]
 [connection signal="body_entered" from="Hitbox" to="." method="_on_hitbox_body_entered"]
 [connection signal="area_entered" from="CrowbarHitbox" to="." method="_on_crowbar_hitbox_area_entered"]
 [connection signal="timeout" from="ArmTimer" to="StateMachine/PlayerShoot" method="_on_arm_timer_timeout"]
 [connection signal="timeout" from="ArmTimer" to="StateMachine/PlayerWalkShoot" method="_on_arm_timer_timeout"]
 [connection signal="timeout" from="IdleTimer" to="StateMachine/PlayerIdle" method="_on_idle_timer_timeout"]
+[connection signal="timeout" from="SwapTimer" to="." method="_on_swap_timer_timeout"]

@@ -76,13 +76,17 @@ func _on_navigation_timer_timeout():
 
 func get_next_attack():
 	if health.health >= 75:
-		#return attack_array[0]
-		return attack_array[2]
+		SoundManager.set_main_loop_parameter(SoundManager.COMBAT_LOW)
+		return attack_array[0]
+		#return attack_array[2]
 	elif health.health < 75 and health.health >= 50:
+		SoundManager.set_main_loop_parameter(SoundManager.COMBAT_MID)
 		return attack_array.slice(0, 1).pick_random()
 	elif health.health < 50 and health.health >= 25:
+		SoundManager.set_main_loop_parameter(SoundManager.COMBAT_MID_HIGH)
 		return attack_array.pick_random()
 	else:
+		SoundManager.set_main_loop_parameter(SoundManager.COMBAT_HIGH)
 		berserk = true
 		return attack_array.pick_random()
 

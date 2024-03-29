@@ -1,17 +1,26 @@
-[gd_scene load_steps=6 format=3 uid="uid://d1uvwlrgj3fct"]
+[gd_scene load_steps=9 format=3 uid="uid://d1uvwlrgj3fct"]
 
+[ext_resource type="Material" uid="uid://cuocdq6pvulnx" path="res://art/item/item.tres" id="1_c86na"]
 [ext_resource type="Script" path="res://scripts/medkit.gd" id="1_f8x5k"]
 [ext_resource type="Texture2D" uid="uid://bmygfiefy1jr7" path="res://art/item/medkit.png" id="1_vftut"]
 [ext_resource type="Texture2D" uid="uid://bmoyw0lie4hpa" path="res://art/item/medkit_n.png" id="2_v271x"]
+[ext_resource type="Shader" path="res://shaders/shine.gdshader" id="3_gkvbe"]
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_jlyve"]
 radius = 17.0
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_b51c5"]
+shader = ExtResource("3_gkvbe")
+shader_parameter/shine_color = Vector4(1, 1, 1, 1)
+shader_parameter/shine_speed = 1.0
+shader_parameter/shine_size = 0.01
 
 [sub_resource type="CanvasTexture" id="CanvasTexture_80ri7"]
 diffuse_texture = ExtResource("1_vftut")
 normal_texture = ExtResource("2_v271x")
 
 [node name="Medkit" type="Area2D"]
+material = ExtResource("1_c86na")
 collision_layer = 0
 collision_mask = 2
 script = ExtResource("1_f8x5k")
@@ -21,6 +30,7 @@ shape = SubResource("CircleShape2D_jlyve")
 
 [node name="Sprite2D" type="Sprite2D" parent="."]
 texture_filter = 1
+material = SubResource("ShaderMaterial_b51c5")
 texture = SubResource("CanvasTexture_80ri7")
 metadata/_aseprite_wizard_config_ = {
 "i_mode": 1,

@@ -1,6 +1,7 @@
-[gd_scene load_steps=6 format=3 uid="uid://dgq8wmrdicq3d"]
+[gd_scene load_steps=7 format=3 uid="uid://dgq8wmrdicq3d"]
 
 [ext_resource type="Texture2D" uid="uid://cbk03a7tvn101" path="res://art/environment/crate.png" id="1_01s4h"]
+[ext_resource type="Material" uid="uid://cuocdq6pvulnx" path="res://art/item/item.tres" id="1_u0dhl"]
 [ext_resource type="Texture2D" uid="uid://bo8axagyr3elc" path="res://art/environment/crate_n.png" id="2_mgnir"]
 
 [sub_resource type="CanvasTexture" id="CanvasTexture_4yete"]
@@ -15,6 +16,7 @@ polygon = PackedVector2Array(-14, 14, -14, -14, 14, -14, 14, 14)
 
 [node name="Crate" type="StaticBody2D"]
 z_index = 5
+material = ExtResource("1_u0dhl")
 collision_layer = 513
 
 [node name="Sprite2D" type="Sprite2D" parent="."]

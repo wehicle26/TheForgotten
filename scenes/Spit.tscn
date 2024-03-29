@@ -118,7 +118,7 @@ length = 300
 [node name="Hitbox" parent="." instance=ExtResource("5_ybtxs")]
 scale = Vector2(0.125, 0.125)
 collision_layer = 0
-collision_mask = 16
+collision_mask = 1040
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Hitbox"]
 rotation = -1.57079
@@ -131,3 +131,4 @@ light_texture = ExtResource("8_wseds")
 light_offset = 0
 
 [connection signal="area_entered" from="Hitbox" to="." method="_on_hitbox_area_entered"]
+[connection signal="body_entered" from="Hitbox" to="." method="_on_hitbox_body_entered"]

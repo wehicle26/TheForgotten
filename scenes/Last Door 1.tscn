@@ -1,7 +1,8 @@
-[gd_scene load_steps=13 format=3 uid="uid://o11d4ocyk4w1"]
+[gd_scene load_steps=14 format=3 uid="uid://o11d4ocyk4w1"]
 
 [ext_resource type="Script" path="res://scripts/door.gd" id="1_82o6h"]
 [ext_resource type="Texture2D" uid="uid://dfmhh38vcuy14" path="res://art/environment/Last Door 1.png" id="1_forke"]
+[ext_resource type="Material" uid="uid://cuocdq6pvulnx" path="res://art/item/item.tres" id="1_x2yxi"]
 [ext_resource type="Texture2D" uid="uid://6d3vk2iu3oqf" path="res://art/environment/Last Door 1_n.png" id="2_n1qib"]
 
 [sub_resource type="OccluderPolygon2D" id="OccluderPolygon2D_b5lok"]
@@ -212,6 +213,7 @@ height = 48.0
 
 [node name="Door" type="StaticBody2D"]
 z_index = 4
+material = ExtResource("1_x2yxi")
 collision_layer = 257
 collision_mask = 3
 script = ExtResource("1_82o6h")

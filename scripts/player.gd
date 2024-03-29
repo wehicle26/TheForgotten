@@ -32,7 +32,9 @@ signal unfreeze
 @onready var gun = $Gun
 @onready var canvas_layer = $CanvasLayer
 @onready var ray_cast_2d_2 = $RayCast2D2
+@onready var swap_timer = $SwapTimer
 
+const run_sprite = preload("res://ui/shift.png")
 const left_click_sprite = preload("res://ui/tile_0077.png")
 const toggle_sprite = preload("res://ui/tile_0123.png")
 const swap_sprite = preload("res://ui/tile_0082.png")
@@ -54,7 +56,7 @@ var stun_time = .25
 var flashlight: Light 
 var can_shoot: bool = false
 var can_run: bool = true
-
+var swap_delay: bool = false
 var shake_strength: float = 0.0
 var rand = RandomNumberGenerator.new()
 
@@ -97,6 +99,17 @@ func show_tut(tut):
 		tween = get_tree().create_tween()
 		tween.tween_property(h_box_container, "modulate", Color.TRANSPARENT, 3).set_trans(Tween.TRANS_BACK)
 		await tween.finished
+	
+	if tut == "run":
+		tut_sprite.texture = run_sprite
+		label.text = "run"
+		h_box_container.visible = true
+		var tween = get_tree().create_tween()
+		tween.tween_property(h_box_container, "modulate", Color.WHITE, 3).set_trans(Tween.TRANS_BACK)
+		await tween.finished
+		tween = get_tree().create_tween()
+		tween.tween_property(h_box_container, "modulate", Color.TRANSPARENT, 3).set_trans(Tween.TRANS_BACK)
+		await tween.finished
 
 
 func apply_shake():
@@ -111,10 +124,10 @@ func randomOffset():
 
 
 func _respawn():
-	if not GlobalState.boss_encounter:
-		GlobalState.reset()
-		get_tree().change_scene_to_file(mainScene)
-	else:
+	if GlobalState.encounter1:
+		var main = get_tree().get_first_node_in_group("Main")
+		main.checkpoint_intro()
+	elif GlobalState.boss_encounter:
 		var main = get_tree().get_first_node_in_group("Main")
 		main.checkpoint()
 
@@ -193,8 +206,10 @@ func _input(event):
 	#gun.num_bullets = 4
 	#if event.is_action_pressed("5"):
 	#gun.num_bullets = 5
-	if event.is_action_pressed("switch_weapon") and inventory.blaster:
-		animation_player.play("RESET")
+	if event.is_action_pressed("switch_weapon") and inventory.blaster and not swap_delay:
+		swap_delay = true
+		swap_timer.start()
+		#animation_player.play("RESET")
 		gun.hide()
 		if current_weapon == "blaster":
 			current_weapon = "crowbar"
@@ -249,3 +264,7 @@ func _on_crowbar_hitbox_area_entered(area):
 		area.damage(attack)
 	if area is Hitbox and area.get_parent() is BreakableDoor:
 		area.get_parent().hit(attack_damage)
+
+
+func _on_swap_timer_timeout():
+	swap_delay = false

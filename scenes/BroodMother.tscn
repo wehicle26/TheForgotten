@@ -251,7 +251,7 @@ rotation = -1.5708
 shape = SubResource("CapsuleShape2D_ss482")
 
 [node name="Health" parent="." index="4"]
-max_health = 5
+max_health = 100
 
 [node name="CollisionShape2D" parent="." index="5"]
 position = Vector2(-4, 0)
@@ -342,8 +342,10 @@ target_position = Vector2(0, 45)
 target_position = Vector2(0, 40)
 
 [node name="CanvasLayer" type="CanvasLayer" parent="." index="13"]
+visible = false
 
 [node name="Label" type="Label" parent="CanvasLayer" index="0"]
+visible = false
 offset_left = 5.0
 offset_top = 22.0
 offset_right = 66.0

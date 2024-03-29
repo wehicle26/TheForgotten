@@ -1,5 +1,6 @@
-[gd_scene load_steps=7 format=3 uid="uid://c8jacqeqx75ku"]
+[gd_scene load_steps=8 format=3 uid="uid://c8jacqeqx75ku"]
 
+[ext_resource type="Material" uid="uid://cuocdq6pvulnx" path="res://art/item/item.tres" id="1_8nax2"]
 [ext_resource type="Script" path="res://scripts/engine.gd" id="1_k2vc2"]
 [ext_resource type="Texture2D" uid="uid://b1nnlipjfc24m" path="res://art/environment/engine.png" id="1_tv7eu"]
 [ext_resource type="Texture2D" uid="uid://kp6o1xo13igs" path="res://art/environment/engine_n.png" id="2_60x0p"]
@@ -42,6 +43,7 @@ _data = {
 }
 
 [node name="Engine" type="StaticBody2D"]
+material = ExtResource("1_8nax2")
 script = ExtResource("1_k2vc2")
 
 [node name="LightOccluder2D" type="LightOccluder2D" parent="."]

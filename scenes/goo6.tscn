@@ -1,6 +1,7 @@
-[gd_scene load_steps=7 format=3 uid="uid://dg0ww4sifttdq"]
+[gd_scene load_steps=8 format=3 uid="uid://dg0ww4sifttdq"]
 
 [ext_resource type="Script" path="res://scripts/goo3.gd" id="1_3pop1"]
+[ext_resource type="Material" uid="uid://cuocdq6pvulnx" path="res://art/item/item.tres" id="1_bqg62"]
 [ext_resource type="Texture2D" uid="uid://baehu25vnmj21" path="res://art/environment/goo6.png" id="1_dthhc"]
 [ext_resource type="Texture2D" uid="uid://c5lh4alvstjwn" path="res://art/environment/goo6_n.png" id="1_ltkfb"]
 
@@ -42,6 +43,7 @@ _data = {
 }
 
 [node name="goo6" type="Node2D"]
+material = ExtResource("1_bqg62")
 script = ExtResource("1_3pop1")
 
 [node name="Sprite2D" type="Sprite2D" parent="."]

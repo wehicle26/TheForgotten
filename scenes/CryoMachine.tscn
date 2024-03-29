@@ -1,6 +1,7 @@
-[gd_scene load_steps=10 format=3 uid="uid://bv8yf3ytm2yc1"]
+[gd_scene load_steps=11 format=3 uid="uid://bv8yf3ytm2yc1"]
 
 [ext_resource type="Script" path="res://scripts/cryoMachine.gd" id="2_33tf2"]
+[ext_resource type="Material" uid="uid://cuocdq6pvulnx" path="res://art/item/item.tres" id="2_bltew"]
 [ext_resource type="Texture2D" uid="uid://cwn23onickl1b" path="res://art/environment/cryo_machine.png" id="2_egvs8"]
 [ext_resource type="Texture2D" uid="uid://3i6fk8y37ydv" path="res://art/environment/cryo_machine_n.png" id="4_taa7u"]
 
@@ -62,6 +63,7 @@ occluder = SubResource("OccluderPolygon2D_ky1c8")
 
 [node name="Sprite2D" type="Sprite2D" parent="."]
 texture_filter = 1
+material = ExtResource("2_bltew")
 position = Vector2(6, 4)
 texture = SubResource("CanvasTexture_nf657")
 hframes = 2
