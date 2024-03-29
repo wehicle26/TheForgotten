@@ -5876,7 +5876,7 @@ occlusion_layer_0/light_mask = 1
 occlusion_layer_0/sdf_collision = true
 occlusion_layer_1/light_mask = 2
 occlusion_layer_2/light_mask = 1
-physics_layer_0/collision_layer = 769
+physics_layer_0/collision_layer = 1793
 sources/0 = SubResource("TileSetAtlasSource_qbao0")
 
 [sub_resource type="NavigationPolygon" id="NavigationPolygon_vfffu"]

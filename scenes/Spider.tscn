@@ -16,7 +16,7 @@ radius = 14.0
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_b7p4p"]
 resource_local_to_scene = true
-radius = 8.0
+radius = 5.0
 
 [sub_resource type="CanvasTexture" id="CanvasTexture_doaef"]
 diffuse_texture = ExtResource("3_7lvca")
@@ -141,6 +141,7 @@ script = ExtResource("9_itlue")
 enemy = NodePath("../..")
 
 [node name="Danger" type="Node2D" parent="." index="11"]
+visible = false
 
 [node name="N" type="RayCast2D" parent="Danger" index="0"]
 rotation = -3.14159

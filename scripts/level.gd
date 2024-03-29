@@ -18,6 +18,8 @@ enum { PROLOGUE, LEVEL_1 }
 @onready var boss_spawn = $BossSpawn
 @onready var boss_checkpoint = $BossCheckpoint
 @onready var glitch = $Glitch
+@onready var medkit_spawn = $MedkitSpawn
+@onready var checkpoint_one = $CheckpointOne
 
 
 var PlayerScene: PackedScene = preload("res://scenes/Player.tscn")
@@ -25,7 +27,9 @@ var blobScene: PackedScene = preload("res://scenes/Blob.tscn")
 var spiderScene: PackedScene = preload("res://scenes/Spider.tscn")
 var broodMotherScene: PackedScene = preload("res://scenes/BroodMother.tscn")
 var roachScene: PackedScene = preload("res://scenes/SpaceRoach.tscn")
+var medkitScene: PackedScene = preload("res://scenes/Medkit.tscn")
 var broodMother: BroodMother
+var medkit: Medkit
 var player: Player
 var paused = false
 var combat = false
@@ -33,13 +37,16 @@ var enemy_count = 0
 var last_count = 0
 
 func _process(_delta):
-	if GlobalState.encounter2:
+	if GlobalState.encounter2 and not GlobalState.boss_encounter:
 		enemy_count = get_tree().get_nodes_in_group("Enemy").size()
 		if enemy_count >= 1 and enemy_count != last_count:
 			var loop_level = 5 + enemy_count
 			SoundManager.set_main_loop_parameter(clamp(loop_level, 5, 8))
 		elif enemy_count == 0:
 			SoundManager.set_main_loop_parameter(SoundManager.MAIN_LOOP_GARBLED)
+			if GlobalState.encounter2 and not GlobalState.encounter4:
+				get_tree().call_group("Cargo_Light", "turn_on")
+				get_tree().call_group("SpiderLight", "turn_off")
 
 		last_count = enemy_count
 
@@ -132,6 +139,8 @@ func _on_event_1_body_exited(body):
 		var lines: Array[String] = ["Huh...?",]
 		DialogueManager.start_passive_dialogue(player.global_position, lines)
 		player.walk_speed = 45
+		player.can_run = true
+		player.show_tut("run")
 
 
 func _on_enter_cargo_body_exited(body):
@@ -257,6 +266,10 @@ func _on_event_5_body_exited(body):
 
 func _on_boss_event_body_exited(body):
 	if body is Player and not GlobalState.boss_encounter:
+		medkit = medkitScene.instantiate()
+		medkit.global_position = medkit_spawn.global_position
+		var items = get_tree().get_first_node_in_group("Item")
+		items.add_child(medkit)
 		GlobalState.boss_encounter = true
 		SoundManager.set_main_loop_parameter(SoundManager.COMBAT_LOW)
 		broodMother = broodMotherScene.instantiate()
@@ -264,12 +277,29 @@ func _on_boss_event_body_exited(body):
 		entities.add_child(broodMother)
 
 func checkpoint():
+	medkit.queue_free()
 	get_tree().call_group("Enemy", "queue_free")
 	player.global_position = boss_checkpoint.global_position
 	player.health.health = player.health.max_health
 	player.health.healthChanged.emit()
 	GlobalState.boss_encounter = false
-	#SoundManager.set_main_loop_parameter(SoundManager.MAIN_LOOP_GARBLED)
+	medkit = medkitScene.instantiate()
+	medkit.global_position = medkit_spawn.global_position
+	var items = get_tree().get_first_node_in_group("Item")
+	items.add_child(medkit)
+	SoundManager.set_main_loop_parameter(SoundManager.COMBAT_LOW)
+
+func checkpoint_intro():
+	get_tree().call_group("Enemy", "queue_free")
+	get_tree().call_group("Light", "turn_off")
+	get_tree().call_group("Hallway_Light", "turn_on")
+	GlobalState.encounter2 = false
+	GlobalState.encounter4 = false
+	GlobalState.dialogue4 = false
+	player.global_position = checkpoint_one.global_position
+	player.health.health = player.health.max_health
+	player.health.healthChanged.emit()
+	SoundManager.set_main_loop_parameter(SoundManager.MAIN_LOOP_CURIOUS)
 
 
 func _on_event_6_body_exited(body):
@@ -279,3 +309,15 @@ func _on_event_6_body_exited(body):
 		#var roach: Enemy = roachScene.instantiate()
 		#roach.global_position = roach_spawn.global_position
 		#entities.add_child(roach)
+
+
+func _on_enter_rec_body_exited(body):
+	if body is Player:
+		SoundManager.set_main_loop_parameter(SoundManager.MAIN_LOOP_GARBLED)
+		get_tree().call_group("Rec_Light", "turn_on")
+
+
+func _on_exit_rec_body_exited(body):
+	if body is Player:
+		SoundManager.set_main_loop_parameter(SoundManager.MAIN_LOOP_GARBLED)
+		get_tree().call_group("Rec_Light", "turn_off")

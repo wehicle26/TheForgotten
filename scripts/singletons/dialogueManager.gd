@@ -13,7 +13,7 @@ var can_advance_line = false
 
 
 func _unhandled_input(event):
-	if event.is_action_pressed("interact") and is_dialogue_active and can_advance_line:
+	if (event.is_action_pressed("interact") or event.is_action_pressed("shoot")) and is_dialogue_active and can_advance_line:
 		if is_instance_valid(text_box):
 			text_box.queue_free()
 
