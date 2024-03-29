@@ -345,6 +345,7 @@ target_position = Vector2(0, 40)
 visible = false
 
 [node name="Label" type="Label" parent="CanvasLayer" index="0"]
+visible = false
 offset_left = 5.0
 offset_top = 22.0
 offset_right = 66.0

@@ -1,4 +1,4 @@
-[gd_scene load_steps=70 format=3 uid="uid://b71gis6vgkvkg"]
+
 
 [ext_resource type="Script" path="res://scripts/level.gd" id="1_6u7sh"]
 [ext_resource type="PackedScene" uid="uid://bob88w6sefucj" path="res://scenes/Environment.tscn" id="1_halep"]
@@ -37,6 +37,10 @@
 [ext_resource type="PackedScene" uid="uid://ct7ourn5qoi1d" path="res://scenes/goo 4.tscn" id="34_6apeg"]
 [ext_resource type="PackedScene" uid="uid://c3degpyqcf8sx" path="res://scenes/goo5.tscn" id="35_457ab"]
 [ext_resource type="PackedScene" uid="uid://dg0ww4sifttdq" path="res://scenes/goo6.tscn" id="36_82x1q"]
+[ext_resource type="PackedScene" uid="uid://b22lifd4o6b78" path="res://scenes/bio bubbler.tscn" id="37_sdbie"]
+[ext_resource type="PackedScene" uid="uid://cm7nrakm7047c" path="res://scenes/broken pod sprite.tscn" id="39_yaph2"]
+[ext_resource type="PackedScene" uid="uid://cdulslplko5uq" path="res://scenes/gamecube.tscn" id="40_w5c1m"]
+[ext_resource type="PackedScene" uid="uid://cj1c827fjn65u" path="res://scenes/BIGG EGG.tscn" id="41_cmd40"]
 
 [sub_resource type="SegmentShape2D" id="SegmentShape2D_xjm62"]
 resource_local_to_scene = true
@@ -259,6 +263,7 @@ shader_parameter/outer_radius = 1.0
 script = ExtResource("1_6u7sh")
 
 [node name="DarknessLevel" type="CanvasModulate" parent="." groups=["Darkness"]]
+visible = false
 light_mask = 3
 visibility_layer = 3
 z_index = 10
@@ -370,6 +375,7 @@ rotation = 0.261799
 [node name="CargoCrates" type="Node2D" parent="Environment/Inanimate"]
 
 [node name="Crate8" parent="Environment/Inanimate/CargoCrates" instance=ExtResource("8_74hus")]
+z_index = 6
 position = Vector2(-1007, -17)
 
 [node name="Crate9" parent="Environment/Inanimate/CargoCrates" instance=ExtResource("8_74hus")]
@@ -449,7 +455,7 @@ rotation = 0.20045
 position = Vector2(-816, -40)
 
 [node name="Crate29" parent="Environment/Inanimate/CargoCrates" instance=ExtResource("8_74hus")]
-position = Vector2(-849, 78)
+position = Vector2(-850, 111)
 
 [node name="Crate30" parent="Environment/Inanimate/CargoCrates" instance=ExtResource("8_74hus")]
 position = Vector2(-814, 117)
@@ -507,7 +513,7 @@ position = Vector2(-981, -17)
 rotation = 3.14159
 
 [node name="Forklift2" parent="Environment/Inanimate" instance=ExtResource("9_rxupm")]
-position = Vector2(-849, 52)
+position = Vector2(-851, 58)
 rotation = 1.57079
 
 [node name="Crate5" parent="Environment/Inanimate" instance=ExtResource("8_74hus")]
@@ -545,6 +551,9 @@ position = Vector2(-480, -64)
 
 [node name="goo6" parent="Environment/Inanimate" instance=ExtResource("36_82x1q")]
 position = Vector2(-528, -224)
+
+[node name="bio bubbler" parent="Environment/Inanimate" instance=ExtResource("37_sdbie")]
+position = Vector2(-456, 424)
 
 [node name="Engine" parent="Environment/Inanimate" instance=ExtResource("28_a46ni")]
 position = Vector2(-1200, 143)
@@ -912,7 +921,7 @@ rotation = -3.14158
 light_texture = ExtResource("6_g4f4m")
 
 [node name="CeilingLight" parent="Lights/HallwayLights" groups=["Hallway_Light"] instance=ExtResource("4_7cj7q")]
-position = Vector2(438, 262)
+position = Vector2(437, 260)
 texture = null
 light_texture = ExtResource("5_wy17f")
 light_offset = 0
@@ -959,7 +968,13 @@ light_texture = ExtResource("5_wy17f")
 light_offset = 0
 
 [node name="Light6" parent="Lights/CargoLights" groups=["Cargo_Light"] instance=ExtResource("4_7cj7q")]
-position = Vector2(286, 176)
+position = Vector2(284, 177)
+texture = null
+light_texture = ExtResource("5_wy17f")
+light_offset = 0
+
+[node name="Light11" parent="Lights/CargoLights" groups=["Cargo_Light"] instance=ExtResource("4_7cj7q")]
+position = Vector2(11, -28)
 texture = null
 light_texture = ExtResource("5_wy17f")
 light_offset = 0
@@ -1176,7 +1191,7 @@ position = Vector2(-857, 198)
 position = Vector2(-872, -65)
 
 [node name="SpiderSpawnLocation3" type="Marker2D" parent="."]
-position = Vector2(-1186, 96)
+position = Vector2(-1170, 88)
 
 [node name="BlobSpawnLocation" type="Marker2D" parent="."]
 position = Vector2(-495, 326)
@@ -1202,13 +1217,20 @@ position = Vector2(-467, 16)
 [node name="CanvasLayer" type="CanvasLayer" parent="."]
 
 [node name="BossSpawn" type="Marker2D" parent="."]
-position = Vector2(399, 140)
+position = Vector2(243, -119)
 
 [node name="RoachSpawn" type="Marker2D" parent="."]
 position = Vector2(-401, -496)
 
-[node name="CheckpointOne" type="Marker2D" parent="."]
-position = Vector2(-679.167, 123.729)
+[node name="Node2D" parent="." instance=ExtResource("39_yaph2")]
+position = Vector2(-950, -174)
+
+[node name="gamecube" parent="." instance=ExtResource("40_w5c1m")]
+position = Vector2(-96, 320)
+
+[node name="BIGG EGG" parent="." instance=ExtResource("41_cmd40")]
+z_index = 7
+position = Vector2(528, 160)
 
 [connection signal="body_exited" from="Triggers/ExitCryo" to="." method="_on_exit_cryo_body_exited"]
 [connection signal="body_exited" from="Triggers/EnterCryo" to="." method="_on_enter_cryo_body_exited"]
