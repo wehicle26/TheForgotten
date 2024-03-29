@@ -251,14 +251,15 @@ shader_parameter/shake_color_rate = 0.01
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_5pnrb"]
 shader = ExtResource("23_gq8o3")
-shader_parameter/alpha = 1.0
-shader_parameter/inner_radius = 0.0
+shader_parameter/alpha = 0.5
+shader_parameter/inner_radius = 0.5
 shader_parameter/outer_radius = 1.0
 
 [node name="Main" type="Node2D" groups=["Main"]]
 script = ExtResource("1_6u7sh")
 
 [node name="DarknessLevel" type="CanvasModulate" parent="." groups=["Darkness"]]
+visible = false
 light_mask = 3
 visibility_layer = 3
 z_index = 10
@@ -1153,7 +1154,6 @@ grow_horizontal = 2
 grow_vertical = 2
 
 [node name="Overlay" type="CanvasLayer" parent="."]
-visible = false
 
 [node name="ColorRect" type="ColorRect" parent="Overlay"]
 material = SubResource("ShaderMaterial_5pnrb")
