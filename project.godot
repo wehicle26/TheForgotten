@@ -31,6 +31,7 @@ DSP/dsp_buffer_count=4
 config/name="The Forgotten"
 run/main_scene="res://scenes/Ui.tscn"
 config/features=PackedStringArray("4.2", "Forward Plus")
+run/max_fps=60
 boot_splash/bg_color=Color(0.141176, 0.141176, 0.141176, 1)
 boot_splash/use_filter=false
 config/icon="res://icon.svg"
@@ -79,6 +80,11 @@ import/blender/enabled=false
 
 config/itch_username="MindlessRuff"
 config/itch_project_name="the-forgotten"
+
+[gui]
+
+theme/default_font_antialiasing=0
+theme/default_font_multichannel_signed_distance_field=true
 
 [input]
 
