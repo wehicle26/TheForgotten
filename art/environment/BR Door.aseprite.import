@@ -1,0 +1,14 @@
+[remap]
+
+importer="aseprite_wizard.plugin.noop"
+type="PackedDataContainer"
+uid="uid://pvy3ujhm7d57"
+path="res://.godot/imported/BR Door.aseprite-b32fb7cbf7bbcf1b29051fc896f0a1ac.res"
+
+[deps]
+
+source_file="res://art/environment/BR Door.aseprite"
+dest_files=["res://.godot/imported/BR Door.aseprite-b32fb7cbf7bbcf1b29051fc896f0a1ac.res"]
+
+[params]
+
