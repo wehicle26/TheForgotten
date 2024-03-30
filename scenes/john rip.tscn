@@ -1,0 +1,26 @@
+[gd_scene load_steps=4 format=3 uid="uid://blt12hr0qmvvp"]
+
+[ext_resource type="Texture2D" uid="uid://cayhtp2l4oo00" path="res://art/environment/john rip.png" id="1_mw8aq"]
+[ext_resource type="Texture2D" uid="uid://b8drf0j8fmg5i" path="res://art/environment/john rip_n.png" id="2_4ory0"]
+
+[sub_resource type="CanvasTexture" id="CanvasTexture_swn8b"]
+diffuse_texture = ExtResource("1_mw8aq")
+normal_texture = ExtResource("2_4ory0")
+
+[node name="Node2D" type="Node2D"]
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+texture_filter = 1
+texture = SubResource("CanvasTexture_swn8b")
+metadata/_aseprite_wizard_config_ = {
+"i_mode": 1,
+"keep_anim_length": false,
+"layer": "",
+"o_ex_p": "",
+"o_folder": "res://art/environment",
+"o_name": "john rip_n",
+"only_visible": true,
+"op_exp": true,
+"player": "",
+"source": "res://art/environment/john rip.aseprite"
+}

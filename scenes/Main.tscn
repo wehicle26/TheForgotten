@@ -1,4 +1,4 @@
-[gd_scene load_steps=84 format=3 uid="uid://b71gis6vgkvkg"]
+[gd_scene load_steps=87 format=3 uid="uid://b71gis6vgkvkg"]
 
 [ext_resource type="Script" path="res://scripts/level.gd" id="1_6u7sh"]
 [ext_resource type="PackedScene" uid="uid://bob88w6sefucj" path="res://scenes/Environment.tscn" id="1_halep"]
@@ -47,13 +47,13 @@
 [ext_resource type="PackedScene" uid="uid://cdulslplko5uq" path="res://scenes/gamecube.tscn" id="40_w5c1m"]
 [ext_resource type="PackedScene" uid="uid://cj1c827fjn65u" path="res://scenes/BIGG EGG.tscn" id="41_cmd40"]
 [ext_resource type="PackedScene" uid="uid://limhqhvfnhad" path="res://scenes/BR Door.tscn" id="42_kuoky"]
-[ext_resource type="PackedScene" uid="uid://dxe6ve1gg1kpo" path="res://scenes/WEB1.tscn" id="43_535tl"]
+[ext_resource type="PackedScene" uid="uid://dyprvfi0cuepe" path="res://scenes/WEB1.tscn" id="43_535tl"]
 [ext_resource type="PackedScene" uid="uid://c4cos3p5d2hv3" path="res://scenes/WEB2.tscn" id="44_4iu8q"]
 [ext_resource type="PackedScene" uid="uid://dcybuevkj5ccw" path="res://scenes/WEB3.tscn" id="45_iup20"]
 [ext_resource type="PackedScene" uid="uid://c4va6arsto042" path="res://scenes/Egg.tscn" id="46_jglte"]
 [ext_resource type="PackedScene" uid="uid://d3h08mqrfxlx4" path="res://scenes/deadman.tscn" id="47_3e63x"]
 [ext_resource type="PackedScene" uid="uid://hbg4agwwgwc7" path="res://scenes/goo2 map white pass.tscn" id="48_1xect"]
-
+[ext_resource type="PackedScene" uid="uid://blt12hr0qmvvp" path="res://scenes/john rip.tscn" id="54_22hx3"]
 
 [sub_resource type="SegmentShape2D" id="SegmentShape2D_xjm62"]
 resource_local_to_scene = true
@@ -277,6 +277,7 @@ shader_parameter/outer_radius = 1.0
 script = ExtResource("1_6u7sh")
 
 [node name="DarknessLevel" type="CanvasModulate" parent="." groups=["Darkness"]]
+visible = false
 light_mask = 3
 visibility_layer = 3
 z_index = 10
@@ -302,7 +303,7 @@ position = Vector2(-606, -214)
 
 [node name="FlashlightItem" parent="Environment/Items" instance=ExtResource("5_6ojie")]
 material = null
-position = Vector2(-1020, 174)
+position = Vector2(-910, 200)
 rotation = -0.785397
 
 [node name="BlasterItem" parent="Environment/Items" instance=ExtResource("5_bmbqo")]
@@ -507,6 +508,14 @@ position = Vector2(-564, -275)
 rotation = 0.785397
 
 [node name="Crate2" parent="Environment/Inanimate" instance=ExtResource("8_74hus")]
+position = Vector2(-453, -320)
+rotation = 0.233794
+
+[node name="Crate9" parent="Environment/Inanimate" instance=ExtResource("8_74hus")]
+position = Vector2(-456, -355)
+rotation = -0.0912088
+
+[node name="Crate4" parent="Environment/Inanimate" instance=ExtResource("8_74hus")]
 position = Vector2(-529, -288)
 rotation = -0.261799
 
@@ -676,6 +685,10 @@ position = Vector2(-176, 124)
 
 [node name="Door7" parent="Environment/Interactable" instance=ExtResource("19_i3gnf")]
 position = Vector2(-336, 132)
+
+[node name="Door10" parent="Environment/Interactable" instance=ExtResource("19_i3gnf")]
+position = Vector2(-476, -336)
+rotation = 1.57079
 
 [node name="Door8" parent="Environment/Interactable" instance=ExtResource("19_i3gnf")]
 position = Vector2(144, -65)
@@ -972,13 +985,15 @@ energy_factor = 3.0
 light_offset = 0
 
 [node name="Light5" parent="Lights/CargoLights" groups=["Cargo_Light"] instance=ExtResource("4_7cj7q")]
-position = Vector2(153, -58)
+position = Vector2(147, -85)
+scale = Vector2(0.75, 0.75)
 texture = null
 light_texture = ExtResource("5_wy17f")
 light_offset = 0
 
 [node name="Light9" parent="Lights/CargoLights" groups=["Cargo_Light"] instance=ExtResource("4_7cj7q")]
-position = Vector2(220, -58)
+position = Vector2(234, -85)
+scale = Vector2(0.75, 0.75)
 texture = null
 light_texture = ExtResource("5_wy17f")
 light_offset = 0
@@ -1073,7 +1088,7 @@ light_texture = ExtResource("5_wy17f")
 light_offset = 0
 
 [node name="Light7" parent="Lights/RecLights" groups=["Rec_Light"] instance=ExtResource("4_7cj7q")]
-position = Vector2(853, 522)
+position = Vector2(842, 531)
 texture = null
 light_texture = ExtResource("5_wy17f")
 light_offset = 0
@@ -1083,6 +1098,36 @@ position = Vector2(892, 401)
 texture = null
 light_texture = ExtResource("5_wy17f")
 light_offset = 0
+
+[node name="boss room" type="Node2D" parent="Lights"]
+
+[node name="Light9" parent="Lights/boss room" groups=["Rec_Light"] instance=ExtResource("4_7cj7q")]
+position = Vector2(1188, -43)
+texture = null
+light_texture = ExtResource("5_wy17f")
+light_offset = 0
+
+[node name="Light8" parent="Lights/boss room" groups=["Hallway_Light"] instance=ExtResource("4_7cj7q")]
+position = Vector2(1147, 52)
+light_texture = ExtResource("6_g4f4m")
+
+[node name="Light13" parent="Lights/boss room" groups=["Hallway_Light"] instance=ExtResource("4_7cj7q")]
+position = Vector2(1279, 260)
+light_texture = ExtResource("6_g4f4m")
+
+[node name="Light11" parent="Lights/boss room" groups=["Hallway_Light"] instance=ExtResource("4_7cj7q")]
+position = Vector2(1515, -4)
+rotation = -3.14159
+light_texture = ExtResource("6_g4f4m")
+
+[node name="Light12" parent="Lights/boss room" groups=["Hallway_Light"] instance=ExtResource("4_7cj7q")]
+position = Vector2(1515, 204)
+rotation = -3.14159
+light_texture = ExtResource("6_g4f4m")
+
+[node name="Light10" parent="Lights/boss room" groups=["Hallway_Light"] instance=ExtResource("4_7cj7q")]
+position = Vector2(1147, 148)
+light_texture = ExtResource("6_g4f4m")
 
 [node name="Entities" type="Node2D" parent="." groups=["Entities"]]
 
@@ -1207,7 +1252,7 @@ grow_vertical = 2
 position = Vector2(41, 12)
 
 [node name="PlayerSpawnLocation" type="Marker2D" parent="."]
-position = Vector2(-680, -35)
+position = Vector2(-670, -43)
 
 [node name="SpiderSpawnLocation" type="Marker2D" parent="."]
 position = Vector2(-857, 198)
@@ -1222,7 +1267,7 @@ position = Vector2(-1170, 88)
 position = Vector2(-495, 326)
 
 [node name="MedkitSpawn" type="Marker2D" parent="."]
-position = Vector2(176, -146)
+position = Vector2(173, -138)
 
 [node name="Marker2D" type="Marker2D" parent="." groups=["EusBossSpawn"]]
 position = Vector2(833, 64)
@@ -1275,6 +1320,11 @@ z_index = 7
 position = Vector2(258, -144)
 rotation = -0.0529382
 
+[node name="WEB12" parent="." instance=ExtResource("43_535tl")]
+z_index = 7
+position = Vector2(-438, -196)
+rotation = -1.54568
+
 [node name="WEB2" parent="." instance=ExtResource("44_4iu8q")]
 z_index = 7
 position = Vector2(552, 165)
@@ -1285,10 +1335,20 @@ z_index = 7
 position = Vector2(270, 159)
 rotation = -1.90365
 
+[node name="WEB11" parent="." instance=ExtResource("44_4iu8q")]
+z_index = 7
+position = Vector2(-431, -135)
+rotation = -2.17036
+
 [node name="WEB8" parent="." instance=ExtResource("44_4iu8q")]
 z_index = 7
 position = Vector2(333, -146)
 rotation = -0.0896935
+
+[node name="WEB10" parent="." instance=ExtResource("44_4iu8q")]
+z_index = 7
+position = Vector2(57, 54)
+rotation = 3.22633
 
 [node name="WEB4" parent="." instance=ExtResource("44_4iu8q")]
 z_index = 7
@@ -1356,7 +1416,7 @@ position = Vector2(616, 282)
 
 [node name="Egg5" parent="." instance=ExtResource("46_jglte")]
 z_index = 7
-position = Vector2(583, 174)
+position = Vector2(643, 213)
 
 [node name="Node2D2" parent="." instance=ExtResource("47_3e63x")]
 z_index = 7
@@ -1365,21 +1425,34 @@ rotation = 2.32042
 
 [node name="Node2D3" parent="." instance=ExtResource("47_3e63x")]
 z_index = 7
-position = Vector2(550, 194)
+position = Vector2(628, 193)
 rotation = 3.30796
 
 [node name="Node2D4" parent="." instance=ExtResource("47_3e63x")]
 z_index = 7
-position = Vector2(574, 247)
+position = Vector2(589, 242)
 rotation = 0.497532
+
+[node name="Node2D8" parent="." instance=ExtResource("47_3e63x")]
+z_index = 7
+position = Vector2(-431, -120)
+rotation = -1.56969
+
+[node name="Node2D9" parent="." instance=ExtResource("47_3e63x")]
+z_index = 7
+position = Vector2(-458, -226)
+rotation = -4.34339
 
 [node name="Node2D5" parent="." instance=ExtResource("47_3e63x")]
 z_index = 7
-position = Vector2(618, 202)
-rotation = -0.585825
+position = Vector2(579, 172)
+rotation = 0.184315
 
 [node name="Node2D6" parent="." instance=ExtResource("48_1xect")]
-position = Vector2(-643, 83)
+position = Vector2(-659, 121)
+
+[node name="Node2D7" parent="." instance=ExtResource("54_22hx3")]
+position = Vector2(-578, 274)
 
 [connection signal="body_exited" from="Triggers/ExitCryo" to="." method="_on_exit_cryo_body_exited"]
 [connection signal="body_exited" from="Triggers/EnterCryo" to="." method="_on_enter_cryo_body_exited"]
