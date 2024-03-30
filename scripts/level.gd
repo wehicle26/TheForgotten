@@ -105,6 +105,12 @@ func _on_exit_cryo_body_exited(body):
 			GlobalState.dialogue2 = true
 			await get_tree().create_timer(.5).timeout
 			DialogueManager.start_passive_dialogue(player.global_position, ["Hello...?"])
+			var goo6: Goo = get_tree().get_first_node_in_group("goo6")
+			goo6.show_goo()
+			SoundManager.play_custom_sound(goo6.global_transform, "event:/goo6", 0.9)
+			await get_tree().create_timer(3).timeout
+			goo6.hide_goo()
+			
 
 
 func _on_enter_cryo_body_exited(body):
@@ -129,7 +135,7 @@ func _on_event_1_body_exited(body):
 		SoundManager.play_custom_sound(player.global_transform, "event:/stinger1", 0.9)
 		glitch.visible = true
 		get_tree().call_group("goo", "show_goo")
-		await get_tree().create_timer(16).timeout
+		await get_tree().create_timer(10).timeout
 		glitch.visible = false
 		get_tree().call_group("goo", "hide_goo")
 		get_tree().call_group("Hallway_Light", "turn_off")

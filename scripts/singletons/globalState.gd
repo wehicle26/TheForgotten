@@ -1,5 +1,6 @@
 extends Node
 
+var disclaimer = false
 var game_running = false
 var playing = false
 var master_volume: float = 1.0

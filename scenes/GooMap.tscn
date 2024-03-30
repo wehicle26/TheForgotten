@@ -134,6 +134,7 @@ _data = {
 
 [node name="GooMap" instance=ExtResource("1_kbqjp")]
 z_index = 6
+material = null
 script = ExtResource("2_pcv3t")
 
 [node name="Sprite2D" parent="." index="0"]

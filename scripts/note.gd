@@ -1,11 +1,13 @@
 extends Item
 
+@export var note_texture: Texture2D
 @onready var sprite_2d = $CanvasLayer/CenterContainer/Control/Sprite2D
 
 var note_open = false
 
 func _ready():
 	interact = Callable(self, "_on_interact")
+	sprite_2d.texture = note_texture
 
 
 func _on_interact():
