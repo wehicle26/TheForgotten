@@ -1,0 +1,26 @@
+[gd_scene load_steps=4 format=3 uid="uid://c4cos3p5d2hv3"]
+
+[ext_resource type="Texture2D" uid="uid://ddy5381urr3xp" path="res://art/environment/WEB2.png" id="1_w3m6g"]
+[ext_resource type="Texture2D" uid="uid://h4vmbesigln2" path="res://art/environment/WEB2_n.png" id="2_uttkt"]
+
+[sub_resource type="CanvasTexture" id="CanvasTexture_53fjs"]
+diffuse_texture = ExtResource("1_w3m6g")
+normal_texture = ExtResource("2_uttkt")
+
+[node name="Node2D" type="StaticBody2D"]
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+texture_filter = 1
+texture = SubResource("CanvasTexture_53fjs")
+metadata/_aseprite_wizard_config_ = {
+"i_mode": 1,
+"keep_anim_length": false,
+"layer": "",
+"o_ex_p": "",
+"o_folder": "res://art/environment",
+"o_name": "WEB2_n",
+"only_visible": true,
+"op_exp": false,
+"player": "",
+"source": "res://art/environment/WEB2.aseprite"
+}
