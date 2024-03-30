@@ -1246,6 +1246,9 @@ position = Vector2(-96, 320)
 z_index = 7
 position = Vector2(528, 160)
 
+[node name="Checkpoint" type="Marker2D" parent="."]
+position = Vector2(-621, 112)
+
 [connection signal="body_exited" from="Triggers/ExitCryo" to="." method="_on_exit_cryo_body_exited"]
 [connection signal="body_exited" from="Triggers/EnterCryo" to="." method="_on_enter_cryo_body_exited"]
 [connection signal="body_exited" from="Triggers/Event1" to="." method="_on_event_1_body_exited"]

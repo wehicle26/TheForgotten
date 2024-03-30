@@ -19,7 +19,7 @@ enum { PROLOGUE, LEVEL_1 }
 @onready var boss_checkpoint = $BossCheckpoint
 @onready var glitch = $Glitch
 @onready var medkit_spawn = $MedkitSpawn
-@onready var checkpoint_one = $CheckpointOne
+@onready var checkpoint_one = $Checkpoint
 
 
 var PlayerScene: PackedScene = preload("res://scenes/Player.tscn")

@@ -124,7 +124,7 @@ func randomOffset():
 
 
 func _respawn():
-	if GlobalState.encounter1:
+	if GlobalState.encounter1 and not GlobalState.boss_encounter:
 		var main = get_tree().get_first_node_in_group("Main")
 		main.checkpoint_intro()
 	elif GlobalState.boss_encounter:
