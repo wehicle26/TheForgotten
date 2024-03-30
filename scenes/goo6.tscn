@@ -1,9 +1,9 @@
 [gd_scene load_steps=8 format=3 uid="uid://dg0ww4sifttdq"]
 
-[ext_resource type="Script" path="res://scripts/goo3.gd" id="1_3pop1"]
 [ext_resource type="Material" uid="uid://cuocdq6pvulnx" path="res://art/item/item.tres" id="1_bqg62"]
 [ext_resource type="Texture2D" uid="uid://baehu25vnmj21" path="res://art/environment/goo6.png" id="1_dthhc"]
 [ext_resource type="Texture2D" uid="uid://c5lh4alvstjwn" path="res://art/environment/goo6_n.png" id="1_ltkfb"]
+[ext_resource type="Script" path="res://scripts/goo6.gd" id="2_l2bko"]
 
 [sub_resource type="CanvasTexture" id="CanvasTexture_0om7v"]
 diffuse_texture = ExtResource("1_dthhc")
@@ -44,7 +44,7 @@ _data = {
 
 [node name="goo6" type="Node2D" groups=["goo6"]]
 material = ExtResource("1_bqg62")
-script = ExtResource("1_3pop1")
+script = ExtResource("2_l2bko")
 
 [node name="Sprite2D" type="Sprite2D" parent="."]
 texture_filter = 1

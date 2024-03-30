@@ -18,8 +18,9 @@ func damage(attack: Attack):
 	if body.has_method("damage"):
 		body.damage()
 	health -= attack.attack_damage
-	if body is Blob:
-		body.label.text = str(health)
+	if body is Enemy:
+		if attack.attack_type == "crowbar":
+			SoundManager.play_custom_sound(global_transform, "event:/roach_hit", .8)
 	var knockback_direction = (global_position - attack.attack_position).normalized()
 	body.velocity = knockback_direction * attack.knockback_force
 	healthChanged.emit()
