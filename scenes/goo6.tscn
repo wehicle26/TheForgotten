@@ -42,7 +42,7 @@ _data = {
 "default": SubResource("Animation_rmmfv")
 }
 
-[node name="goo6" type="Node2D"]
+[node name="goo6" type="Node2D" groups=["goo6"]]
 material = ExtResource("1_bqg62")
 script = ExtResource("1_3pop1")
 

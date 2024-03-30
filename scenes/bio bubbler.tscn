@@ -1,6 +1,7 @@
-[gd_scene load_steps=6 format=3 uid="uid://xwxks3suwe77"]
+[gd_scene load_steps=7 format=3 uid="uid://xwxks3suwe77"]
 
 [ext_resource type="Texture2D" uid="uid://bfjyqxcgwahdx" path="res://art/environment/bio bubbler.png" id="1_0pk7f"]
+[ext_resource type="Material" uid="uid://cuocdq6pvulnx" path="res://art/item/item.tres" id="1_h8wgh"]
 [ext_resource type="Texture2D" uid="uid://bb5g21cyedyv1" path="res://art/environment/bio bubbler_n.png" id="2_llno6"]
 
 [sub_resource type="CanvasTexture" id="CanvasTexture_107yy"]
@@ -41,6 +42,7 @@ _data = {
 }
 
 [node name="bio bubbler" type="StaticBody2D"]
+material = ExtResource("1_h8wgh")
 
 [node name="Sprite2D" type="Sprite2D" parent="."]
 texture_filter = 1

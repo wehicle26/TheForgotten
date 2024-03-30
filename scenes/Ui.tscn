@@ -1,8 +1,36 @@
-[gd_scene load_steps=6 format=3 uid="uid://dx367olnv4jly"]
+[gd_scene load_steps=9 format=3 uid="uid://dx367olnv4jly"]
 
 [ext_resource type="Theme" uid="uid://cdpahudvr7n3t" path="res://ui/Ui.tres" id="1_klrwp"]
 [ext_resource type="Script" path="res://scripts/ui.gd" id="1_mk2rm"]
 [ext_resource type="Texture2D" uid="uid://bmeaxme02o2r8" path="res://art/environment/splash1_320x160.png" id="3_6mtop"]
+[ext_resource type="Texture2D" uid="uid://biu0u4v7eesi2" path="res://ui/DISCLAIMER.png" id="4_2kcvs"]
+
+[sub_resource type="Animation" id="Animation_duukv"]
+resource_name = "fade_in"
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("TextureRect:self_modulate")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 1),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Color(1, 1, 1, 1), Color(1, 1, 1, 0)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("TextureRect:visible")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0, 1),
+"transitions": PackedFloat32Array(1, 1),
+"update": 1,
+"values": [true, false]
+}
 
 [sub_resource type="Animation" id="Animation_18at2"]
 resource_name = "fade_out"
@@ -31,8 +59,37 @@ tracks/1/keys = {
 "values": [true, false]
 }
 
+[sub_resource type="Animation" id="Animation_tdnb4"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("TextureRect:self_modulate")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Color(1, 1, 1, 1)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("TextureRect:visible")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [true]
+}
+
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_g22p2"]
 _data = {
+"RESET": SubResource("Animation_tdnb4"),
+"fade_in": SubResource("Animation_duukv"),
 "fade_out": SubResource("Animation_18at2")
 }
 
@@ -79,6 +136,16 @@ text = "OPTIONS
 layout_mode = 2
 theme_override_colors/font_hover_color = Color(0.647059, 0.188235, 0.188235, 1)
 text = "QUIT"
+
+[node name="TextureRect" type="TextureRect" parent="."]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+texture = ExtResource("4_2kcvs")
+expand_mode = 1
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="."]
 libraries = {

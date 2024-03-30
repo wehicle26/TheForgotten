@@ -19,7 +19,7 @@ signal flashlight_toggle
 
 func _ready():
 	if get_parent() is Player:
-		light_offset = 140
+		light_offset = 180
 		rotation = -PI/2
 		height = 30
 		position.y = 30

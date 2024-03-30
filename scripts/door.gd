@@ -12,7 +12,7 @@ func open_door():
 	if not open and not locked:
 		open = true
 		animation_player.speed_scale = 1
-		animation_player.play("opening")
+		animation_player.play("default")
 		SoundManager.play_custom_sound(global_transform, "event:/door_open", .7)
 		timer.start()
 
@@ -21,7 +21,7 @@ func close_door():
 	if open:
 		open = false
 		animation_player.speed_scale = 2.0
-		animation_player.play_backwards("opening")
+		animation_player.play_backwards("default")
 		SoundManager.play_custom_sound(global_transform, "event:/door_close", .7)
 		timer.stop()
 
