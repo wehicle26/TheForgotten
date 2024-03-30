@@ -1,5 +1,4 @@
-[gd_scene load_steps=70 format=3 uid="uid://b71gis6vgkvkg"]
-
+[gd_scene load_steps=75 format=3 uid="uid://b71gis6vgkvkg"]
 
 [ext_resource type="Script" path="res://scripts/level.gd" id="1_6u7sh"]
 [ext_resource type="PackedScene" uid="uid://bob88w6sefucj" path="res://scenes/Environment.tscn" id="1_halep"]
@@ -42,6 +41,7 @@
 [ext_resource type="PackedScene" uid="uid://cm7nrakm7047c" path="res://scenes/broken pod sprite.tscn" id="39_yaph2"]
 [ext_resource type="PackedScene" uid="uid://cdulslplko5uq" path="res://scenes/gamecube.tscn" id="40_w5c1m"]
 [ext_resource type="PackedScene" uid="uid://cj1c827fjn65u" path="res://scenes/BIGG EGG.tscn" id="41_cmd40"]
+[ext_resource type="PackedScene" uid="uid://limhqhvfnhad" path="res://scenes/BR Door.tscn" id="42_kuoky"]
 
 [sub_resource type="SegmentShape2D" id="SegmentShape2D_xjm62"]
 resource_local_to_scene = true
@@ -286,11 +286,11 @@ z_index = 5
 [node name="Crowbar" parent="Environment/Items" instance=ExtResource("3_ax4cu")]
 z_index = -2
 material = null
-position = Vector2(-603, -224)
+position = Vector2(-655, -28)
 
 [node name="FlashlightItem" parent="Environment/Items" instance=ExtResource("5_6ojie")]
 material = null
-position = Vector2(-1156, 114)
+position = Vector2(-101, 67)
 rotation = -0.785397
 
 [node name="BlasterItem" parent="Environment/Items" instance=ExtResource("5_bmbqo")]
@@ -559,6 +559,11 @@ position = Vector2(-456, 424)
 [node name="Engine" parent="Environment/Inanimate" instance=ExtResource("28_a46ni")]
 position = Vector2(-1200, 143)
 
+[node name="underneath" type="Polygon2D" parent="Environment/Inanimate"]
+z_index = -4
+color = Color(0, 0, 0, 1)
+polygon = PackedVector2Array(-238, 560, -247, 558, -222, 539, -62, 381, 38, 319, 97, 234, 160, 224, 161, 224, 299, 223, 450, 223, 537, 136, 513, 103, 512, 96, 509, -5, 507, -42, 503, -73, 476, -97, 434, -139, 413, -156, 184, -158, 74, -164, 70, -223, 18, -247, -35, -249, -61, -315, -228, -480, -262, -542, -449, -554, -577, -521, -605, -494, -607, -480, -608, -371, -652, -283, -793, -162, -810, -159, -922, -160, -1027, -156, -1093, -120, -1166, -126, -1244, -129, -1251, -120, -1249, 259, -1214, 264, -1164, 238, -1138, 193, -1113, 173, -1084, 186, -1063, 208, -1039, 231, -1031, 287, -998, 319, -944, 338, -867, 325, -755, 345, -738, 373, -670, 425, -617, 436, -592, 470, -591, 500, -578, 568, -534, 614, -269, 627, -248, 606, -242, 573)
+
 [node name="Interactable" type="Node2D" parent="Environment"]
 
 [node name="BreakableDoor" parent="Environment/Interactable" instance=ExtResource("10_3i61v")]
@@ -658,7 +663,7 @@ position = Vector2(-336, 320)
 position = Vector2(-176, 124)
 
 [node name="Door7" parent="Environment/Interactable" instance=ExtResource("19_i3gnf")]
-position = Vector2(-336, 124)
+position = Vector2(-336, 132)
 
 [node name="Door8" parent="Environment/Interactable" instance=ExtResource("19_i3gnf")]
 position = Vector2(144, -65)
@@ -1182,7 +1187,7 @@ grow_vertical = 2
 position = Vector2(41, 12)
 
 [node name="PlayerSpawnLocation" type="Marker2D" parent="."]
-position = Vector2(-654, -29)
+position = Vector2(-136, 30)
 
 [node name="SpiderSpawnLocation" type="Marker2D" parent="."]
 position = Vector2(-857, 198)
@@ -1231,6 +1236,10 @@ position = Vector2(-96, 320)
 [node name="BIGG EGG" parent="." instance=ExtResource("41_cmd40")]
 z_index = 7
 position = Vector2(528, 160)
+
+[node name="Node2D2" parent="." instance=ExtResource("42_kuoky")]
+position = Vector2(0, 176)
+rotation = 3.14159
 
 [connection signal="body_exited" from="Triggers/ExitCryo" to="." method="_on_exit_cryo_body_exited"]
 [connection signal="body_exited" from="Triggers/EnterCryo" to="." method="_on_enter_cryo_body_exited"]
