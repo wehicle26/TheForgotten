@@ -4,8 +4,8 @@ class_name BreakableDoor
 
 @onready var collision_shape_2d = $CollisionShape2D3
 @onready var light_occluder_2d = $LightOccluder2D
-@onready var light_occluder_2d_4 = $LightOccluder2D4
-@onready var light_occluder_2d_5 = $LightOccluder2D5
+@onready var light_occluder_2d_4 = $LightOccluder2D2
+@onready var light_occluder_2d_5 = $LightOccluder2D3
 @onready var sparks = $Sparks
 
 @onready var animation_player: AnimationPlayer = $AnimationPlayer
