@@ -1,0 +1,21 @@
+[gd_scene load_steps=2 format=3 uid="uid://hbg4agwwgwc7"]
+
+[ext_resource type="Texture2D" uid="uid://cnubc62uex7xl" path="res://art/environment/goo 2 map white pass.png" id="1_7l74e"]
+
+[node name="Node2D" type="StaticBody2D"]
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+texture_filter = 1
+texture = ExtResource("1_7l74e")
+metadata/_aseprite_wizard_config_ = {
+"i_mode": 1,
+"keep_anim_length": false,
+"layer": "",
+"o_ex_p": "",
+"o_folder": "res://art/environment",
+"o_name": "goo 2 map white pass",
+"only_visible": true,
+"op_exp": true,
+"player": "",
+"source": "res://art/environment/goo2 MAP WHITE PASS.aseprite"
+}
