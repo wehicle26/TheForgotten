@@ -7,9 +7,14 @@ var options = "res://scenes/Options.tscn"
 @onready var background = $Background
 @onready var button_container = $ButtonContainer
 @onready var animation_player = $AnimationPlayer
+@onready var texture_rect = $TextureRect
 
-
+ 
 func _ready():
+	if not GlobalState.disclaimer:
+		GlobalState.disclaimer = true
+		await get_tree().create_timer(7).timeout
+		animation_player.play("fade_in")
 	if not GlobalState.playing: 
 		SoundManager.play_main_loop(SoundManager.MAIN_LOOP_INTRO)
 		GlobalState.playing = true
