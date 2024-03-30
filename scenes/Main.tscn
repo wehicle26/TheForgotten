@@ -1,5 +1,4 @@
-[gd_scene load_steps=70 format=3 uid="uid://b71gis6vgkvkg"]
-
+[gd_scene load_steps=74 format=3 uid="uid://b71gis6vgkvkg"]
 
 [ext_resource type="Script" path="res://scripts/level.gd" id="1_6u7sh"]
 [ext_resource type="PackedScene" uid="uid://bob88w6sefucj" path="res://scenes/Environment.tscn" id="1_halep"]
@@ -38,7 +37,7 @@
 [ext_resource type="PackedScene" uid="uid://ct7ourn5qoi1d" path="res://scenes/goo 4.tscn" id="34_6apeg"]
 [ext_resource type="PackedScene" uid="uid://c3degpyqcf8sx" path="res://scenes/goo5.tscn" id="35_457ab"]
 [ext_resource type="PackedScene" uid="uid://dg0ww4sifttdq" path="res://scenes/goo6.tscn" id="36_82x1q"]
-[ext_resource type="PackedScene" uid="uid://b22lifd4o6b78" path="res://scenes/bio bubbler.tscn" id="37_sdbie"]
+[ext_resource type="PackedScene" uid="uid://xwxks3suwe77" path="res://scenes/bio bubbler.tscn" id="37_sdbie"]
 [ext_resource type="PackedScene" uid="uid://cm7nrakm7047c" path="res://scenes/broken pod sprite.tscn" id="39_yaph2"]
 [ext_resource type="PackedScene" uid="uid://cdulslplko5uq" path="res://scenes/gamecube.tscn" id="40_w5c1m"]
 [ext_resource type="PackedScene" uid="uid://cj1c827fjn65u" path="res://scenes/BIGG EGG.tscn" id="41_cmd40"]
@@ -1169,6 +1168,7 @@ grow_horizontal = 2
 grow_vertical = 2
 
 [node name="Overlay" type="CanvasLayer" parent="."]
+visible = false
 
 [node name="ColorRect" type="ColorRect" parent="Overlay"]
 material = SubResource("ShaderMaterial_5pnrb")
@@ -1217,7 +1217,7 @@ position = Vector2(-467, 16)
 [node name="CanvasLayer" type="CanvasLayer" parent="."]
 
 [node name="BossSpawn" type="Marker2D" parent="."]
-position = Vector2(243, -119)
+position = Vector2(178, -11)
 
 [node name="RoachSpawn" type="Marker2D" parent="."]
 position = Vector2(-401, -496)

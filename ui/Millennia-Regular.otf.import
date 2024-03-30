@@ -13,9 +13,9 @@ dest_files=["res://.godot/imported/Millennia-Regular.otf-08f53715f61f9f836c090cc
 [params]
 
 Rendering=null
-antialiasing=1
-generate_mipmaps=false
-multichannel_signed_distance_field=false
+antialiasing=0
+generate_mipmaps=true
+multichannel_signed_distance_field=true
 msdf_pixel_range=8
 msdf_size=48
 allow_system_fallback=true
@@ -26,7 +26,7 @@ oversampling=0.0
 Fallbacks=null
 fallbacks=[]
 Compress=null
-compress=true
+compress=false
 preload=[]
 language_support={}
 script_support={}
