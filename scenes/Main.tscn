@@ -1277,7 +1277,6 @@ rotation = -0.0529382
 
 [node name="WEB2" parent="." instance=ExtResource("44_4iu8q")]
 z_index = 7
-material = ExtResource("50_4y5hp")
 position = Vector2(552, 165)
 rotation = 1.14249
 
