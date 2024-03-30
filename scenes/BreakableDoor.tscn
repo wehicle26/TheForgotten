@@ -52,7 +52,6 @@ alpha_curve = SubResource("CurveTexture_ndauy")
 
 [sub_resource type="Animation" id="Animation_w7r0o"]
 length = 0.3
-loop_mode = 1
 tracks/0/type = "value"
 tracks/0/imported = false
 tracks/0/enabled = true
