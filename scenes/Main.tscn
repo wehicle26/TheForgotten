@@ -38,6 +38,7 @@
 [ext_resource type="PackedScene" uid="uid://bjdo168oeu7y7" path="res://scenes/goo1.tscn" id="30_4br8j"]
 [ext_resource type="Texture2D" uid="uid://lp5a4k6a0rcr" path="res://ui/note5.png" id="30_fjfyg"]
 [ext_resource type="PackedScene" uid="uid://bqog8an22nige" path="res://scenes/goo2.tscn" id="31_q5lq1"]
+[ext_resource type="Texture2D" uid="uid://bcfwdncxhqhja" path="res://ui/note6.png" id="31_ubgg6"]
 [ext_resource type="PackedScene" uid="uid://5aet8x7656cv" path="res://scenes/goo3.tscn" id="33_ecy1s"]
 [ext_resource type="PackedScene" uid="uid://ct7ourn5qoi1d" path="res://scenes/goo 4.tscn" id="34_6apeg"]
 [ext_resource type="PackedScene" uid="uid://c3degpyqcf8sx" path="res://scenes/goo5.tscn" id="35_457ab"]
@@ -54,6 +55,7 @@
 [ext_resource type="PackedScene" uid="uid://d3h08mqrfxlx4" path="res://scenes/deadman.tscn" id="47_3e63x"]
 [ext_resource type="PackedScene" uid="uid://hbg4agwwgwc7" path="res://scenes/goo2 map white pass.tscn" id="48_1xect"]
 [ext_resource type="PackedScene" uid="uid://blt12hr0qmvvp" path="res://scenes/john rip.tscn" id="54_22hx3"]
+
 
 [sub_resource type="SegmentShape2D" id="SegmentShape2D_xjm62"]
 resource_local_to_scene = true
@@ -92,6 +94,9 @@ b = Vector2(80, 0)
 
 [sub_resource type="SegmentShape2D" id="SegmentShape2D_27tpe"]
 b = Vector2(0, 80)
+
+[sub_resource type="SegmentShape2D" id="SegmentShape2D_ygoss"]
+b = Vector2(90, 0)
 
 [sub_resource type="NavigationPolygon" id="NavigationPolygon_x2io3"]
 vertices = PackedVector2Array(462, 156, 462, 302, 388, 302, 274, 188, 274, 142, 388, 50, 238, 142, 238, 82, 274, 82, 274, 50, 434, 4, 434, -262, 494, -262, 494, -124, 526, -92, 526, 92)
@@ -275,6 +280,12 @@ shader_parameter/outer_radius = 1.0
 
 [node name="Main" type="Node2D" groups=["Main"]]
 script = ExtResource("1_6u7sh")
+
+[node name="underneath" type="Polygon2D" parent="."]
+z_index = -6
+position = Vector2(0, -32)
+color = Color(0, 0, 0, 1)
+polygon = PackedVector2Array(-238, 560, -247, 558, -222, 539, -62, 381, 38, 319, 97, 234, 160, 224, 161, 224, 299, 223, 450, 223, 537, 136, 513, 103, 512, 96, 509, -5, 507, -42, 503, -73, 476, -97, 434, -139, 413, -156, 184, -158, 74, -164, 70, -223, 18, -247, -35, -249, -61, -315, -228, -480, -262, -542, -449, -554, -577, -521, -605, -494, -607, -480, -608, -371, -652, -283, -793, -162, -810, -159, -922, -160, -1027, -156, -1093, -120, -1166, -126, -1244, -129, -1251, -120, -1249, 259, -1214, 264, -1164, 238, -1138, 193, -1113, 173, -1084, 186, -1063, 208, -1039, 231, -1031, 287, -998, 319, -944, 338, -867, 325, -755, 345, -738, 373, -670, 425, -617, 436, -592, 470, -591, 500, -578, 568, -534, 614, -269, 627, -248, 606, -242, 573)
 
 [node name="DarknessLevel" type="CanvasModulate" parent="." groups=["Darkness"]]
 visible = false
@@ -651,6 +662,7 @@ z_index = 4
 material = null
 position = Vector2(-400, -210)
 rotation = 1.57079
+note_texture = ExtResource("31_ubgg6")
 
 [node name="Note7" parent="Environment/Interactable" instance=ExtResource("12_ylmx7")]
 z_index = 4
@@ -704,6 +716,7 @@ rotation = 1.5708
 [node name="Node2D2" parent="Environment/Interactable" instance=ExtResource("42_kuoky")]
 position = Vector2(0, 208)
 rotation = 3.14159
+bathroom_door = true
 
 [node name="Triggers" type="Node2D" parent="."]
 
@@ -853,6 +866,13 @@ collision_mask = 2
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Triggers/BossEvent"]
 shape = SubResource("SegmentShape2D_27tpe")
 
+[node name="goo6" type="Area2D" parent="Triggers"]
+position = Vector2(-570, -186)
+collision_mask = 3
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Triggers/goo6"]
+shape = SubResource("SegmentShape2D_ygoss")
+
 [node name="Lights" type="Node2D" parent="."]
 position = Vector2(-1045, -100)
 
@@ -934,14 +954,9 @@ light_texture = ExtResource("6_g4f4m")
 position = Vector2(319, 267)
 light_texture = ExtResource("6_g4f4m")
 
-[node name="Light16" parent="Lights/HallwayLights" groups=["Hallway_Light"] instance=ExtResource("4_7cj7q")]
-position = Vector2(454, 410)
-rotation = -1.57078
-light_texture = ExtResource("6_g4f4m")
-
 [node name="Light17" parent="Lights/HallwayLights" groups=["Hallway_Light"] instance=ExtResource("4_7cj7q")]
-position = Vector2(516, 410)
-rotation = -1.57078
+position = Vector2(523, 400)
+rotation = -3.14159
 light_texture = ExtResource("6_g4f4m")
 
 [node name="Light18" parent="Lights/HallwayLights" groups=["Hallway_Light"] instance=ExtResource("4_7cj7q")]
@@ -1193,15 +1208,6 @@ offset_right = 320.0
 offset_bottom = 180.0
 color = Color(0, 0, 0, 1)
 
-[node name="CanvasLayer2" type="CanvasLayer" parent="."]
-layer = -4
-
-[node name="underneath" type="Polygon2D" parent="CanvasLayer2"]
-visible = false
-position = Vector2(0, -32)
-color = Color(0, 0, 0, 1)
-polygon = PackedVector2Array(-238, 560, -247, 558, -222, 539, -62, 381, 38, 319, 97, 234, 160, 224, 161, 224, 299, 223, 450, 223, 537, 136, 513, 103, 512, 96, 509, -5, 507, -42, 503, -73, 476, -97, 434, -139, 413, -156, 184, -158, 74, -164, 70, -223, 18, -247, -35, -249, -61, -315, -228, -480, -262, -542, -449, -554, -577, -521, -605, -494, -607, -480, -608, -371, -652, -283, -793, -162, -810, -159, -922, -160, -1027, -156, -1093, -120, -1166, -126, -1244, -129, -1251, -120, -1249, 259, -1214, 264, -1164, 238, -1138, 193, -1113, 173, -1084, 186, -1063, 208, -1039, 231, -1031, 287, -998, 319, -944, 338, -867, 325, -755, 345, -738, 373, -670, 425, -617, 436, -592, 470, -591, 500, -578, 568, -534, 614, -269, 627, -248, 606, -242, 573)
-
 [node name="Space" type="CanvasLayer" parent="."]
 layer = -8
 visible = false
@@ -1448,9 +1454,6 @@ z_index = 7
 position = Vector2(579, 172)
 rotation = 0.184315
 
-[node name="Node2D6" parent="." instance=ExtResource("48_1xect")]
-position = Vector2(-659, 121)
-
 [node name="Node2D7" parent="." instance=ExtResource("54_22hx3")]
 position = Vector2(-578, 274)
 
@@ -1472,3 +1475,4 @@ position = Vector2(-578, 274)
 [connection signal="body_exited" from="Triggers/Event5" to="." method="_on_event_5_body_exited"]
 [connection signal="body_exited" from="Triggers/Event6" to="." method="_on_event_6_body_exited"]
 [connection signal="body_exited" from="Triggers/BossEvent" to="." method="_on_boss_event_body_exited"]
+[connection signal="body_exited" from="Triggers/goo6" to="." method="_on_goo_6_body_exited"]

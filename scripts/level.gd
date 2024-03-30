@@ -38,8 +38,8 @@ var last_count = 0
 
 func _process(_delta):
 	if GlobalState.encounter2 and not GlobalState.boss_encounter:
-		enemy_count = get_tree().get_nodes_in_group("Enemy").size()
-		if enemy_count >= 1 and enemy_count != last_count:
+		#enemy_count = get_tree().get_nodes_in_group("Enemy").size()
+		if enemy_count >= 1:
 			var loop_level = 5 + enemy_count
 			SoundManager.set_main_loop_parameter(clamp(loop_level, 5, 8))
 		elif enemy_count == 0:
@@ -105,12 +105,6 @@ func _on_exit_cryo_body_exited(body):
 			GlobalState.dialogue2 = true
 			await get_tree().create_timer(.5).timeout
 			DialogueManager.start_passive_dialogue(player.global_position, ["Hello...?"])
-			var goo6: Goo = get_tree().get_first_node_in_group("goo6")
-			goo6.show_goo()
-			SoundManager.play_custom_sound(goo6.global_transform, "event:/goo6", 0.9)
-			await get_tree().create_timer(3).timeout
-			goo6.hide_goo()
-			
 
 
 func _on_enter_cryo_body_exited(body):
@@ -176,9 +170,9 @@ func _on_exit_cargo_body_exited(body):
 func _on_drop_pods_body_exited(body):
 	if body is Player:
 		if not GlobalState.dialogue4:
-				GlobalState.dialogue4 = true
-				#DialogueManager.start_passive_dialogue(player.global_position, ["A single functional escape pod..."])
-				SoundManager.set_main_loop_parameter(SoundManager.COMBAT_LOW)
+			GlobalState.dialogue4 = true
+			#DialogueManager.start_passive_dialogue(player.global_position, ["A single functional escape pod..."])
+			SoundManager.set_main_loop_parameter(SoundManager.COMBAT_LOW)
 
 
 func _on_event_2_body_exited(body):
@@ -190,17 +184,17 @@ func _on_event_2_body_exited(body):
 			entities.call_deferred("add_child", spider1)
 			#entities.add_child(spider)
 			spider1.global_position = spider_spawn_location.global_position
-			#spider1.spider_dead.connect(_check_enemy_count)
+			spider1.spider_dead.connect(_check_enemy_count)
 			var spider2 = spiderScene.instantiate()
 			entities.call_deferred("add_child", spider2)
 			#entities.add_child(spider)
 			spider2.global_position = spider_spawn_location_2.global_position
-			#spider2.spider_dead.connect(_check_enemy_count)
+			spider2.spider_dead.connect(_check_enemy_count)
 			var spider3 = spiderScene.instantiate()
 			entities.call_deferred("add_child", spider3)
 			#entities.add_child(spider)
 			spider3.global_position = spider_spawn_location_3.global_position
-			#spider3.spider_dead.connect(_check_enemy_count)
+			spider3.spider_dead.connect(_check_enemy_count)
 			SoundManager.set_main_loop_parameter(SoundManager.COMBAT_MID)
 			combat = true
 			var spiderLight: Light = get_tree().get_first_node_in_group("SpiderLight")
@@ -231,6 +225,8 @@ func _check_enemy_count():
 	enemy_count -= 1
 	if enemy_count == 0:
 		combat = false
+		get_tree().call_group("Cargo_Light", "turn_on")
+		get_tree().call_group("SpiderLight", "turn_off")
 		SoundManager.set_main_loop_parameter(SoundManager.MAIN_LOOP_GARBLED)
 
 
@@ -327,3 +323,13 @@ func _on_exit_rec_body_exited(body):
 	if body is Player:
 		SoundManager.set_main_loop_parameter(SoundManager.MAIN_LOOP_GARBLED)
 		get_tree().call_group("Rec_Light", "turn_off")
+
+
+func _on_goo_6_body_exited(body):
+	if body is Player and not GlobalState.goo6:
+		GlobalState.goo6 = true
+		var goo6: Goo = get_tree().get_first_node_in_group("goo6")
+		goo6.show_goo()
+		SoundManager.play_custom_sound(goo6.global_transform, "event:/goo6", 0.9)
+		await get_tree().create_timer(3).timeout
+		goo6.hide_goo()

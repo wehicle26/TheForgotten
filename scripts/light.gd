@@ -7,6 +7,7 @@ const FLASHLIGHT_SWITCH_OFF = preload("res://sounds/FlashlightSwitchOff_SFXB._1.
 @onready var sprite_light = $SpriteLight
 @onready var shadow_light = $ShadowLight
 
+@export var flicker_on = true
 @export var light_texture: Texture2D
 @export var flicker_factor = 1.0
 @export var energy_factor = 1.0
@@ -68,6 +69,8 @@ func _on_battery_no_power():
 
 
 func _on_flicker_timer_timeout():
+	if not flicker_on:
+		return
 	var rand_light = randf()
 	sprite_light.energy = rand_light
 	shadow_light.energy = rand_light

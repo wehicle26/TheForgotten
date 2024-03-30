@@ -1,9 +1,11 @@
-[gd_scene load_steps=12 format=3 uid="uid://cb4m455df4aw4"]
+[gd_scene load_steps=15 format=3 uid="uid://cb4m455df4aw4"]
 
 [ext_resource type="PackedScene" uid="uid://drc50lwybh48x" path="res://scenes/Item.tscn" id="1_kbqjp"]
 [ext_resource type="Script" path="res://scripts/goo2MAP.gd" id="2_pcv3t"]
 [ext_resource type="Texture2D" uid="uid://dpwleegl8a2i0" path="res://art/environment/goo2 MAP.png" id="2_xrsp5"]
 [ext_resource type="Texture2D" uid="uid://cpnhfycgptptg" path="res://art/environment/goo2 MAP_n.png" id="3_72jro"]
+[ext_resource type="PackedScene" uid="uid://ch0016cku2p02" path="res://scenes/Light.tscn" id="5_iom8i"]
+[ext_resource type="Texture2D" uid="uid://cnubc62uex7xl" path="res://art/environment/goo 2 map white pass.png" id="6_ma7eg"]
 
 [sub_resource type="CanvasTexture" id="CanvasTexture_xapgy"]
 resource_local_to_scene = true
@@ -40,6 +42,18 @@ tracks/1/keys = {
 "update": 1,
 "values": [8]
 }
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("Light:visible")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [true]
+}
 
 [sub_resource type="Animation" id="Animation_hn5lk"]
 length = 0.2
@@ -68,6 +82,18 @@ tracks/1/keys = {
 "update": 1,
 "values": [6, 7]
 }
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("Light:visible")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [true]
+}
 
 [sub_resource type="Animation" id="Animation_vdvv1"]
 length = 0.3
@@ -94,6 +120,18 @@ tracks/1/keys = {
 "transitions": PackedFloat32Array(1, 1, 1),
 "update": 1,
 "values": [3, 4, 5]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("Light:visible")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [false]
 }
 
 [sub_resource type="Animation" id="Animation_3k0vk"]
@@ -123,9 +161,37 @@ tracks/1/keys = {
 "update": 1,
 "values": [0, 1, 2]
 }
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("Light:visible")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [false]
+}
+
+[sub_resource type="Animation" id="Animation_ac80y"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Light:visible")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [true]
+}
 
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_w0jj7"]
 _data = {
+"RESET": SubResource("Animation_ac80y"),
 "fuzzy": SubResource("Animation_pxfyt"),
 "map": SubResource("Animation_hn5lk"),
 "opening": SubResource("Animation_vdvv1"),
@@ -143,7 +209,6 @@ material = null
 texture = SubResource("CanvasTexture_xapgy")
 hframes = 3
 vframes = 3
-frame = 8
 metadata/_aseprite_wizard_config_ = {
 "i_mode": -1,
 "keep_anim_length": false,
@@ -173,5 +238,15 @@ polygon = PackedVector2Array(-14, 22, -12, 29, -10, 30, -5, 29, -3, 27, 4, 27, 7
 
 [node name="Timer" type="Timer" parent="." index="4"]
 autostart = true
+
+[node name="Light" parent="." index="5" instance=ExtResource("5_iom8i")]
+position = Vector2(5, -14)
+scale = Vector2(1.3, 1.3)
+texture = null
+flicker_on = false
+light_texture = ExtResource("6_ma7eg")
+flicker_factor = 1.0
+energy_factor = 2.3
+light_offset = 0
 
 [connection signal="timeout" from="Timer" to="." method="_on_timer_timeout"]

@@ -7,6 +7,7 @@ var master_volume: float = 1.0
 var music_volume: float = 1.0
 var sfx_volume: float = 1.0
 
+var goo6 = false
 var encounter1 = false
 var encounter2 = false
 var encounter3 = false
