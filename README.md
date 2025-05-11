@@ -87,7 +87,7 @@ Now click on "Preview Pull Request":
 
 ![PR](screenshots/github_pull_request.png)
 
-Make sure the right side is your repository name and the branch you just created is selected and hit create:
+(Pull Request tab in Desktop Git) Make sure the right side is your repository name and the branch you just created is selected and hit create:
 
 ![PR2](screenshots/github_pull_request2.png)
 
